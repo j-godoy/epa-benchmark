@@ -13,7 +13,11 @@
 2) In epa-evosuite folder, run "mvn clean install -DskipTests=true"
 3) Clone this repository: git clone https://github.com/j-godoy/epa-benchmark.git
 4) Check config_example.ini for correct folders.
-4) Run "python script.py config_example.ini runs_example.ini"
+5) SeptUp classpath:
+	- Add maven/bin folder to classpath
+	- Create JAVA_HOME environment var pointing to jdk folder
+	- Add jdk/bin folder to classpath
+6) Run "python script.py config_example.ini runs_example.ini"
 
 # Results
 - In epa-benchmark/results there will be 3 folders and 3 files:
