@@ -13,7 +13,9 @@
 	- Add jdk/bin folder to classpath
 
 # Instructions
-0) Create "Replication-Package" in home user dir and follow the next steps (optional)
+Quick run: download release icst2019 (Replication-Package.zip) OR
+
+0) [optional-recommended] Create "Replication-Package" folder in home user dir and follow the next steps
 1) Clone epa-evosuite repository: git clone https://github.com/j-godoy/epa-evosuite.git
 2) In epa-evosuite folder, run "mvn clean install -DskipTests=true"
 3) Clone this repository: git clone https://github.com/j-godoy/epa-benchmark.git
