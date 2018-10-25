@@ -1,0 +1,36 @@
+PCD_1:286:(java.io.IOException) e.getException() => e.getException()
+PCD_2:334:(java.io.IOException) e.getException() => e.getException()
+JSD_1:112:static is deleted
+JSD_2:114:static is deleted
+JSD_3:477:static is deleted
+JSI_1:19:static is inserted
+JSI_2:21:static is inserted
+JSI_3:23:static is inserted
+JSI_4:25:static is inserted
+JSI_5:27:static is inserted
+JSI_6:29:static is inserted
+JSI_7:31:static is inserted
+JSI_8:33:static is inserted
+JSI_9:35:static is inserted
+JSI_10:37:static is inserted
+JTD_1:43:this.env => env
+JTI_1:43:env  -->  this.env
+JID_1:19:private boolean createdfalse => private boolean created;
+JID_2:21:private boolean boundfalse => private boolean bound;
+JID_3:23:private boolean connectedfalse => private boolean connected;
+JID_4:25:private boolean closedfalse => private boolean closed;
+JID_5:27:private java.lang.Object closeLocknew java.lang.Object() => private java.lang.Object closeLock;
+JID_6:29:private boolean shutInfalse => private boolean shutIn;
+JID_7:31:private boolean shutOutfalse => private boolean shutOut;
+JID_8:35:private boolean oldImplfalse => private boolean oldImpl;
+JID_9:477:private static com.example.socket.MockSocketImplFactory factorynull => private static com.example.socket.MockSocketImplFactory factory;
+OAN_1:120:connect0( endpoint, timeout ) => connect0(endpoint)
+EAM_1:66:e.getMessage() => e.getLocalizedMessage()
+EAM_2:247:getInputStream0() => getOutputStream()
+EAM_3:247:getInputStream0() => getInputStream()
+EAM_4:247:getInputStream0() => getOutputStream0()
+EAM_5:295:getOutputStream0() => getInputStream0()
+EAM_6:295:getOutputStream0() => getOutputStream()
+EAM_7:295:getOutputStream0() => getInputStream()
+OMR_1:119:connect(endpoint,timeout) => connect(endpoint);
+OMR_2:129:connect0(endpoint,timeout) => connect0(endpoint);

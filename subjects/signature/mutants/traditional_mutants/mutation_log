@@ -1,0 +1,468 @@
+AORB_1:101:int_sign0(byte,int,int):outbuf.length - offset => outbuf.length * offset
+AORB_2:101:int_sign0(byte,int,int):outbuf.length - offset => outbuf.length / offset
+AORB_3:101:int_sign0(byte,int,int):outbuf.length - offset => outbuf.length % offset
+AORB_4:101:int_sign0(byte,int,int):outbuf.length - offset => outbuf.length + offset
+AORB_5:143:boolean_verify0(byte,int,int):signature.length - offset => signature.length * offset
+AORB_6:143:boolean_verify0(byte,int,int):signature.length - offset => signature.length / offset
+AORB_7:143:boolean_verify0(byte,int,int):signature.length - offset => signature.length % offset
+AORB_8:143:boolean_verify0(byte,int,int):signature.length - offset => signature.length + offset
+AOIU_2:46:void_initVerify0(com.example.signature.MockPublicKey):VERIFY => -VERIFY
+AOIU_3:63:void_initSign0(com.example.signature.MockPrivateKey):SIGN => -SIGN
+AOIU_4:79:byte_sign0():state => -state
+AOIU_5:79:byte_sign0():SIGN => -SIGN
+AOIU_6:89:int_sign(byte,int,int):offset => -offset
+AOIU_7:89:int_sign(byte,int,int):len => -len
+AOIU_8:101:int_sign0(byte,int,int):outbuf.length => -outbuf.length
+AOIU_9:101:int_sign0(byte,int,int):len => -len
+AOIU_10:104:int_sign0(byte,int,int):state => -state
+AOIU_11:104:int_sign0(byte,int,int):SIGN => -SIGN
+AOIU_12:107:int_sign0(byte,int,int):offset => -offset
+AOIU_13:107:int_sign0(byte,int,int):len => -len
+AOIU_14:123:boolean_verify0(byte):state => -state
+AOIU_15:123:boolean_verify0(byte):VERIFY => -VERIFY
+AOIU_16:133:boolean_verify(byte,int,int):offset => -offset
+AOIU_17:133:boolean_verify(byte,int,int):length => -length
+AOIU_18:142:boolean_verify0(byte,int,int):state => -state
+AOIU_19:142:boolean_verify0(byte,int,int):VERIFY => -VERIFY
+AOIU_20:146:boolean_verify0(byte,int,int):offset => -offset
+AOIU_21:146:boolean_verify0(byte,int,int):length => -length
+AOIU_22:155:void_update(byte):b => -b
+AOIU_23:165:void_update0(byte):b => -b
+AOIU_24:175:void_update(byte):data.length => -data.length
+AOIU_25:185:void_update(byte,int,int):off => -off
+AOIU_26:185:void_update(byte,int,int):len => -len
+AOIU_27:195:void_update0(byte,int,int):off => -off
+AOIU_28:195:void_update0(byte,int,int):len => -len
+AOIS_3:46:void_initVerify0(com.example.signature.MockPublicKey):VERIFY => ++VERIFY
+AOIS_4:46:void_initVerify0(com.example.signature.MockPublicKey):VERIFY => --VERIFY
+AOIS_5:46:void_initVerify0(com.example.signature.MockPublicKey):VERIFY => VERIFY++
+AOIS_6:46:void_initVerify0(com.example.signature.MockPublicKey):VERIFY => VERIFY--
+AOIS_7:63:void_initSign0(com.example.signature.MockPrivateKey):SIGN => ++SIGN
+AOIS_8:63:void_initSign0(com.example.signature.MockPrivateKey):SIGN => --SIGN
+AOIS_9:63:void_initSign0(com.example.signature.MockPrivateKey):SIGN => SIGN++
+AOIS_10:63:void_initSign0(com.example.signature.MockPrivateKey):SIGN => SIGN--
+AOIS_11:79:byte_sign0():state => ++state
+AOIS_12:79:byte_sign0():state => --state
+AOIS_13:79:byte_sign0():state => state++
+AOIS_14:79:byte_sign0():state => state--
+AOIS_15:79:byte_sign0():SIGN => ++SIGN
+AOIS_16:79:byte_sign0():SIGN => --SIGN
+AOIS_17:79:byte_sign0():SIGN => SIGN++
+AOIS_18:79:byte_sign0():SIGN => SIGN--
+AOIS_19:89:int_sign(byte,int,int):offset => offset++
+AOIS_20:89:int_sign(byte,int,int):offset => offset--
+AOIS_21:89:int_sign(byte,int,int):len => len++
+AOIS_22:89:int_sign(byte,int,int):len => len--
+AOIS_23:101:int_sign0(byte,int,int):outbuf.length => ++outbuf.length
+AOIS_24:101:int_sign0(byte,int,int):outbuf.length => --outbuf.length
+AOIS_25:101:int_sign0(byte,int,int):outbuf.length => outbuf.length++
+AOIS_26:101:int_sign0(byte,int,int):outbuf.length => outbuf.length--
+AOIS_27:101:int_sign0(byte,int,int):offset => ++offset
+AOIS_28:101:int_sign0(byte,int,int):offset => --offset
+AOIS_29:101:int_sign0(byte,int,int):offset => offset++
+AOIS_30:101:int_sign0(byte,int,int):offset => offset--
+AOIS_31:101:int_sign0(byte,int,int):len => len++
+AOIS_32:101:int_sign0(byte,int,int):len => len--
+AOIS_33:104:int_sign0(byte,int,int):state => ++state
+AOIS_34:104:int_sign0(byte,int,int):state => --state
+AOIS_35:104:int_sign0(byte,int,int):state => state++
+AOIS_36:104:int_sign0(byte,int,int):state => state--
+AOIS_37:104:int_sign0(byte,int,int):SIGN => ++SIGN
+AOIS_38:104:int_sign0(byte,int,int):SIGN => --SIGN
+AOIS_39:104:int_sign0(byte,int,int):SIGN => SIGN++
+AOIS_40:104:int_sign0(byte,int,int):SIGN => SIGN--
+AOIS_41:107:int_sign0(byte,int,int):offset => offset++
+AOIS_42:107:int_sign0(byte,int,int):offset => offset--
+AOIS_43:107:int_sign0(byte,int,int):len => len++
+AOIS_44:107:int_sign0(byte,int,int):len => len--
+AOIS_45:123:boolean_verify0(byte):state => ++state
+AOIS_46:123:boolean_verify0(byte):state => --state
+AOIS_47:123:boolean_verify0(byte):state => state++
+AOIS_48:123:boolean_verify0(byte):state => state--
+AOIS_49:123:boolean_verify0(byte):VERIFY => ++VERIFY
+AOIS_50:123:boolean_verify0(byte):VERIFY => --VERIFY
+AOIS_51:123:boolean_verify0(byte):VERIFY => VERIFY++
+AOIS_52:123:boolean_verify0(byte):VERIFY => VERIFY--
+AOIS_53:133:boolean_verify(byte,int,int):offset => offset++
+AOIS_54:133:boolean_verify(byte,int,int):offset => offset--
+AOIS_55:133:boolean_verify(byte,int,int):length => length++
+AOIS_56:133:boolean_verify(byte,int,int):length => length--
+AOIS_57:142:boolean_verify0(byte,int,int):state => ++state
+AOIS_58:142:boolean_verify0(byte,int,int):state => --state
+AOIS_59:142:boolean_verify0(byte,int,int):state => state++
+AOIS_60:142:boolean_verify0(byte,int,int):state => state--
+AOIS_61:142:boolean_verify0(byte,int,int):VERIFY => ++VERIFY
+AOIS_62:142:boolean_verify0(byte,int,int):VERIFY => --VERIFY
+AOIS_63:142:boolean_verify0(byte,int,int):VERIFY => VERIFY++
+AOIS_64:142:boolean_verify0(byte,int,int):VERIFY => VERIFY--
+AOIS_65:143:boolean_verify0(byte,int,int):offset => ++offset
+AOIS_66:143:boolean_verify0(byte,int,int):offset => --offset
+AOIS_67:143:boolean_verify0(byte,int,int):offset => offset++
+AOIS_68:143:boolean_verify0(byte,int,int):offset => offset--
+AOIS_69:143:boolean_verify0(byte,int,int):length => ++length
+AOIS_70:143:boolean_verify0(byte,int,int):length => --length
+AOIS_71:143:boolean_verify0(byte,int,int):length => length++
+AOIS_72:143:boolean_verify0(byte,int,int):length => length--
+AOIS_73:143:boolean_verify0(byte,int,int):length => ++length
+AOIS_74:143:boolean_verify0(byte,int,int):length => --length
+AOIS_75:143:boolean_verify0(byte,int,int):length => length++
+AOIS_76:143:boolean_verify0(byte,int,int):length => length--
+AOIS_77:143:boolean_verify0(byte,int,int):signature.length => ++signature.length
+AOIS_78:143:boolean_verify0(byte,int,int):signature.length => --signature.length
+AOIS_79:143:boolean_verify0(byte,int,int):signature.length => signature.length++
+AOIS_80:143:boolean_verify0(byte,int,int):signature.length => signature.length--
+AOIS_81:143:boolean_verify0(byte,int,int):offset => ++offset
+AOIS_82:143:boolean_verify0(byte,int,int):offset => --offset
+AOIS_83:143:boolean_verify0(byte,int,int):offset => offset++
+AOIS_84:143:boolean_verify0(byte,int,int):offset => offset--
+AOIS_85:146:boolean_verify0(byte,int,int):offset => offset++
+AOIS_86:146:boolean_verify0(byte,int,int):offset => offset--
+AOIS_87:146:boolean_verify0(byte,int,int):length => length++
+AOIS_88:146:boolean_verify0(byte,int,int):length => length--
+AOIS_89:155:void_update(byte):b => b++
+AOIS_90:155:void_update(byte):b => b--
+AOIS_91:164:void_update0(byte):state => ++state
+AOIS_92:164:void_update0(byte):state => --state
+AOIS_93:164:void_update0(byte):state => state++
+AOIS_94:164:void_update0(byte):state => state--
+AOIS_95:164:void_update0(byte):VERIFY => ++VERIFY
+AOIS_96:164:void_update0(byte):VERIFY => --VERIFY
+AOIS_97:164:void_update0(byte):VERIFY => VERIFY++
+AOIS_98:164:void_update0(byte):VERIFY => VERIFY--
+AOIS_99:164:void_update0(byte):state => ++state
+AOIS_100:164:void_update0(byte):state => --state
+AOIS_101:164:void_update0(byte):state => state++
+AOIS_102:164:void_update0(byte):state => state--
+AOIS_103:164:void_update0(byte):SIGN => ++SIGN
+AOIS_104:164:void_update0(byte):SIGN => --SIGN
+AOIS_105:164:void_update0(byte):SIGN => SIGN++
+AOIS_106:164:void_update0(byte):SIGN => SIGN--
+AOIS_107:165:void_update0(byte):b => b++
+AOIS_108:165:void_update0(byte):b => b--
+AOIS_109:175:void_update(byte):data.length => data.length++
+AOIS_110:175:void_update(byte):data.length => data.length--
+AOIS_111:185:void_update(byte,int,int):off => off++
+AOIS_112:185:void_update(byte,int,int):off => off--
+AOIS_113:185:void_update(byte,int,int):len => len++
+AOIS_114:185:void_update(byte,int,int):len => len--
+AOIS_115:194:void_update0(byte,int,int):state => ++state
+AOIS_116:194:void_update0(byte,int,int):state => --state
+AOIS_117:194:void_update0(byte,int,int):state => state++
+AOIS_118:194:void_update0(byte,int,int):state => state--
+AOIS_119:194:void_update0(byte,int,int):SIGN => ++SIGN
+AOIS_120:194:void_update0(byte,int,int):SIGN => --SIGN
+AOIS_121:194:void_update0(byte,int,int):SIGN => SIGN++
+AOIS_122:194:void_update0(byte,int,int):SIGN => SIGN--
+AOIS_123:194:void_update0(byte,int,int):state => ++state
+AOIS_124:194:void_update0(byte,int,int):state => --state
+AOIS_125:194:void_update0(byte,int,int):state => state++
+AOIS_126:194:void_update0(byte,int,int):state => state--
+AOIS_127:194:void_update0(byte,int,int):VERIFY => ++VERIFY
+AOIS_128:194:void_update0(byte,int,int):VERIFY => --VERIFY
+AOIS_129:194:void_update0(byte,int,int):VERIFY => VERIFY++
+AOIS_130:194:void_update0(byte,int,int):VERIFY => VERIFY--
+AOIS_131:195:void_update0(byte,int,int):off => off++
+AOIS_132:195:void_update0(byte,int,int):off => off--
+AOIS_133:195:void_update0(byte,int,int):len => len++
+AOIS_134:195:void_update0(byte,int,int):len => len--
+ROR_1:79:byte_sign0(): state == SIGN  =>   state > SIGN
+ROR_2:79:byte_sign0(): state == SIGN  =>   state >= SIGN
+ROR_3:79:byte_sign0(): state == SIGN  =>   state < SIGN
+ROR_4:79:byte_sign0(): state == SIGN  =>   state <= SIGN
+ROR_5:79:byte_sign0(): state == SIGN  =>   state != SIGN
+ROR_6:79:byte_sign0(): state == SIGN  =>   true
+ROR_7:79:byte_sign0(): state == SIGN  =>   false
+ROR_8:98:int_sign0(byte,int,int): outbuf == null  =>   outbuf != null
+ROR_9:101:int_sign0(byte,int,int): outbuf.length - offset < len  =>   outbuf.length - offset > len
+ROR_10:101:int_sign0(byte,int,int): outbuf.length - offset < len  =>   outbuf.length - offset >= len
+ROR_11:101:int_sign0(byte,int,int): outbuf.length - offset < len  =>   outbuf.length - offset <= len
+ROR_12:101:int_sign0(byte,int,int): outbuf.length - offset < len  =>   outbuf.length - offset == len
+ROR_13:101:int_sign0(byte,int,int): outbuf.length - offset < len  =>   outbuf.length - offset != len
+ROR_14:101:int_sign0(byte,int,int): outbuf.length - offset < len  =>   true
+ROR_15:101:int_sign0(byte,int,int): outbuf.length - offset < len  =>   false
+ROR_16:104:int_sign0(byte,int,int): state != SIGN  =>   state > SIGN
+ROR_17:104:int_sign0(byte,int,int): state != SIGN  =>   state >= SIGN
+ROR_18:104:int_sign0(byte,int,int): state != SIGN  =>   state < SIGN
+ROR_19:104:int_sign0(byte,int,int): state != SIGN  =>   state <= SIGN
+ROR_20:104:int_sign0(byte,int,int): state != SIGN  =>   state == SIGN
+ROR_21:104:int_sign0(byte,int,int): state != SIGN  =>   true
+ROR_22:104:int_sign0(byte,int,int): state != SIGN  =>   false
+ROR_23:123:boolean_verify0(byte): state == VERIFY  =>   state > VERIFY
+ROR_24:123:boolean_verify0(byte): state == VERIFY  =>   state >= VERIFY
+ROR_25:123:boolean_verify0(byte): state == VERIFY  =>   state < VERIFY
+ROR_26:123:boolean_verify0(byte): state == VERIFY  =>   state <= VERIFY
+ROR_27:123:boolean_verify0(byte): state == VERIFY  =>   state != VERIFY
+ROR_28:123:boolean_verify0(byte): state == VERIFY  =>   true
+ROR_29:123:boolean_verify0(byte): state == VERIFY  =>   false
+ROR_30:142:boolean_verify0(byte,int,int): state == VERIFY  =>   state > VERIFY
+ROR_31:142:boolean_verify0(byte,int,int): state == VERIFY  =>   state >= VERIFY
+ROR_32:142:boolean_verify0(byte,int,int): state == VERIFY  =>   state < VERIFY
+ROR_33:142:boolean_verify0(byte,int,int): state == VERIFY  =>   state <= VERIFY
+ROR_34:142:boolean_verify0(byte,int,int): state == VERIFY  =>   state != VERIFY
+ROR_35:142:boolean_verify0(byte,int,int): state == VERIFY  =>   true
+ROR_36:142:boolean_verify0(byte,int,int): state == VERIFY  =>   false
+ROR_37:143:boolean_verify0(byte,int,int): signature == null  =>   signature != null
+ROR_38:143:boolean_verify0(byte,int,int): offset < 0  =>   offset > 0
+ROR_39:143:boolean_verify0(byte,int,int): offset < 0  =>   offset >= 0
+ROR_40:143:boolean_verify0(byte,int,int): offset < 0  =>   offset <= 0
+ROR_41:143:boolean_verify0(byte,int,int): offset < 0  =>   offset == 0
+ROR_42:143:boolean_verify0(byte,int,int): offset < 0  =>   offset != 0
+ROR_43:143:boolean_verify0(byte,int,int): offset < 0  =>   true
+ROR_44:143:boolean_verify0(byte,int,int): offset < 0  =>   false
+ROR_45:143:boolean_verify0(byte,int,int): length < 0  =>   length > 0
+ROR_46:143:boolean_verify0(byte,int,int): length < 0  =>   length >= 0
+ROR_47:143:boolean_verify0(byte,int,int): length < 0  =>   length <= 0
+ROR_48:143:boolean_verify0(byte,int,int): length < 0  =>   length == 0
+ROR_49:143:boolean_verify0(byte,int,int): length < 0  =>   length != 0
+ROR_50:143:boolean_verify0(byte,int,int): length < 0  =>   true
+ROR_51:143:boolean_verify0(byte,int,int): length < 0  =>   false
+ROR_52:143:boolean_verify0(byte,int,int): length > signature.length - offset  =>   length >= signature.length - offset
+ROR_53:143:boolean_verify0(byte,int,int): length > signature.length - offset  =>   length < signature.length - offset
+ROR_54:143:boolean_verify0(byte,int,int): length > signature.length - offset  =>   length <= signature.length - offset
+ROR_55:143:boolean_verify0(byte,int,int): length > signature.length - offset  =>   length == signature.length - offset
+ROR_56:143:boolean_verify0(byte,int,int): length > signature.length - offset  =>   length != signature.length - offset
+ROR_57:143:boolean_verify0(byte,int,int): length > signature.length - offset  =>   true
+ROR_58:143:boolean_verify0(byte,int,int): length > signature.length - offset  =>   false
+ROR_59:164:void_update0(byte): state == VERIFY  =>   state > VERIFY
+ROR_60:164:void_update0(byte): state == VERIFY  =>   state >= VERIFY
+ROR_61:164:void_update0(byte): state == VERIFY  =>   state < VERIFY
+ROR_62:164:void_update0(byte): state == VERIFY  =>   state <= VERIFY
+ROR_63:164:void_update0(byte): state == VERIFY  =>   state != VERIFY
+ROR_64:164:void_update0(byte): state == VERIFY  =>   true
+ROR_65:164:void_update0(byte): state == VERIFY  =>   false
+ROR_66:164:void_update0(byte): state == SIGN  =>   state > SIGN
+ROR_67:164:void_update0(byte): state == SIGN  =>   state >= SIGN
+ROR_68:164:void_update0(byte): state == SIGN  =>   state < SIGN
+ROR_69:164:void_update0(byte): state == SIGN  =>   state <= SIGN
+ROR_70:164:void_update0(byte): state == SIGN  =>   state != SIGN
+ROR_71:164:void_update0(byte): state == SIGN  =>   true
+ROR_72:164:void_update0(byte): state == SIGN  =>   false
+ROR_73:194:void_update0(byte,int,int): state == SIGN  =>   state > SIGN
+ROR_74:194:void_update0(byte,int,int): state == SIGN  =>   state >= SIGN
+ROR_75:194:void_update0(byte,int,int): state == SIGN  =>   state < SIGN
+ROR_76:194:void_update0(byte,int,int): state == SIGN  =>   state <= SIGN
+ROR_77:194:void_update0(byte,int,int): state == SIGN  =>   state != SIGN
+ROR_78:194:void_update0(byte,int,int): state == SIGN  =>   true
+ROR_79:194:void_update0(byte,int,int): state == SIGN  =>   false
+ROR_80:194:void_update0(byte,int,int): state == VERIFY  =>   state > VERIFY
+ROR_81:194:void_update0(byte,int,int): state == VERIFY  =>   state >= VERIFY
+ROR_82:194:void_update0(byte,int,int): state == VERIFY  =>   state < VERIFY
+ROR_83:194:void_update0(byte,int,int): state == VERIFY  =>   state <= VERIFY
+ROR_84:194:void_update0(byte,int,int): state == VERIFY  =>   state != VERIFY
+ROR_85:194:void_update0(byte,int,int): state == VERIFY  =>   true
+ROR_86:194:void_update0(byte,int,int): state == VERIFY  =>   false
+COR_1:143:boolean_verify0(byte,int,int): signature == null || offset < 0  =>   signature == null && offset < 0
+COR_2:143:boolean_verify0(byte,int,int): signature == null || offset < 0  =>   signature == null ^ offset < 0
+COR_3:143:boolean_verify0(byte,int,int): signature == null || offset < 0 || length < 0  =>   (signature == null || offset < 0) && length < 0
+COR_4:143:boolean_verify0(byte,int,int): signature == null || offset < 0 || length < 0  =>   (signature == null || offset < 0) ^ length < 0
+COR_5:143:boolean_verify0(byte,int,int): signature == null || offset < 0 || length < 0 || length > signature.length - offset  =>   (signature == null || offset < 0 || length < 0) && length > signature.length - offset
+COR_6:143:boolean_verify0(byte,int,int): signature == null || offset < 0 || length < 0 || length > signature.length - offset  =>   (signature == null || offset < 0 || length < 0) ^ length > signature.length - offset
+COR_7:164:void_update0(byte): state == VERIFY || state == SIGN  =>   state == VERIFY && state == SIGN
+COR_8:164:void_update0(byte): state == VERIFY || state == SIGN  =>   state == VERIFY ^ state == SIGN
+COR_9:194:void_update0(byte,int,int): state == SIGN || state == VERIFY  =>   state == SIGN && state == VERIFY
+COR_10:194:void_update0(byte,int,int): state == SIGN || state == VERIFY  =>   state == SIGN ^ state == VERIFY
+COI_1:79:byte_sign0(): state == SIGN  =>  !(state == SIGN)
+COI_2:98:int_sign0(byte,int,int): outbuf == null  =>  !(outbuf == null)
+COI_3:101:int_sign0(byte,int,int): outbuf.length - offset < len  =>  !(outbuf.length - offset < len)
+COI_4:104:int_sign0(byte,int,int): state != SIGN  =>  !(state != SIGN)
+COI_5:123:boolean_verify0(byte): state == VERIFY  =>  !(state == VERIFY)
+COI_6:142:boolean_verify0(byte,int,int): state == VERIFY  =>  !(state == VERIFY)
+COI_7:143:boolean_verify0(byte,int,int): signature == null  =>  !(signature == null)
+COI_8:143:boolean_verify0(byte,int,int): offset < 0  =>  !(offset < 0)
+COI_9:143:boolean_verify0(byte,int,int): signature == null || offset < 0  =>  !(signature == null || offset < 0)
+COI_10:143:boolean_verify0(byte,int,int): length < 0  =>  !(length < 0)
+COI_11:143:boolean_verify0(byte,int,int): signature == null || offset < 0 || length < 0  =>  !(signature == null || offset < 0 || length < 0)
+COI_12:143:boolean_verify0(byte,int,int): length > signature.length - offset  =>  !(length > signature.length - offset)
+COI_13:143:boolean_verify0(byte,int,int): signature == null || offset < 0 || length < 0 || length > signature.length - offset  =>  !(signature == null || offset < 0 || length < 0 || length > signature.length - offset)
+COI_14:164:void_update0(byte): state == VERIFY  =>  !(state == VERIFY)
+COI_15:164:void_update0(byte): state == SIGN  =>  !(state == SIGN)
+COI_16:164:void_update0(byte): state == VERIFY || state == SIGN  =>  !(state == VERIFY || state == SIGN)
+COI_17:194:void_update0(byte,int,int): state == SIGN  =>  !(state == SIGN)
+COI_18:194:void_update0(byte,int,int): state == VERIFY  =>  !(state == VERIFY)
+COI_19:194:void_update0(byte,int,int): state == SIGN || state == VERIFY  =>  !(state == SIGN || state == VERIFY)
+LOI_2:46:void_initVerify0(com.example.signature.MockPublicKey):VERIFY => ~VERIFY
+LOI_3:63:void_initSign0(com.example.signature.MockPrivateKey):SIGN => ~SIGN
+LOI_4:79:byte_sign0():state => ~state
+LOI_5:79:byte_sign0():SIGN => ~SIGN
+LOI_6:89:int_sign(byte,int,int):offset => ~offset
+LOI_7:89:int_sign(byte,int,int):len => ~len
+LOI_8:101:int_sign0(byte,int,int):outbuf.length => ~outbuf.length
+LOI_9:101:int_sign0(byte,int,int):offset => ~offset
+LOI_10:101:int_sign0(byte,int,int):len => ~len
+LOI_11:104:int_sign0(byte,int,int):state => ~state
+LOI_12:104:int_sign0(byte,int,int):SIGN => ~SIGN
+LOI_13:107:int_sign0(byte,int,int):offset => ~offset
+LOI_14:107:int_sign0(byte,int,int):len => ~len
+LOI_15:123:boolean_verify0(byte):state => ~state
+LOI_16:123:boolean_verify0(byte):VERIFY => ~VERIFY
+LOI_17:133:boolean_verify(byte,int,int):offset => ~offset
+LOI_18:133:boolean_verify(byte,int,int):length => ~length
+LOI_19:142:boolean_verify0(byte,int,int):state => ~state
+LOI_20:142:boolean_verify0(byte,int,int):VERIFY => ~VERIFY
+LOI_21:143:boolean_verify0(byte,int,int):offset => ~offset
+LOI_22:143:boolean_verify0(byte,int,int):length => ~length
+LOI_23:143:boolean_verify0(byte,int,int):length => ~length
+LOI_24:143:boolean_verify0(byte,int,int):signature.length => ~signature.length
+LOI_25:143:boolean_verify0(byte,int,int):offset => ~offset
+LOI_26:146:boolean_verify0(byte,int,int):offset => ~offset
+LOI_27:146:boolean_verify0(byte,int,int):length => ~length
+LOI_28:155:void_update(byte):b => ~b
+LOI_29:164:void_update0(byte):state => ~state
+LOI_30:164:void_update0(byte):VERIFY => ~VERIFY
+LOI_31:164:void_update0(byte):state => ~state
+LOI_32:164:void_update0(byte):SIGN => ~SIGN
+LOI_33:165:void_update0(byte):b => ~b
+LOI_34:175:void_update(byte):data.length => ~data.length
+LOI_35:185:void_update(byte,int,int):off => ~off
+LOI_36:185:void_update(byte,int,int):len => ~len
+LOI_37:194:void_update0(byte,int,int):state => ~state
+LOI_38:194:void_update0(byte,int,int):SIGN => ~SIGN
+LOI_39:194:void_update0(byte,int,int):state => ~state
+LOI_40:194:void_update0(byte,int,int):VERIFY => ~VERIFY
+LOI_41:195:void_update0(byte,int,int):off => ~off
+LOI_42:195:void_update0(byte,int,int):len => ~len
+SDL_1:27:Signature(java.lang.String): try {     this.algorithm = algorithm; } catch ( java.lang.Exception ex ) {     throw ex; }  =>   try { }
+SDL_2:37:void_initVerify(com.example.signature.MockPublicKey): try {     initVerify0( publicKey ); } catch ( java.lang.Exception ex ) {     throw ex; }  =>   try { }
+SDL_3:46:void_initVerify0(com.example.signature.MockPublicKey): engine.engineInitVerify( publicKey ); state = VERIFY;  =>   state = VERIFY;
+SDL_4:46:void_initVerify0(com.example.signature.MockPublicKey): engine.engineInitVerify( publicKey ); state = VERIFY;  =>   engine.engineInitVerify( publicKey );
+SDL_5:54:void_initSign(com.example.signature.MockPrivateKey): try {     initSign0( privateKey ); } catch ( java.lang.Exception ex ) {     throw ex; }  =>   try { }
+SDL_6:63:void_initSign0(com.example.signature.MockPrivateKey): engine.engineInitSign( privateKey ); state = SIGN;  =>   state = SIGN;
+SDL_7:63:void_initSign0(com.example.signature.MockPrivateKey): engine.engineInitSign( privateKey ); state = SIGN;  =>   engine.engineInitSign( privateKey );
+SDL_8:80:byte_sign0(): if (state == SIGN) {     return engine.engineSign(); } throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" );  =>   throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" );
+SDL_9:82:byte_sign0(): if (state == SIGN) {     return engine.engineSign(); } throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" );  =>   if (state == SIGN) {     return engine.engineSign(); }
+SDL_10:82:byte_sign0(): if (state == SIGN) {     return engine.engineSign(); }  =>   if (true) {     return engine.engineSign(); }
+SDL_11:90:int_sign(byte,int,int): return sign0( outbuf, offset, len );  =>   return 0;
+SDL_12:105:int_sign0(byte,int,int): if (outbuf == null) {     throw new java.lang.IllegalArgumentException( \"No output buffer given\" ); } if (outbuf.length - offset < len) {     throw new java.lang.IllegalArgumentException( \"Output buffer too small for specified offset and length\" ); } if (state != SIGN) {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" ); } return engine.engineSign( outbuf, offset, len );  =>   if (outbuf.length - offset < len) {     throw new java.lang.IllegalArgumentException( \"Output buffer too small for specified offset and length\" ); } if (state != SIGN) {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" ); } return engine.engineSign( outbuf, offset, len );
+SDL_13:105:int_sign0(byte,int,int): if (outbuf == null) {     throw new java.lang.IllegalArgumentException( \"No output buffer given\" ); } if (outbuf.length - offset < len) {     throw new java.lang.IllegalArgumentException( \"Output buffer too small for specified offset and length\" ); } if (state != SIGN) {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" ); } return engine.engineSign( outbuf, offset, len );  =>   if (outbuf == null) {     throw new java.lang.IllegalArgumentException( \"No output buffer given\" ); } if (state != SIGN) {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" ); } return engine.engineSign( outbuf, offset, len );
+SDL_14:105:int_sign0(byte,int,int): if (outbuf == null) {     throw new java.lang.IllegalArgumentException( \"No output buffer given\" ); } if (outbuf.length - offset < len) {     throw new java.lang.IllegalArgumentException( \"Output buffer too small for specified offset and length\" ); } if (state != SIGN) {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" ); } return engine.engineSign( outbuf, offset, len );  =>   if (outbuf == null) {     throw new java.lang.IllegalArgumentException( \"No output buffer given\" ); } if (outbuf.length - offset < len) {     throw new java.lang.IllegalArgumentException( \"Output buffer too small for specified offset and length\" ); } return engine.engineSign( outbuf, offset, len );
+SDL_15:99:int_sign0(byte,int,int): throw new java.lang.IllegalArgumentException( \"No output buffer given\" );  =>  
+SDL_16:101:int_sign0(byte,int,int): if (outbuf == null) {     throw new java.lang.IllegalArgumentException( \"No output buffer given\" ); }  =>   if (true) {     throw new java.lang.IllegalArgumentException( \"No output buffer given\" ); }
+SDL_17:102:int_sign0(byte,int,int): throw new java.lang.IllegalArgumentException( \"Output buffer too small for specified offset and length\" );  =>  
+SDL_18:104:int_sign0(byte,int,int): if (outbuf.length - offset < len) {     throw new java.lang.IllegalArgumentException( \"Output buffer too small for specified offset and length\" ); }  =>   if (true) {     throw new java.lang.IllegalArgumentException( \"Output buffer too small for specified offset and length\" ); }
+SDL_19:105:int_sign0(byte,int,int): throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" );  =>  
+SDL_20:107:int_sign0(byte,int,int): if (state != SIGN) {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" ); }  =>   if (true) {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signing\" ); }
+SDL_21:108:int_sign0(byte,int,int): return engine.engineSign( outbuf, offset, len );  =>   return 0;
+SDL_22:115:boolean_verify(byte): return verify0( signature );  =>   return true;
+SDL_23:115:boolean_verify(byte): return verify0( signature );  =>   return false;
+SDL_24:124:boolean_verify0(byte): if (state == VERIFY) {     return engine.engineVerify( signature ); } throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"verification\" );  =>   throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"verification\" );
+SDL_25:126:boolean_verify0(byte): if (state == VERIFY) {     return engine.engineVerify( signature ); } throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"verification\" );  =>   if (state == VERIFY) {     return engine.engineVerify( signature ); }
+SDL_26:126:boolean_verify0(byte): if (state == VERIFY) {     return engine.engineVerify( signature ); }  =>   if (true) {     return engine.engineVerify( signature ); }
+SDL_27:125:boolean_verify0(byte): return engine.engineVerify( signature );  =>   return true;
+SDL_28:125:boolean_verify0(byte): return engine.engineVerify( signature );  =>   return false;
+SDL_29:134:boolean_verify(byte,int,int): return verify0( signature, offset, length );  =>   return true;
+SDL_30:134:boolean_verify(byte,int,int): return verify0( signature, offset, length );  =>   return false;
+SDL_31:143:boolean_verify0(byte,int,int): if (state == VERIFY) {     if (signature == null || offset < 0 || length < 0 || length > signature.length - offset) {         throw new java.lang.IllegalArgumentException( \"Bad arguments\" );     }     return engine.engineVerify( signature, offset, length ); } throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"verification\" );  =>   throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"verification\" );
+SDL_32:148:boolean_verify0(byte,int,int): if (state == VERIFY) {     if (signature == null || offset < 0 || length < 0 || length > signature.length - offset) {         throw new java.lang.IllegalArgumentException( \"Bad arguments\" );     }     return engine.engineVerify( signature, offset, length ); } throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"verification\" );  =>   if (state == VERIFY) {     if (signature == null || offset < 0 || length < 0 || length > signature.length - offset) {         throw new java.lang.IllegalArgumentException( \"Bad arguments\" );     }     return engine.engineVerify( signature, offset, length ); }
+SDL_33:144:boolean_verify0(byte,int,int): if (signature == null || offset < 0 || length < 0 || length > signature.length - offset) {     throw new java.lang.IllegalArgumentException( \"Bad arguments\" ); } return engine.engineVerify( signature, offset, length );  =>   return engine.engineVerify( signature, offset, length );
+SDL_34:148:boolean_verify0(byte,int,int): if (state == VERIFY) {     if (signature == null || offset < 0 || length < 0 || length > signature.length - offset) {         throw new java.lang.IllegalArgumentException( \"Bad arguments\" );     }     return engine.engineVerify( signature, offset, length ); }  =>   if (true) {     if (signature == null || offset < 0 || length < 0 || length > signature.length - offset) {         throw new java.lang.IllegalArgumentException( \"Bad arguments\" );     }     return engine.engineVerify( signature, offset, length ); }
+SDL_35:144:boolean_verify0(byte,int,int): throw new java.lang.IllegalArgumentException( \"Bad arguments\" );  =>  
+SDL_36:146:boolean_verify0(byte,int,int): if (signature == null || offset < 0 || length < 0 || length > signature.length - offset) {     throw new java.lang.IllegalArgumentException( \"Bad arguments\" ); }  =>   if (true) {     throw new java.lang.IllegalArgumentException( \"Bad arguments\" ); }
+SDL_37:147:boolean_verify0(byte,int,int): return engine.engineVerify( signature, offset, length );  =>   return true;
+SDL_38:147:boolean_verify0(byte,int,int): return engine.engineVerify( signature, offset, length );  =>   return false;
+SDL_39:156:void_update(byte): try {     update0( b ); } catch ( java.lang.Exception ex ) {     throw ex; }  =>   try { }
+SDL_40:164:void_update0(byte): if (state == VERIFY || state == SIGN) {     engine.engineUpdate( b ); } else {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signature or verification\" ); }  =>  
+SDL_41:165:void_update0(byte): engine.engineUpdate( b );  =>  
+SDL_42:169:void_update0(byte): if (state == VERIFY || state == SIGN) {     engine.engineUpdate( b ); } else {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signature or verification\" ); }  =>   if (true) {     engine.engineUpdate( b ); } else {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signature or verification\" ); }
+SDL_43:167:void_update0(byte): throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signature or verification\" );  =>  
+SDL_44:176:void_update(byte): try {     update0( data, 0, data.length ); } catch ( java.lang.Exception ex ) {     throw ex; }  =>   try { }
+SDL_45:186:void_update(byte,int,int): try {     update0( data, off, len ); } catch ( java.lang.Exception ex ) {     throw ex; }  =>   try { }
+SDL_46:194:void_update0(byte,int,int): if (state == SIGN || state == VERIFY) {     engine.engineUpdate( data, off, len ); } else {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signature or verification\" ); }  =>  
+SDL_47:195:void_update0(byte,int,int): engine.engineUpdate( data, off, len );  =>  
+SDL_48:199:void_update0(byte,int,int): if (state == SIGN || state == VERIFY) {     engine.engineUpdate( data, off, len ); } else {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signature or verification\" ); }  =>   if (true) {     engine.engineUpdate( data, off, len ); } else {     throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signature or verification\" ); }
+SDL_49:197:void_update0(byte,int,int): throw new com.example.signature.MockSignatureException( \"object not initialized for \" + \"signature or verification\" );  =>  
+SDL_50:206:java.lang.String_getAlgorithm(): return getAlgorithm0();  =>   return \"\";
+SDL_51:214:java.lang.String_getAlgorithm0(): return this.algorithm;  =>   return \"\";
+VDL_1:79:byte_sign0():state == SIGN => SIGN
+VDL_2:79:byte_sign0():state == SIGN => state
+VDL_3:98:int_sign0(byte,int,int):outbuf == null => null
+VDL_4:101:int_sign0(byte,int,int):outbuf.length - offset => outbuf.length
+VDL_5:101:int_sign0(byte,int,int):outbuf.length - offset < len => outbuf.length - offset
+VDL_6:104:int_sign0(byte,int,int):state != SIGN => SIGN
+VDL_7:104:int_sign0(byte,int,int):state != SIGN => state
+VDL_8:123:boolean_verify0(byte):state == VERIFY => VERIFY
+VDL_9:123:boolean_verify0(byte):state == VERIFY => state
+VDL_10:142:boolean_verify0(byte,int,int):state == VERIFY => VERIFY
+VDL_11:142:boolean_verify0(byte,int,int):state == VERIFY => state
+VDL_12:143:boolean_verify0(byte,int,int):signature == null => null
+VDL_13:143:boolean_verify0(byte,int,int):offset < 0 => 0
+VDL_14:143:boolean_verify0(byte,int,int):length < 0 => 0
+VDL_15:143:boolean_verify0(byte,int,int):signature.length - offset => signature.length
+VDL_16:143:boolean_verify0(byte,int,int):length > signature.length - offset => signature.length - offset
+VDL_17:164:void_update0(byte):state == VERIFY => VERIFY
+VDL_18:164:void_update0(byte):state == VERIFY => state
+VDL_19:164:void_update0(byte):state == SIGN => SIGN
+VDL_20:164:void_update0(byte):state == SIGN => state
+VDL_21:194:void_update0(byte,int,int):state == SIGN => SIGN
+VDL_22:194:void_update0(byte,int,int):state == SIGN => state
+VDL_23:194:void_update0(byte,int,int):state == VERIFY => VERIFY
+VDL_24:194:void_update0(byte,int,int):state == VERIFY => state
+ODL_1:79:byte_sign0():state == SIGN => state
+ODL_2:79:byte_sign0():state == SIGN => SIGN
+ODL_3:82:byte_sign0():"object not initialized for " + "signing" => "object not initialized for "
+ODL_4:82:byte_sign0():"object not initialized for " + "signing" => "signing"
+ODL_5:98:int_sign0(byte,int,int):outbuf == null => outbuf
+ODL_6:98:int_sign0(byte,int,int):outbuf == null => null
+ODL_7:101:int_sign0(byte,int,int):outbuf.length - offset => outbuf.length
+ODL_8:101:int_sign0(byte,int,int):outbuf.length - offset => offset
+ODL_9:101:int_sign0(byte,int,int):outbuf.length - offset < len => outbuf.length - offset
+ODL_10:101:int_sign0(byte,int,int):outbuf.length - offset < len => len
+ODL_11:104:int_sign0(byte,int,int):state != SIGN => state
+ODL_12:104:int_sign0(byte,int,int):state != SIGN => SIGN
+ODL_13:105:int_sign0(byte,int,int):"object not initialized for " + "signing" => "object not initialized for "
+ODL_14:105:int_sign0(byte,int,int):"object not initialized for " + "signing" => "signing"
+ODL_15:123:boolean_verify0(byte):state == VERIFY => state
+ODL_16:123:boolean_verify0(byte):state == VERIFY => VERIFY
+ODL_17:126:boolean_verify0(byte):"object not initialized for " + "verification" => "object not initialized for "
+ODL_18:126:boolean_verify0(byte):"object not initialized for " + "verification" => "verification"
+ODL_19:142:boolean_verify0(byte,int,int):state == VERIFY => state
+ODL_20:142:boolean_verify0(byte,int,int):state == VERIFY => VERIFY
+ODL_21:143:boolean_verify0(byte,int,int):signature == null => signature
+ODL_22:143:boolean_verify0(byte,int,int):signature == null => null
+ODL_23:143:boolean_verify0(byte,int,int):offset < 0 => offset
+ODL_24:143:boolean_verify0(byte,int,int):offset < 0 => 0
+ODL_25:143:boolean_verify0(byte,int,int):signature == null || offset < 0 => signature == null
+ODL_26:143:boolean_verify0(byte,int,int):signature == null || offset < 0 => offset < 0
+ODL_27:143:boolean_verify0(byte,int,int):length < 0 => length
+ODL_28:143:boolean_verify0(byte,int,int):length < 0 => 0
+ODL_29:143:boolean_verify0(byte,int,int):signature == null || offset < 0 || length < 0 => signature == null || offset < 0
+ODL_30:143:boolean_verify0(byte,int,int):signature == null || offset < 0 || length < 0 => length < 0
+ODL_31:143:boolean_verify0(byte,int,int):signature.length - offset => signature.length
+ODL_32:143:boolean_verify0(byte,int,int):signature.length - offset => offset
+ODL_33:143:boolean_verify0(byte,int,int):length > signature.length - offset => length
+ODL_34:143:boolean_verify0(byte,int,int):length > signature.length - offset => signature.length - offset
+ODL_35:143:boolean_verify0(byte,int,int):signature == null || offset < 0 || length < 0 || length > signature.length - offset => signature == null || offset < 0 || length < 0
+ODL_36:143:boolean_verify0(byte,int,int):signature == null || offset < 0 || length < 0 || length > signature.length - offset => length > signature.length - offset
+ODL_37:148:boolean_verify0(byte,int,int):"object not initialized for " + "verification" => "object not initialized for "
+ODL_38:148:boolean_verify0(byte,int,int):"object not initialized for " + "verification" => "verification"
+ODL_39:164:void_update0(byte):state == VERIFY => state
+ODL_40:164:void_update0(byte):state == VERIFY => VERIFY
+ODL_41:164:void_update0(byte):state == SIGN => state
+ODL_42:164:void_update0(byte):state == SIGN => SIGN
+ODL_43:164:void_update0(byte):state == VERIFY || state == SIGN => state == VERIFY
+ODL_44:164:void_update0(byte):state == VERIFY || state == SIGN => state == SIGN
+ODL_45:167:void_update0(byte):"object not initialized for " + "signature or verification" => "object not initialized for "
+ODL_46:167:void_update0(byte):"object not initialized for " + "signature or verification" => "signature or verification"
+ODL_47:194:void_update0(byte,int,int):state == SIGN => state
+ODL_48:194:void_update0(byte,int,int):state == SIGN => SIGN
+ODL_49:194:void_update0(byte,int,int):state == VERIFY => state
+ODL_50:194:void_update0(byte,int,int):state == VERIFY => VERIFY
+ODL_51:194:void_update0(byte,int,int):state == SIGN || state == VERIFY => state == SIGN
+ODL_52:194:void_update0(byte,int,int):state == SIGN || state == VERIFY => state == VERIFY
+ODL_53:197:void_update0(byte,int,int):"object not initialized for " + "signature or verification" => "object not initialized for "
+ODL_54:197:void_update0(byte,int,int):"object not initialized for " + "signature or verification" => "signature or verification"
+CDL_1:82:byte_sign0():"object not initialized for " + "signing" => "signing"
+CDL_2:82:byte_sign0():"object not initialized for " + "signing" => "object not initialized for "
+CDL_3:98:int_sign0(byte,int,int):outbuf == null => outbuf
+CDL_4:105:int_sign0(byte,int,int):"object not initialized for " + "signing" => "signing"
+CDL_5:105:int_sign0(byte,int,int):"object not initialized for " + "signing" => "object not initialized for "
+CDL_6:126:boolean_verify0(byte):"object not initialized for " + "verification" => "verification"
+CDL_7:126:boolean_verify0(byte):"object not initialized for " + "verification" => "object not initialized for "
+CDL_8:143:boolean_verify0(byte,int,int):signature == null => signature
+CDL_9:143:boolean_verify0(byte,int,int):offset < 0 => offset
+CDL_10:143:boolean_verify0(byte,int,int):length < 0 => length
+CDL_11:148:boolean_verify0(byte,int,int):"object not initialized for " + "verification" => "verification"
+CDL_12:148:boolean_verify0(byte,int,int):"object not initialized for " + "verification" => "object not initialized for "
+CDL_13:167:void_update0(byte):"object not initialized for " + "signature or verification" => "signature or verification"
+CDL_14:167:void_update0(byte):"object not initialized for " + "signature or verification" => "object not initialized for "
+CDL_15:197:void_update0(byte,int,int):"object not initialized for " + "signature or verification" => "signature or verification"
+CDL_16:197:void_update0(byte,int,int):"object not initialized for " + "signature or verification" => "object not initialized for "

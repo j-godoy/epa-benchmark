@@ -1,0 +1,408 @@
+AORB_1:83:int_previousIndex0():cursor - 1 => cursor * 1
+AORB_2:83:int_previousIndex0():cursor - 1 => cursor / 1
+AORB_3:83:int_previousIndex0():cursor - 1 => cursor % 1
+AORB_4:83:int_previousIndex0():cursor - 1 => cursor + 1
+AORB_5:138:java.lang.Object_previous0():cursor - 1 => cursor * 1
+AORB_6:138:java.lang.Object_previous0():cursor - 1 => cursor / 1
+AORB_7:138:java.lang.Object_previous0():cursor - 1 => cursor % 1
+AORB_8:138:java.lang.Object_previous0():cursor - 1 => cursor + 1
+AORB_9:188:void_add0(java.lang.Object):i + 1 => i * 1
+AORB_10:188:void_add0(java.lang.Object):i + 1 => i / 1
+AORB_11:188:void_add0(java.lang.Object):i + 1 => i % 1
+AORB_12:188:void_add0(java.lang.Object):i + 1 => i - 1
+AORB_13:213:java.lang.Object_super_next():i + 1 => i * 1
+AORB_14:213:java.lang.Object_super_next():i + 1 => i / 1
+AORB_15:213:java.lang.Object_super_next():i + 1 => i % 1
+AORB_16:213:java.lang.Object_super_next():i + 1 => i - 1
+AODU_1:38:void_ctorListItr0(com.example.listitr.MyArrayList,int):-1 => 1
+AODU_2:189:void_add0(java.lang.Object):-1 => 1
+AODU_3:227:void_remove0():-1 => 1
+AOIU_1:26:ListItr(com.example.listitr.MyArrayList,int):index => -index
+AOIU_2:40:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => -index
+AOIU_3:54:boolean_hasPrevious0():cursor => -cursor
+AOIU_4:69:int_nextIndex0():cursor => -cursor
+AOIU_5:83:int_previousIndex0():cursor => -cursor
+AOIU_6:84:int_previousIndex0():i => -i
+AOIU_7:138:java.lang.Object_previous0():cursor => -cursor
+AOIU_8:139:java.lang.Object_previous0():i => -i
+AOIU_9:143:java.lang.Object_previous0():i => -i
+AOIU_10:143:java.lang.Object_previous0():elementData.length => -elementData.length
+AOIU_11:146:java.lang.Object_previous0():i => -i
+AOIU_12:147:java.lang.Object_previous0():i => -i
+AOIU_13:162:void_set0(java.lang.Object):lastRet => -lastRet
+AOIU_14:167:void_set0(java.lang.Object):lastRet => -lastRet
+AOIU_15:186:void_add0(java.lang.Object):cursor => -cursor
+AOIU_16:187:void_add0(java.lang.Object):i => -i
+AOIU_17:188:void_add0(java.lang.Object):i => -i
+AOIU_18:198:boolean_super_hasNext():cursor => -cursor
+AOIU_19:205:java.lang.Object_super_next():cursor => -cursor
+AOIU_20:206:java.lang.Object_super_next():i => -i
+AOIU_21:210:java.lang.Object_super_next():i => -i
+AOIU_22:210:java.lang.Object_super_next():elementData.length => -elementData.length
+AOIU_23:213:java.lang.Object_super_next():i => -i
+AOIU_24:214:java.lang.Object_super_next():i => -i
+AOIU_25:220:void_remove0():lastRet => -lastRet
+AOIU_26:225:void_remove0():lastRet => -lastRet
+AOIU_27:226:void_remove0():lastRet => -lastRet
+AOIU_28:236:void_checkForComodification():expectedModCount => -expectedModCount
+AOIS_1:26:ListItr(com.example.listitr.MyArrayList,int):index => index++
+AOIS_2:26:ListItr(com.example.listitr.MyArrayList,int):index => index--
+AOIS_3:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => ++index
+AOIS_4:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => --index
+AOIS_5:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => index++
+AOIS_6:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => index--
+AOIS_7:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => ++index
+AOIS_8:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => --index
+AOIS_9:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => index++
+AOIS_10:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => index--
+AOIS_11:35:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => ++index
+AOIS_12:35:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => --index
+AOIS_13:35:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => index++
+AOIS_14:35:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => index--
+AOIS_15:40:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => ++index
+AOIS_16:40:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => --index
+AOIS_17:40:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => index++
+AOIS_18:40:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => index--
+AOIS_19:54:boolean_hasPrevious0():cursor => ++cursor
+AOIS_20:54:boolean_hasPrevious0():cursor => --cursor
+AOIS_21:54:boolean_hasPrevious0():cursor => cursor++
+AOIS_22:54:boolean_hasPrevious0():cursor => cursor--
+AOIS_23:69:int_nextIndex0():cursor => cursor++
+AOIS_24:69:int_nextIndex0():cursor => cursor--
+AOIS_25:83:int_previousIndex0():cursor => ++cursor
+AOIS_26:83:int_previousIndex0():cursor => --cursor
+AOIS_27:83:int_previousIndex0():cursor => cursor++
+AOIS_28:83:int_previousIndex0():cursor => cursor--
+AOIS_29:84:int_previousIndex0():i => i++
+AOIS_30:84:int_previousIndex0():i => i--
+AOIS_31:138:java.lang.Object_previous0():cursor => ++cursor
+AOIS_32:138:java.lang.Object_previous0():cursor => --cursor
+AOIS_33:138:java.lang.Object_previous0():cursor => cursor++
+AOIS_34:138:java.lang.Object_previous0():cursor => cursor--
+AOIS_35:139:java.lang.Object_previous0():i => ++i
+AOIS_36:139:java.lang.Object_previous0():i => --i
+AOIS_37:139:java.lang.Object_previous0():i => i++
+AOIS_38:139:java.lang.Object_previous0():i => i--
+AOIS_39:143:java.lang.Object_previous0():i => ++i
+AOIS_40:143:java.lang.Object_previous0():i => --i
+AOIS_41:143:java.lang.Object_previous0():i => i++
+AOIS_42:143:java.lang.Object_previous0():i => i--
+AOIS_43:143:java.lang.Object_previous0():elementData.length => ++elementData.length
+AOIS_44:143:java.lang.Object_previous0():elementData.length => --elementData.length
+AOIS_45:143:java.lang.Object_previous0():elementData.length => elementData.length++
+AOIS_46:143:java.lang.Object_previous0():elementData.length => elementData.length--
+AOIS_47:146:java.lang.Object_previous0():i => ++i
+AOIS_48:146:java.lang.Object_previous0():i => --i
+AOIS_49:146:java.lang.Object_previous0():i => i++
+AOIS_50:146:java.lang.Object_previous0():i => i--
+AOIS_51:147:java.lang.Object_previous0():i => ++i
+AOIS_52:147:java.lang.Object_previous0():i => --i
+AOIS_53:147:java.lang.Object_previous0():i => i++
+AOIS_54:147:java.lang.Object_previous0():i => i--
+AOIS_55:162:void_set0(java.lang.Object):lastRet => ++lastRet
+AOIS_56:162:void_set0(java.lang.Object):lastRet => --lastRet
+AOIS_57:162:void_set0(java.lang.Object):lastRet => lastRet++
+AOIS_58:162:void_set0(java.lang.Object):lastRet => lastRet--
+AOIS_59:167:void_set0(java.lang.Object):lastRet => lastRet++
+AOIS_60:167:void_set0(java.lang.Object):lastRet => lastRet--
+AOIS_61:186:void_add0(java.lang.Object):cursor => cursor++
+AOIS_62:186:void_add0(java.lang.Object):cursor => cursor--
+AOIS_63:187:void_add0(java.lang.Object):i => i++
+AOIS_64:187:void_add0(java.lang.Object):i => i--
+AOIS_65:188:void_add0(java.lang.Object):i => ++i
+AOIS_66:188:void_add0(java.lang.Object):i => --i
+AOIS_67:188:void_add0(java.lang.Object):i => i++
+AOIS_68:188:void_add0(java.lang.Object):i => i--
+AOIS_69:198:boolean_super_hasNext():cursor => ++cursor
+AOIS_70:198:boolean_super_hasNext():cursor => --cursor
+AOIS_71:198:boolean_super_hasNext():cursor => cursor++
+AOIS_72:198:boolean_super_hasNext():cursor => cursor--
+AOIS_73:205:java.lang.Object_super_next():cursor => cursor++
+AOIS_74:205:java.lang.Object_super_next():cursor => cursor--
+AOIS_75:206:java.lang.Object_super_next():i => ++i
+AOIS_76:206:java.lang.Object_super_next():i => --i
+AOIS_77:206:java.lang.Object_super_next():i => i++
+AOIS_78:206:java.lang.Object_super_next():i => i--
+AOIS_79:210:java.lang.Object_super_next():i => ++i
+AOIS_80:210:java.lang.Object_super_next():i => --i
+AOIS_81:210:java.lang.Object_super_next():i => i++
+AOIS_82:210:java.lang.Object_super_next():i => i--
+AOIS_83:210:java.lang.Object_super_next():elementData.length => ++elementData.length
+AOIS_84:210:java.lang.Object_super_next():elementData.length => --elementData.length
+AOIS_85:210:java.lang.Object_super_next():elementData.length => elementData.length++
+AOIS_86:210:java.lang.Object_super_next():elementData.length => elementData.length--
+AOIS_87:213:java.lang.Object_super_next():i => ++i
+AOIS_88:213:java.lang.Object_super_next():i => --i
+AOIS_89:213:java.lang.Object_super_next():i => i++
+AOIS_90:213:java.lang.Object_super_next():i => i--
+AOIS_91:214:java.lang.Object_super_next():i => ++i
+AOIS_92:214:java.lang.Object_super_next():i => --i
+AOIS_93:214:java.lang.Object_super_next():i => i++
+AOIS_94:214:java.lang.Object_super_next():i => i--
+AOIS_95:220:void_remove0():lastRet => ++lastRet
+AOIS_96:220:void_remove0():lastRet => --lastRet
+AOIS_97:220:void_remove0():lastRet => lastRet++
+AOIS_98:220:void_remove0():lastRet => lastRet--
+AOIS_99:225:void_remove0():lastRet => lastRet++
+AOIS_100:225:void_remove0():lastRet => lastRet--
+AOIS_101:226:void_remove0():lastRet => ++lastRet
+AOIS_102:226:void_remove0():lastRet => --lastRet
+AOIS_103:226:void_remove0():lastRet => lastRet++
+AOIS_104:226:void_remove0():lastRet => lastRet--
+AOIS_105:236:void_checkForComodification():expectedModCount => ++expectedModCount
+AOIS_106:236:void_checkForComodification():expectedModCount => --expectedModCount
+AOIS_107:236:void_checkForComodification():expectedModCount => expectedModCount++
+AOIS_108:236:void_checkForComodification():expectedModCount => expectedModCount--
+ROR_1:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0  =>   index > 0
+ROR_2:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0  =>   index >= 0
+ROR_3:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0  =>   index <= 0
+ROR_4:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0  =>   index == 0
+ROR_5:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0  =>   index != 0
+ROR_6:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0  =>   true
+ROR_7:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0  =>   false
+ROR_8:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index > arrayList.size()  =>   index >= arrayList.size()
+ROR_9:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index > arrayList.size()  =>   index < arrayList.size()
+ROR_10:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index > arrayList.size()  =>   index <= arrayList.size()
+ROR_11:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index > arrayList.size()  =>   index == arrayList.size()
+ROR_12:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index > arrayList.size()  =>   index != arrayList.size()
+ROR_13:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index > arrayList.size()  =>   true
+ROR_14:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index > arrayList.size()  =>   false
+ROR_15:54:boolean_hasPrevious0(): cursor != 0  =>   cursor > 0
+ROR_16:54:boolean_hasPrevious0(): cursor != 0  =>   cursor >= 0
+ROR_17:54:boolean_hasPrevious0(): cursor != 0  =>   cursor < 0
+ROR_18:54:boolean_hasPrevious0(): cursor != 0  =>   cursor <= 0
+ROR_19:54:boolean_hasPrevious0(): cursor != 0  =>   cursor == 0
+ROR_20:54:boolean_hasPrevious0(): cursor != 0  =>   true
+ROR_21:54:boolean_hasPrevious0(): cursor != 0  =>   false
+ROR_22:139:java.lang.Object_previous0(): i < 0  =>   i > 0
+ROR_23:139:java.lang.Object_previous0(): i < 0  =>   i >= 0
+ROR_24:139:java.lang.Object_previous0(): i < 0  =>   i <= 0
+ROR_25:139:java.lang.Object_previous0(): i < 0  =>   i == 0
+ROR_26:139:java.lang.Object_previous0(): i < 0  =>   i != 0
+ROR_27:139:java.lang.Object_previous0(): i < 0  =>   true
+ROR_28:139:java.lang.Object_previous0(): i < 0  =>   false
+ROR_29:143:java.lang.Object_previous0(): i >= elementData.length  =>   i > elementData.length
+ROR_30:143:java.lang.Object_previous0(): i >= elementData.length  =>   i < elementData.length
+ROR_31:143:java.lang.Object_previous0(): i >= elementData.length  =>   i <= elementData.length
+ROR_32:143:java.lang.Object_previous0(): i >= elementData.length  =>   i == elementData.length
+ROR_33:143:java.lang.Object_previous0(): i >= elementData.length  =>   i != elementData.length
+ROR_34:143:java.lang.Object_previous0(): i >= elementData.length  =>   true
+ROR_35:143:java.lang.Object_previous0(): i >= elementData.length  =>   false
+ROR_36:162:void_set0(java.lang.Object): lastRet < 0  =>   lastRet > 0
+ROR_37:162:void_set0(java.lang.Object): lastRet < 0  =>   lastRet >= 0
+ROR_38:162:void_set0(java.lang.Object): lastRet < 0  =>   lastRet <= 0
+ROR_39:162:void_set0(java.lang.Object): lastRet < 0  =>   lastRet == 0
+ROR_40:162:void_set0(java.lang.Object): lastRet < 0  =>   lastRet != 0
+ROR_41:162:void_set0(java.lang.Object): lastRet < 0  =>   true
+ROR_42:162:void_set0(java.lang.Object): lastRet < 0  =>   false
+ROR_43:198:boolean_super_hasNext(): cursor != this.arrayList.size()  =>   cursor > this.arrayList.size()
+ROR_44:198:boolean_super_hasNext(): cursor != this.arrayList.size()  =>   cursor >= this.arrayList.size()
+ROR_45:198:boolean_super_hasNext(): cursor != this.arrayList.size()  =>   cursor < this.arrayList.size()
+ROR_46:198:boolean_super_hasNext(): cursor != this.arrayList.size()  =>   cursor <= this.arrayList.size()
+ROR_47:198:boolean_super_hasNext(): cursor != this.arrayList.size()  =>   cursor == this.arrayList.size()
+ROR_48:198:boolean_super_hasNext(): cursor != this.arrayList.size()  =>   true
+ROR_49:198:boolean_super_hasNext(): cursor != this.arrayList.size()  =>   false
+ROR_50:206:java.lang.Object_super_next(): i >= this.arrayList.size()  =>   i > this.arrayList.size()
+ROR_51:206:java.lang.Object_super_next(): i >= this.arrayList.size()  =>   i < this.arrayList.size()
+ROR_52:206:java.lang.Object_super_next(): i >= this.arrayList.size()  =>   i <= this.arrayList.size()
+ROR_53:206:java.lang.Object_super_next(): i >= this.arrayList.size()  =>   i == this.arrayList.size()
+ROR_54:206:java.lang.Object_super_next(): i >= this.arrayList.size()  =>   i != this.arrayList.size()
+ROR_55:206:java.lang.Object_super_next(): i >= this.arrayList.size()  =>   true
+ROR_56:206:java.lang.Object_super_next(): i >= this.arrayList.size()  =>   false
+ROR_57:210:java.lang.Object_super_next(): i >= elementData.length  =>   i > elementData.length
+ROR_58:210:java.lang.Object_super_next(): i >= elementData.length  =>   i < elementData.length
+ROR_59:210:java.lang.Object_super_next(): i >= elementData.length  =>   i <= elementData.length
+ROR_60:210:java.lang.Object_super_next(): i >= elementData.length  =>   i == elementData.length
+ROR_61:210:java.lang.Object_super_next(): i >= elementData.length  =>   i != elementData.length
+ROR_62:210:java.lang.Object_super_next(): i >= elementData.length  =>   true
+ROR_63:210:java.lang.Object_super_next(): i >= elementData.length  =>   false
+ROR_64:220:void_remove0(): lastRet < 0  =>   lastRet > 0
+ROR_65:220:void_remove0(): lastRet < 0  =>   lastRet >= 0
+ROR_66:220:void_remove0(): lastRet < 0  =>   lastRet <= 0
+ROR_67:220:void_remove0(): lastRet < 0  =>   lastRet == 0
+ROR_68:220:void_remove0(): lastRet < 0  =>   lastRet != 0
+ROR_69:220:void_remove0(): lastRet < 0  =>   true
+ROR_70:220:void_remove0(): lastRet < 0  =>   false
+ROR_71:236:void_checkForComodification(): this.arrayList.getModCount() != expectedModCount  =>   this.arrayList.getModCount() > expectedModCount
+ROR_72:236:void_checkForComodification(): this.arrayList.getModCount() != expectedModCount  =>   this.arrayList.getModCount() >= expectedModCount
+ROR_73:236:void_checkForComodification(): this.arrayList.getModCount() != expectedModCount  =>   this.arrayList.getModCount() < expectedModCount
+ROR_74:236:void_checkForComodification(): this.arrayList.getModCount() != expectedModCount  =>   this.arrayList.getModCount() <= expectedModCount
+ROR_75:236:void_checkForComodification(): this.arrayList.getModCount() != expectedModCount  =>   this.arrayList.getModCount() == expectedModCount
+ROR_76:236:void_checkForComodification(): this.arrayList.getModCount() != expectedModCount  =>   true
+ROR_77:236:void_checkForComodification(): this.arrayList.getModCount() != expectedModCount  =>   false
+COR_1:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0 || index > arrayList.size()  =>   index < 0 && index > arrayList.size()
+COR_2:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0 || index > arrayList.size()  =>   index < 0 ^ index > arrayList.size()
+COI_1:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0  =>  !(index < 0)
+COI_2:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index > arrayList.size()  =>  !(index > arrayList.size())
+COI_3:34:void_ctorListItr0(com.example.listitr.MyArrayList,int): index < 0 || index > arrayList.size()  =>  !(index < 0 || index > arrayList.size())
+COI_4:54:boolean_hasPrevious0(): cursor != 0  =>  !(cursor != 0)
+COI_5:55:boolean_hasPrevious0(): b  =>  !b
+COI_6:99:boolean_hasNext0(): superHasNext  =>  !superHasNext
+COI_7:139:java.lang.Object_previous0(): i < 0  =>  !(i < 0)
+COI_8:143:java.lang.Object_previous0(): i >= elementData.length  =>  !(i >= elementData.length)
+COI_9:162:void_set0(java.lang.Object): lastRet < 0  =>  !(lastRet < 0)
+COI_10:198:boolean_super_hasNext(): cursor != this.arrayList.size()  =>  !(cursor != this.arrayList.size())
+COI_11:199:boolean_super_hasNext(): b  =>  !b
+COI_12:206:java.lang.Object_super_next(): i >= this.arrayList.size()  =>  !(i >= this.arrayList.size())
+COI_13:210:java.lang.Object_super_next(): i >= elementData.length  =>  !(i >= elementData.length)
+COI_14:220:void_remove0(): lastRet < 0  =>  !(lastRet < 0)
+COI_15:236:void_checkForComodification(): this.arrayList.getModCount() != expectedModCount  =>  !(this.arrayList.getModCount() != expectedModCount)
+LOI_1:26:ListItr(com.example.listitr.MyArrayList,int):index => ~index
+LOI_2:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => ~index
+LOI_3:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => ~index
+LOI_4:35:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => ~index
+LOI_5:40:void_ctorListItr0(com.example.listitr.MyArrayList,int):index => ~index
+LOI_6:54:boolean_hasPrevious0():cursor => ~cursor
+LOI_7:69:int_nextIndex0():cursor => ~cursor
+LOI_8:83:int_previousIndex0():cursor => ~cursor
+LOI_9:84:int_previousIndex0():i => ~i
+LOI_10:138:java.lang.Object_previous0():cursor => ~cursor
+LOI_11:139:java.lang.Object_previous0():i => ~i
+LOI_12:143:java.lang.Object_previous0():i => ~i
+LOI_13:143:java.lang.Object_previous0():elementData.length => ~elementData.length
+LOI_14:146:java.lang.Object_previous0():i => ~i
+LOI_15:147:java.lang.Object_previous0():i => ~i
+LOI_16:162:void_set0(java.lang.Object):lastRet => ~lastRet
+LOI_17:167:void_set0(java.lang.Object):lastRet => ~lastRet
+LOI_18:186:void_add0(java.lang.Object):cursor => ~cursor
+LOI_19:187:void_add0(java.lang.Object):i => ~i
+LOI_20:188:void_add0(java.lang.Object):i => ~i
+LOI_21:198:boolean_super_hasNext():cursor => ~cursor
+LOI_22:205:java.lang.Object_super_next():cursor => ~cursor
+LOI_23:206:java.lang.Object_super_next():i => ~i
+LOI_24:210:java.lang.Object_super_next():i => ~i
+LOI_25:210:java.lang.Object_super_next():elementData.length => ~elementData.length
+LOI_26:213:java.lang.Object_super_next():i => ~i
+LOI_27:214:java.lang.Object_super_next():i => ~i
+LOI_28:220:void_remove0():lastRet => ~lastRet
+LOI_29:225:void_remove0():lastRet => ~lastRet
+LOI_30:226:void_remove0():lastRet => ~lastRet
+LOI_31:236:void_checkForComodification():expectedModCount => ~expectedModCount
+SDL_1:27:ListItr(com.example.listitr.MyArrayList,int): try {     ctorListItr0( arrayList, index ); } catch ( java.lang.RuntimeException ex ) {     throw ex; }  =>   try { }
+SDL_2:38:void_ctorListItr0(com.example.listitr.MyArrayList,int): if (index < 0 || index > arrayList.size()) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); } this.arrayList = new com.example.listitr.MyArrayList( arrayList ); this.lastRet = -1; this.expectedModCount = this.arrayList.getModCount(); this.cursor = index;  =>   this.arrayList = new com.example.listitr.MyArrayList( arrayList ); this.lastRet = -1; this.expectedModCount = this.arrayList.getModCount(); this.cursor = index;
+SDL_3:40:void_ctorListItr0(com.example.listitr.MyArrayList,int): if (index < 0 || index > arrayList.size()) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); } this.arrayList = new com.example.listitr.MyArrayList( arrayList ); this.lastRet = -1; this.expectedModCount = this.arrayList.getModCount(); this.cursor = index;  =>   if (index < 0 || index > arrayList.size()) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); } this.lastRet = -1; this.expectedModCount = this.arrayList.getModCount(); this.cursor = index;
+SDL_4:40:void_ctorListItr0(com.example.listitr.MyArrayList,int): if (index < 0 || index > arrayList.size()) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); } this.arrayList = new com.example.listitr.MyArrayList( arrayList ); this.lastRet = -1; this.expectedModCount = this.arrayList.getModCount(); this.cursor = index;  =>   if (index < 0 || index > arrayList.size()) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); } this.arrayList = new com.example.listitr.MyArrayList( arrayList ); this.expectedModCount = this.arrayList.getModCount(); this.cursor = index;
+SDL_5:40:void_ctorListItr0(com.example.listitr.MyArrayList,int): if (index < 0 || index > arrayList.size()) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); } this.arrayList = new com.example.listitr.MyArrayList( arrayList ); this.lastRet = -1; this.expectedModCount = this.arrayList.getModCount(); this.cursor = index;  =>   if (index < 0 || index > arrayList.size()) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); } this.arrayList = new com.example.listitr.MyArrayList( arrayList ); this.lastRet = -1; this.cursor = index;
+SDL_6:40:void_ctorListItr0(com.example.listitr.MyArrayList,int): if (index < 0 || index > arrayList.size()) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); } this.arrayList = new com.example.listitr.MyArrayList( arrayList ); this.lastRet = -1; this.expectedModCount = this.arrayList.getModCount(); this.cursor = index;  =>   if (index < 0 || index > arrayList.size()) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); } this.arrayList = new com.example.listitr.MyArrayList( arrayList ); this.lastRet = -1; this.expectedModCount = this.arrayList.getModCount();
+SDL_7:35:void_ctorListItr0(com.example.listitr.MyArrayList,int): throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index );  =>  
+SDL_8:37:void_ctorListItr0(com.example.listitr.MyArrayList,int): if (index < 0 || index > arrayList.size()) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); }  =>   if (true) {     throw new java.lang.IndexOutOfBoundsException( \"Index: \" + index ); }
+SDL_9:47:boolean_hasPrevious(): return hasPrevious0();  =>   return true;
+SDL_10:47:boolean_hasPrevious(): return hasPrevious0();  =>   return false;
+SDL_11:56:boolean_hasPrevious0(): return b;  =>   return true;
+SDL_12:56:boolean_hasPrevious0(): return b;  =>   return false;
+SDL_13:62:int_nextIndex(): return nextIndex0();  =>   return 0;
+SDL_14:70:int_nextIndex0(): return cursor;  =>   return 0;
+SDL_15:76:int_previousIndex(): return previousIndex0();  =>   return 0;
+SDL_16:85:int_previousIndex0(): return i;  =>   return 0;
+SDL_17:91:boolean_hasNext(): return hasNext0();  =>   return true;
+SDL_18:91:boolean_hasNext(): return hasNext0();  =>   return false;
+SDL_19:100:boolean_hasNext0(): return superHasNext;  =>   return true;
+SDL_20:100:boolean_hasNext0(): return superHasNext;  =>   return false;
+SDL_21:121:void_remove(): try {     remove0(); } catch ( java.lang.RuntimeException ex ) {     throw ex; }  =>   try { }
+SDL_22:148:java.lang.Object_previous0(): checkForComodification(); int i = cursor - 1; if (i < 0) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i; java.lang.Object object = (java.lang.Object) elementData[lastRet = i]; return object;  =>   int i = cursor - 1; if (i < 0) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i; java.lang.Object object = (java.lang.Object) elementData[lastRet = i]; return object;
+SDL_23:146:java.lang.Object_previous0(): checkForComodification(); int i = cursor - 1; if (i < 0) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i; java.lang.Object object = (java.lang.Object) elementData[lastRet = i]; return object;  =>   checkForComodification(); int i = cursor - 1; java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i; java.lang.Object object = (java.lang.Object) elementData[lastRet = i]; return object;
+SDL_24:146:java.lang.Object_previous0(): checkForComodification(); int i = cursor - 1; if (i < 0) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i; java.lang.Object object = (java.lang.Object) elementData[lastRet = i]; return object;  =>   checkForComodification(); int i = cursor - 1; if (i < 0) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); cursor = i; java.lang.Object object = (java.lang.Object) elementData[lastRet = i]; return object;
+SDL_25:148:java.lang.Object_previous0(): checkForComodification(); int i = cursor - 1; if (i < 0) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i; java.lang.Object object = (java.lang.Object) elementData[lastRet = i]; return object;  =>   checkForComodification(); int i = cursor - 1; if (i < 0) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } java.lang.Object object = (java.lang.Object) elementData[lastRet = i]; return object;
+SDL_26:140:java.lang.Object_previous0(): throw new java.util.NoSuchElementException();  =>  
+SDL_27:142:java.lang.Object_previous0(): if (i < 0) {     throw new java.util.NoSuchElementException(); }  =>   if (true) {     throw new java.util.NoSuchElementException(); }
+SDL_28:144:java.lang.Object_previous0(): throw new java.util.ConcurrentModificationException();  =>  
+SDL_29:146:java.lang.Object_previous0(): if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); }  =>   if (true) {     throw new java.util.ConcurrentModificationException(); }
+SDL_30:155:void_set(java.lang.Object): try {     set0( e ); } catch ( java.lang.RuntimeException ex ) {     throw ex; }  =>   try { }
+SDL_31:168:void_set0(java.lang.Object): if (lastRet < 0) {     throw new java.lang.IllegalStateException(); } checkForComodification(); try {     arrayList.set( lastRet, e ); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   checkForComodification(); try {     arrayList.set( lastRet, e ); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }
+SDL_32:170:void_set0(java.lang.Object): if (lastRet < 0) {     throw new java.lang.IllegalStateException(); } checkForComodification(); try {     arrayList.set( lastRet, e ); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   if (lastRet < 0) {     throw new java.lang.IllegalStateException(); } try {     arrayList.set( lastRet, e ); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }
+SDL_33:163:void_set0(java.lang.Object): throw new java.lang.IllegalStateException();  =>  
+SDL_34:165:void_set0(java.lang.Object): if (lastRet < 0) {     throw new java.lang.IllegalStateException(); }  =>   if (true) {     throw new java.lang.IllegalStateException(); }
+SDL_35:168:void_set0(java.lang.Object): try {     arrayList.set( lastRet, e ); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   try { }
+SDL_36:177:void_add(java.lang.Object): try {     add0( e ); } catch ( java.lang.RuntimeException ex ) {     throw ex; }  =>   try { }
+SDL_37:193:void_add0(java.lang.Object): checkForComodification(); try {     int i = cursor;     arrayList.add( i, e );     cursor = i + 1;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   try {     int i = cursor;     arrayList.add( i, e );     cursor = i + 1;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }
+SDL_38:191:void_add0(java.lang.Object): try {     int i = cursor;     arrayList.add( i, e );     cursor = i + 1;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   try {     int i = cursor;     cursor = i + 1;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); }
+SDL_39:191:void_add0(java.lang.Object): try {     int i = cursor;     arrayList.add( i, e );     cursor = i + 1;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   try {     int i = cursor;     arrayList.add( i, e );     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); }
+SDL_40:191:void_add0(java.lang.Object): try {     int i = cursor;     arrayList.add( i, e );     cursor = i + 1;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   try {     int i = cursor;     arrayList.add( i, e );     cursor = i + 1;     expectedModCount = this.arrayList.getModCount(); }
+SDL_41:191:void_add0(java.lang.Object): try {     int i = cursor;     arrayList.add( i, e );     cursor = i + 1;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   try {     int i = cursor;     arrayList.add( i, e );     cursor = i + 1;     lastRet = -1; }
+SDL_42:200:boolean_super_hasNext(): return b;  =>   return true;
+SDL_43:200:boolean_super_hasNext(): return b;  =>   return false;
+SDL_44:215:java.lang.Object_super_next(): checkForComodification(); int i = cursor; if (i >= this.arrayList.size()) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i + 1; final java.lang.Object o = (java.lang.Object) elementData[lastRet = i]; return o;  =>   int i = cursor; if (i >= this.arrayList.size()) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i + 1; final java.lang.Object o = (java.lang.Object) elementData[lastRet = i]; return o;
+SDL_45:213:java.lang.Object_super_next(): checkForComodification(); int i = cursor; if (i >= this.arrayList.size()) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i + 1; final java.lang.Object o = (java.lang.Object) elementData[lastRet = i]; return o;  =>   checkForComodification(); int i = cursor; java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i + 1; final java.lang.Object o = (java.lang.Object) elementData[lastRet = i]; return o;
+SDL_46:213:java.lang.Object_super_next(): checkForComodification(); int i = cursor; if (i >= this.arrayList.size()) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i + 1; final java.lang.Object o = (java.lang.Object) elementData[lastRet = i]; return o;  =>   checkForComodification(); int i = cursor; if (i >= this.arrayList.size()) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); cursor = i + 1; final java.lang.Object o = (java.lang.Object) elementData[lastRet = i]; return o;
+SDL_47:215:java.lang.Object_super_next(): checkForComodification(); int i = cursor; if (i >= this.arrayList.size()) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } cursor = i + 1; final java.lang.Object o = (java.lang.Object) elementData[lastRet = i]; return o;  =>   checkForComodification(); int i = cursor; if (i >= this.arrayList.size()) {     throw new java.util.NoSuchElementException(); } java.lang.Object[] elementData = arrayList.getElementData(); if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); } final java.lang.Object o = (java.lang.Object) elementData[lastRet = i]; return o;
+SDL_48:207:java.lang.Object_super_next(): throw new java.util.NoSuchElementException();  =>  
+SDL_49:209:java.lang.Object_super_next(): if (i >= this.arrayList.size()) {     throw new java.util.NoSuchElementException(); }  =>   if (true) {     throw new java.util.NoSuchElementException(); }
+SDL_50:211:java.lang.Object_super_next(): throw new java.util.ConcurrentModificationException();  =>  
+SDL_51:213:java.lang.Object_super_next(): if (i >= elementData.length) {     throw new java.util.ConcurrentModificationException(); }  =>   if (true) {     throw new java.util.ConcurrentModificationException(); }
+SDL_52:229:void_remove0(): if (lastRet < 0) {     throw new java.lang.IllegalStateException(); } checkForComodification(); try {     arrayList.remove( lastRet );     cursor = lastRet;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   checkForComodification(); try {     arrayList.remove( lastRet );     cursor = lastRet;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }
+SDL_53:231:void_remove0(): if (lastRet < 0) {     throw new java.lang.IllegalStateException(); } checkForComodification(); try {     arrayList.remove( lastRet );     cursor = lastRet;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   if (lastRet < 0) {     throw new java.lang.IllegalStateException(); } try {     arrayList.remove( lastRet );     cursor = lastRet;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }
+SDL_54:221:void_remove0(): throw new java.lang.IllegalStateException();  =>  
+SDL_55:223:void_remove0(): if (lastRet < 0) {     throw new java.lang.IllegalStateException(); }  =>   if (true) {     throw new java.lang.IllegalStateException(); }
+SDL_56:229:void_remove0(): try {     arrayList.remove( lastRet );     cursor = lastRet;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   try {     cursor = lastRet;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); }
+SDL_57:229:void_remove0(): try {     arrayList.remove( lastRet );     cursor = lastRet;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   try {     arrayList.remove( lastRet );     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); }
+SDL_58:229:void_remove0(): try {     arrayList.remove( lastRet );     cursor = lastRet;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   try {     arrayList.remove( lastRet );     cursor = lastRet;     expectedModCount = this.arrayList.getModCount(); }
+SDL_59:229:void_remove0(): try {     arrayList.remove( lastRet );     cursor = lastRet;     lastRet = -1;     expectedModCount = this.arrayList.getModCount(); } catch ( java.lang.IndexOutOfBoundsException ex ) {     throw new java.util.ConcurrentModificationException(); }  =>   try {     arrayList.remove( lastRet );     cursor = lastRet;     lastRet = -1; }
+SDL_60:236:void_checkForComodification(): if (this.arrayList.getModCount() != expectedModCount) {     throw new java.util.ConcurrentModificationException(); }  =>  
+SDL_61:237:void_checkForComodification(): throw new java.util.ConcurrentModificationException();  =>  
+SDL_62:239:void_checkForComodification(): if (this.arrayList.getModCount() != expectedModCount) {     throw new java.util.ConcurrentModificationException(); }  =>   if (true) {     throw new java.util.ConcurrentModificationException(); }
+VDL_1:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index < 0 => 0
+VDL_2:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index > arrayList.size() => arrayList.size()
+VDL_3:35:void_ctorListItr0(com.example.listitr.MyArrayList,int):"Index: " + index => "Index: "
+VDL_4:54:boolean_hasPrevious0():cursor != 0 => 0
+VDL_5:83:int_previousIndex0():cursor - 1 => 1
+VDL_6:138:java.lang.Object_previous0():cursor - 1 => 1
+VDL_7:139:java.lang.Object_previous0():i < 0 => 0
+VDL_8:143:java.lang.Object_previous0():i >= elementData.length => elementData.length
+VDL_9:162:void_set0(java.lang.Object):lastRet < 0 => 0
+VDL_10:188:void_add0(java.lang.Object):i + 1 => 1
+VDL_11:198:boolean_super_hasNext():cursor != this.arrayList.size() => this.arrayList.size()
+VDL_12:206:java.lang.Object_super_next():i >= this.arrayList.size() => this.arrayList.size()
+VDL_13:210:java.lang.Object_super_next():i >= elementData.length => elementData.length
+VDL_14:213:java.lang.Object_super_next():i + 1 => 1
+VDL_15:220:void_remove0():lastRet < 0 => 0
+VDL_16:236:void_checkForComodification():this.arrayList.getModCount() != expectedModCount => this.arrayList.getModCount()
+ODL_1:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index < 0 => index
+ODL_2:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index < 0 => 0
+ODL_3:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index > arrayList.size() => index
+ODL_4:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index > arrayList.size() => arrayList.size()
+ODL_5:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index < 0 || index > arrayList.size() => index < 0
+ODL_6:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index < 0 || index > arrayList.size() => index > arrayList.size()
+ODL_7:35:void_ctorListItr0(com.example.listitr.MyArrayList,int):"Index: " + index => "Index: "
+ODL_8:35:void_ctorListItr0(com.example.listitr.MyArrayList,int):"Index: " + index => index
+ODL_9:38:void_ctorListItr0(com.example.listitr.MyArrayList,int):-1 => 1
+ODL_10:54:boolean_hasPrevious0():cursor != 0 => cursor
+ODL_11:54:boolean_hasPrevious0():cursor != 0 => 0
+ODL_12:83:int_previousIndex0():cursor - 1 => cursor
+ODL_13:83:int_previousIndex0():cursor - 1 => 1
+ODL_14:138:java.lang.Object_previous0():cursor - 1 => cursor
+ODL_15:138:java.lang.Object_previous0():cursor - 1 => 1
+ODL_16:139:java.lang.Object_previous0():i < 0 => i
+ODL_17:139:java.lang.Object_previous0():i < 0 => 0
+ODL_18:143:java.lang.Object_previous0():i >= elementData.length => i
+ODL_19:143:java.lang.Object_previous0():i >= elementData.length => elementData.length
+ODL_20:162:void_set0(java.lang.Object):lastRet < 0 => lastRet
+ODL_21:162:void_set0(java.lang.Object):lastRet < 0 => 0
+ODL_22:188:void_add0(java.lang.Object):i + 1 => i
+ODL_23:188:void_add0(java.lang.Object):i + 1 => 1
+ODL_24:189:void_add0(java.lang.Object):-1 => 1
+ODL_25:198:boolean_super_hasNext():cursor != this.arrayList.size() => cursor
+ODL_26:198:boolean_super_hasNext():cursor != this.arrayList.size() => this.arrayList.size()
+ODL_27:206:java.lang.Object_super_next():i >= this.arrayList.size() => i
+ODL_28:206:java.lang.Object_super_next():i >= this.arrayList.size() => this.arrayList.size()
+ODL_29:210:java.lang.Object_super_next():i >= elementData.length => i
+ODL_30:210:java.lang.Object_super_next():i >= elementData.length => elementData.length
+ODL_31:213:java.lang.Object_super_next():i + 1 => i
+ODL_32:213:java.lang.Object_super_next():i + 1 => 1
+ODL_33:220:void_remove0():lastRet < 0 => lastRet
+ODL_34:220:void_remove0():lastRet < 0 => 0
+ODL_35:227:void_remove0():-1 => 1
+ODL_36:236:void_checkForComodification():this.arrayList.getModCount() != expectedModCount => this.arrayList.getModCount()
+ODL_37:236:void_checkForComodification():this.arrayList.getModCount() != expectedModCount => expectedModCount
+CDL_1:34:void_ctorListItr0(com.example.listitr.MyArrayList,int):index < 0 => index
+CDL_2:35:void_ctorListItr0(com.example.listitr.MyArrayList,int):"Index: " + index => index
+CDL_3:38:void_ctorListItr0(com.example.listitr.MyArrayList,int):-1 =>  
+CDL_4:54:boolean_hasPrevious0():cursor != 0 => cursor
+CDL_5:83:int_previousIndex0():cursor - 1 => cursor
+CDL_6:138:java.lang.Object_previous0():cursor - 1 => cursor
+CDL_7:139:java.lang.Object_previous0():i < 0 => i
+CDL_8:162:void_set0(java.lang.Object):lastRet < 0 => lastRet
+CDL_9:188:void_add0(java.lang.Object):i + 1 => i
+CDL_10:189:void_add0(java.lang.Object):-1 =>  
+CDL_11:213:java.lang.Object_super_next():i + 1 => i
+CDL_12:220:void_remove0():lastRet < 0 => lastRet
+CDL_13:227:void_remove0():-1 =>  

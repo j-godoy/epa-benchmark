@@ -1,0 +1,22 @@
+digraph finite_state_machine {
+	rankdir=LR;
+	size="8,5"
+	node [shape = doublecircle]; S0;
+	node [shape = circle];
+	S0 -> S1 [ label = "Socket" ];
+        S3 -> S6 [label = "close" ];
+        S3 -> S3 [label = "getInputStream\ngetOutputStream" ];
+        S3 -> S4 [label = "shutdownInput" ];
+        S3 -> S5 [label = "shutdownOutput" ];
+        S6 -> S6 [label = "close" ];
+        S2 -> S6 [label = "close\nconnect" ];
+        S2 -> S3 [label = "connect" ];
+        S1 -> S2 [label = "bind" ];
+        S1 -> S6 [label = "close\nconnect" ];
+        S1 -> S3 [label = "connect" ];
+        S5 -> S6 [label = "close\nshutdownInput" ];
+        S5 -> S5 [label = "getInputStream" ];
+        S4 -> S6 [label = "close" ];
+        S4 -> S4 [label = "getOutputStream" ];
+        S4 -> S6 [label = "shutdownOutput" ];
+}

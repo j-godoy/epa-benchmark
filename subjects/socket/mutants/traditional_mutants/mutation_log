@@ -1,0 +1,376 @@
+AOIU_1:106:int_connect0(com.example.socket.MockSocketAddress):RET_OK => -RET_OK
+AOIU_2:108:int_connect0(com.example.socket.MockSocketAddress):IO_EXCEPTION => -IO_EXCEPTION
+AOIU_3:120:int_connect(com.example.socket.MockSocketAddress,int):timeout => -timeout
+AOIU_4:130:int_connect0(com.example.socket.MockSocketAddress,int):timeout => -timeout
+AOIU_5:131:int_connect0(com.example.socket.MockSocketAddress,int):RET_OK => -RET_OK
+AOIU_6:133:int_connect0(com.example.socket.MockSocketAddress,int):IO_EXCEPTION => -IO_EXCEPTION
+AOIU_7:144:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => -timeout
+AOIU_8:164:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => -timeout
+AOIU_9:166:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => -timeout
+AOIU_10:168:void_internal_connect(com.example.socket.MockSocketAddress,int):port => -port
+AOIU_11:170:void_internal_connect(com.example.socket.MockSocketAddress,int):port => -port
+AOIU_12:201:int_bind0(com.example.socket.MockSocketAddress):RET_OK => -RET_OK
+AOIU_13:203:int_bind0(com.example.socket.MockSocketAddress):IO_EXCEPTION => -IO_EXCEPTION
+AOIU_14:229:void_internal_bind(com.example.socket.MockSocketAddress):port => -port
+AOIU_15:258:com.example.socket.Pair_getInputStream0():RET_OK => -RET_OK
+AOIU_16:260:com.example.socket.Pair_getInputStream0():IO_EXCEPTION => -IO_EXCEPTION
+AOIU_17:306:com.example.socket.Pair_getOutputStream0():RET_OK => -RET_OK
+AOIU_18:308:com.example.socket.Pair_getOutputStream0():IO_EXCEPTION => -IO_EXCEPTION
+AOIU_19:369:int_close0():RET_OK => -RET_OK
+AOIU_20:371:int_close0():IO_EXCEPTION => -IO_EXCEPTION
+AOIU_21:390:int_shutdownInput0():RET_OK => -RET_OK
+AOIU_22:392:int_shutdownInput0():IO_EXCEPTION => -IO_EXCEPTION
+AOIU_23:427:int_shutdownOutput0():RET_OK => -RET_OK
+AOIU_24:429:int_shutdownOutput0():IO_EXCEPTION => -IO_EXCEPTION
+AOIS_1:106:int_connect0(com.example.socket.MockSocketAddress):RET_OK => RET_OK++
+AOIS_2:106:int_connect0(com.example.socket.MockSocketAddress):RET_OK => RET_OK--
+AOIS_3:108:int_connect0(com.example.socket.MockSocketAddress):IO_EXCEPTION => IO_EXCEPTION++
+AOIS_4:108:int_connect0(com.example.socket.MockSocketAddress):IO_EXCEPTION => IO_EXCEPTION--
+AOIS_5:120:int_connect(com.example.socket.MockSocketAddress,int):timeout => timeout++
+AOIS_6:120:int_connect(com.example.socket.MockSocketAddress,int):timeout => timeout--
+AOIS_7:130:int_connect0(com.example.socket.MockSocketAddress,int):timeout => timeout++
+AOIS_8:130:int_connect0(com.example.socket.MockSocketAddress,int):timeout => timeout--
+AOIS_9:131:int_connect0(com.example.socket.MockSocketAddress,int):RET_OK => RET_OK++
+AOIS_10:131:int_connect0(com.example.socket.MockSocketAddress,int):RET_OK => RET_OK--
+AOIS_11:133:int_connect0(com.example.socket.MockSocketAddress,int):IO_EXCEPTION => IO_EXCEPTION++
+AOIS_12:133:int_connect0(com.example.socket.MockSocketAddress,int):IO_EXCEPTION => IO_EXCEPTION--
+AOIS_13:144:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => ++timeout
+AOIS_14:144:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => --timeout
+AOIS_15:144:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => timeout++
+AOIS_16:144:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => timeout--
+AOIS_17:164:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => timeout++
+AOIS_18:164:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => timeout--
+AOIS_19:166:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => ++timeout
+AOIS_20:166:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => --timeout
+AOIS_21:166:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => timeout++
+AOIS_22:166:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => timeout--
+AOIS_23:168:void_internal_connect(com.example.socket.MockSocketAddress,int):port => port++
+AOIS_24:168:void_internal_connect(com.example.socket.MockSocketAddress,int):port => port--
+AOIS_25:170:void_internal_connect(com.example.socket.MockSocketAddress,int):port => port++
+AOIS_26:170:void_internal_connect(com.example.socket.MockSocketAddress,int):port => port--
+AOIS_27:201:int_bind0(com.example.socket.MockSocketAddress):RET_OK => RET_OK++
+AOIS_28:201:int_bind0(com.example.socket.MockSocketAddress):RET_OK => RET_OK--
+AOIS_29:203:int_bind0(com.example.socket.MockSocketAddress):IO_EXCEPTION => IO_EXCEPTION++
+AOIS_30:203:int_bind0(com.example.socket.MockSocketAddress):IO_EXCEPTION => IO_EXCEPTION--
+AOIS_31:229:void_internal_bind(com.example.socket.MockSocketAddress):port => port++
+AOIS_32:229:void_internal_bind(com.example.socket.MockSocketAddress):port => port--
+AOIS_33:258:com.example.socket.Pair_getInputStream0():RET_OK => RET_OK++
+AOIS_34:258:com.example.socket.Pair_getInputStream0():RET_OK => RET_OK--
+AOIS_35:260:com.example.socket.Pair_getInputStream0():IO_EXCEPTION => IO_EXCEPTION++
+AOIS_36:260:com.example.socket.Pair_getInputStream0():IO_EXCEPTION => IO_EXCEPTION--
+AOIS_37:306:com.example.socket.Pair_getOutputStream0():RET_OK => RET_OK++
+AOIS_38:306:com.example.socket.Pair_getOutputStream0():RET_OK => RET_OK--
+AOIS_39:308:com.example.socket.Pair_getOutputStream0():IO_EXCEPTION => IO_EXCEPTION++
+AOIS_40:308:com.example.socket.Pair_getOutputStream0():IO_EXCEPTION => IO_EXCEPTION--
+AOIS_41:369:int_close0():RET_OK => RET_OK++
+AOIS_42:369:int_close0():RET_OK => RET_OK--
+AOIS_43:371:int_close0():IO_EXCEPTION => IO_EXCEPTION++
+AOIS_44:371:int_close0():IO_EXCEPTION => IO_EXCEPTION--
+AOIS_45:390:int_shutdownInput0():RET_OK => RET_OK++
+AOIS_46:390:int_shutdownInput0():RET_OK => RET_OK--
+AOIS_47:392:int_shutdownInput0():IO_EXCEPTION => IO_EXCEPTION++
+AOIS_48:392:int_shutdownInput0():IO_EXCEPTION => IO_EXCEPTION--
+AOIS_49:427:int_shutdownOutput0():RET_OK => RET_OK++
+AOIS_50:427:int_shutdownOutput0():RET_OK => RET_OK--
+AOIS_51:429:int_shutdownOutput0():IO_EXCEPTION => IO_EXCEPTION++
+AOIS_52:429:int_shutdownOutput0():IO_EXCEPTION => IO_EXCEPTION--
+ROR_1:59:void_createImpl(boolean): impl == null  =>   impl != null
+ROR_2:72:void_setImpl(): factory != null  =>   factory == null
+ROR_3:77:void_setImpl(): impl != null  =>   impl == null
+ROR_4:141:void_internal_connect(com.example.socket.MockSocketAddress,int): endpoint == null  =>   endpoint != null
+ROR_5:144:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout < 0  =>   timeout > 0
+ROR_6:144:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout < 0  =>   timeout >= 0
+ROR_7:144:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout < 0  =>   timeout <= 0
+ROR_8:144:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout < 0  =>   timeout == 0
+ROR_9:144:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout < 0  =>   timeout != 0
+ROR_10:144:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout < 0  =>   true
+ROR_11:144:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout < 0  =>   false
+ROR_12:166:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout == 0  =>   timeout > 0
+ROR_13:166:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout == 0  =>   timeout >= 0
+ROR_14:166:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout == 0  =>   timeout < 0
+ROR_15:166:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout == 0  =>   timeout <= 0
+ROR_16:166:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout == 0  =>   timeout != 0
+ROR_17:166:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout == 0  =>   true
+ROR_18:166:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout == 0  =>   false
+ROR_19:216:void_internal_bind(com.example.socket.MockSocketAddress): bindpoint != null  =>   bindpoint == null
+ROR_20:220:void_internal_bind(com.example.socket.MockSocketAddress): epoint != null  =>   epoint == null
+ROR_21:223:void_internal_bind(com.example.socket.MockSocketAddress): epoint == null  =>   epoint != null
+ROR_22:235:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String): addr == null  =>   addr != null
+COR_1:150:void_internal_connect(com.example.socket.MockSocketAddress,int): !oldImpl && isConnected()  =>   !oldImpl || isConnected()
+COR_2:150:void_internal_connect(com.example.socket.MockSocketAddress,int): !oldImpl && isConnected()  =>   !oldImpl ^ isConnected()
+COR_3:213:void_internal_bind(com.example.socket.MockSocketAddress): !oldImpl && isBound()  =>   !oldImpl || isBound()
+COR_4:213:void_internal_bind(com.example.socket.MockSocketAddress): !oldImpl && isBound()  =>   !oldImpl ^ isBound()
+COR_5:216:void_internal_bind(com.example.socket.MockSocketAddress): bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)  =>   bindpoint != null || !(bindpoint instanceof com.example.socket.MockInetSocketAddress)
+COR_6:216:void_internal_bind(com.example.socket.MockSocketAddress): bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)  =>   bindpoint != null ^ !(bindpoint instanceof com.example.socket.MockInetSocketAddress)
+COR_7:220:void_internal_bind(com.example.socket.MockSocketAddress): epoint != null && epoint.isUnresolved()  =>   epoint != null || epoint.isUnresolved()
+COR_8:220:void_internal_bind(com.example.socket.MockSocketAddress): epoint != null && epoint.isUnresolved()  =>   epoint != null ^ epoint.isUnresolved()
+COR_9:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String): addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address  =>   addr instanceof com.example.socket.MockInet4Address && addr instanceof com.example.socket.MockInet6Address
+COR_10:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String): addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address  =>   addr instanceof com.example.socket.MockInet4Address ^ addr instanceof com.example.socket.MockInet6Address
+COR_11:451:boolean_isConnected(): connected || oldImpl  =>   connected && oldImpl
+COR_12:451:boolean_isConnected(): connected || oldImpl  =>   connected ^ oldImpl
+COR_13:456:boolean_isBound(): bound || oldImpl  =>   bound && oldImpl
+COR_14:456:boolean_isBound(): bound || oldImpl  =>   bound ^ oldImpl
+COD_1:85:com.example.socket.MockSocketImpl_getImpl():!created => created
+COD_2:150:void_internal_connect(com.example.socket.MockSocketAddress,int):!oldImpl => oldImpl
+COD_3:153:void_internal_connect(com.example.socket.MockSocketAddress,int):!(endpoint instanceof com.example.socket.MockInetSocketAddress) => endpoint instanceof com.example.socket.MockInetSocketAddress
+COD_4:160:void_internal_connect(com.example.socket.MockSocketAddress,int):!created => created
+COD_5:163:void_internal_connect(com.example.socket.MockSocketAddress,int):!oldImpl => oldImpl
+COD_6:180:void_internal_connect(com.example.socket.MockSocketAddress,int):!connected => connected
+COD_7:213:void_internal_bind(com.example.socket.MockSocketAddress):!oldImpl => oldImpl
+COD_8:216:void_internal_bind(com.example.socket.MockSocketAddress):!(bindpoint instanceof com.example.socket.MockInetSocketAddress) => bindpoint instanceof com.example.socket.MockInetSocketAddress
+COD_9:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):!(addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address) => addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address
+COD_10:270:java.io.InputStream_internal_getInputStream():!isConnected() => isConnected()
+COD_11:318:java.io.OutputStream_internal_getOutputStream():!isConnected() => isConnected()
+COD_12:402:void_internal_shutdownInput():!isConnected() => isConnected()
+COD_13:439:void_internal_shutdownOutput():!isConnected() => isConnected()
+COI_1:59:void_createImpl(boolean): impl == null  =>  !(impl == null)
+COI_2:63:void_createImpl(boolean): stream  =>  !stream
+COI_3:64:void_createImpl(boolean): created  =>  !created
+COI_4:72:void_setImpl(): factory != null  =>  !(factory != null)
+COI_5:77:void_setImpl(): impl != null  =>  !(impl != null)
+COI_6:141:void_internal_connect(com.example.socket.MockSocketAddress,int): endpoint == null  =>  !(endpoint == null)
+COI_7:144:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout < 0  =>  !(timeout < 0)
+COI_8:150:void_internal_connect(com.example.socket.MockSocketAddress,int): !oldImpl && isConnected()  =>  !(!oldImpl && isConnected())
+COI_9:166:void_internal_connect(com.example.socket.MockSocketAddress,int): timeout == 0  =>  !(timeout == 0)
+COI_10:176:void_internal_connect(com.example.socket.MockSocketAddress,int): connected  =>  !connected
+COI_11:177:void_internal_connect(com.example.socket.MockSocketAddress,int): bound  =>  !bound
+COI_12:213:void_internal_bind(com.example.socket.MockSocketAddress): !oldImpl && isBound()  =>  !(!oldImpl && isBound())
+COI_13:216:void_internal_bind(com.example.socket.MockSocketAddress): bindpoint != null  =>  !(bindpoint != null)
+COI_14:216:void_internal_bind(com.example.socket.MockSocketAddress): bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)  =>  !(bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress))
+COI_15:220:void_internal_bind(com.example.socket.MockSocketAddress): epoint != null  =>  !(epoint != null)
+COI_16:220:void_internal_bind(com.example.socket.MockSocketAddress): epoint != null && epoint.isUnresolved()  =>  !(epoint != null && epoint.isUnresolved())
+COI_17:223:void_internal_bind(com.example.socket.MockSocketAddress): epoint == null  =>  !(epoint == null)
+COI_18:230:void_internal_bind(com.example.socket.MockSocketAddress): bound  =>  !bound
+COI_19:235:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String): addr == null  =>  !(addr == null)
+COI_20:347:void_internal_close(): created  =>  !created
+COI_21:350:void_internal_close(): closed  =>  !closed
+COI_22:409:void_internal_shutdownInput(): shutIn  =>  !shutIn
+COI_23:446:void_internal_shutdownOutput(): shutOut  =>  !shutOut
+COI_24:451:boolean_isConnected(): connected  =>  !connected
+COI_25:451:boolean_isConnected(): oldImpl  =>  !oldImpl
+COI_26:451:boolean_isConnected(): connected || oldImpl  =>  !(connected || oldImpl)
+COI_27:456:boolean_isBound(): bound  =>  !bound
+COI_28:456:boolean_isBound(): oldImpl  =>  !oldImpl
+COI_29:456:boolean_isBound(): bound || oldImpl  =>  !(bound || oldImpl)
+COI_30:463:boolean_isClosed(): closed  =>  !closed
+COI_31:469:boolean_isInputShutdown(): shutIn  =>  !shutIn
+COI_32:474:boolean_isOutputShutdown(): shutOut  =>  !shutOut
+LOI_1:106:int_connect0(com.example.socket.MockSocketAddress):RET_OK => ~RET_OK
+LOI_2:108:int_connect0(com.example.socket.MockSocketAddress):IO_EXCEPTION => ~IO_EXCEPTION
+LOI_3:120:int_connect(com.example.socket.MockSocketAddress,int):timeout => ~timeout
+LOI_4:130:int_connect0(com.example.socket.MockSocketAddress,int):timeout => ~timeout
+LOI_5:131:int_connect0(com.example.socket.MockSocketAddress,int):RET_OK => ~RET_OK
+LOI_6:133:int_connect0(com.example.socket.MockSocketAddress,int):IO_EXCEPTION => ~IO_EXCEPTION
+LOI_7:144:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => ~timeout
+LOI_8:164:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => ~timeout
+LOI_9:166:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout => ~timeout
+LOI_10:168:void_internal_connect(com.example.socket.MockSocketAddress,int):port => ~port
+LOI_11:170:void_internal_connect(com.example.socket.MockSocketAddress,int):port => ~port
+LOI_12:201:int_bind0(com.example.socket.MockSocketAddress):RET_OK => ~RET_OK
+LOI_13:203:int_bind0(com.example.socket.MockSocketAddress):IO_EXCEPTION => ~IO_EXCEPTION
+LOI_14:229:void_internal_bind(com.example.socket.MockSocketAddress):port => ~port
+LOI_15:258:com.example.socket.Pair_getInputStream0():RET_OK => ~RET_OK
+LOI_16:260:com.example.socket.Pair_getInputStream0():IO_EXCEPTION => ~IO_EXCEPTION
+LOI_17:306:com.example.socket.Pair_getOutputStream0():RET_OK => ~RET_OK
+LOI_18:308:com.example.socket.Pair_getOutputStream0():IO_EXCEPTION => ~IO_EXCEPTION
+LOI_19:369:int_close0():RET_OK => ~RET_OK
+LOI_20:371:int_close0():IO_EXCEPTION => ~IO_EXCEPTION
+LOI_21:390:int_shutdownInput0():RET_OK => ~RET_OK
+LOI_22:392:int_shutdownInput0():IO_EXCEPTION => ~IO_EXCEPTION
+LOI_23:427:int_shutdownOutput0():RET_OK => ~RET_OK
+LOI_24:429:int_shutdownOutput0():IO_EXCEPTION => ~IO_EXCEPTION
+SDL_1:45:Socket(com.example.socket.MockEnvironment): try {     this.env = env;     setImpl(); } catch ( java.lang.Exception ex ) {     throw ex; }  =>   try {     setImpl(); }
+SDL_2:45:Socket(com.example.socket.MockEnvironment): try {     this.env = env;     setImpl(); } catch ( java.lang.Exception ex ) {     throw ex; }  =>   try {     this.env = env; }
+SDL_3:65:void_createImpl(boolean): if (impl == null) {     setImpl(); } try {     impl.create( stream );     created = true; } catch ( java.io.IOException e ) {     throw new java.net.SocketException( e.getMessage() ); }  =>   try {     impl.create( stream );     created = true; } catch ( java.io.IOException e ) {     throw new java.net.SocketException( e.getMessage() ); }
+SDL_4:60:void_createImpl(boolean): setImpl();  =>  
+SDL_5:62:void_createImpl(boolean): if (impl == null) {     setImpl(); }  =>   if (true) {     setImpl(); }
+SDL_6:65:void_createImpl(boolean): try {     impl.create( stream );     created = true; } catch ( java.io.IOException e ) {     throw new java.net.SocketException( e.getMessage() ); }  =>   try {     created = true; }
+SDL_7:65:void_createImpl(boolean): try {     impl.create( stream );     created = true; } catch ( java.io.IOException e ) {     throw new java.net.SocketException( e.getMessage() ); }  =>   try {     impl.create( stream ); }
+SDL_8:75:void_setImpl(): if (factory != null) {     impl = factory.createSocketImpl( env ); } else {     impl = new com.example.socket.MockSocketImpl( env ); } if (impl != null) {     impl.setSocket( this ); }  =>   if (impl != null) {     impl.setSocket( this ); }
+SDL_9:77:void_setImpl(): if (factory != null) {     impl = factory.createSocketImpl( env ); } else {     impl = new com.example.socket.MockSocketImpl( env ); } if (impl != null) {     impl.setSocket( this ); }  =>   if (factory != null) {     impl = factory.createSocketImpl( env ); } else {     impl = new com.example.socket.MockSocketImpl( env ); }
+SDL_10:73:void_setImpl(): impl = factory.createSocketImpl( env );  =>  
+SDL_11:77:void_setImpl(): if (factory != null) {     impl = factory.createSocketImpl( env ); } else {     impl = new com.example.socket.MockSocketImpl( env ); }  =>   if (true) {     impl = factory.createSocketImpl( env ); } else {     impl = new com.example.socket.MockSocketImpl( env ); }
+SDL_12:75:void_setImpl(): impl = new com.example.socket.MockSocketImpl( env );  =>  
+SDL_13:78:void_setImpl(): impl.setSocket( this );  =>  
+SDL_14:80:void_setImpl(): if (impl != null) {     impl.setSocket( this ); }  =>   if (true) {     impl.setSocket( this ); }
+SDL_15:86:com.example.socket.MockSocketImpl_getImpl(): if (!created) {     createImpl( true ); } return impl;  =>   return impl;
+SDL_16:86:com.example.socket.MockSocketImpl_getImpl(): createImpl( true );  =>  
+SDL_17:88:com.example.socket.MockSocketImpl_getImpl(): if (!created) {     createImpl( true ); }  =>   if (true) {     createImpl( true ); }
+SDL_18:96:int_connect(com.example.socket.MockSocketAddress): return connect0( endpoint );  =>   return 0;
+SDL_19:107:int_connect0(com.example.socket.MockSocketAddress): try {     internal_connect( endpoint, 0 );     return RET_OK; } catch ( com.example.socket.MockIOException ex ) {     return IO_EXCEPTION; }  =>   try {     return RET_OK; }
+SDL_20:107:int_connect0(com.example.socket.MockSocketAddress): return RET_OK;  =>   return 0;
+SDL_21:121:int_connect(com.example.socket.MockSocketAddress,int): return connect0( endpoint, timeout );  =>   return 0;
+SDL_22:132:int_connect0(com.example.socket.MockSocketAddress,int): try {     internal_connect( endpoint, timeout );     return RET_OK; } catch ( com.example.socket.MockIOException ex ) {     return IO_EXCEPTION; }  =>   try {     return RET_OK; }
+SDL_23:132:int_connect0(com.example.socket.MockSocketAddress,int): return RET_OK;  =>   return 0;
+SDL_24:191:int_bind(com.example.socket.MockSocketAddress): return bind0( bindpoint );  =>   return 0;
+SDL_25:202:int_bind0(com.example.socket.MockSocketAddress): try {     internal_bind( bindpoint );     return RET_OK; } catch ( com.example.socket.MockIOException ex ) {     return IO_EXCEPTION; }  =>   try {     return RET_OK; }
+SDL_26:202:int_bind0(com.example.socket.MockSocketAddress): return RET_OK;  =>   return 0;
+SDL_27:228:void_internal_bind(com.example.socket.MockSocketAddress): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;  =>   if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;
+SDL_28:228:void_internal_bind(com.example.socket.MockSocketAddress): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;
+SDL_29:228:void_internal_bind(com.example.socket.MockSocketAddress): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;
+SDL_30:228:void_internal_bind(com.example.socket.MockSocketAddress): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;
+SDL_31:228:void_internal_bind(com.example.socket.MockSocketAddress): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;
+SDL_32:230:void_internal_bind(com.example.socket.MockSocketAddress): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); getImpl().bind( addr, port ); bound = true;
+SDL_33:230:void_internal_bind(com.example.socket.MockSocketAddress): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); bound = true;
+SDL_34:230:void_internal_bind(com.example.socket.MockSocketAddress): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port ); bound = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); } if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); } com.example.socket.MockInetSocketAddress epoint = (com.example.socket.MockInetSocketAddress) bindpoint; if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); } if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); } com.example.socket.MockInetAddress addr = epoint.getAddress(); int port = epoint.getPort(); checkAddress( addr, \"bind\" ); getImpl().bind( addr, port );
+SDL_35:211:void_internal_bind(com.example.socket.MockSocketAddress): throw new java.net.SocketException( \"Socket is closed\" );  =>  
+SDL_36:213:void_internal_bind(com.example.socket.MockSocketAddress): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket is closed\" ); }
+SDL_37:214:void_internal_bind(com.example.socket.MockSocketAddress): throw new java.net.SocketException( \"Already bound\" );  =>  
+SDL_38:216:void_internal_bind(com.example.socket.MockSocketAddress): if (!oldImpl && isBound()) {     throw new java.net.SocketException( \"Already bound\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Already bound\" ); }
+SDL_39:217:void_internal_bind(com.example.socket.MockSocketAddress): throw new java.lang.IllegalArgumentException( \"Unsupported address type\" );  =>  
+SDL_40:219:void_internal_bind(com.example.socket.MockSocketAddress): if (bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress)) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); }  =>   if (true) {     throw new java.lang.IllegalArgumentException( \"Unsupported address type\" ); }
+SDL_41:221:void_internal_bind(com.example.socket.MockSocketAddress): throw new java.net.SocketException( \"Unresolved address\" );  =>  
+SDL_42:223:void_internal_bind(com.example.socket.MockSocketAddress): if (epoint != null && epoint.isUnresolved()) {     throw new java.net.SocketException( \"Unresolved address\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Unresolved address\" ); }
+SDL_43:224:void_internal_bind(com.example.socket.MockSocketAddress): epoint = new com.example.socket.MockInetSocketAddress( 0 );  =>  
+SDL_44:226:void_internal_bind(com.example.socket.MockSocketAddress): if (epoint == null) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); }  =>   if (true) {     epoint = new com.example.socket.MockInetSocketAddress( 0 ); }
+SDL_45:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String): if (addr == null) {     return; } if (!(addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address)) {     throw new java.lang.IllegalArgumentException( op + \": invalid address type\" ); }  =>   if (!(addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address)) {     throw new java.lang.IllegalArgumentException( op + \": invalid address type\" ); }
+SDL_46:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String): if (addr == null) {     return; } if (!(addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address)) {     throw new java.lang.IllegalArgumentException( op + \": invalid address type\" ); }  =>   if (addr == null) {     return; }
+SDL_47:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String): if (addr == null) {     return; }  =>   if (true) {     return; }
+SDL_48:239:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String): throw new java.lang.IllegalArgumentException( op + \": invalid address type\" );  =>  
+SDL_49:241:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String): if (!(addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address)) {     throw new java.lang.IllegalArgumentException( op + \": invalid address type\" ); }  =>   if (true) {     throw new java.lang.IllegalArgumentException( op + \": invalid address type\" ); }
+SDL_50:286:java.io.InputStream_internal_getInputStream(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is shutdown\" ); } java.io.InputStream is = null; try {     is = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<InputStream>(){         public  java.io.InputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getInputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return is;  =>   if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is shutdown\" ); } java.io.InputStream is = null; try {     is = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<InputStream>(){         public  java.io.InputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getInputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return is;
+SDL_51:286:java.io.InputStream_internal_getInputStream(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is shutdown\" ); } java.io.InputStream is = null; try {     is = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<InputStream>(){         public  java.io.InputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getInputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return is;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is shutdown\" ); } java.io.InputStream is = null; try {     is = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<InputStream>(){         public  java.io.InputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getInputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return is;
+SDL_52:286:java.io.InputStream_internal_getInputStream(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is shutdown\" ); } java.io.InputStream is = null; try {     is = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<InputStream>(){         public  java.io.InputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getInputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return is;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } java.io.InputStream is = null; try {     is = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<InputStream>(){         public  java.io.InputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getInputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return is;
+SDL_53:268:java.io.InputStream_internal_getInputStream(): throw new java.net.SocketException( \"Socket is closed\" );  =>  
+SDL_54:270:java.io.InputStream_internal_getInputStream(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket is closed\" ); }
+SDL_55:271:java.io.InputStream_internal_getInputStream(): throw new java.net.SocketException( \"Socket is not connected\" );  =>  
+SDL_56:273:java.io.InputStream_internal_getInputStream(): if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket is not connected\" ); }
+SDL_57:274:java.io.InputStream_internal_getInputStream(): throw new java.net.SocketException( \"Socket input is shutdown\" );  =>  
+SDL_58:276:java.io.InputStream_internal_getInputStream(): if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is shutdown\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket input is shutdown\" ); }
+SDL_59:279:java.io.InputStream_internal_getInputStream(): try {     is = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<InputStream>(){         public  java.io.InputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getInputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); }  =>   try { }
+SDL_60:334:java.io.OutputStream_internal_getOutputStream(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is shutdown\" ); } java.io.OutputStream os = null; try {     os = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<OutputStream>(){         public  java.io.OutputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getOutputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return os;  =>   if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is shutdown\" ); } java.io.OutputStream os = null; try {     os = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<OutputStream>(){         public  java.io.OutputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getOutputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return os;
+SDL_61:334:java.io.OutputStream_internal_getOutputStream(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is shutdown\" ); } java.io.OutputStream os = null; try {     os = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<OutputStream>(){         public  java.io.OutputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getOutputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return os;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is shutdown\" ); } java.io.OutputStream os = null; try {     os = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<OutputStream>(){         public  java.io.OutputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getOutputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return os;
+SDL_62:334:java.io.OutputStream_internal_getOutputStream(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is shutdown\" ); } java.io.OutputStream os = null; try {     os = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<OutputStream>(){         public  java.io.OutputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getOutputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return os;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } java.io.OutputStream os = null; try {     os = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<OutputStream>(){         public  java.io.OutputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getOutputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); } return os;
+SDL_63:316:java.io.OutputStream_internal_getOutputStream(): throw new java.net.SocketException( \"Socket is closed\" );  =>  
+SDL_64:318:java.io.OutputStream_internal_getOutputStream(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket is closed\" ); }
+SDL_65:319:java.io.OutputStream_internal_getOutputStream(): throw new java.net.SocketException( \"Socket is not connected\" );  =>  
+SDL_66:321:java.io.OutputStream_internal_getOutputStream(): if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket is not connected\" ); }
+SDL_67:322:java.io.OutputStream_internal_getOutputStream(): throw new java.net.SocketException( \"Socket output is shutdown\" );  =>  
+SDL_68:324:java.io.OutputStream_internal_getOutputStream(): if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is shutdown\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket output is shutdown\" ); }
+SDL_69:327:java.io.OutputStream_internal_getOutputStream(): try {     os = AccessController.doPrivileged( new java.security.PrivilegedExceptionAction<OutputStream>(){         public  java.io.OutputStream run()                 throws java.io.IOException, com.example.socket.MockIOException         {             return impl.getOutputStream();         }     } ); } catch ( java.security.PrivilegedActionException e ) {     throw (java.io.IOException) e.getException(); }  =>   try { }
+SDL_70:342:void_internal_close(): synchronized (closeLock) {     if (isClosed()) {         return;     }     if (created) {         impl.close();     }     closed = true; }  =>  
+SDL_71:359:int_close(): return close0();  =>   return 0;
+SDL_72:370:int_close0(): try {     this.internal_close();     return RET_OK; } catch ( com.example.socket.MockIOException ex ) {     return IO_EXCEPTION; }  =>   try {     return RET_OK; }
+SDL_73:370:int_close0(): return RET_OK;  =>   return 0;
+SDL_74:380:int_shutdownInput(): return shutdownInput0();  =>   return 0;
+SDL_75:391:int_shutdownInput0(): try {     internal_shutdownInput();     return RET_OK; } catch ( com.example.socket.MockIOException ex ) {     return IO_EXCEPTION; }  =>   try {     return RET_OK; }
+SDL_76:391:int_shutdownInput0(): return RET_OK;  =>   return 0;
+SDL_77:407:void_internal_shutdownInput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); } getImpl().shutdownInput(); shutIn = true;  =>   if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); } getImpl().shutdownInput(); shutIn = true;
+SDL_78:407:void_internal_shutdownInput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); } getImpl().shutdownInput(); shutIn = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); } getImpl().shutdownInput(); shutIn = true;
+SDL_79:407:void_internal_shutdownInput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); } getImpl().shutdownInput(); shutIn = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } getImpl().shutdownInput(); shutIn = true;
+SDL_80:409:void_internal_shutdownInput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); } getImpl().shutdownInput(); shutIn = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); } shutIn = true;
+SDL_81:409:void_internal_shutdownInput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); } getImpl().shutdownInput(); shutIn = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); } getImpl().shutdownInput();
+SDL_82:400:void_internal_shutdownInput(): throw new java.net.SocketException( \"Socket is closed\" );  =>  
+SDL_83:402:void_internal_shutdownInput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket is closed\" ); }
+SDL_84:403:void_internal_shutdownInput(): throw new java.net.SocketException( \"Socket is not connected\" );  =>  
+SDL_85:405:void_internal_shutdownInput(): if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket is not connected\" ); }
+SDL_86:406:void_internal_shutdownInput(): throw new java.net.SocketException( \"Socket input is already shutdown\" );  =>  
+SDL_87:408:void_internal_shutdownInput(): if (isInputShutdown()) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket input is already shutdown\" ); }
+SDL_88:417:int_shutdownOutput(): return shutdownOutput0();  =>   return 0;
+SDL_89:428:int_shutdownOutput0(): try {     internal_shutdownOutput();     return RET_OK; } catch ( com.example.socket.MockIOException ex ) {     return IO_EXCEPTION; }  =>   try {     return RET_OK; }
+SDL_90:428:int_shutdownOutput0(): return RET_OK;  =>   return 0;
+SDL_91:444:void_internal_shutdownOutput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); } getImpl().shutdownOutput(); shutOut = true;  =>   if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); } getImpl().shutdownOutput(); shutOut = true;
+SDL_92:444:void_internal_shutdownOutput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); } getImpl().shutdownOutput(); shutOut = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); } getImpl().shutdownOutput(); shutOut = true;
+SDL_93:444:void_internal_shutdownOutput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); } getImpl().shutdownOutput(); shutOut = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } getImpl().shutdownOutput(); shutOut = true;
+SDL_94:446:void_internal_shutdownOutput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); } getImpl().shutdownOutput(); shutOut = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); } shutOut = true;
+SDL_95:446:void_internal_shutdownOutput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); } getImpl().shutdownOutput(); shutOut = true;  =>   if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); } if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); } if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); } getImpl().shutdownOutput();
+SDL_96:437:void_internal_shutdownOutput(): throw new java.net.SocketException( \"Socket is closed\" );  =>  
+SDL_97:439:void_internal_shutdownOutput(): if (isClosed()) {     throw new java.net.SocketException( \"Socket is closed\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket is closed\" ); }
+SDL_98:440:void_internal_shutdownOutput(): throw new java.net.SocketException( \"Socket is not connected\" );  =>  
+SDL_99:442:void_internal_shutdownOutput(): if (!isConnected()) {     throw new java.net.SocketException( \"Socket is not connected\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket is not connected\" ); }
+SDL_100:443:void_internal_shutdownOutput(): throw new java.net.SocketException( \"Socket output is already shutdown\" );  =>  
+SDL_101:445:void_internal_shutdownOutput(): if (isOutputShutdown()) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); }  =>   if (true) {     throw new java.net.SocketException( \"Socket output is already shutdown\" ); }
+SDL_102:452:boolean_isConnected(): return connected || oldImpl;  =>   return true;
+SDL_103:452:boolean_isConnected(): return connected || oldImpl;  =>   return false;
+SDL_104:457:boolean_isBound(): return bound || oldImpl;  =>   return true;
+SDL_105:457:boolean_isBound(): return bound || oldImpl;  =>   return false;
+SDL_106:461:boolean_isClosed(): synchronized (closeLock) {     return closed; }  =>  
+SDL_107:470:boolean_isInputShutdown(): return shutIn;  =>   return true;
+SDL_108:470:boolean_isInputShutdown(): return shutIn;  =>   return false;
+SDL_109:475:boolean_isOutputShutdown(): return shutOut;  =>   return true;
+SDL_110:475:boolean_isOutputShutdown(): return shutOut;  =>   return false;
+VDL_1:59:void_createImpl(boolean):impl == null => null
+VDL_2:72:void_setImpl():factory != null => null
+VDL_3:77:void_setImpl():impl != null => null
+VDL_4:85:com.example.socket.MockSocketImpl_getImpl():!created =>  
+VDL_5:141:void_internal_connect(com.example.socket.MockSocketAddress,int):endpoint == null => null
+VDL_6:144:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout < 0 => 0
+VDL_7:150:void_internal_connect(com.example.socket.MockSocketAddress,int):!oldImpl =>  
+VDL_8:160:void_internal_connect(com.example.socket.MockSocketAddress,int):!created =>  
+VDL_9:163:void_internal_connect(com.example.socket.MockSocketAddress,int):!oldImpl =>  
+VDL_10:166:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout == 0 => 0
+VDL_11:180:void_internal_connect(com.example.socket.MockSocketAddress,int):!connected =>  
+VDL_12:213:void_internal_bind(com.example.socket.MockSocketAddress):!oldImpl =>  
+VDL_13:216:void_internal_bind(com.example.socket.MockSocketAddress):bindpoint != null => null
+VDL_14:220:void_internal_bind(com.example.socket.MockSocketAddress):epoint != null => null
+VDL_15:223:void_internal_bind(com.example.socket.MockSocketAddress):epoint == null => null
+VDL_16:235:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):addr == null => null
+VDL_17:239:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):op + ": invalid address type" => ": invalid address type"
+VDL_18:451:boolean_isConnected():connected || oldImpl => oldImpl
+VDL_19:451:boolean_isConnected():connected || oldImpl => connected
+VDL_20:456:boolean_isBound():bound || oldImpl => oldImpl
+VDL_21:456:boolean_isBound():bound || oldImpl => bound
+ODL_1:59:void_createImpl(boolean):impl == null => impl
+ODL_2:59:void_createImpl(boolean):impl == null => null
+ODL_3:72:void_setImpl():factory != null => factory
+ODL_4:72:void_setImpl():factory != null => null
+ODL_5:77:void_setImpl():impl != null => impl
+ODL_6:77:void_setImpl():impl != null => null
+ODL_7:85:com.example.socket.MockSocketImpl_getImpl():!created => created
+ODL_8:141:void_internal_connect(com.example.socket.MockSocketAddress,int):endpoint == null => endpoint
+ODL_9:141:void_internal_connect(com.example.socket.MockSocketAddress,int):endpoint == null => null
+ODL_10:144:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout < 0 => timeout
+ODL_11:144:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout < 0 => 0
+ODL_12:150:void_internal_connect(com.example.socket.MockSocketAddress,int):!oldImpl => oldImpl
+ODL_13:150:void_internal_connect(com.example.socket.MockSocketAddress,int):!oldImpl && isConnected() => !oldImpl
+ODL_14:150:void_internal_connect(com.example.socket.MockSocketAddress,int):!oldImpl && isConnected() => isConnected()
+ODL_15:153:void_internal_connect(com.example.socket.MockSocketAddress,int):!(endpoint instanceof com.example.socket.MockInetSocketAddress) => endpoint instanceof com.example.socket.MockInetSocketAddress
+ODL_16:160:void_internal_connect(com.example.socket.MockSocketAddress,int):!created => created
+ODL_17:163:void_internal_connect(com.example.socket.MockSocketAddress,int):!oldImpl => oldImpl
+ODL_18:166:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout == 0 => timeout
+ODL_19:166:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout == 0 => 0
+ODL_20:180:void_internal_connect(com.example.socket.MockSocketAddress,int):!connected => connected
+ODL_21:213:void_internal_bind(com.example.socket.MockSocketAddress):!oldImpl => oldImpl
+ODL_22:213:void_internal_bind(com.example.socket.MockSocketAddress):!oldImpl && isBound() => !oldImpl
+ODL_23:213:void_internal_bind(com.example.socket.MockSocketAddress):!oldImpl && isBound() => isBound()
+ODL_24:216:void_internal_bind(com.example.socket.MockSocketAddress):bindpoint != null => bindpoint
+ODL_25:216:void_internal_bind(com.example.socket.MockSocketAddress):bindpoint != null => null
+ODL_26:216:void_internal_bind(com.example.socket.MockSocketAddress):!(bindpoint instanceof com.example.socket.MockInetSocketAddress) => bindpoint instanceof com.example.socket.MockInetSocketAddress
+ODL_27:216:void_internal_bind(com.example.socket.MockSocketAddress):bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress) => bindpoint != null
+ODL_28:216:void_internal_bind(com.example.socket.MockSocketAddress):bindpoint != null && !(bindpoint instanceof com.example.socket.MockInetSocketAddress) => !(bindpoint instanceof com.example.socket.MockInetSocketAddress)
+ODL_29:220:void_internal_bind(com.example.socket.MockSocketAddress):epoint != null => epoint
+ODL_30:220:void_internal_bind(com.example.socket.MockSocketAddress):epoint != null => null
+ODL_31:220:void_internal_bind(com.example.socket.MockSocketAddress):epoint != null && epoint.isUnresolved() => epoint != null
+ODL_32:220:void_internal_bind(com.example.socket.MockSocketAddress):epoint != null && epoint.isUnresolved() => epoint.isUnresolved()
+ODL_33:223:void_internal_bind(com.example.socket.MockSocketAddress):epoint == null => epoint
+ODL_34:223:void_internal_bind(com.example.socket.MockSocketAddress):epoint == null => null
+ODL_35:235:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):addr == null => addr
+ODL_36:235:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):addr == null => null
+ODL_37:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address => addr instanceof com.example.socket.MockInet4Address
+ODL_38:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address => addr instanceof com.example.socket.MockInet6Address
+ODL_39:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):!(addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address) => addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address
+ODL_40:239:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):op + ": invalid address type" => op
+ODL_41:239:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):op + ": invalid address type" => ": invalid address type"
+ODL_42:270:java.io.InputStream_internal_getInputStream():!isConnected() => isConnected()
+ODL_43:318:java.io.OutputStream_internal_getOutputStream():!isConnected() => isConnected()
+ODL_44:402:void_internal_shutdownInput():!isConnected() => isConnected()
+ODL_45:439:void_internal_shutdownOutput():!isConnected() => isConnected()
+ODL_46:451:boolean_isConnected():connected || oldImpl => connected
+ODL_47:451:boolean_isConnected():connected || oldImpl => oldImpl
+ODL_48:456:boolean_isBound():bound || oldImpl => bound
+ODL_49:456:boolean_isBound():bound || oldImpl => oldImpl
+CDL_1:59:void_createImpl(boolean):impl == null => impl
+CDL_2:72:void_setImpl():factory != null => factory
+CDL_3:77:void_setImpl():impl != null => impl
+CDL_4:141:void_internal_connect(com.example.socket.MockSocketAddress,int):endpoint == null => endpoint
+CDL_5:144:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout < 0 => timeout
+CDL_6:153:void_internal_connect(com.example.socket.MockSocketAddress,int):!(endpoint instanceof com.example.socket.MockInetSocketAddress) =>  
+CDL_7:166:void_internal_connect(com.example.socket.MockSocketAddress,int):timeout == 0 => timeout
+CDL_8:216:void_internal_bind(com.example.socket.MockSocketAddress):bindpoint != null => bindpoint
+CDL_9:216:void_internal_bind(com.example.socket.MockSocketAddress):!(bindpoint instanceof com.example.socket.MockInetSocketAddress) =>  
+CDL_10:220:void_internal_bind(com.example.socket.MockSocketAddress):epoint != null => epoint
+CDL_11:223:void_internal_bind(com.example.socket.MockSocketAddress):epoint == null => epoint
+CDL_12:235:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):addr == null => addr
+CDL_13:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address => addr instanceof com.example.socket.MockInet6Address
+CDL_14:238:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):addr instanceof com.example.socket.MockInet4Address || addr instanceof com.example.socket.MockInet6Address => addr instanceof com.example.socket.MockInet4Address
+CDL_15:239:void_checkAddress(com.example.socket.MockInetAddress,java.lang.String):op + ": invalid address type" => op

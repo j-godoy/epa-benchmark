@@ -1,0 +1,13 @@
+
+.\com\example\socket\MockApplicationProxy.java
+.\com\example\socket\MockEnvironment.java
+.\com\example\socket\MockInet4Address.java
+.\com\example\socket\MockInet6Address.java
+.\com\example\socket\MockInetAddress.java
+.\com\example\socket\MockInetSocketAddress.java
+.\com\example\socket\MockIOException.java
+.\com\example\socket\MockSocketAddress.java
+.\com\example\socket\MockSocketImpl.java
+.\com\example\socket\MockSocketImplFactory.java
+.\com\example\socket\Pair.java
+.\com\example\socket\Socket.java

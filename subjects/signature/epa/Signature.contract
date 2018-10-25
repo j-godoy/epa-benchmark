@@ -1,0 +1,69 @@
+<!-- Contratos para Signature -->
+
+<contract name="Signature" invariant="
+	(init_state AND NOT sign_state AND NOT verify_state) OR
+	(NOT init_state AND sign_state AND NOT verify_state) OR
+	(NOT init_state AND NOT sign_state AND verify_state)">
+
+	<variable name="init_state" type="BOOLEAN" />
+	<variable name="sign_state" type="BOOLEAN" />
+	<variable name="verify_state" type="BOOLEAN" />
+
+	<constructor name="signature" pre="TRUE" post="	
+		init_state' AND
+		NOT sign_state' AND
+		NOT verify_state'">
+	</constructor>
+
+	<action name="initSign(PrivateKey)" pre="TRUE" post="
+		NOT init_state' AND
+		sign_state' AND
+		NOT verify_state'"/>
+
+	<action name="initSign(PrivateKey,SecureRandom)" pre="TRUE" post="
+		NOT init_state' AND
+		sign_state' AND
+		NOT verify_state'"/>
+
+	<action name="sign()" pre="sign_state" post="
+		NOT init_state' AND
+		sign_state' AND
+		NOT verify_state'"/>
+
+	<action name="sign(byte[],int,int)" pre="sign_state" post="
+		NOT init_state' AND
+		sign_state' AND
+		NOT verify_state'"/>
+
+	<action name="initVerify(PublicKey)" pre="TRUE" post="
+		NOT init_state' AND
+		NOT sign_state' AND
+		verify_state'"/>
+
+	<action name="initVerify(Certificate)" pre="TRUE" post="
+		NOT init_state' AND
+		NOT sign_state' AND
+		verify_state'"/>
+
+	<action name="verify(byte[])" pre="verify_state" post="
+		NOT init_state' AND
+		NOT sign_state' AND
+		verify_state'"/>
+
+	<action name="verify(byte[],int,int)" pre="verify_state" post="
+		NOT init_state' AND
+		NOT sign_state' AND
+		verify_state'"/>
+
+	<action name="update(byte)" pre="sign_state OR verify_state" post="TRUE" />
+
+	<action name="update(byte[])" pre="sign_state OR verify_state" post="TRUE" />
+
+	<action name="update(byte[],int,int)" pre="sign_state OR verify_state" post="TRUE" />
+
+	<action name="getAlgorithm()" pre="TRUE" post="TRUE" />
+
+	<action name="getProvider()" pre="TRUE" post="TRUE" />
+
+
+</contract>

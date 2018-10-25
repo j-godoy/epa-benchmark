@@ -1,0 +1,15 @@
+JSD_1:14:static is deleted
+JSD_2:16:static is deleted
+JSD_3:18:static is deleted
+JSI_1:10:static is inserted
+JSI_2:12:static is inserted
+JSI_3:20:static is inserted
+JTD_1:26:this.algorithm => algorithm
+JTI_1:26:algorithm  -->  this.algorithm
+JID_1:20:private int stateUNINITIALIZED => private int state;
+OAN_1:133:verify0( signature, offset, length ) => verify0(signature)
+OAN_2:146:engine.engineVerify( signature, offset, length ) => engine.engineVerify(signature)
+EAM_1:205:getAlgorithm0() => getAlgorithm()
+OMR_1:132:verify(signature,offset,length) => verify(signature);
+OMR_2:142:verify0(signature,offset,length) => verify0(signature);
+OMR_3:184:update(data,off,len) => update(data);

@@ -1,0 +1,287 @@
+<?xml version="1.0" ?>
+<abstraction initial_state="Sinit" input_format="contract"
+	name="com.example.smtp">
+	<label name="SMTPProcesor" />
+	<label name="auth" />
+	<label name="data" />
+	<label name="ehlo" />
+	<label name="mail" />
+	<label name="noop" />
+	<label name="quit" />
+	<label name="rcpt" />
+	<label name="reset" />
+	<label name="verify" />
+
+	<state name="Sinit">
+		<enabled_label name="SMTPProcesor" />
+		<transition destination="START_STATE" label="SMTPProcesor" />
+	</state>
+	<state name="START_STATE">
+		<enabled_label name="auth" />
+		<enabled_label name="ehlo" />
+		<enabled_label name="mail" />
+		<enabled_label name="noop" />
+		<enabled_label name="reset" />
+		<enabled_label name="verify" />
+		<enabled_label name="quit" />
+		<!-- transition #1 -->
+		<transition destination="AUTH_START_STATE" label="auth" />
+		<!-- transition #2 -->
+		<transition destination="MAIL_ENABLED_STATE" label="ehlo" />
+		<!-- transition #3 -->
+		<transition destination="MAIL_ENABLED_STATE" label="noop" />
+		<!-- transition #4 -->
+		<transition destination="MAIL_ENABLED_STATE" label="verify" />
+		<!-- transition #5 -->
+		<transition destination="MAIL_STATE" label="mail" />
+		<!-- transition #6 -->
+		<transition destination="START_STATE" label="auth" />
+		<!-- transition #7 -->
+		<transition destination="START_STATE" label="ehlo" />
+		<!-- transition #8 -->
+		<transition destination="START_STATE" label="noop" />
+		<!-- transition #9 -->
+		<transition destination="START_STATE" label="reset" />
+		<!-- transition #10 -->
+		<transition destination="START_STATE" label="verify" />
+		<!-- transition #11 -->
+		<transition destination="QUIT_STATE" label="quit" />
+	</state>
+	<state name="MAIL_STATE">
+		<enabled_label name="auth" />
+		<enabled_label name="rcpt" />
+		<enabled_label name="ehlo" />
+		<enabled_label name="noop" />
+		<enabled_label name="quit" />
+		<enabled_label name="reset" />
+		<enabled_label name="verify" />
+		<!-- transition #1 -->
+		<transition destination="AUTH_MAIL_STATE" label="auth" />
+		<!-- transition #2 -->
+		<transition destination="MAIL_ENABLED_STATE" label="ehlo" />
+		<!-- transition #3 -->
+		<transition destination="MAIL_ENABLED_STATE" label="noop" />
+		<!-- transition #4 -->
+		<transition destination="MAIL_ENABLED_STATE" label="verify" />
+		<!-- transition #5 -->
+		<transition destination="MAIL_STATE" label="auth" />
+		<!-- transition #6 -->
+		<transition destination="RCPT_STATE" label="rcpt" />
+		<!-- transition #7 -->
+		<transition destination="START_STATE" label="reset" />
+		<!-- transition #8 -->
+		<transition destination="QUIT_STATE" label="quit" />
+	</state>
+	<state name="RCPT_STATE">
+		<enabled_label name="auth" />
+		<enabled_label name="data" />
+		<enabled_label name="ehlo" />
+		<enabled_label name="noop" />
+		<enabled_label name="quit" />
+		<enabled_label name="rcpt" />
+		<enabled_label name="reset" />
+		<enabled_label name="verify" />
+		<!-- transition #1 -->
+		<transition destination="AUTH_RCPT_STATE" label="auth" />
+		<!-- transition #2 -->
+		<transition destination="DATA_STATE" label="data" />
+		<!-- transition #3 -->
+		<transition destination="MAIL_ENABLED_STATE" label="ehlo" />
+		<!-- transition #4 -->
+		<transition destination="MAIL_ENABLED_STATE" label="noop" />
+		<!-- transition #5 -->
+		<transition destination="MAIL_ENABLED_STATE" label="verify" />
+		<!-- transition #6 -->
+		<transition destination="QUIT_STATE" label="quit" />
+		<!-- transition #7 -->
+		<transition destination="RCPT_STATE" label="auth" />
+		<!-- transition #8 -->
+		<transition destination="RCPT_STATE" label="rcpt" />
+		<!-- transition #9 -->
+		<transition destination="START_STATE" label="reset" />
+	</state>
+	<state name="DATA_STATE">
+		<enabled_label name="auth" />
+		<enabled_label name="ehlo" />
+		<enabled_label name="noop" />
+		<enabled_label name="quit" />
+		<enabled_label name="reset" />
+		<enabled_label name="verify" />
+		<!-- transition #1 -->
+		<transition destination="AUTH_DATA_STATE" label="auth" />
+		<!-- transition #2 -->
+		<transition destination="DATA_STATE" label="auth" />
+		<!-- transition #3 -->
+		<transition destination="MAIL_ENABLED_STATE" label="ehlo" />
+		<!-- transition #4 -->
+		<transition destination="MAIL_ENABLED_STATE" label="noop" />
+		<!-- transition #5 -->
+		<transition destination="MAIL_ENABLED_STATE" label="verify" />
+		<!-- transition #6 -->
+		<transition destination="QUIT_STATE" label="quit" />
+		<!-- transition #7 -->
+		<transition destination="START_STATE" label="ehlo" />
+		<!-- transition #8 -->
+		<transition destination="START_STATE" label="noop" />
+		<!-- transition #9 -->
+		<transition destination="START_STATE" label="verify" />
+		<!-- transition #10 -->
+		<transition destination="START_STATE" label="reset" />
+	</state>
+	<state name="MAIL_ENABLED_STATE">
+		<enabled_label name="auth" />
+		<enabled_label name="ehlo" />
+		<enabled_label name="mail" />
+		<enabled_label name="noop" />
+		<enabled_label name="quit" />
+		<enabled_label name="rcpt" />
+		<enabled_label name="reset" />
+		<enabled_label name="verify" />
+		<!-- transition #1 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="auth" />
+		<!-- transition #2 -->
+		<transition destination="MAIL_ENABLED_STATE" label="auth" />
+		<!-- transition #3 -->
+		<transition destination="MAIL_ENABLED_STATE" label="ehlo" />
+		<!-- transition #4 -->
+		<transition destination="MAIL_ENABLED_STATE" label="noop" />
+		<!-- transition #5 -->
+		<transition destination="MAIL_ENABLED_STATE" label="verify" />
+		<!-- transition #6 -->
+		<transition destination="MAIL_STATE" label="mail" />
+		<!-- transition #7 -->
+		<transition destination="QUIT_STATE" label="quit" />
+		<!-- transition #8 -->
+		<transition destination="RCPT_STATE" label="rcpt" />
+		<!-- transition #9 -->
+		<transition destination="START_STATE" label="reset" />
+	</state>
+
+	<state name="AUTH_START_STATE">
+		<enabled_label name="ehlo" />
+		<enabled_label name="mail" />
+		<enabled_label name="noop" />
+		<enabled_label name="reset" />
+		<enabled_label name="verify" />
+		<enabled_label name="quit" />
+		<!-- transition #1 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="ehlo" />
+		<!-- transition #2 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="noop" />
+		<!-- transition #3 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="verify" />
+		<!-- transition #4 -->
+		<transition destination="AUTH_MAIL_STATE" label="mail" />
+		<!-- transition #5 -->
+		<transition destination="AUTH_START_STATE" label="ehlo" />
+		<!-- transition #6 -->
+		<transition destination="AUTH_START_STATE" label="noop" />
+		<!-- transition #7 -->
+		<transition destination="AUTH_START_STATE" label="reset" />
+		<!-- transition #8 -->
+		<transition destination="AUTH_START_STATE" label="verify" />
+		<!-- transition #9 -->
+		<transition destination="QUIT_STATE" label="quit" />
+	</state>
+
+	<state name="AUTH_MAIL_STATE">
+		<enabled_label name="ehlo" />
+		<enabled_label name="noop" />
+		<enabled_label name="quit" />
+		<enabled_label name="reset" />
+		<enabled_label name="rcpt" />
+		<enabled_label name="verify" />
+		<!-- transition #1 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="ehlo" />
+		<!-- transition #2 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="noop" />
+		<!-- transition #3 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="verify" />
+		<!-- transition #4 -->
+		<transition destination="AUTH_RCPT_STATE" label="rcpt" />
+		<!-- transition #5 -->
+		<transition destination="AUTH_START_STATE" label="reset" />
+		<!-- transition #6 -->
+		<transition destination="QUIT_STATE" label="quit" />
+	</state>
+
+	<state name="AUTH_RCPT_STATE">
+		<enabled_label name="data" />
+		<enabled_label name="ehlo" />
+		<enabled_label name="noop" />
+		<enabled_label name="quit" />
+		<enabled_label name="rcpt" />
+		<enabled_label name="reset" />
+		<enabled_label name="verify" />
+		<!-- transition #1 -->
+		<transition destination="AUTH_DATA_STATE" label="data" />
+		<!-- transition #2 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="ehlo" />
+		<!-- transition #3 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="noop" />
+		<!-- transition #4 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="verify" />
+		<!-- transition #5 -->
+		<transition destination="QUIT_STATE" label="quit" />
+		<!-- transition #6 -->
+		<transition destination="AUTH_RCPT_STATE" label="rcpt" />
+		<!-- transition #7 -->
+		<transition destination="AUTH_START_STATE" label="reset" />
+	</state>
+	<state name="AUTH_DATA_STATE">
+		<enabled_label name="ehlo" />
+		<enabled_label name="noop" />
+		<enabled_label name="quit" />
+		<enabled_label name="reset" />
+		<enabled_label name="verify" />
+		<!-- transition #1 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="ehlo" />
+		<!-- transition #2 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="noop" />
+		<!-- transition #3 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="verify" />
+		<!-- transition #4 -->
+		<transition destination="QUIT_STATE" label="quit" />
+		<!-- transition #5 -->
+		<transition destination="AUTH_START_STATE" label="ehlo" />
+		<!-- transition #6 -->
+		<transition destination="AUTH_START_STATE" label="noop" />
+		<!-- transition #7 -->
+		<transition destination="AUTH_START_STATE" label="verify" />
+		<!-- transition #8 -->
+		<transition destination="AUTH_START_STATE" label="reset" />
+	</state>
+
+	<state name="AUTH_MAIL_ENABLED_STATE">
+		<enabled_label name="ehlo" />
+		<enabled_label name="mail" />
+		<enabled_label name="noop" />
+		<enabled_label name="quit" />
+		<enabled_label name="rcpt" />
+		<enabled_label name="reset" />
+		<enabled_label name="verify" />
+		<!-- transition #1 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="ehlo" />
+		<!-- transition #2 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="noop" />
+		<!-- transition #3 -->
+		<transition destination="AUTH_MAIL_ENABLED_STATE" label="verify" />
+		<!-- transition #4 -->
+		<transition destination="AUTH_MAIL_STATE" label="mail" />
+		<!-- transition #5 -->
+		<transition destination="QUIT_STATE" label="quit" />
+		<!-- transition #6 -->
+		<transition destination="AUTH_RCPT_STATE" label="rcpt" />
+		<!-- transition #7 -->
+		<transition destination="AUTH_START_STATE" label="reset" />
+	</state>
+
+	<state name="QUIT_STATE">
+		<!-- No enabled actions here -->
+	</state>
+	<state name="ERR_STATE">
+		<!-- No enabled actions here -->
+	</state>
+
+</abstraction>
+

@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<abstraction initial_state="Sinit"  input_format="contract" name="com.example.smtp.Signature">
+  <label name="Signature()"/>
+  <label name="getAlgorithm()"/>
+  <label name="initSign(PrivateKey)"/>
+  <label name="initVerify(PublicKey)"/>
+  <label name="sign()"/>
+  <label name="sign(byte[],int,int)"/>
+  <label name="update(byte)"/>
+  <label name="update(byte[])"/>
+  <label name="update(byte[],int,int)"/>
+  <label name="verify(byte[])"/>
+  <label name="verify(byte[],int,int)"/>
+
+  <state name="Sinit">
+    <enabled_label name="Signature()"/>
+    <transition destination="S6195" label="Signature()"/>
+  </state>
+  <state name="S6195">
+    <enabled_label name="initSign(PrivateKey)"/>
+    <enabled_label name="initVerify(PublicKey)"/>
+    <enabled_label name="getAlgorithm()"/>
+    <transition destination="S7999" label="initSign(PrivateKey)"/>
+    <transition destination="S8179" label="initVerify(PublicKey)"/>
+    <transition destination="S6195" label="getAlgorithm()"/>
+  </state>
+  <state name="S7999">
+    <enabled_label name="initSign(PrivateKey)"/>
+    <enabled_label name="sign()"/>
+    <enabled_label name="sign(byte[],int,int)"/>
+    <enabled_label name="initVerify(PublicKey)"/>
+    <enabled_label name="update(byte)"/>
+    <enabled_label name="update(byte[])"/>
+    <enabled_label name="update(byte[],int,int)"/>
+    <enabled_label name="getAlgorithm()"/>
+    <transition destination="S7999" label="initSign(PrivateKey)"/>
+    <transition destination="S7999" label="sign()"/>
+    <transition destination="S7999" label="sign(byte[],int,int)"/>
+    <transition destination="S8179" label="initVerify(PublicKey)"/>
+    <transition destination="S7999" label="update(byte)"/>
+    <transition destination="S7999" label="update(byte[])"/>
+    <transition destination="S7999" label="update(byte[],int,int)"/>
+    <transition destination="S7999" label="getAlgorithm()"/>
+  </state>
+  <state name="S8179">
+    <enabled_label name="initSign(PrivateKey)"/>
+    <enabled_label name="initVerify(PublicKey)"/>
+    <enabled_label name="verify(byte[],int,int)"/>
+    <enabled_label name="update(byte)"/>
+    <enabled_label name="update(byte[])"/>
+    <enabled_label name="update(byte[],int,int)"/>
+    <enabled_label name="getAlgorithm()"/>
+    <transition destination="S7999" label="initSign(PrivateKey)"/>
+    <transition destination="S8179" label="initVerify(PublicKey)"/>
+    <transition destination="S8179" label="verify(byte[])"/>
+    <transition destination="S8179" label="verify(byte[],int,int)"/>
+    <transition destination="S8179" label="update(byte)"/>
+    <transition destination="S8179" label="update(byte[])"/>
+    <transition destination="S8179" label="update(byte[],int,int)"/>
+    <transition destination="S8179" label="getAlgorithm()"/>
+  </state>
+</abstraction>
+

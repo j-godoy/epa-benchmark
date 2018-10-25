@@ -1,0 +1,51 @@
+PRV_1:845:this.session = conn.sessionProxy;  =>  this.session = session;
+PRV_2:846:this.statement = s;  =>  this.statement = statement;
+PRV_3:847:this.result = r;  =>  this.result = result;
+PRV_4:848:this.connection = conn;  =>  this.connection = connection;
+PRV_5:870:this.session = conn.sessionProxy;  =>  this.session = session;
+PRV_6:871:this.result = r;  =>  this.result = result;
+PRV_7:872:this.connection = conn;  =>  this.connection = connection;
+PRV_8:912:this.statement = s;  =>  this.statement = statement;
+PRV_9:913:this.result = r;  =>  this.result = result;
+PRV_10:914:this.connection = conn;  =>  this.connection = connection;
+PRV_11:918:r.metaData = metaData;  =>  r.metaData = resultMetaData;
+PRV_12:960:r.metaData = metaData;  =>  r.metaData = resultMetaData;
+PRV_13:964:stmt.connection = sessionInterface;  =>  stmt.connection = session;
+JSD_1:626:static is deleted
+JSD_2:628:static is deleted
+JSD_3:630:static is deleted
+JSD_4:632:static is deleted
+JSD_5:634:static is deleted
+JSD_6:636:static is deleted
+JSD_7:638:static is deleted
+JSD_8:640:static is deleted
+JSD_9:642:static is deleted
+JSD_10:644:static is deleted
+JSD_11:881:static is deleted
+JSD_12:883:static is deleted
+JSI_1:594:static is inserted
+JSI_2:596:static is inserted
+JSI_3:598:static is inserted
+JSI_4:600:static is inserted
+JSI_5:602:static is inserted
+JSI_6:604:static is inserted
+JSI_7:606:static is inserted
+JSI_8:608:static is inserted
+JSI_9:610:static is inserted
+JSI_10:612:static is inserted
+JSI_11:614:static is inserted
+JSI_12:616:static is inserted
+JSI_13:618:static is inserted
+JSI_14:620:static is inserted
+JSI_15:622:static is inserted
+JSI_16:624:static is inserted
+JSI_17:728:static is inserted
+JSI_18:730:static is inserted
+JSI_19:732:static is inserted
+JSI_20:734:static is inserted
+JTD_1:911:this.session => session
+JTI_1:911:session  -->  this.session
+EAM_1:358:getRow0() => getRow()
+EAM_2:713:sourceType.getNameString() => sourceType.getJDBCClassName()
+EAM_3:713:targetType.getJDBCClassName() => targetType.getNameString()
+OMR_1:748:checkUpdatable(columnIndex) => checkUpdatable();

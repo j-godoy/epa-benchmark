@@ -1,0 +1,10 @@
+JSI_1:15:static is inserted
+JSI_2:17:static is inserted
+JSI_3:19:static is inserted
+JSI_4:21:static is inserted
+JTD_1:37:this.arrayList => arrayList
+JTD_2:39:this.arrayList => arrayList
+JTI_1:26:arrayList  -->  this.arrayList
+JTI_2:34:arrayList  -->  this.arrayList
+JTI_3:37:arrayList  -->  this.arrayList
+EMM_1:154:set0( e ) => set( e )
