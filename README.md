@@ -1,6 +1,6 @@
 # epa-benchmark
 
-# Prerequisite
+# Prerequisites
 - [Maven](https://maven.apache.org/download.cgi)
 - [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 - [python3.6](https://www.python.org/downloads/release/python-360/)
