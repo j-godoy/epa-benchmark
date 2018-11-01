@@ -1,0 +1,7 @@
+results.csv
+pit_histogram.csv
+mujava_histogram.csv
+*.pyc
+runs_example_local.ini
+config_example_local.ini
+*.class
