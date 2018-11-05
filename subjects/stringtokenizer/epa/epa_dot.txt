@@ -1,0 +1,11 @@
+digraph finite_state_machine {
+	rankdir=LR;
+	size="8,5"
+	node [shape = doublecircle]; S0;
+	node [shape = circle];
+	S0 -> S1 [ label = "StringTokenizer(String,String)\nStringTokenizer(String,String,boolean)\nStringTokenizer(String)" ];
+	S0 -> S2 [ label = "StringTokenizer(String,String)\nStringTokenizer(String,String,boolean)\nStringTokenizer(String)" ];
+        S1 -> S2 [label = "nextToken(String)     \nnextToken()" ];
+        S1 -> S1 [label = "nextToken()\nnextToken(String)\nhasMoreTokens()" ];
+        S2 -> S2 [label = "hasMoreTokens()" ];
+}

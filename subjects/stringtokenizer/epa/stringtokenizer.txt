@@ -1,0 +1,10 @@
+StringTokenizer2 = S0,
+
+S0 = (stringTokenizer_EXIT187 -> S1
+		| stringTokenizer_EXIT187 -> S2),
+
+S1 = (hasMoreTokens_EXIT308_TRUE -> S1
+		| nextToken_EXIT336 -> S1
+		| nextToken_EXIT336 -> S2),
+		
+S2 = (hasMoreTokens_EXIT308_FALSE -> S2).
