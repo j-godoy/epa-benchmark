@@ -142,9 +142,9 @@ public class SMTPProcessor {
     
 	private int lastCommand;
 	
-	int maxPassAttempts;
-    int passAttempts;
-    boolean isconnected;
+	private int maxPassAttempts;
+	private int passAttempts;
+	private boolean isconnected;
 
     //***************************************************************
     // Public Interface
@@ -259,7 +259,7 @@ public class SMTPProcessor {
               forcedexit = true;
            }
         }
-        catch ( IOException e ) {
+        catch ( MockIOException e ) {
 //               if (running) {
 //               }
            if (socket!=null) {
@@ -477,7 +477,7 @@ public class SMTPProcessor {
 			throw new IllegalStateException();
 		}
 
-		enqueueLineToInputStream(COMMAND_reset);
+		enqueueLineToInputStream(COMMAND_RSET);
 		run();
 	}
 
@@ -588,7 +588,7 @@ public class SMTPProcessor {
 
 	private boolean mail_pre() {
 		return socket != null && !socket.isClosed()
-				&& ((lastCommand == HELO && isHELOEnabled) || lastCommand == EHLO || lastCommand == NONE || lastCommand == reset || lastCommand == VRFY || lastCommand == NOOP);
+				&& ((lastCommand == HELO && isHELOEnabled) || lastCommand == EHLO || lastCommand == NONE || lastCommand == RSET || lastCommand == VRFY || lastCommand == NOOP);
 	}
 
 	private boolean rcpt_pre() {
@@ -641,9 +641,9 @@ public class SMTPProcessor {
             lastCommand = NOOP;
         }
         //Resets the state of the server back to the initial state.
-        else if( command.equals( COMMAND_reset ) ) {
+        else if( command.equals( COMMAND_RSET ) ) {
           write( MESSAGE_OK, 0 );
-            lastCommand = reset;
+            lastCommand = RSET;
             resetMessage();
         }
         else if( command.equals( COMMAND_AUTH ) ) {
@@ -748,7 +748,7 @@ public class SMTPProcessor {
         //word command.
         else if( command.equals( COMMAND_MAIL_FROM ) && inputString.toUpperCase().startsWith( "MAIL FROM:" ) ) {
 
-            if( (lastCommand == HELO && isHELOEnabled) || lastCommand == NONE || lastCommand == reset || lastCommand == EHLO || lastCommand == VRFY || lastCommand == NOOP) {
+            if( (lastCommand == HELO && isHELOEnabled) || lastCommand == NONE || lastCommand == RSET || lastCommand == EHLO || lastCommand == VRFY || lastCommand == NOOP) {
                 try {
 					if( handleMailFrom( inputString ) ) {
 					    lastCommand = MAIL_FROM;
@@ -1281,7 +1281,7 @@ public class SMTPProcessor {
     //Commands
     private static final String COMMAND_EHLO = "EHLO";
     private static final String COMMAND_HELO = "HELO";
-    private static final String COMMAND_reset = "reset";
+    private static final String COMMAND_RSET = "RSET";
     private static final String COMMAND_NOOP = "NOOP";
     private static final String COMMAND_QUIT = "QUIT";
     private static final String COMMAND_MAIL_FROM = "MAIL";
@@ -1300,7 +1300,7 @@ public class SMTPProcessor {
     private static final int RCPT_TO = 5;
     private static final int DATA = 6;
     private static final int DATA_FINISHED = 7;
-    private static final int reset = 8;
+    private static final int RSET = 8;
     private static final int STLS = 9;
     private static final int VRFY = 10;
     private static final int NOOP = 11;

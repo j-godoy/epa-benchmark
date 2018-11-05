@@ -1,9 +1,6 @@
 package com.example.smtp;
 
 import static org.junit.Assert.fail;
-
-import java.util.Arrays;
-
 import org.junit.Test;
 
 public class TestSMTPProcessor {
@@ -13,7 +10,7 @@ public class TestSMTPProcessor {
 		SMTPProcessor p = new SMTPProcessor();
 //		p.helo("relay.example.com");
 		p.noop();
-		p.rset();
+		p.reset();
 		p.mail("bob@example.com");
 		p.rcpt("alice@example.com");
 		p.rcpt("theboss@example.com");
@@ -53,7 +50,7 @@ public class TestSMTPProcessor {
 		p.mail("bob@example.com");
 		p.rcpt("alice@example.com");
 		p.data("This message will be sent");
-		p.rset();
+		p.reset();
 		try {
 			p.mail("bob@example.com");
 			fail();
@@ -65,7 +62,7 @@ public class TestSMTPProcessor {
 		SMTPProcessor sMTPProcessor0 = new SMTPProcessor();
 		sMTPProcessor0.mail("B o(p?@Gb");
 		sMTPProcessor0.rcpt("B o(p?@Gb");
-		sMTPProcessor0.rset();
+		sMTPProcessor0.reset();
 	}
 
 	@Test
@@ -95,7 +92,7 @@ public class TestSMTPProcessor {
 	public void test04() throws Throwable {
 		SMTPProcessor sMTPProcessor0 = new SMTPProcessor();
 		sMTPProcessor0.mail("f|:2\"\u0006@,Ri");
-		sMTPProcessor0.rset();
+		sMTPProcessor0.reset();
 	}
 
 	@Test
@@ -115,7 +112,7 @@ public class TestSMTPProcessor {
 	@Test
 	public void test09() throws Throwable {
 		SMTPProcessor sMTPProcessor0 = new SMTPProcessor();
-		sMTPProcessor0.rset();
+		sMTPProcessor0.reset();
 	}
 
 	@Test
@@ -149,7 +146,7 @@ public class TestSMTPProcessor {
 		SMTPProcessor sMTPProcessor0 = new SMTPProcessor();
 		sMTPProcessor0.mail("j8I#@}31'H% S>8");
 		sMTPProcessor0.rcpt("j8I#@}31'H% S>8");
-		sMTPProcessor0.rset();
+		sMTPProcessor0.reset();
 	}
 
 	@Test
@@ -173,7 +170,7 @@ public class TestSMTPProcessor {
 	public void testEvoSuiteEvoSuite04() throws Throwable {
 		SMTPProcessor sMTPProcessor0 = new SMTPProcessor();
 		sMTPProcessor0.mail("");
-		sMTPProcessor0.rset();
+		sMTPProcessor0.reset();
 	}
 
 	@Test
@@ -305,7 +302,7 @@ public class TestSMTPProcessor {
 	@Test
 	public void testEvoSuite21() throws Throwable {
 		SMTPProcessor sMTPProcessor0 = new SMTPProcessor();
-		sMTPProcessor0.rset();
+		sMTPProcessor0.reset();
 		sMTPProcessor0.mail("j]=I@}31'H%JS>");
 	}
 

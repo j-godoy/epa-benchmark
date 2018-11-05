@@ -145,9 +145,9 @@ public class SMTPProcessor {
     
 	private int lastCommand;
 	
-	int maxPassAttempts;
-    int passAttempts;
-    boolean isconnected;
+	private int maxPassAttempts;
+	private int passAttempts;
+	private boolean isconnected;
 
     //***************************************************************
     // Public Interface
