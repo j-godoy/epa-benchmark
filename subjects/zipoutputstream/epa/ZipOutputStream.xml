@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abstraction initial_state="S0" input_format="code-with-pre" name="java2.util2.zip.ZipOutputStream">
+    <label name="ZipOutputStream(OutputStream)" />
+    <label name="close()" />
+    <label name="closeEntry()" />
+    <label name="finish()" />
+    <label name="putNextEntry(ZipEntry)" />
+    <label name="write(byte[],int,int)" />
+    <label name="setComment(String)" />
+    <label name="setLevel(int)" />
+    <label name="setMethod(int)" />
+    <label name="toByteArray()" />
+    
+  <state name="S0">
+    <enabled_label name="ZipOutputStream(OutputStream)" />
+    <transition destination="S1" label="ZipOutputStream(OutputStream)" uncertain="false" violates_invariant="false" />
+  </state>
+
+  <state name="S1">
+    <enabled_label name="putNextEntry(ZipEntry)" />
+    <enabled_label name="closeEntry()" />
+    <enabled_label name="setComment(String)" />
+    <enabled_label name="setLevel(int)" />
+    <enabled_label name="setMethod(int)" />
+    <transition destination="S3" label="putNextEntry(ZipEntry)" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="closeEntry()" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="setComment(String)" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="setLevel(int)" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="setMethod(int)" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="toByteArray()" uncertain="false" violates_invariant="false" />
+
+  </state>
+  
+  <state name="S2">
+    <enabled_label name="setComment(String)" />
+    <enabled_label name="setLevel(int)" />
+    <enabled_label name="setMethod(int)" />
+    <enabled_label name="close()" />
+    <transition destination="S2" label="close()" uncertain="false" violates_invariant="false" />
+    <transition destination="S2" label="setComment(String)" uncertain="false" violates_invariant="false" />
+    <transition destination="S2" label="setLevel(int)" uncertain="false" violates_invariant="false" />
+    <transition destination="S2" label="setMethod(int)" uncertain="false" violates_invariant="false" />
+    <transition destination="S2" label="toByteArray()" uncertain="false" violates_invariant="false" />
+  </state>
+  
+  <state name="S3">
+    <enabled_label name="setComment(String)" />
+    <enabled_label name="setLevel(int)" />
+    <enabled_label name="setMethod(int)" />
+    <enabled_label name="putNextEntry(ZipEntry)" />
+    <enabled_label name="closeEntry()" />
+    <enabled_label name="close()" />
+    <enabled_label name="write(byte[],int,int)" />
+    <enabled_label name="finish()" />
+    
+    <transition destination="S3" label="putNextEntry(ZipEntry)" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="closeEntry()" uncertain="false" violates_invariant="false" />
+    <transition destination="S3" label="write(byte[],int,int)" uncertain="false" violates_invariant="false" />
+    <transition destination="S2" label="close()" uncertain="false" violates_invariant="false" />
+    <transition destination="S3" label="finish()" uncertain="false" violates_invariant="false" />
+    <transition destination="S3" label="setComment(String)" uncertain="false" violates_invariant="false" />
+    <transition destination="S3" label="setLevel(int)" uncertain="false" violates_invariant="false" />
+    <transition destination="S3" label="setMethod(int)" uncertain="false" violates_invariant="false" />
+    <transition destination="S3" label="toByteArray()" uncertain="false" violates_invariant="false" />
+
+  </state>
+  
+</abstraction>
