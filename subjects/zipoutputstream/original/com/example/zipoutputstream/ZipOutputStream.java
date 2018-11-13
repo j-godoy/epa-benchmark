@@ -14,6 +14,7 @@ import java.util.Vector;
 import java.util.HashSet;
 
 import java.util.zip.ZipException;
+
 import java.util.zip.Deflater;
 import java.util.zip.CRC32;
 
@@ -201,7 +202,7 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	public void closeEntry() throws IOException {
 		closeEntry0();
 	}
-	
+
 	/**
 	 * Closes the current ZIP entry and positions the stream for writing the
 	 * next entry.

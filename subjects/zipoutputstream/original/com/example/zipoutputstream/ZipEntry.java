@@ -298,6 +298,7 @@ public class ZipEntry implements ZipConstants, Cloneable {
 	/*
 	 * Converts DOS time to Java time (number of milliseconds since epoch).
 	 */
+	@SuppressWarnings("deprecation")
 	private static long dosToJavaTime(long dtime) {
 		Date d = new Date((int) (((dtime >> 25) & 0x7f) + 80), (int) (((dtime >> 21) & 0x0f) - 1),
 				(int) ((dtime >> 16) & 0x1f), (int) ((dtime >> 11) & 0x1f), (int) ((dtime >> 5) & 0x3f),
@@ -308,6 +309,7 @@ public class ZipEntry implements ZipConstants, Cloneable {
 	/*
 	 * Converts Java time to DOS time.
 	 */
+	@SuppressWarnings("deprecation")
 	private static long javaToDosTime(long time) {
 		Date d = new Date(time);
 		int year = d.getYear() + 1900;

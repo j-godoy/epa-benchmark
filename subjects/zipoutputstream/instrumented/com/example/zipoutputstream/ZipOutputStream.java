@@ -566,19 +566,19 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	private boolean isCloseEntryEnabled() {
 		return closed == false;
 	}
-
+	
 	private boolean isFinishEnabled() {
 		return closed == false && current != null;
 	}
 
 	private boolean isCloseEnabled() {
-		return current != null && closed == true;
+		return /*current != null && closed == true*/true;
 	}
 
 	private boolean isWriteEnabled() {
 		return closed == false && current != null;
 	}
-
+	
 	private boolean isSetCommentEnabled() {
 		return true;
 	}
