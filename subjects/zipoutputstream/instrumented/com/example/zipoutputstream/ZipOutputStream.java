@@ -572,7 +572,7 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	}
 
 	private boolean isCloseEnabled() {
-		return /*current != null && closed == true*/true;
+		return true;
 	}
 
 	private boolean isWriteEnabled() {
@@ -593,7 +593,7 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 
 	@EpaState(name = "S1")
 	private boolean stateS1() {
-		return isCloseEntryEnabled() && !isCloseEnabled() && isPutNextEntryEnabled() && !isWriteEnabled()
+		return isCloseEntryEnabled() && isCloseEnabled() && isPutNextEntryEnabled() && !isWriteEnabled()
 				&& !isFinishEnabled() && isSetCommentEnabled() && isSetLevelEnabled() && isSetMethodEnabled();
 	}
 
