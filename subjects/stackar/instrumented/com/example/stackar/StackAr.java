@@ -87,13 +87,13 @@ public class StackAr
      * Remove the most recently inserted item from the stack.
      * @exception Underflow if stack is already empty.
      */
-    @EpaAction(name="pop()")
-    public void pop( ) throws Underflow
-    {
-        if( isEmpty( ) )
-            throw new Underflow( );
-        theArray[ topOfStack-- ] = null;
-    }
+//    @EpaAction(name="pop()")
+//    public void pop( ) throws Underflow
+//    {
+//        if( isEmpty( ) )
+//            throw new Underflow( );
+//        theArray[ topOfStack-- ] = null;
+//    }
 
     /**
      * Insert a new item into the stack, if not already full.
