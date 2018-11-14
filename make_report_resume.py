@@ -23,7 +23,7 @@ def get_complete_row(row):
             row[10], row[11], row[12], row[13], row[14],
             row[15], row[16], row[17], row[18], row[19],
             'N/A', 'N/A', 'N/A', 'N/A', 'N/A',
-            'N/A', row[20], 'N/A', row[21], row[2],
+            'N/A', row[20], 'N/A', row[21], row[22],
             row[23], row[24], row[25]]
 
 def read_evosuite_csv(file_path):
