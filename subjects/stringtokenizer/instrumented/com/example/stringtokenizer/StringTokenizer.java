@@ -447,9 +447,10 @@ public class StringTokenizer implements Enumeration<Object> {
 		return count;
 	}
 	
-	// ======================================================
-	// Boolean Queries
-	// ======================================================
+	/*-------------------------------------------------------
+	 * EPA State Methods
+	 */
+	
 	private boolean isHasMoreElementsEnabled() {
 //		return delimiters!=null;
 		return true;
