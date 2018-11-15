@@ -3,24 +3,24 @@ package com.example.nfst;
 import java.util.NoSuchElementException;
 
 /**
- * This class returns tokens using non-alphanumberic
- * characters as delimiters.
+ * This class returns tokens using non-alphanumberic characters as delimiters.
  */
 public class NumberFormatStringTokenizer {
 
-	/** Current position in the format string          */
+	/** Current position in the format string */
 	private int currentPosition;
 
-	/** Index of last character in the format string      */
+	/** Index of last character in the format string */
 	private int maxPosition;
 
-	/** Format string to be tokenized        */
+	/** Format string to be tokenized */
 	private String str;
 
 	/**
 	 * Construct a NumberFormatStringTokenizer.
 	 *
-	 * @param str Format string to be tokenized
+	 * @param str
+	 *            Format string to be tokenized
 	 */
 	public NumberFormatStringTokenizer(String str) {
 		this.str = str;
@@ -30,16 +30,16 @@ public class NumberFormatStringTokenizer {
 	/**
 	 * Reset tokenizer so that nextToken() starts from the beginning.
 	 */
-	public void reset() {
-		currentPosition = 0;
-	}
+//	public void reset() {
+//		currentPosition = 0;
+//	}
 
 	/**
 	 * Returns the next token from this string tokenizer.
 	 *
-	 * @return     the next token from this string tokenizer.
-	 * @throws  NoSuchElementException  if there are no more tokens in this
-	 *               tokenizer's string.
+	 * @return the next token from this string tokenizer.
+	 * @throws NoSuchElementException
+	 *             if there are no more tokens in this tokenizer's string.
 	 */
 	public String nextToken() {
 
@@ -49,13 +49,11 @@ public class NumberFormatStringTokenizer {
 
 		int start = currentPosition;
 
-		while ((currentPosition < maxPosition)
-				&& Character.isLetterOrDigit(str.charAt(currentPosition))) {
+		while ((currentPosition < maxPosition) && Character.isLetterOrDigit(str.charAt(currentPosition))) {
 			currentPosition++;
 		}
 
-		if ((start == currentPosition)
-				&& (!Character.isLetterOrDigit(str.charAt(currentPosition)))) {
+		if ((start == currentPosition) && (!Character.isLetterOrDigit(str.charAt(currentPosition)))) {
 			currentPosition++;
 		}
 
@@ -65,7 +63,7 @@ public class NumberFormatStringTokenizer {
 	/**
 	 * Tells if there is a digit or a letter character ahead.
 	 *
-	 * @return     true if there is a number or character ahead.
+	 * @return true if there is a number or character ahead.
 	 */
 	public boolean isLetterOrDigitAhead() {
 
@@ -82,9 +80,9 @@ public class NumberFormatStringTokenizer {
 	}
 
 	/**
-	 * Tells if there is a digit or a letter character ahead.
+	 * Tells if there is not a digit or a letter character ahead.
 	 *
-	 * @return     true if there is a number or character ahead.
+	 * @return true if there is not a number or character ahead.
 	 */
 	public boolean nextIsSep() {
 
@@ -95,11 +93,10 @@ public class NumberFormatStringTokenizer {
 	}
 
 	/**
-	 * Tells if <code>nextToken</code> will throw an exception
-	 * if it is called.
+	 * Tells if <code>nextToken</code> will throw an exception if it is called.
 	 *
-	 * @return true if <code>nextToken</code> can be called
-	 * without throwing an exception.
+	 * @return true if <code>nextToken</code> can be called without throwing an
+	 *         exception.
 	 */
 	public boolean hasMoreTokens() {
 		return (currentPosition >= maxPosition) ? false : true;
@@ -110,31 +107,30 @@ public class NumberFormatStringTokenizer {
 	 * <code>nextToken</code> method can be called before it generates an
 	 * exception.
 	 *
-	 * @return  the number of tokens remaining in the string using the current
-	 *          delimiter set.
-	 * @see     java.util.StringTokenizer#nextToken()
+	 * @return the number of tokens remaining in the string using the current
+	 *         delimiter set.
+	 * @see java.util.StringTokenizer#nextToken()
 	 */
-	public int countTokens() {
-
-		int count = 0;
-		int currpos = currentPosition;
-
-		while (currpos < maxPosition) {
-			int start = currpos;
-
-			while ((currpos < maxPosition)
-					&& Character.isLetterOrDigit(str.charAt(currpos))) {
-				currpos++;
-			}
-
-			if ((start == currpos)
-					&& (Character.isLetterOrDigit(str.charAt(currpos)) == false)) {
-				currpos++;
-			}
-
-			count++;
-		}
-
-		return count;
-	}
-} // end NumberFormatStringTokenizer
+//	public int countTokens() {
+//
+//		int count = 0;
+//		int currpos = currentPosition;
+//
+//		while (currpos < maxPosition) {
+//			int start = currpos;
+//
+//			while ((currpos < maxPosition) && Character.isLetterOrDigit(str.charAt(currpos))) {
+//				currpos++;
+//			}
+//
+//			if ((start == currpos) && (Character.isLetterOrDigit(str.charAt(currpos)) == false)) {
+//				currpos++;
+//			}
+//
+//			count++;
+//		}
+//
+//		return count;
+//	}
+	
+}

@@ -1,47 +1,47 @@
 Invariant_based = S0,
 
-S0 = (stackAr_EXIT40 -> S2
-		| stackAr_EXIT40 -> S4
-		| stackAr_EXIT40 -> S5),
+S0 = (stackAr -> S2
+		| stackAr -> S4
+		| stackAr -> S5),
 
-S2 = (topAndPop_EXIT112 -> S2
-		| isFull_EXIT57_FALSE -> S2
-		| top_EXIT78 -> S2
-		| push_EXIT103 -> S1
-		| makeEmpty_EXIT68 -> S2
-		| isEmpty_EXIT48_TRUE -> S2),
+S2 = (topAndPop -> S2
+		| isFull -> S2
+		| top -> S2
+		| push -> S1
+		| makeEmpty -> S2
+		| isEmpty -> S2),
 
-S4 = (topAndPop_EXIT112 -> S4
-		| top_EXIT78 -> S4
-		| isFull_EXIT57_TRUE -> S4
-		| makeEmpty_EXIT68 -> S4
-		| isEmpty_EXIT48_TRUE -> S4),
+S4 = (topAndPop -> S4
+		| top -> S4
+		| isFull -> S4
+		| makeEmpty -> S4
+		| isEmpty -> S4),
 
-S1 = (topAndPop_EXIT115 -> S1
-		| topAndPop_EXIT115 -> S2
-		| isFull_EXIT57_FALSE -> S1
-		| top_EXIT79 -> S1
-		| push_EXIT103 -> S1
-		| push_EXIT103 -> S3
-		| makeEmpty_EXIT68 -> S2
-		| isEmpty_EXIT48_FALSE -> S1),
+S1 = (topAndPop -> S1
+		| topAndPop -> S2
+		| isFull -> S1
+		| top -> S1
+		| push -> S1
+		| push -> S3
+		| makeEmpty -> S2
+		| isEmpty -> S1),
 
-S3 = (topAndPop_EXIT115 -> S1
-		| top_EXIT79 -> S3
-		| isFull_EXIT57_TRUE -> S3
-		| makeEmpty_EXIT68 -> S2
-		| isEmpty_EXIT48_FALSE -> S3),
+S3 = (topAndPop -> S1
+		| top -> S3
+		| isFull -> S3
+		| makeEmpty -> S2
+		| isEmpty -> S3),
 
-S5 = (topAndPop_EXIT115 -> S5
-		| isFull_EXIT57_FALSE -> S5
-		| top_EXIT79 -> S5
-		| push_EXIT103 -> S6
-		| makeEmpty_EXIT68 -> S5
-		| isEmpty_EXIT48_TRUE -> S5),
-S6 = (topAndPop_EXIT115 -> S5
-		| top_EXIT79 -> S6
-		| isFull_EXIT57_TRUE -> S6
-		| makeEmpty_EXIT68 -> S5
-		| isEmpty_EXIT48_FALSE -> S6).
+S5 = (topAndPop -> S5
+		| isFull -> S5
+		| top -> S5
+		| push -> S6
+		| makeEmpty -> S5
+		| isEmpty -> S5),
+S6 = (topAndPop -> S5
+		| top -> S6
+		| isFull -> S6
+		| makeEmpty -> S5
+		| isEmpty -> S6).
 
 ||MTS_Invariant_based = (Invariant_based).

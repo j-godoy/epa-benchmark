@@ -1,11 +1,6 @@
 package com.example.nfst;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.util.NoSuchElementException;
-
 import org.evosuite.epa.EpaAction;
 import org.evosuite.epa.EpaState;
 
@@ -38,10 +33,10 @@ public class NumberFormatStringTokenizer {
 	/**
 	 * Reset tokenizer so that nextToken() starts from the beginning.
 	 */
-	@EpaAction(name = "reset()")
-	public void reset() {
-		currentPosition = 0;
-	}
+//	@EpaAction(name = "reset()")
+//	public void reset() {
+//		currentPosition = 0;
+//	}
 
 	/**
 	 * Returns the next token from this string tokenizer.
@@ -91,9 +86,9 @@ public class NumberFormatStringTokenizer {
 	}
 
 	/**
-	 * Tells if there is a digit or a letter character ahead.
+	 * Tells if there is not a digit or a letter character ahead.
 	 *
-	 * @return true if there is a number or character ahead.
+	 * @return true if there is not a number or character ahead.
 	 */
 	@EpaAction(name = "nextIsSep()")
 	public boolean nextIsSep() {
@@ -124,50 +119,69 @@ public class NumberFormatStringTokenizer {
 	 *         delimiter set.
 	 * @see java.util.StringTokenizer#nextToken()
 	 */
-	@EpaAction(name = "countTokens()")
-	public int countTokens() {
-
-		int count = 0;
-		int currpos = currentPosition;
-
-		while (currpos < maxPosition) {
-			int start = currpos;
-
-			while ((currpos < maxPosition) && Character.isLetterOrDigit(str.charAt(currpos))) {
-				currpos++;
-			}
-
-			if ((start == currpos) && (Character.isLetterOrDigit(str.charAt(currpos)) == false)) {
-				currpos++;
-			}
-
-			count++;
-		}
-
-		return count;
-	}
+//	@EpaAction(name = "countTokens()")
+//	public int countTokens() {
+//
+//		int count = 0;
+//		int currpos = currentPosition;
+//
+//		while (currpos < maxPosition) {
+//			int start = currpos;
+//
+//			while ((currpos < maxPosition) && Character.isLetterOrDigit(str.charAt(currpos))) {
+//				currpos++;
+//			}
+//
+//			if ((start == currpos) && (Character.isLetterOrDigit(str.charAt(currpos)) == false)) {
+//				currpos++;
+//			}
+//
+//			count++;
+//		}
+//
+//		return count;
+//	}
+	
+	/*-------------------------------------------------------
+	 * EPA State Methods
+	 */
 
 	private boolean nextIsSepIsEnabled() {
+		// TODO: ver si quedan 2 o 3 estados. Si quedan 2, debería ser true
 		return currentPosition >= 0 && currentPosition < str.length();
 	}
 
 	private boolean nextTokenIsEnabled() {
 		return currentPosition < maxPosition;
 	}
+	
+	private boolean hasMoreTokensIsEnabled() {
+		return true;
+	}
+	
+	private boolean isLetterOrDigitAheadIsEnabled() {
+		return true;
+	}
+	
 
 	@EpaState(name = "S1")
 	private boolean stateS1() {
-		return nextIsSepIsEnabled() && nextTokenIsEnabled();
+		return hasMoreTokensIsEnabled() && nextTokenIsEnabled() && isLetterOrDigitAheadIsEnabled() && nextIsSepIsEnabled();
 	}
 
 	@EpaState(name = "S2")
 	private boolean stateS2() {
-		return !nextIsSepIsEnabled() && nextTokenIsEnabled();
+		return hasMoreTokensIsEnabled() && nextTokenIsEnabled() && isLetterOrDigitAheadIsEnabled() && !nextIsSepIsEnabled();
 	}
 
-	@EpaState(name = "S3")
-	private boolean stateS3() {
-		return !nextIsSepIsEnabled() && !nextTokenIsEnabled();
+//	@EpaState(name = "S3")
+//	private boolean stateS3() {
+//		return hasMoreTokensIsEnabled() && nextTokenIsEnabled() && isLetterOrDigitAheadIsEnabled() && nextIsSepIsEnabled();
+//	}
+	
+	@EpaState(name = "S4")
+	private boolean stateS4() {
+		return hasMoreTokensIsEnabled() && !nextTokenIsEnabled() && isLetterOrDigitAheadIsEnabled() && !nextIsSepIsEnabled();
 	}
 
-} // end NumberFormatStringTokenizer
+}

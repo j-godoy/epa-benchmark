@@ -24,3 +24,33 @@ S6 = (hasMoreTokens_EXIT2180_FALSE  -> S6
 		| isLetterOrDigitAhead_EXIT2154_FALSE -> S6).
 		
 ||MTS_StringTokenizer = (StringTokenizer).
+
+
+
+
+StringTokenizer = S0,
+
+S0 = (numberFormatStringTokenizer -> S1),
+
+S1 = (hasMoreTokens -> S1
+		| isLetterOrDigitAhead -> S4
+		| isLetterOrDigitAhead -> S5
+		| nextIsSep -> S4
+		| nextToken -> S1
+		| nextToken -> S6),
+		
+S4 = (nextToken -> S1
+		| nextToken -> S6
+		| hasMoreTokens -> S4
+		| isLetterOrDigitAhead -> S4
+		| nextIsSep -> S4),
+
+S5 = (hasMoreTokens -> S5
+		| isLetterOrDigitAhead -> S5		
+		| nextToken -> S1
+		| nextToken -> S6),
+		
+S6 = (hasMoreTokens  -> S6
+		| isLetterOrDigitAhead -> S6).
+		
+||MTS_StringTokenizer = (StringTokenizer).
