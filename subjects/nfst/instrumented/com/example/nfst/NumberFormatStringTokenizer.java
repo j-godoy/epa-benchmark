@@ -147,7 +147,6 @@ public class NumberFormatStringTokenizer {
 	 */
 
 	private boolean nextIsSepIsEnabled() {
-		// TODO: ver si quedan 2 o 3 estados. Si quedan 2, debería ser true
 		return currentPosition >= 0 && currentPosition < str.length();
 	}
 
@@ -174,13 +173,8 @@ public class NumberFormatStringTokenizer {
 		return hasMoreTokensIsEnabled() && nextTokenIsEnabled() && isLetterOrDigitAheadIsEnabled() && !nextIsSepIsEnabled();
 	}
 
-//	@EpaState(name = "S3")
-//	private boolean stateS3() {
-//		return hasMoreTokensIsEnabled() && nextTokenIsEnabled() && isLetterOrDigitAheadIsEnabled() && nextIsSepIsEnabled();
-//	}
-	
-	@EpaState(name = "S4")
-	private boolean stateS4() {
+	@EpaState(name = "S3")
+	private boolean stateS3() {
 		return hasMoreTokensIsEnabled() && !nextTokenIsEnabled() && isLetterOrDigitAheadIsEnabled() && !nextIsSepIsEnabled();
 	}
 
