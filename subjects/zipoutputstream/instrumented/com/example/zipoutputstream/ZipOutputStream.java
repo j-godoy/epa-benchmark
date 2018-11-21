@@ -54,9 +54,9 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	private CRC32 crc = new CRC32();
 	private long written = 0;
 	private long locoff = 0;
-	private String comment;
+//	private String comment;
 	private int method = DEFLATED;
-	private boolean finished;
+//	private boolean finished;
 
 	private boolean closed = false;
 	private ByteArrayOutputStream byteArrayOutputStream;
@@ -113,13 +113,13 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	 *                if the length of the specified ZIP file comment is greater
 	 *                than 0xFFFF bytes
 	 */
-	@EpaAction(name = "setComment(String)")
-	public void setComment(String comment) {
-		if (comment != null && comment.length() > 0xffff / 3 && getUTF8Length(comment) > 0xffff) {
-			throw new IllegalArgumentException("ZIP file comment too long.");
-		}
-		this.comment = comment;
-	}
+//	@EpaAction(name = "setComment(String)")
+//	public void setComment(String comment) {
+//		if (comment != null && comment.length() > 0xffff / 3 && getUTF8Length(comment) > 0xffff) {
+//			throw new IllegalArgumentException("ZIP file comment too long.");
+//		}
+//		this.comment = comment;
+//	}
 
 	/**
 	 * Sets the default compression method for subsequent entries. This default
@@ -131,13 +131,13 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	 * @exception IllegalArgumentException
 	 *                if the specified compression method is invalid
 	 */
-	@EpaAction(name = "setMethod(int)")
-	public void setMethod(int method) {
-		if (method != DEFLATED && method != STORED) {
-			throw new IllegalArgumentException("invalid compression method");
-		}
-		this.method = method;
-	}
+//	@EpaAction(name = "setMethod(int)")
+//	public void setMethod(int method) {
+//		if (method != DEFLATED && method != STORED) {
+//			throw new IllegalArgumentException("invalid compression method");
+//		}
+//		this.method = method;
+//	}
 
 	/**
 	 * Sets the compression level for subsequent entries which are DEFLATED. The
@@ -148,10 +148,10 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	 * @exception IllegalArgumentException
 	 *                if the compression level is invalid
 	 */
-	@EpaAction(name = "setLevel(int)")
-	public void setLevel(int level) {
-		deflater_setLevel(level);
-	}
+//	@EpaAction(name = "setLevel(int)")
+//	public void setLevel(int level) {
+//		deflater_setLevel(level);
+//	}
 
 	/**
 	 * Begins writing a new ZIP file entry and positions the stream to the start
@@ -328,25 +328,25 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	 * @exception IOException
 	 *                if an I/O exception has occurred
 	 */
-	@EpaAction(name = "finish()")
-	public void finish() throws IOException {
-		ensureOpen();
-		if (finished) {
-			return;
-		}
-		if (current != null) {
-			closeEntry0();
-		}
-		if (xentries.size() < 1) {
-			throw new ZipException("ZIP file must have at least one entry");
-		}
-		// write central directory
-		long off = written;
-		for (XEntry xentry : xentries)
-			writeCEN(xentry);
-		writeEND(off, written - off);
-		finished = true;
-	}
+//	@EpaAction(name = "finish()")
+//	public void finish() throws IOException {
+//		ensureOpen();
+//		if (finished) {
+//			return;
+//		}
+//		if (current != null) {
+//			closeEntry0();
+//		}
+//		if (xentries.size() < 1) {
+//			throw new ZipException("ZIP file must have at least one entry");
+//		}
+//		// write central directory
+//		long off = written;
+//		for (XEntry xentry : xentries)
+//			writeCEN(xentry);
+//		writeEND(off, written - off);
+//		finished = true;
+//	}
 
 	/**
 	 * Closes the ZIP output stream as well as the stream being filtered.
@@ -410,63 +410,63 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	 * Write central directory (CEN) header for specified entry. REMIND: add
 	 * support for file attributes
 	 */
-	private void writeCEN(XEntry xentry) throws IOException {
-		ZipEntry e = xentry.entry;
-		int flag = xentry.flag;
-		int version = version(e);
-		writeInt(CENSIG); // CEN header signature
-		writeShort(version); // version made by
-		writeShort(version); // version needed to extract
-		writeShort(flag); // general purpose bit flag
-		writeShort(e.method); // compression method
-		writeInt(e.time); // last modification time
-		writeInt(e.crc); // crc-32
-		writeInt(e.csize); // compressed size
-		writeInt(e.size); // uncompressed size
-		byte[] nameBytes = getUTF8Bytes(e.name);
-		writeShort(nameBytes.length);
-		writeShort(e.extra != null ? e.extra.length : 0);
-		byte[] commentBytes;
-		if (e.comment != null) {
-			commentBytes = getUTF8Bytes(e.comment);
-			writeShort(commentBytes.length);
-		} else {
-			commentBytes = null;
-			writeShort(0);
-		}
-		writeShort(0); // starting disk number
-		writeShort(0); // internal file attributes (unused)
-		writeInt(0); // external file attributes (unused)
-		writeInt(xentry.offset); // relative offset of local header
-		writeBytes(nameBytes, 0, nameBytes.length);
-		if (e.extra != null) {
-			writeBytes(e.extra, 0, e.extra.length);
-		}
-		if (commentBytes != null) {
-			writeBytes(commentBytes, 0, commentBytes.length);
-		}
-	}
+//	private void writeCEN(XEntry xentry) throws IOException {
+//		ZipEntry e = xentry.entry;
+//		int flag = xentry.flag;
+//		int version = version(e);
+//		writeInt(CENSIG); // CEN header signature
+//		writeShort(version); // version made by
+//		writeShort(version); // version needed to extract
+//		writeShort(flag); // general purpose bit flag
+//		writeShort(e.method); // compression method
+//		writeInt(e.time); // last modification time
+//		writeInt(e.crc); // crc-32
+//		writeInt(e.csize); // compressed size
+//		writeInt(e.size); // uncompressed size
+//		byte[] nameBytes = getUTF8Bytes(e.name);
+//		writeShort(nameBytes.length);
+//		writeShort(e.extra != null ? e.extra.length : 0);
+//		byte[] commentBytes;
+//		if (e.comment != null) {
+//			commentBytes = getUTF8Bytes(e.comment);
+//			writeShort(commentBytes.length);
+//		} else {
+//			commentBytes = null;
+//			writeShort(0);
+//		}
+//		writeShort(0); // starting disk number
+//		writeShort(0); // internal file attributes (unused)
+//		writeInt(0); // external file attributes (unused)
+//		writeInt(xentry.offset); // relative offset of local header
+//		writeBytes(nameBytes, 0, nameBytes.length);
+//		if (e.extra != null) {
+//			writeBytes(e.extra, 0, e.extra.length);
+//		}
+//		if (commentBytes != null) {
+//			writeBytes(commentBytes, 0, commentBytes.length);
+//		}
+//	}
 
 	/*
 	 * Writes end of central directory (END) header.
 	 */
-	private void writeEND(long off, long len) throws IOException {
-		int count = xentries.size();
-		writeInt(ENDSIG); // END record signature
-		writeShort(0); // number of this disk
-		writeShort(0); // central directory start disk
-		writeShort(count); // number of directory entries on disk
-		writeShort(count); // total number of directory entries
-		writeInt(len); // length of central directory
-		writeInt(off); // offset of central directory
-		if (comment != null) { // zip file comment
-			byte[] b = getUTF8Bytes(comment);
-			writeShort(b.length);
-			writeBytes(b, 0, b.length);
-		} else {
-			writeShort(0);
-		}
-	}
+//	private void writeEND(long off, long len) throws IOException {
+//		int count = xentries.size();
+//		writeInt(ENDSIG); // END record signature
+//		writeShort(0); // number of this disk
+//		writeShort(0); // central directory start disk
+//		writeShort(count); // number of directory entries on disk
+//		writeShort(count); // total number of directory entries
+//		writeInt(len); // length of central directory
+//		writeInt(off); // offset of central directory
+//		if (comment != null) { // zip file comment
+//			byte[] b = getUTF8Bytes(comment);
+//			writeShort(b.length);
+//			writeBytes(b, 0, b.length);
+//		} else {
+//			writeShort(0);
+//		}
+//	}
 
 	/*
 	 * Writes a 16-bit short to the output stream in little-endian byte order.
@@ -501,20 +501,20 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	/*
 	 * Returns the length of String's UTF8 encoding.
 	 */
-	static int getUTF8Length(String s) {
-		int count = 0;
-		for (int i = 0; i < s.length(); i++) {
-			char ch = s.charAt(i);
-			if (ch <= 0x7f) {
-				count++;
-			} else if (ch <= 0x7ff) {
-				count += 2;
-			} else {
-				count += 3;
-			}
-		}
-		return count;
-	}
+//	static int getUTF8Length(String s) {
+//		int count = 0;
+//		for (int i = 0; i < s.length(); i++) {
+//			char ch = s.charAt(i);
+//			if (ch <= 0x7f) {
+//				count++;
+//			} else if (ch <= 0x7ff) {
+//				count += 2;
+//			} else {
+//				count += 3;
+//			}
+//		}
+//		return count;
+//	}
 
 	/*
 	 * Returns an array of bytes representing the UTF8 encoding of the specified
@@ -554,10 +554,10 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 		return b;
 	}
 
-	@EpaAction(name = "toByteArray()")
-	public byte[] toByteArray() {
-		return this.byteArrayOutputStream.toByteArray();
-	}
+//	@EpaAction(name = "toByteArray()")
+//	public byte[] toByteArray() {
+//		return this.byteArrayOutputStream.toByteArray();
+//	}
 
 	private boolean isPutNextEntryEnabled() {
 		return closed == false;
@@ -567,9 +567,9 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 		return closed == false;
 	}
 	
-	private boolean isFinishEnabled() {
-		return closed == false && current != null;
-	}
+//	private boolean isFinishEnabled() {
+//		return closed == false && current != null;
+//	}
 
 	private boolean isCloseEnabled() {
 		return true;
@@ -579,34 +579,34 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 		return closed == false && current != null;
 	}
 	
-	private boolean isSetCommentEnabled() {
-		return true;
-	}
-
-	private boolean isSetLevelEnabled() {
-		return true;
-	}
-
-	private boolean isSetMethodEnabled() {
-		return true;
-	}
+//	private boolean isSetCommentEnabled() {
+//		return true;
+//	}
+//
+//	private boolean isSetLevelEnabled() {
+//		return true;
+//	}
+//
+//	private boolean isSetMethodEnabled() {
+//		return true;
+//	}
 
 	@EpaState(name = "S1")
 	private boolean stateS1() {
 		return isCloseEntryEnabled() && isCloseEnabled() && isPutNextEntryEnabled() && !isWriteEnabled()
-				&& !isFinishEnabled() && isSetCommentEnabled() && isSetLevelEnabled() && isSetMethodEnabled();
+				/*&& !isFinishEnabled() && isSetCommentEnabled() && isSetLevelEnabled() && isSetMethodEnabled()*/;
 	}
 
 	@EpaState(name = "S2")
 	private boolean stateS2() {
 		return !isCloseEntryEnabled() && isCloseEnabled() && !isPutNextEntryEnabled() && !isWriteEnabled()
-				&& !isFinishEnabled() && isSetCommentEnabled() && isSetLevelEnabled() && isSetMethodEnabled();
+				/*&& !isFinishEnabled() && isSetCommentEnabled() && isSetLevelEnabled() && isSetMethodEnabled()*/;
 	}
 
 	@EpaState(name = "S3")
 	private boolean stateS3() {
 		return isCloseEntryEnabled() && isCloseEnabled() && isPutNextEntryEnabled() && isWriteEnabled()
-				&& isFinishEnabled() && isSetCommentEnabled() && isSetLevelEnabled() && isSetMethodEnabled();
+				/*&& isFinishEnabled() && isSetCommentEnabled() && isSetLevelEnabled() && isSetMethodEnabled()*/	;
 	}
 
 }
