@@ -11,6 +11,7 @@
   <state name="S0">
     <enabled_label name="StackAr(int)" />
     <transition destination="S1" label="StackAr(int)" uncertain="false" violates_invariant="false" />
+	<transition destination="S4" label="StackAr(int)" uncertain="false" violates_invariant="false" />
   </state>
   
   <state name="S1">
@@ -56,6 +57,19 @@
     <transition destination="S3" label="isFull()" uncertain="false" violates_invariant="false" />
 	<transition destination="S1" label="makeEmpty()" uncertain="false" violates_invariant="false" />
 	<transition destination="S3" label="isEmpty()" uncertain="false" violates_invariant="false" />
+  </state>
+  
+  <state name="S4">
+    <enabled_label name="topAndPop()" />
+	<enabled_label name="isFull()" />
+	<enabled_label name="top()" />
+	<enabled_label name="makeEmpty()" />
+	<enabled_label name="isEmpty()" />
+    <transition destination="S4" label="topAndPop()" uncertain="false" violates_invariant="false" />
+    <transition destination="S4" label="isFull()" uncertain="false" violates_invariant="false" />
+	<transition destination="S4" label="top()" uncertain="false" violates_invariant="false" />
+	<transition destination="S4" label="makeEmpty()" uncertain="false" violates_invariant="false" />
+	<transition destination="S4" label="isEmpty()" uncertain="false" violates_invariant="false" />
   </state>
   
 </abstraction>

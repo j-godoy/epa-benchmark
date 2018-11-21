@@ -144,5 +144,10 @@ public class StackAr
 	private boolean stateS3() {
 		return isFull() && !isEmpty();
 	}
+	
+	@EpaState(name="S4")
+	private boolean stateS4() {
+		return isFull() && isEmpty();
+	}
 
 }
