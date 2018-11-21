@@ -120,6 +120,7 @@ public class MyFilterOutputStream extends MyOutputStream {
 	 * @see java.io.FilterOutputStream#flush()
 	 * @see java.io.FilterOutputStream#out
 	 */
+	@SuppressWarnings("try")
 	public void close() throws IOException {
 		OutputStream ostream = out;
 		try {

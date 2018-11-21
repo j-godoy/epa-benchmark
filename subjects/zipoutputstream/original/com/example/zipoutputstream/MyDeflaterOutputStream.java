@@ -9,6 +9,7 @@ package com.example.zipoutputstream;
 
 import java.io.FilterOutputStream;
 import java.io.OutputStream;
+import java.io.InputStream;
 import java.io.IOException;
 
 import java.util.zip.Deflater;

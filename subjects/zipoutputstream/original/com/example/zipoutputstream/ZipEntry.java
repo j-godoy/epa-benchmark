@@ -115,9 +115,9 @@ public class ZipEntry implements ZipConstants, Cloneable {
 	 * @return the modification time of the entry, or -1 if not specified
 	 * @see #setTime(long)
 	 */
-	public long getTime() {
-		return time != -1 ? dosToJavaTime(time) : -1;
-	}
+//	public long getTime() {
+//		return time != -1 ? dosToJavaTime(time) : -1;
+//	}
 
 	/**
 	 * Sets the uncompressed size of the entry data.
@@ -261,12 +261,12 @@ public class ZipEntry implements ZipConstants, Cloneable {
 	 *                than 0xFFFF bytes
 	 * @see #getComment()
 	 */
-	public void setComment(String comment) {
-		if (comment != null && comment.length() > 0xffff / 3 && ZipOutputStream.getUTF8Length(comment) > 0xffff) {
-			throw new IllegalArgumentException("invalid entry comment length");
-		}
-		this.comment = comment;
-	}
+//	public void setComment(String comment) {
+//		if (comment != null && comment.length() > 0xffff / 3 && ZipOutputStream.getUTF8Length(comment) > 0xffff) {
+//			throw new IllegalArgumentException("invalid entry comment length");
+//		}
+//		this.comment = comment;
+//	}
 
 	/**
 	 * Returns the comment string for the entry, or null if none.
@@ -298,18 +298,16 @@ public class ZipEntry implements ZipConstants, Cloneable {
 	/*
 	 * Converts DOS time to Java time (number of milliseconds since epoch).
 	 */
-	@SuppressWarnings("deprecation")
-	private static long dosToJavaTime(long dtime) {
-		Date d = new Date((int) (((dtime >> 25) & 0x7f) + 80), (int) (((dtime >> 21) & 0x0f) - 1),
-				(int) ((dtime >> 16) & 0x1f), (int) ((dtime >> 11) & 0x1f), (int) ((dtime >> 5) & 0x3f),
-				(int) ((dtime << 1) & 0x3e));
-		return d.getTime();
-	}
+//	private static long dosToJavaTime(long dtime) {
+//		Date d = new Date((int) (((dtime >> 25) & 0x7f) + 80), (int) (((dtime >> 21) & 0x0f) - 1),
+//				(int) ((dtime >> 16) & 0x1f), (int) ((dtime >> 11) & 0x1f), (int) ((dtime >> 5) & 0x3f),
+//				(int) ((dtime << 1) & 0x3e));
+//		return d.getTime();
+//	}
 
 	/*
 	 * Converts Java time to DOS time.
 	 */
-	@SuppressWarnings("deprecation")
 	private static long javaToDosTime(long time) {
 		Date d = new Date(time);
 		int year = d.getYear() + 1900;
