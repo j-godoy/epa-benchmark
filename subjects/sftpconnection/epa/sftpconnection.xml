@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
-<abstraction initial_state="S0" input_format="contract" name="com.example.sftpconnection.sftp2Connection">
+<abstraction initial_state="S0" input_format="contract" name="com.example.sftpconnection.SftpConnection">
   <label name="login"/>
+  <label name="sftpConnection"/>
   <label name="disconnect"/>
   <label name="setConnectionListeners"/>
-  <label name="addConnectionListeners"/>
+  <label name="addConnectionListener"/>
   <label name="getPWD"/>
-  <label name="isConnected"/>
   <label name="list"/>
   <label name="download"/>
   <label name="removeFileOrDir"/>
@@ -20,143 +20,75 @@
   <label name="rename"/>
   <label name="handleDownload"/>
   <label name="handleUpload"/>
+  
   <state name="S0">
-    <enabled_label name="ListItr"/>
-    <transition destination="S127" label="ListItr"/>
-    <transition destination="S95" label="ListItr"/>
-    <transition destination="S119" label="ListItr"/>
-    <transition destination="S87" label="ListItr"/>
+    <enabled_label name="sftpConnection"/>
+    <transition destination="S1" label="sftpConnection"/>
   </state>
-  <state name="S127">
-    <enabled_label name="add"/>
-    <enabled_label name="hasNext"/>
-    <enabled_label name="hasPrevious"/>
-    <enabled_label name="next"/>
-    <enabled_label name="nextIndex"/>
-    <enabled_label name="previous"/>
-    <enabled_label name="previousIndex"/>
-    <transition destination="S127" label="add"/>
-    <transition destination="S127" label="hasNext"/>
-    <transition destination="S127" label="hasPrevious"/>
-    <transition destination="S511" label="next"/>
-    <transition destination="S503" label="next"/>
-    <transition destination="S127" label="nextIndex"/>
-    <transition destination="S511" label="previous"/>
-    <transition destination="S479" label="previous"/>
-    <transition destination="S127" label="previousIndex"/>
+  
+  <state name="S1">
+    <enabled_label name="setConnectionListeners"/>
+    <enabled_label name="login"/>
+    <transition destination="S2" label="setConnectionListeners"/>
+    <transition destination="S3" label="login"/>
   </state>
-  <state name="S95">
-    <enabled_label name="add"/>
-    <enabled_label name="hasNext"/>
-    <enabled_label name="hasPrevious"/>
-    <enabled_label name="next"/>
-    <enabled_label name="nextIndex"/>
-    <enabled_label name="previousIndex"/>
-    <transition destination="S127" label="add"/>
-    <transition destination="S95" label="hasNext"/>
-    <transition destination="S95" label="hasPrevious"/>
-    <transition destination="S511" label="next"/>
-    <transition destination="S503" label="next"/>
-    <transition destination="S95" label="nextIndex"/>
-    <transition destination="S95" label="previousIndex"/>
+  
+  <state name="S2">
+    <enabled_label name="addConnectionListener"/>
+    <enabled_label name="getPWD"/>
+	<enabled_label name="login"/>
+    <transition destination="S2" label="add"/>
+    <transition destination="S2" label="hasNext"/>
+    <transition destination="S4" label="hasPrevious"/>
   </state>
-  <state name="S119">
-    <enabled_label name="add"/>
-    <enabled_label name="hasNext"/>
-    <enabled_label name="hasPrevious"/>
-    <enabled_label name="nextIndex"/>
-    <enabled_label name="previous"/>
-    <enabled_label name="previousIndex"/>
-    <transition destination="S119" label="add"/>
-    <transition destination="S119" label="hasNext"/>
-    <transition destination="S119" label="hasPrevious"/>
-    <transition destination="S119" label="nextIndex"/>
-    <transition destination="S511" label="previous"/>
-    <transition destination="S479" label="previous"/>
-    <transition destination="S119" label="previousIndex"/>
+  
+  <state name="S3">
+    <enabled_label name="addConnectionListener"/>
+    <enabled_label name="setConnectionListeners"/>
+    <enabled_label name="disconnect"/>
+    <enabled_label name="isConnected"/>
+    <enabled_label name="getPWD"/>
+    <transition destination="S3" label="addConnectionListener"/>
+    <transition destination="S3" label="isConnected"/>
+    <transition destination="S3" label="getPWD"/>
+    <transition destination="S4" label="setConnectionListeners"/>
+	<transition destination="S4" label="addConnectionListener"/>
+	<transition destination="S1" label="disconnect"/>
   </state>
-  <state name="S87">
-    <enabled_label name="add"/>
-    <enabled_label name="hasNext"/>
-    <enabled_label name="hasPrevious"/>
-    <enabled_label name="nextIndex"/>
-    <enabled_label name="previousIndex"/>
-    <transition destination="S119" label="add"/>
-    <transition destination="S87" label="hasNext"/>
-    <transition destination="S87" label="hasPrevious"/>
-    <transition destination="S87" label="nextIndex"/>
-    <transition destination="S87" label="previousIndex"/>
+  
+  <state name="S4">
+    <enabled_label name="disconnect"/>
+    <enabled_label name="list"/>
+    <enabled_label name="getPWD"/>
+    <enabled_label name="download"/>
+    <enabled_label name="removeFileOrDir"/>
+	<enabled_label name="upload"/>
+	<enabled_label name="setLocalPath"/>
+	<enabled_label name="sortLs"/>
+	<enabled_label name="chdir"/>
+	<enabled_label name="getPermissions"/>
+	<enabled_label name="sortSize"/>
+	<enabled_label name="mkdir"/>
+	<enabled_label name="isConnected"/>
+	<enabled_label name="rename"/>
+	<enabled_label name="handleDownload"/>
+	<enabled_label name="handleUpload"/>
+    <transition destination="S2" label="disconnect"/>
+    <transition destination="S4" label="list"/>
+	<transition destination="S4" label="getPWD"/>
+	<transition destination="S4" label="download"/>
+	<transition destination="S4" label="removeFileOrDir"/>
+	<transition destination="S4" label="upload"/>
+	<transition destination="S4" label="setLocalPath"/>
+	<transition destination="S4" label="sortLs"/>
+	<transition destination="S4" label="chdir"/>
+	<transition destination="S4" label="getPermissions"/>
+	<transition destination="S4" label="sortSize"/>
+	<transition destination="S4" label="mkdir"/>
+	<transition destination="S4" label="isConnected"/>
+	<transition destination="S4" label="rename"/>
+	<transition destination="S4" label="handleDownload"/>
+	<transition destination="S4" label="handleUpload"/>
   </state>
-  <state name="S511">
-    <enabled_label name="add"/>
-    <enabled_label name="hasNext"/>
-    <enabled_label name="hasPrevious"/>
-    <enabled_label name="next"/>
-    <enabled_label name="nextIndex"/>
-    <enabled_label name="previous"/>
-    <enabled_label name="previousIndex"/>
-    <enabled_label name="remove"/>
-    <enabled_label name="set"/>
-    <transition destination="S127" label="add"/>
-    <transition destination="S511" label="hasNext"/>
-    <transition destination="S511" label="hasPrevious"/>
-    <transition destination="S511" label="next"/>
-    <transition destination="S503" label="next"/>
-    <transition destination="S511" label="nextIndex"/>
-    <transition destination="S511" label="previous"/>
-    <transition destination="S479" label="previous"/>
-    <transition destination="S511" label="previousIndex"/>
-    <transition destination="S127" label="remove"/>
-    <transition destination="S95" label="remove"/>
-    <transition destination="S119" label="remove"/>
-    <transition destination="S511" label="set"/>
-  </state>
-  <state name="S503">
-    <enabled_label name="add"/>
-    <enabled_label name="hasNext"/>
-    <enabled_label name="hasPrevious"/>
-    <enabled_label name="nextIndex"/>
-    <enabled_label name="previous"/>
-    <enabled_label name="previousIndex"/>
-    <enabled_label name="remove"/>
-    <enabled_label name="set"/>
-    <transition destination="S119" label="add"/>
-    <transition destination="S503" label="hasNext"/>
-    <transition destination="S503" label="hasPrevious"/>
-    <transition destination="S503" label="nextIndex"/>
-    <transition destination="S511" label="previous"/>
-    <transition destination="S479" label="previous"/>
-    <transition destination="S503" label="previousIndex"/>
-    <transition destination="S119" label="remove"/>
-    <transition destination="S87" label="remove"/>
-    <transition destination="S503" label="set"/>
-    <!--
-	    <transition destination="S95" label="remove"/>
-    	<transition destination="S127" label="remove"/>
-	-->
-  </state>
-  <state name="S479">
-    <enabled_label name="add"/>
-    <enabled_label name="hasNext"/>
-    <enabled_label name="hasPrevious"/>
-    <enabled_label name="next"/>
-    <enabled_label name="nextIndex"/>
-    <enabled_label name="previousIndex"/>
-    <enabled_label name="remove"/>
-    <enabled_label name="set"/>
-    <transition destination="S479" label="hasNext"/>
-    <transition destination="S479" label="hasPrevious"/>
-    <transition destination="S511" label="next"/>
-    <transition destination="S503" label="next"/>
-    <transition destination="S479" label="nextIndex"/>
-    <transition destination="S479" label="previousIndex"/>
-    <transition destination="S95" label="remove"/>
-    <transition destination="S87" label="remove"/>
-    <transition destination="S479" label="set"/>
-    <transition destination="S127" label="add"/>
-    <!--
-	    <transition destination="S119" label="remove"/>
-    	<transition destination="S127" label="remove"/>
-    -->
   </state>
 </abstraction>

@@ -17,7 +17,7 @@ package com.example.sftpconnection;
 
 import java.util.Vector;
 
-public class Sftp2Connection implements MockBasicConnection {
+public class SftpConnection implements MockBasicConnection {
 	public static int smbBuffer = 32000;
 	private String path = "";
 	private String pwd = "/";
@@ -39,7 +39,7 @@ public class Sftp2Connection implements MockBasicConnection {
 	private MockSession session;
 	private MockChannelSftp channel;
 
-	public Sftp2Connection(String host, String port, String keyfile) {
+	public SftpConnection(String host, String port, String keyfile) {
 		this.host = host;
 		this.port = Integer.parseInt(port);
 		this.keyfile = keyfile;
@@ -709,7 +709,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		}
 	}
 
-	private void fireActionFinished(Sftp2Connection con) {
+	private void fireActionFinished(SftpConnection con) {
 		if (listeners == null) {
 			return;
 		} else {
@@ -800,6 +800,7 @@ public class Sftp2Connection implements MockBasicConnection {
 	// {
 	// return null;
 	// }
+	
 }
 
 class MyUserInfo {

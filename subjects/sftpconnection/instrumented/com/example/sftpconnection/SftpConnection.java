@@ -17,7 +17,10 @@ package com.example.sftpconnection;
 
 import java.util.Vector;
 
-public class Sftp2Connection implements MockBasicConnection {
+import org.evosuite.epa.EpaAction;
+import org.evosuite.epa.EpaState;
+
+public class SftpConnection implements MockBasicConnection {
 	public static int smbBuffer = 32000;
 	private String path = "";
 	private String pwd = "/";
@@ -39,7 +42,8 @@ public class Sftp2Connection implements MockBasicConnection {
 	private MockSession session;
 	private MockChannelSftp channel;
 
-	public Sftp2Connection(String host, String port, String keyfile) {
+	@EpaAction(name = "SftpConnection(String,String,String)")
+	public SftpConnection(String host, String port, String keyfile) {
 		this.host = host;
 		this.port = Integer.parseInt(port);
 		this.keyfile = keyfile;
@@ -74,6 +78,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		}
 	}
 
+	@EpaAction(name = "removeFileOrDir(String)")
 	public int removeFileOrDir(String file) {
 		file = toSFTP(file);
 
@@ -147,6 +152,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		// }
 	}
 
+	@EpaAction(name = "disconnect()")
 	public void disconnect() {
 		try {
 			channel.disconnect();
@@ -159,15 +165,18 @@ public class Sftp2Connection implements MockBasicConnection {
 		connected = false;
 	}
 
+	@EpaAction(name = "isConnected()")
 	public boolean isConnected() {
 		return connected;
 	}
 
+	@EpaAction(name = "getPWD()")
 	public String getPWD() {
 		// Log.debug("PWD: " + pwd);
 		return toSFTPDir(pwd);
 	}
 
+	@EpaAction(name = "mkdir(String)")
 	public boolean mkdir(String dirName) {
 		try {
 			if (!dirName.endsWith("/")) {
@@ -184,13 +193,16 @@ public class Sftp2Connection implements MockBasicConnection {
 		}
 	}
 
+	@EpaAction(name = "list()")
 	public void list() throws MockIOException {
 	}
 
+	@EpaAction(name = "chdir(String)")
 	public boolean chdir(String p) {
 		return chdir(p, true);
 	}
 
+	@EpaAction(name = "chdir(String,boolean)")
 	public boolean chdir(String p, boolean refresh) {
 		String tmp = toSFTP(p);
 
@@ -239,6 +251,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		return path;
 	}
 
+	@EpaAction(name = "setLocalPath(String)")
 	public boolean setLocalPath(String p) {
 		if (StringUtils.isRelative(p)) {
 			p = path + p;
@@ -273,6 +286,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		return true;
 	}
 
+	@EpaAction(name = "sortLs()")
 	public String[] sortLs() {
 		try {
 			// System.out.println(pwd);
@@ -325,14 +339,17 @@ public class Sftp2Connection implements MockBasicConnection {
 		return new String[0];
 	}
 
+	@EpaAction(name = "sortSize()")
 	public String[] sortSize() {
 		return size;
 	}
 
+	@EpaAction(name = "getPermissions()")
 	public int[] getPermissions() {
 		return perms;
 	}
 
+	@EpaAction(name = "handleUpload(String)")
 	public int handleUpload(String f) {
 		if (MockSettings.getEnableSftpMultiThreading()) {
 
@@ -345,6 +362,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		return 0;
 	}
 
+	@EpaAction(name = "handleDownload(String)")
 	public int handleDownload(String f) {
 		if (MockSettings.getEnableSftpMultiThreading()) {
 			MockSftp2Transfer t = new MockSftp2Transfer(getLocalPath(), getPWD(), f, user, pass, listeners, "DOWNLOAD",
@@ -356,6 +374,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		return 0;
 	}
 
+	@EpaAction(name = "upload(String)")
 	public int upload(String f) {
 		String file = toSFTP(f);
 
@@ -374,6 +393,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		return 0;
 	}
 
+	@EpaAction(name = "download(String)")
 	public int download(String f) {
 		String file = toSFTP(f);
 
@@ -622,6 +642,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		}
 	}
 
+	@EpaAction(name = "rename(String,String)")
 	public boolean rename(String oldName, String newName) {
 		try {
 			oldName = toSFTP(oldName);
@@ -650,10 +671,12 @@ public class Sftp2Connection implements MockBasicConnection {
 //		}
 //	}
 
+	@EpaAction(name = "addConnectionListener(Vector)")
 	public void addConnectionListener(ConnectionListener l) {
 		listeners.add(l);
 	}
 
+	@EpaAction(name = "setConnectionListeners(Vector)")
 	public void setConnectionListeners(Vector l) {
 		listeners = l;
 	}
@@ -669,6 +692,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		}
 	}
 
+	@EpaAction(name = "login(String,String)")
 	public boolean login(String user, String pass) {
 		this.user = user;
 		this.pass = pass;
@@ -709,7 +733,7 @@ public class Sftp2Connection implements MockBasicConnection {
 		}
 	}
 
-	private void fireActionFinished(Sftp2Connection con) {
+	private void fireActionFinished(SftpConnection con) {
 		if (listeners == null) {
 			return;
 		} else {
@@ -800,6 +824,34 @@ public class Sftp2Connection implements MockBasicConnection {
 	// {
 	// return null;
 	// }
+	
+	
+	
+	
+	/*
+	 * EPA States
+	 */
+	
+
+	@EpaState(name = "S1")
+	private boolean stateS1() {
+		return !this.connected && this.listeners.isEmpty();
+	}
+
+	@EpaState(name = "S2")
+	private boolean stateS2() {
+		return !this.connected && !this.listeners.isEmpty();
+	}
+
+	@EpaState(name = "S3")
+	private boolean stateS3() {
+		return this.connected && this.listeners.isEmpty();
+	}
+	
+	@EpaState(name = "S4")
+	private boolean stateS4() {
+		return this.connected && !this.listeners.isEmpty();
+	}
 }
 
 class MyUserInfo {
