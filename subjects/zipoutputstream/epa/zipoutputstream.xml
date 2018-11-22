@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abstraction initial_state="S0" input_format="code-with-pre" name="com.example.zipoutputstream.ZipOutputStream">
+    <label name="ZipOutputStream(OutputStream)" />
+    <label name="close()" />
+    <label name="closeEntry()" />
+    <label name="putNextEntry(ZipEntry)" />
+    <label name="write(byte[],int,int)" />
+    
+  <state name="S0">
+    <enabled_label name="ZipOutputStream(OutputStream)" />
+    <transition destination="S1" label="ZipOutputStream(OutputStream)" uncertain="false" violates_invariant="false" />
+  </state>
+
+  <state name="S1">
+    <enabled_label name="putNextEntry(ZipEntry)" />
+    <enabled_label name="closeEntry()" />
+    <transition destination="S3" label="putNextEntry(ZipEntry)" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="closeEntry()" uncertain="false" violates_invariant="false" />
+  </state>
+  
+  <state name="S2">
+    <enabled_label name="close()" />
+    <transition destination="S2" label="close()" uncertain="false" violates_invariant="false" />
+  </state>
+  
+  <state name="S3">
+    <enabled_label name="putNextEntry(ZipEntry)" />
+    <enabled_label name="closeEntry()" />
+    <enabled_label name="close()" />
+    <enabled_label name="write(byte[],int,int)" />
+    <transition destination="S3" label="putNextEntry(ZipEntry)" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="closeEntry()" uncertain="false" violates_invariant="false" />
+    <transition destination="S3" label="write(byte[],int,int)" uncertain="false" violates_invariant="false" />
+    <transition destination="S2" label="close()" uncertain="false" violates_invariant="false" />
+  </state>
+  
+</abstraction>
