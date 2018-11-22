@@ -7,19 +7,16 @@
 
 package com.example.zipoutputstream;
 
-import java.io.OutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 import java.util.HashSet;
-
 import java.util.zip.ZipException;
 
 import org.evosuite.epa.EpaAction;
 import org.evosuite.epa.EpaState;
 
-import java.util.zip.Deflater;
 import java.util.zip.CRC32;
+//import java.util.zip.Deflater;
 
 /**
  * This class implements an output stream filter for writing files in the ZIP
@@ -28,14 +25,14 @@ import java.util.zip.CRC32;
  * @author David Connelly
  * @version 1.36, 03/23/10
  */
-public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConstants {
+public class ZipOutputStream extends MockDeflaterOutputStream implements MockZipConstants {
 
 	private static class XEntry {
-		public final ZipEntry entry;
+		public final MockZipEntry entry;
 		public final long offset;
 		public final int flag;
 
-		public XEntry(ZipEntry entry, long offset) {
+		public XEntry(MockZipEntry entry, long offset) {
 			this.entry = entry;
 			this.offset = offset;
 			this.flag = (entry.method == DEFLATED && (entry.size == -1 || entry.csize == -1 || entry.crc == -1))
@@ -59,9 +56,9 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 //	private boolean finished;
 
 	private boolean closed = false;
-	private ByteArrayOutputStream byteArrayOutputStream;
+	private MockByteArrayOutputStream byteArrayOutputStream;
 
-	private static int version(ZipEntry e) throws ZipException {
+	private static int version(MockZipEntry e) throws ZipException {
 		switch (e.method) {
 		case DEFLATED:
 			return 20;
@@ -84,12 +81,12 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	/**
 	 * Compression method for uncompressed (STORED) entries.
 	 */
-	public static final int STORED = ZipEntry.STORED;
+	public static final int STORED = MockZipEntry.STORED;
 
 	/**
 	 * Compression method for compressed (DEFLATED) entries.
 	 */
-	public static final int DEFLATED = ZipEntry.DEFLATED;
+	public static final int DEFLATED = MockZipEntry.DEFLATED;
 
 	/**
 	 * Creates a new ZIP output stream.
@@ -99,9 +96,9 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	 */
 	@EpaAction(name = "ZipOutputStream(OutputStream)")
 	public ZipOutputStream() {
-		super(new ByteArrayOutputStream(), new Deflater(Deflater.DEFAULT_COMPRESSION, true));
+		super(new MockByteArrayOutputStream(), new MockDeflater(MockDeflater.DEFAULT_COMPRESSION, true));
 		usesDefaultDeflater = true;
-		this.byteArrayOutputStream = (ByteArrayOutputStream) this.out;
+		this.byteArrayOutputStream = (MockByteArrayOutputStream) this.out;
 	}
 
 	/**
@@ -168,7 +165,7 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	 *                if an I/O error has occurred
 	 */
 	@EpaAction(name = "putNextEntry(ZipEntry)")
-	public void putNextEntry(ZipEntry e) throws IOException {
+	public void putNextEntry(MockZipEntry e) throws IOException {
 		ensureOpen();
 		if (current != null) {
 			closeEntry0(); // close previous entry
@@ -224,7 +221,7 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	private void closeEntry0() throws IOException {
 		ensureOpen();
 		if (current != null) {
-			ZipEntry e = current.entry;
+			MockZipEntry e = current.entry;
 			switch (e.method) {
 			case DEFLATED:
 				deflater_finish();
@@ -300,7 +297,7 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 		if (current == null) {
 			throw new ZipException("no current ZIP entry");
 		}
-		ZipEntry entry = current.entry;
+		MockZipEntry entry = current.entry;
 		switch (entry.method) {
 		case DEFLATED:
 			super.write(b, off, len);
@@ -368,7 +365,7 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	 * Writes local file (LOC) header for specified entry.
 	 */
 	private void writeLOC(XEntry xentry) throws IOException {
-		ZipEntry e = xentry.entry;
+		MockZipEntry e = xentry.entry;
 		int flag = xentry.flag;
 		writeInt(LOCSIG); // LOC header signature
 		writeShort(version(e)); // version needed to extract
@@ -399,7 +396,7 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	/*
 	 * Writes extra data descriptor (EXT) for specified entry.
 	 */
-	private void writeEXT(ZipEntry e) throws IOException {
+	private void writeEXT(MockZipEntry e) throws IOException {
 		writeInt(EXTSIG); // EXT header signature
 		writeInt(e.crc); // crc-32
 		writeInt(e.csize); // compressed size
@@ -472,7 +469,7 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	 * Writes a 16-bit short to the output stream in little-endian byte order.
 	 */
 	private void writeShort(int v) throws IOException {
-		OutputStream out = this.out;
+		MockOutputStream out = this.out;
 		out.write((v >>> 0) & 0xff);
 		out.write((v >>> 8) & 0xff);
 		written += 2;
@@ -482,7 +479,7 @@ public class ZipOutputStream extends MyDeflaterOutputStream implements ZipConsta
 	 * Writes a 32-bit int to the output stream in little-endian byte order.
 	 */
 	private void writeInt(long v) throws IOException {
-		OutputStream out = this.out;
+		MockOutputStream out = this.out;
 		out.write((int) ((v >>> 0) & 0xff));
 		out.write((int) ((v >>> 8) & 0xff));
 		out.write((int) ((v >>> 16) & 0xff));

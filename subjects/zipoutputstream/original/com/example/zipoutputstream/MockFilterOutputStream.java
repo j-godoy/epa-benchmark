@@ -1,13 +1,12 @@
 package com.example.zipoutputstream;
 
 import java.io.IOException;
-import java.io.OutputStream;
 
-public class MyFilterOutputStream extends MyOutputStream {
+public class MockFilterOutputStream extends MockOutputStream {
 	/**
 	 * The underlying output stream to be filtered.
 	 */
-	protected OutputStream out;
+	protected MockOutputStream out;
 
 	/**
 	 * Creates an output stream filter built on top of the specified underlying
@@ -18,7 +17,7 @@ public class MyFilterOutputStream extends MyOutputStream {
 	 *            <tt>this.out</tt> for later use, or <code>null</code> if this
 	 *            instance is to be created without an underlying stream.
 	 */
-	public MyFilterOutputStream(OutputStream out) {
+	public MockFilterOutputStream(MockOutputStream out) {
 		this.out = out;
 	}
 
@@ -122,7 +121,7 @@ public class MyFilterOutputStream extends MyOutputStream {
 	 */
 	@SuppressWarnings("try")
 	public void close() throws IOException {
-		OutputStream ostream = out;
+		MockOutputStream ostream = out;
 		try {
 			flush();
 		} catch (Exception e) {

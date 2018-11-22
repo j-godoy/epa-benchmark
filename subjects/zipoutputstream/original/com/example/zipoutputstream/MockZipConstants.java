@@ -14,7 +14,7 @@ package com.example.zipoutputstream;
  * @version	1.20, 03/23/10
  * @author	David Connelly
  */
-interface ZipConstants {
+interface MockZipConstants {
     /*
      * Header signatures
      */

@@ -4,7 +4,7 @@ import java.io.Closeable;
 import java.io.Flushable;
 import java.io.IOException;
 
-public abstract class MyOutputStream implements Closeable, Flushable {
+public abstract class MockOutputStream implements Closeable, Flushable {
 	/**
 	 * Writes the specified byte to this output stream. The general contract for
 	 * <code>write</code> is that one byte is written to the output stream. The

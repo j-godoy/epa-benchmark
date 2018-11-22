@@ -15,7 +15,7 @@ import java.util.Date;
  * @version 1.43, 03/23/10
  * @author David Connelly
  */
-public class ZipEntry implements ZipConstants, Cloneable {
+public class MockZipEntry implements MockZipConstants, Cloneable {
 	String name; // entry name
 	long time = -1; // modification time (in DOS time)
 	long crc = -1; // crc-32 of entry data
@@ -52,7 +52,7 @@ public class ZipEntry implements ZipConstants, Cloneable {
 	 * @exception IllegalArgumentException
 	 *                if the entry name is longer than 0xFFFF bytes
 	 */
-	public ZipEntry(String name) {
+	public MockZipEntry(String name) {
 		if (name == null) {
 			throw new NullPointerException();
 		}
@@ -68,7 +68,7 @@ public class ZipEntry implements ZipConstants, Cloneable {
 	 * @param e
 	 *            a zip Entry object
 	 */
-	public ZipEntry(ZipEntry e) {
+	public MockZipEntry(MockZipEntry e) {
 		name = e.name;
 		time = e.time;
 		crc = e.crc;
@@ -330,7 +330,7 @@ public class ZipEntry implements ZipConstants, Cloneable {
 	 */
 	public Object clone() {
 		try {
-			ZipEntry e = (ZipEntry) super.clone();
+			MockZipEntry e = (MockZipEntry) super.clone();
 			e.extra = (extra == null ? null : (byte[]) extra.clone());
 			return e;
 		} catch (CloneNotSupportedException e) {
