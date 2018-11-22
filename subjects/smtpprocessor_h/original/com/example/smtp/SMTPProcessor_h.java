@@ -57,10 +57,10 @@ import java.text.SimpleDateFormat;
  * @author Eric Daugherty
  * @author Andreas Kyrmegalos (2.x branch)
  */
-public class SMTPProcessor {
+public class SMTPProcessor_h {
 
 //    /** Logger Category for this class. */
-    private static final MockLog log = MockLogFactory.getLog( SMTPProcessor.class.getName() );
+    private static final MockLog log = MockLogFactory.getLog( SMTPProcessor_h.class.getName() );
 
     //***************************************************************
     // Variables
@@ -150,7 +150,7 @@ public class SMTPProcessor {
     // Public Interface
     //***************************************************************
 
-    public SMTPProcessor() {
+    public SMTPProcessor_h() {
     	setupVerifyIP();
     	this.setSocket(new MockServerSocket());
 		this.lastCommand = NONE;
