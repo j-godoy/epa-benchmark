@@ -37,9 +37,9 @@
     <enabled_label name="addConnectionListener"/>
     <enabled_label name="getPWD"/>
 	<enabled_label name="login"/>
-    <transition destination="S2" label="add"/>
-    <transition destination="S2" label="hasNext"/>
-    <transition destination="S4" label="hasPrevious"/>
+    <transition destination="S2" label="addConnectionListener"/>
+    <transition destination="S2" label="getPWD"/>
+    <transition destination="S4" label="login"/>
   </state>
   
   <state name="S3">
@@ -89,6 +89,5 @@
 	<transition destination="S4" label="rename"/>
 	<transition destination="S4" label="handleDownload"/>
 	<transition destination="S4" label="handleUpload"/>
-  </state>
   </state>
 </abstraction>

@@ -1,7 +1,7 @@
 package com.example.sftpconnection;
 
 public class MockFile {
-	private String path; 
+	private String path;
 
 	public MockFile(String p) {
 		this.path = p;

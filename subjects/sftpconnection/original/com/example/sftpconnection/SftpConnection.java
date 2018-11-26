@@ -18,12 +18,12 @@ package com.example.sftpconnection;
 import java.util.Vector;
 
 public class SftpConnection implements MockBasicConnection {
-	public static int smbBuffer = 32000;
+	public final static int smbBuffer = 32000;
 	private String path = "";
 	private String pwd = "/";
 	@SuppressWarnings("rawtypes")
 	private Vector listeners = new Vector();
-//	private String[] files;
+	// private String[] files;
 	private String[] size = new String[0];
 	private int[] perms = null;
 	private String user;
@@ -164,7 +164,6 @@ public class SftpConnection implements MockBasicConnection {
 	}
 
 	public String getPWD() {
-		// Log.debug("PWD: " + pwd);
 		return toSFTPDir(pwd);
 	}
 
@@ -179,7 +178,6 @@ public class SftpConnection implements MockBasicConnection {
 
 			return true;
 		} catch (Exception ex) {
-			// Log.debug("Failed to create directory (" + ex + ").");
 			return false;
 		}
 	}
@@ -639,16 +637,16 @@ public class SftpConnection implements MockBasicConnection {
 		}
 	}
 
-//	private void update(String file, String type, int bytes) {
-//		if (listeners == null) {
-//			return;
-//		} else {
-//			for (int i = 0; i < listeners.size(); i++) {
-//				ConnectionListener listener = (ConnectionListener) listeners.elementAt(i);
-//				listener.updateProgress(file, type, bytes);
-//			}
-//		}
-//	}
+	// private void update(String file, String type, int bytes) {
+	// if (listeners == null) {
+	// return;
+	// } else {
+	// for (int i = 0; i < listeners.size(); i++) {
+	// ConnectionListener listener = (ConnectionListener) listeners.elementAt(i);
+	// listener.updateProgress(file, type, bytes);
+	// }
+	// }
+	// }
 
 	public void addConnectionListener(ConnectionListener l) {
 		listeners.add(l);
@@ -719,65 +717,65 @@ public class SftpConnection implements MockBasicConnection {
 		}
 	}
 
-	public int upload(String file, MockInputStream i) {
-		MockBufferedOutputStream out = null;
-		MockBufferedInputStream in = null;
-
-		try {
-			file = toSFTP(file);
-
-			out = new MockBufferedOutputStream(channel.put(file));
-			in = new MockBufferedInputStream(i);
-
-			// Log.debug(getLocalPath() + ":" + file+ ":"+getPWD());
-			byte[] buf = new byte[smbBuffer];
-			int len = 0;
-			int reallen = 0;
-
-			// while (true) {
-			len = in.read(buf);
-
-			// System.out.print(".");
-			// if (len == StreamTokenizer.TT_EOF) {
-			// break;
-			// }
-
-			out.write(buf, 0, len);
-			reallen += len;
-
-			// fireProgressUpdate(StringUtils.getFile(file), DataConnection.PUT, reallen);
-			// }
-
-			// channel.chmod(744, file);
-
-			fireProgressUpdate(file, MockDataConnection.FINISHED, -1);
-
-			return 0;
-		}
-		// catch(MockIOException ex)
-		// {
-		// ex.printStackTrace();
-		//// Log.debug("Error with file IO (" + ex + ")!");
-		// fireProgressUpdate(file, DataConnection.FAILED, -1);
-		//
-		// return -1;
-		// }
-		catch (MockSftpException ex) {
-			ex.printStackTrace();
-			// Log.debug("Error with file SFTP IO (" + ex + ")!");
-			fireProgressUpdate(file, MockDataConnection.FAILED, -1);
-
-			return -1;
-		} finally {
-			try {
-				out.flush();
-				out.close();
-				in.close();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-	}
+//	private int upload(String file, MockInputStream i) {
+//		MockBufferedOutputStream out = null;
+//		MockBufferedInputStream in = null;
+//
+//		try {
+//			file = toSFTP(file);
+//
+//			out = new MockBufferedOutputStream(channel.put(file));
+//			in = new MockBufferedInputStream(i);
+//
+//			// Log.debug(getLocalPath() + ":" + file+ ":"+getPWD());
+//			byte[] buf = new byte[smbBuffer];
+//			int len = 0;
+//			int reallen = 0;
+//
+//			// while (true) {
+//			len = in.read(buf);
+//
+//			// System.out.print(".");
+//			// if (len == StreamTokenizer.TT_EOF) {
+//			// break;
+//			// }
+//
+//			out.write(buf, 0, len);
+//			reallen += len;
+//
+//			// fireProgressUpdate(StringUtils.getFile(file), DataConnection.PUT, reallen);
+//			// }
+//
+//			// channel.chmod(744, file);
+//
+//			fireProgressUpdate(file, MockDataConnection.FINISHED, -1);
+//
+//			return 0;
+//		}
+//		// catch(MockIOException ex)
+//		// {
+//		// ex.printStackTrace();
+//		//// Log.debug("Error with file IO (" + ex + ")!");
+//		// fireProgressUpdate(file, DataConnection.FAILED, -1);
+//		//
+//		// return -1;
+//		// }
+//		catch (MockSftpException ex) {
+//			ex.printStackTrace();
+//			// Log.debug("Error with file SFTP IO (" + ex + ")!");
+//			fireProgressUpdate(file, MockDataConnection.FAILED, -1);
+//
+//			return -1;
+//		} finally {
+//			try {
+//				out.flush();
+//				out.close();
+//				in.close();
+//			} catch (Exception ex) {
+//				ex.printStackTrace();
+//			}
+//		}
+//	}
 
 	// public InputStream getDownloadInputStream(String file)
 	// {
@@ -800,7 +798,26 @@ public class SftpConnection implements MockBasicConnection {
 	// {
 	// return null;
 	// }
-	
+
+	/*
+	 * EPA States
+	 */
+
+	private boolean stateS1() {
+		return !this.connected && this.listeners.isEmpty();
+	}
+
+	private boolean stateS2() {
+		return !this.connected && !this.listeners.isEmpty();
+	}
+
+	private boolean stateS3() {
+		return this.connected && this.listeners.isEmpty();
+	}
+
+	private boolean stateS4() {
+		return this.connected && !this.listeners.isEmpty();
+	}
 }
 
 class MyUserInfo {
@@ -813,16 +830,6 @@ class MyUserInfo {
 
 	public String getPassword() {
 		return password;
-	}
-
-	public boolean promptYesNo(String str) {
-		/*
-		 * Object[] options={ "yes", "no" }; int foo=JOptionPane.showOptionDialog(null,
-		 * str, "Warning", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-		 * null, options, options[0]); return foo==0;
-		 */
-
-		return true;
 	}
 
 	public String getPassphrase() {

@@ -17,206 +17,205 @@ package com.example.sftpconnection;
 
 import java.util.Vector;
 
-
 /**
  * Interface for all connection types
  */
-public interface MockBasicConnection
-{
-	
-    /**
-     * Some Connections like FTP may allow raw command to be sent, use this method.
-     * 
-     * Implementation is optional.
-     * 
-     * @param cmd
-     */
-//    public void sendRawCommand(String cmd);
+public interface MockBasicConnection {
 
-    //public boolean login(String user, String pass);
-    
-    /**
-     * Teminates the connection if necessary.
-     * 
-     */
-    public void disconnect();
+	/**
+	 * Some Connections like FTP may allow raw command to be sent, use this method.
+	 * 
+	 * Implementation is optional.
+	 * 
+	 * @param cmd
+	 */
+	// public void sendRawCommand(String cmd);
 
-    /**
-     * Shows if the Connection is alive and initialized.
-     * 
-     * @return
-     */
-    public boolean isConnected();
+	// public boolean login(String user, String pass);
 
-    /**
-     * Get the current working dir.
-     * 
-     * @return
-     */
-    public String getPWD();
+	/**
+	 * Teminates the connection if necessary.
+	 * 
+	 */
+	public void disconnect();
 
-    /**
-     * Go up one directory if possible.
-     * 
-     * @return
-     */
-//    public boolean cdup();
+	/**
+	 * Shows if the Connection is alive and initialized.
+	 * 
+	 * @return
+	 */
+	public boolean isConnected();
 
-    /**
-     * Create a new directory.
-     * 
-     * @param dirName
-     * @return
-     */
-    public boolean mkdir(String dirName);
-    
-    /**
-     * Rename a file or directory.
-     * 
-     * @param from
-     * @param to
-     * @return
-     */
-    public boolean rename(String from, String to);
+	/**
+	 * Get the current working dir.
+	 * 
+	 * @return
+	 */
+	public String getPWD();
 
-    /**
-     * Perform any necessary actions so sortLs, sortSize and sortDates are up-to-date.
-     * 
-     * Implementation is optional.
-     * 
-     * @throws MockIOException 
-     */
-    public void list() throws MockIOException;
+	/**
+	 * Go up one directory if possible.
+	 * 
+	 * @return
+	 */
+	// public boolean cdup();
 
-    /**
-     * Change dircetory and inform listeners.
-     * 
-     * @param p
-     * @return
-     */
-    public boolean chdir(String p);
+	/**
+	 * Create a new directory.
+	 * 
+	 * @param dirName
+	 * @return
+	 */
+	public boolean mkdir(String dirName);
 
-    /**
-     * Change directory, but do not trigger an event for the listeners.
-     * 
-     * @param p
-     * @return
-     */
-//    public boolean chdirNoRefresh(String p);
+	/**
+	 * Rename a file or directory.
+	 * 
+	 * @param from
+	 * @param to
+	 * @return
+	 */
+	public boolean rename(String from, String to);
 
-    /**
-     * Get the path downloaded to.
-     * 
-     * @return
-     */
-//    public String getLocalPath();
+	/**
+	 * Perform any necessary actions so sortLs, sortSize and sortDates are
+	 * up-to-date.
+	 * 
+	 * Implementation is optional.
+	 * 
+	 * @throws MockIOException
+	 */
+	public void list() throws MockIOException;
 
-    /**
-     * Set the path downloded to.
-     * 
-     * @param newPath
-     * @return
-     */
-    public boolean setLocalPath(String newPath);
+	/**
+	 * Change dircetory and inform listeners.
+	 * 
+	 * @param p
+	 * @return
+	 */
+	public boolean chdir(String p);
 
-    /**
-     * Get file and diretory names.
-     * 
-     * @return
-     */
-    public String[] sortLs();
+	/**
+	 * Change directory, but do not trigger an event for the listeners.
+	 * 
+	 * @param p
+	 * @return
+	 */
+	// public boolean chdirNoRefresh(String p);
 
-    /**
-     * Get file sizes.
-     * 
-     * @return
-     */
-    public String[] sortSize();
+	/**
+	 * Get the path downloaded to.
+	 * 
+	 * @return
+	 */
+	// public String getLocalPath();
 
-    /**
-     * Get file dates.
-     * 
-     * @return
-     */
-//    public Date[] sortDates();
+	/**
+	 * Set the path downloded to.
+	 * 
+	 * @param newPath
+	 * @return
+	 */
+	public boolean setLocalPath(String newPath);
 
-    /**
-     * Get file/dir permissions.
-     * 
-     * @return
-     */
-    public int[] getPermissions();
+	/**
+	 * Get file and diretory names.
+	 * 
+	 * @return
+	 */
+	public String[] sortLs();
 
-    /**
-     * Initiate a download, possibly non-blocking and in a new thread.
-     * 
-     * @param file
-     * @return
-     */
-    public int handleDownload(String file);
-    
-    /**
-     * Initiate an upload, possibly non-blocking and in a new thread.
-     * 
-     * @param file
-     * @return
-     */
-    public int handleUpload(String file);
+	/**
+	 * Get file sizes.
+	 * 
+	 * @return
+	 */
+	public String[] sortSize();
 
-    /**
-     * Initiate a download in the same thread.
-     * 
-     * @param file
-     * @return
-     */
-    public int download(String file);
+	/**
+	 * Get file dates.
+	 * 
+	 * @return
+	 */
+	// public Date[] sortDates();
 
-    /**
-     * Initiate an upload in the same thread.
-     * 
-     * @param file
-     * @return
-     */    
-    public int upload(String file);
+	/**
+	 * Get file/dir permissions.
+	 * 
+	 * @return
+	 */
+	public int[] getPermissions();
 
-    /**
-     * Initiate a download in the same thread.
-     * 
-     * The InptuStream provides the date, file the remote file name.
-     * 
-     * @param file
-     * @return
-     */    
-    public int upload(String file, MockInputStream in);
+	/**
+	 * Initiate a download, possibly non-blocking and in a new thread.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public int handleDownload(String file);
 
-    /**
-     * Initiate a download and return the content in form of an InputStream.
-     * 
-     * @param file
-     * @return
-     */
-//    public InputStream getDownloadInputStream(String file);
+	/**
+	 * Initiate an upload, possibly non-blocking and in a new thread.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public int handleUpload(String file);
 
-    /**
-     * Remove the given item, recursively if necessary.
-     * 
-     * @param file
-     * @return
-     */
-    public int removeFileOrDir(String file);
+	/**
+	 * Initiate a download in the same thread.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public int download(String file);
 
-    /**
-     * Add a ConnectionListener to be notified about progress and events.
-     * 
-     * @param listener
-     */
-    public void addConnectionListener(ConnectionListener listener);
+	/**
+	 * Initiate an upload in the same thread.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public int upload(String file);
 
-    /**
-     * Remove a ConnectionListener.
-     * 
-     * @param listeners
-     */
-    public void setConnectionListeners(Vector<ConnectionListener> listeners);
+	/**
+	 * Initiate a download in the same thread.
+	 * 
+	 * The InptuStream provides the date, file the remote file name.
+	 * 
+	 * @param file
+	 * @return
+	 */
+//	public int upload(String file, MockInputStream in);
+
+	/**
+	 * Initiate a download and return the content in form of an InputStream.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	// public InputStream getDownloadInputStream(String file);
+
+	/**
+	 * Remove the given item, recursively if necessary.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public int removeFileOrDir(String file);
+
+	/**
+	 * Add a ConnectionListener to be notified about progress and events.
+	 * 
+	 * @param listener
+	 */
+	public void addConnectionListener(ConnectionListener listener);
+
+	/**
+	 * Remove a ConnectionListener.
+	 * 
+	 * @param listeners
+	 */
+	public void setConnectionListeners(Vector<ConnectionListener> listeners);
 
 }

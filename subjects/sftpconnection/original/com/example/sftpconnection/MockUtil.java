@@ -19,11 +19,11 @@ public class MockUtil {
 	static String byte2str(byte[] str, int s, int l) {
 		return byte2str(str, s, l, "UTF-8");
 	}
-	
-	static String byte2str(byte[] str){
-	    return byte2str(str, 0, str.length, "UTF-8");
-	  }
-	
+
+	static String byte2str(byte[] str) {
+		return byte2str(str, 0, str.length, "UTF-8");
+	}
+
 	static String byte2str(byte[] str, String encoding) {
 		return byte2str(str, 0, str.length, encoding);
 	}
@@ -40,9 +40,9 @@ public class MockUtil {
 		return str2byte(str, "UTF-8");
 	}
 
-//	public static String getFingerPrint(MockHASH hash, byte[] hostKey) {
-//		return null;
-//	}
+	// public static String getFingerPrint(MockHASH hash, byte[] hostKey) {
+	// return null;
+	// }
 
 	static void bzero(byte[] foo) {
 		if (foo == null)
@@ -55,8 +55,8 @@ public class MockUtil {
 		return newpath;
 	}
 
-	public static boolean glob(byte[] pattern, byte[] str2byte) {
-		return false;
-	}
+	// public static boolean glob(byte[] pattern, byte[] str2byte) {
+	// return false;
+	// }
 
 }

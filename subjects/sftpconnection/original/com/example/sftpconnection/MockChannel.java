@@ -24,7 +24,6 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package com.example.sftpconnection;
 
-import java.io.OutputStream;
 import java.io.IOException;
 
 public abstract class MockChannel {
@@ -130,8 +129,8 @@ public abstract class MockChannel {
 
 	synchronized void setRecipient(int foo) {
 		this.recipient = foo;
-		if (notifyme > 0)
-			notifyAll();
+		// if (notifyme > 0)
+		// notifyAll();
 	}
 
 	int getRecipient() {
@@ -159,275 +158,268 @@ public abstract class MockChannel {
 		}
 	}
 
-	public void setXForwarding(boolean foo) {
-	}
-
 	public void start() throws MockJSchException {
 	}
 
-	public boolean isEOF() {
-		return eof_remote;
-	}
+	// public void setInputStream(InputStream in) {
+	// io.setInputStream(in, false);
+	// }
+	//
+	// public void setInputStream(InputStream in, boolean dontclose) {
+	// io.setInputStream(in, dontclose);
+	// }
+	//
+	// public void setOutputStream(OutputStream out) {
+	// io.setOutputStream(out, false);
+	// }
+	//
+	// public void setOutputStream(OutputStream out, boolean dontclose) {
+	// io.setOutputStream(out, dontclose);
+	// }
+	//
+	// public void setExtOutputStream(OutputStream out) {
+	// io.setExtOutputStream(out, false);
+	// }
+	//
+	// public void setExtOutputStream(OutputStream out, boolean dontclose) {
+	// io.setExtOutputStream(out, dontclose);
+	// }
+	//
+	// public InputStream getInputStream() throws IOException {
+	// int max_input_buffer_size = 32 * 1024;
+	// try {
+	// max_input_buffer_size =
+	// Integer.parseInt(getSession().getConfig("max_input_buffer_size"));
+	// } catch (Exception e) {
+	// }
+	// PipedInputStream in = new MyPipedInputStream(32 * 1024, // this value should
+	// be customizable.
+	// max_input_buffer_size);
+	// boolean resizable = 32 * 1024 < max_input_buffer_size;
+	// io.setOutputStream(new PassiveOutputStream(in, resizable), false);
+	// return in;
+	// }
+	//
+	// public InputStream getExtInputStream() throws IOException {
+	// int max_input_buffer_size = 32 * 1024;
+	// try {
+	// max_input_buffer_size =
+	// Integer.parseInt(getSession().getConfig("max_input_buffer_size"));
+	// } catch (Exception e) {
+	// }
+	// PipedInputStream in = new MyPipedInputStream(32 * 1024, // this value should
+	// be customizable.
+	// max_input_buffer_size);
+	// boolean resizable = 32 * 1024 < max_input_buffer_size;
+	// io.setExtOutputStream(new PassiveOutputStream(in, resizable), false);
+	// return in;
+	// }
 
-	void getData(Buffer buf) {
-		setRecipient(buf.getInt());
-		setRemoteWindowSize(buf.getUInt());
-		setRemotePacketSize(buf.getInt());
-	}
+	// public MockOutputStream getOutputStream() throws IOException {
+	//
+	// final MockChannel channel = this;
+	// MockOutputStream out = new MockOutputStream() {
+	// private int dataLen = 0;
+	// private Buffer buffer = null;
+	// private MockPacket packet = null;
+	// private boolean closed = false;
+	//
+	// private synchronized void init() throws java.io.IOException {
+	// buffer = new Buffer(rmpsize);
+	// packet = new MockPacket(buffer);
+	//
+	// byte[] _buf = buffer.buffer;
+	// if (_buf.length - (14 + 0) - MockSession.buffer_margin <= 0) {
+	// buffer = null;
+	// packet = null;
+	// throw new IOException("failed to initialize the channel.");
+	// }
+	//
+	// }
+	//
+	// // byte[] b = new byte[1];
+	//
+	// // public void write(int w) throws java.io.IOException {
+	// // b[0] = (byte) w;
+	// // write(b, 0, 1);
+	// // }
+	//
+	// // public void write(byte[] buf, int s, int l) throws java.io.IOException {
+	// // if (packet == null) {
+	// // init();
+	// // }
+	// //
+	// // if (closed) {
+	// // throw new java.io.IOException("Already closed");
+	// // }
+	// //
+	// // byte[] _buf = buffer.buffer;
+	// // int _bufl = _buf.length;
+	// // while (l > 0) {
+	// // int _l = l;
+	// // if (l > _bufl - (14 + dataLen) - MockSession.buffer_margin) {
+	// // _l = _bufl - (14 + dataLen) - MockSession.buffer_margin;
+	// // }
+	// //
+	// // if (_l <= 0) {
+	// // flush();
+	// // continue;
+	// // }
+	// //
+	// // System.arraycopy(buf, s, _buf, 14 + dataLen, _l);
+	// // dataLen += _l;
+	// // s += _l;
+	// // l -= _l;
+	// // }
+	// // }
+	//
+	// public void flush() throws java.io.IOException {
+	// if (closed) {
+	// throw new java.io.IOException("Already closed");
+	// }
+	// if (dataLen == 0)
+	// return;
+	// packet.reset();
+	// buffer.putByte((byte) MockSession.SSH_MSG_CHANNEL_DATA);
+	// buffer.putInt(recipient);
+	// buffer.putInt(dataLen);
+	// buffer.skip(dataLen);
+	// try {
+	// int foo = dataLen;
+	// dataLen = 0;
+	// synchronized (channel) {
+	// if (!channel.close)
+	// getSession().write(packet, channel, foo);
+	// }
+	// } catch (Exception e) {
+	// close();
+	// throw new java.io.IOException(e.toString());
+	// }
+	//
+	// }
+	//
+	// public void close() throws java.io.IOException {
+	// if (packet == null) {
+	// try {
+	// init();
+	// } catch (java.io.IOException e) {
+	// // close should be finished silently.
+	// return;
+	// }
+	// }
+	// if (closed) {
+	// return;
+	// }
+	// if (dataLen > 0) {
+	// flush();
+	// }
+	// channel.eof();
+	// closed = true;
+	// }
+	// };
+	// return out;
+	// }
 
-//	public void setInputStream(InputStream in) {
-//		io.setInputStream(in, false);
-//	}
-//
-//	public void setInputStream(InputStream in, boolean dontclose) {
-//		io.setInputStream(in, dontclose);
-//	}
-//
-//	public void setOutputStream(OutputStream out) {
-//		io.setOutputStream(out, false);
-//	}
-//
-//	public void setOutputStream(OutputStream out, boolean dontclose) {
-//		io.setOutputStream(out, dontclose);
-//	}
-//
-//	public void setExtOutputStream(OutputStream out) {
-//		io.setExtOutputStream(out, false);
-//	}
-//
-//	public void setExtOutputStream(OutputStream out, boolean dontclose) {
-//		io.setExtOutputStream(out, dontclose);
-//	}
-//
-//	public InputStream getInputStream() throws IOException {
-//		int max_input_buffer_size = 32 * 1024;
-//		try {
-//			max_input_buffer_size = Integer.parseInt(getSession().getConfig("max_input_buffer_size"));
-//		} catch (Exception e) {
-//		}
-//		PipedInputStream in = new MyPipedInputStream(32 * 1024, // this value should be customizable.
-//				max_input_buffer_size);
-//		boolean resizable = 32 * 1024 < max_input_buffer_size;
-//		io.setOutputStream(new PassiveOutputStream(in, resizable), false);
-//		return in;
-//	}
-//
-//	public InputStream getExtInputStream() throws IOException {
-//		int max_input_buffer_size = 32 * 1024;
-//		try {
-//			max_input_buffer_size = Integer.parseInt(getSession().getConfig("max_input_buffer_size"));
-//		} catch (Exception e) {
-//		}
-//		PipedInputStream in = new MyPipedInputStream(32 * 1024, // this value should be customizable.
-//				max_input_buffer_size);
-//		boolean resizable = 32 * 1024 < max_input_buffer_size;
-//		io.setExtOutputStream(new PassiveOutputStream(in, resizable), false);
-//		return in;
-//	}
-
-	public OutputStream getOutputStream() throws IOException {
-
-		final MockChannel channel = this;
-		OutputStream out = new OutputStream() {
-			private int dataLen = 0;
-			private Buffer buffer = null;
-			private MockPacket packet = null;
-			private boolean closed = false;
-
-			private synchronized void init() throws java.io.IOException {
-				buffer = new Buffer(rmpsize);
-				packet = new MockPacket(buffer);
-
-				byte[] _buf = buffer.buffer;
-				if (_buf.length - (14 + 0) - MockSession.buffer_margin <= 0) {
-					buffer = null;
-					packet = null;
-					throw new IOException("failed to initialize the channel.");
-				}
-
-			}
-
-			byte[] b = new byte[1];
-
-			public void write(int w) throws java.io.IOException {
-				b[0] = (byte) w;
-				write(b, 0, 1);
-			}
-
-			public void write(byte[] buf, int s, int l) throws java.io.IOException {
-				if (packet == null) {
-					init();
-				}
-
-				if (closed) {
-					throw new java.io.IOException("Already closed");
-				}
-
-				byte[] _buf = buffer.buffer;
-				int _bufl = _buf.length;
-				while (l > 0) {
-					int _l = l;
-					if (l > _bufl - (14 + dataLen) - MockSession.buffer_margin) {
-						_l = _bufl - (14 + dataLen) - MockSession.buffer_margin;
-					}
-
-					if (_l <= 0) {
-						flush();
-						continue;
-					}
-
-					System.arraycopy(buf, s, _buf, 14 + dataLen, _l);
-					dataLen += _l;
-					s += _l;
-					l -= _l;
-				}
-			}
-
-			public void flush() throws java.io.IOException {
-				if (closed) {
-					throw new java.io.IOException("Already closed");
-				}
-				if (dataLen == 0)
-					return;
-				packet.reset();
-				buffer.putByte((byte) MockSession.SSH_MSG_CHANNEL_DATA);
-				buffer.putInt(recipient);
-				buffer.putInt(dataLen);
-				buffer.skip(dataLen);
-				try {
-					int foo = dataLen;
-					dataLen = 0;
-					synchronized (channel) {
-						if (!channel.close)
-							getSession().write(packet, channel, foo);
-					}
-				} catch (Exception e) {
-					close();
-					throw new java.io.IOException(e.toString());
-				}
-
-			}
-
-			public void close() throws java.io.IOException {
-				if (packet == null) {
-					try {
-						init();
-					} catch (java.io.IOException e) {
-						// close should be finished silently.
-						return;
-					}
-				}
-				if (closed) {
-					return;
-				}
-				if (dataLen > 0) {
-					flush();
-				}
-				channel.eof();
-				closed = true;
-			}
-		};
-		return out;
-	}
-
-//	class MyPipedInputStream extends PipedInputStream {
-//		private int BUFFER_SIZE = 1024;
-//		private int max_buffer_size = BUFFER_SIZE;
-//
-//		MyPipedInputStream() throws IOException {
-//			super();
-//		}
-//
-//		MyPipedInputStream(int size) throws IOException {
-//			super();
-//			buffer = new byte[size];
-//			BUFFER_SIZE = size;
-//			max_buffer_size = size;
-//		}
-//
-//		MyPipedInputStream(int size, int max_buffer_size) throws IOException {
-//			this(size);
-//			this.max_buffer_size = max_buffer_size;
-//		}
-//
-//		MyPipedInputStream(PipedOutputStream out) throws IOException {
-//			super(out);
-//		}
-//
-//		MyPipedInputStream(PipedOutputStream out, int size) throws IOException {
-//			super(out);
-//			buffer = new byte[size];
-//			BUFFER_SIZE = size;
-//		}
-//
-//		/*
-//		 * TODO: We should have our own Piped[I/O]Stream implementation. Before
-//		 * accepting data, JDK's PipedInputStream will check the existence of reader
-//		 * thread, and if it is not alive, the stream will be closed. That behavior may
-//		 * cause the problem if multiple threads make access to it.
-//		 */
-////		public synchronized void updateReadSide() throws IOException {
-////			if (available() != 0) { // not empty
-////				return;
-////			}
-////			in = 0;
-////			out = 0;
-////			buffer[in++] = 0;
-////			read();
-////		}
-//
-//		private int freeSpace() {
-//			int size = 0;
-//			if (out < in) {
-//				size = buffer.length - in;
-//			} else if (in < out) {
-//				if (in == -1)
-//					size = buffer.length;
-//				else
-//					size = out - in;
-//			}
-//			return size;
-//		}
-//
-//		synchronized void checkSpace(int len) throws IOException {
-//			int size = freeSpace();
-//			if (size < len) {
-//				int datasize = buffer.length - size;
-//				int foo = buffer.length;
-//				while ((foo - datasize) < len) {
-//					foo *= 2;
-//				}
-//
-//				if (foo > max_buffer_size) {
-//					foo = max_buffer_size;
-//				}
-//				if ((foo - datasize) < len)
-//					return;
-//
-//				byte[] tmp = new byte[foo];
-//				if (out < in) {
-//					System.arraycopy(buffer, 0, tmp, 0, buffer.length);
-//				} else if (in < out) {
-//					if (in == -1) {
-//					} else {
-//						System.arraycopy(buffer, 0, tmp, 0, in);
-//						System.arraycopy(buffer, out, tmp, tmp.length - (buffer.length - out), (buffer.length - out));
-//						out = tmp.length - (buffer.length - out);
-//					}
-//				} else if (in == out) {
-//					System.arraycopy(buffer, 0, tmp, 0, buffer.length);
-//					in = buffer.length;
-//				}
-//				buffer = tmp;
-//			} else if (buffer.length == size && size > BUFFER_SIZE) {
-//				int i = size / 2;
-//				if (i < BUFFER_SIZE)
-//					i = BUFFER_SIZE;
-//				byte[] tmp = new byte[i];
-//				buffer = tmp;
-//			}
-//		}
-//	}
+	// class MyPipedInputStream extends PipedInputStream {
+	// private int BUFFER_SIZE = 1024;
+	// private int max_buffer_size = BUFFER_SIZE;
+	//
+	// MyPipedInputStream() throws IOException {
+	// super();
+	// }
+	//
+	// MyPipedInputStream(int size) throws IOException {
+	// super();
+	// buffer = new byte[size];
+	// BUFFER_SIZE = size;
+	// max_buffer_size = size;
+	// }
+	//
+	// MyPipedInputStream(int size, int max_buffer_size) throws IOException {
+	// this(size);
+	// this.max_buffer_size = max_buffer_size;
+	// }
+	//
+	// MyPipedInputStream(PipedOutputStream out) throws IOException {
+	// super(out);
+	// }
+	//
+	// MyPipedInputStream(PipedOutputStream out, int size) throws IOException {
+	// super(out);
+	// buffer = new byte[size];
+	// BUFFER_SIZE = size;
+	// }
+	//
+	// /*
+	// * TODO: We should have our own Piped[I/O]Stream implementation. Before
+	// * accepting data, JDK's PipedInputStream will check the existence of reader
+	// * thread, and if it is not alive, the stream will be closed. That behavior
+	// may
+	// * cause the problem if multiple threads make access to it.
+	// */
+	//// public synchronized void updateReadSide() throws IOException {
+	//// if (available() != 0) { // not empty
+	//// return;
+	//// }
+	//// in = 0;
+	//// out = 0;
+	//// buffer[in++] = 0;
+	//// read();
+	//// }
+	//
+	// private int freeSpace() {
+	// int size = 0;
+	// if (out < in) {
+	// size = buffer.length - in;
+	// } else if (in < out) {
+	// if (in == -1)
+	// size = buffer.length;
+	// else
+	// size = out - in;
+	// }
+	// return size;
+	// }
+	//
+	// synchronized void checkSpace(int len) throws IOException {
+	// int size = freeSpace();
+	// if (size < len) {
+	// int datasize = buffer.length - size;
+	// int foo = buffer.length;
+	// while ((foo - datasize) < len) {
+	// foo *= 2;
+	// }
+	//
+	// if (foo > max_buffer_size) {
+	// foo = max_buffer_size;
+	// }
+	// if ((foo - datasize) < len)
+	// return;
+	//
+	// byte[] tmp = new byte[foo];
+	// if (out < in) {
+	// System.arraycopy(buffer, 0, tmp, 0, buffer.length);
+	// } else if (in < out) {
+	// if (in == -1) {
+	// } else {
+	// System.arraycopy(buffer, 0, tmp, 0, in);
+	// System.arraycopy(buffer, out, tmp, tmp.length - (buffer.length - out),
+	// (buffer.length - out));
+	// out = tmp.length - (buffer.length - out);
+	// }
+	// } else if (in == out) {
+	// System.arraycopy(buffer, 0, tmp, 0, buffer.length);
+	// in = buffer.length;
+	// }
+	// buffer = tmp;
+	// } else if (buffer.length == size && size > BUFFER_SIZE) {
+	// int i = size / 2;
+	// if (i < BUFFER_SIZE)
+	// i = BUFFER_SIZE;
+	// byte[] tmp = new byte[i];
+	// buffer = tmp;
+	// }
+	// }
+	// }
 
 	void setLocalWindowSizeMax(int foo) {
 		this.lwsize_max = foo;
@@ -455,9 +447,6 @@ public abstract class MockChannel {
 		this.rmpsize = foo;
 	}
 
-	public void run() {
-	}
-
 	void write(byte[] foo) throws IOException {
 		write(foo, 0, foo.length);
 	}
@@ -469,20 +458,20 @@ public abstract class MockChannel {
 		}
 	}
 
-//	void write_ext(byte[] foo, int s, int l) throws IOException {
-//		try {
-//			io.put_ext(foo, s, l);
-//		} catch (NullPointerException e) {
-//		}
-//	}
-//
-//	void eof_remote() {
-//		eof_remote = true;
-//		try {
-//			io.out_close();
-//		} catch (NullPointerException e) {
-//		}
-//	}
+	// void write_ext(byte[] foo, int s, int l) throws IOException {
+	// try {
+	// io.put_ext(foo, s, l);
+	// } catch (NullPointerException e) {
+	// }
+	// }
+	//
+	// void eof_remote() {
+	// eof_remote = true;
+	// try {
+	// io.out_close();
+	// } catch (NullPointerException e) {
+	// }
+	// }
 
 	void eof() {
 		if (eof_local)
@@ -569,24 +558,16 @@ public abstract class MockChannel {
 	}
 
 	public void disconnect() {
-		// System.err.println(this+":disconnect "+io+" "+connected);
-		// Thread.dumpStack();
-
 		try {
-
 			synchronized (this) {
 				if (!connected) {
 					return;
 				}
 				connected = false;
 			}
-
 			close();
-
 			eof_remote = eof_local = true;
-
 			thread = null;
-
 			try {
 				if (io != null) {
 					io.close();
@@ -608,11 +589,11 @@ public abstract class MockChannel {
 		return false;
 	}
 
-//	public void sendSignal(String signal) throws Exception {
-//		RequestSignal request = new RequestSignal();
-//		request.setSignal(signal);
-//		request.request(getSession(), this);
-//	}
+	// public void sendSignal(String signal) throws Exception {
+	// RequestSignal request = new RequestSignal();
+	// request.setSignal(signal);
+	// request.request(getSession(), this);
+	// }
 
 	// public String toString(){
 	// return "Channel: type="+new
@@ -624,58 +605,55 @@ public abstract class MockChannel {
 	 * this.c=c;} public void run(){c.output_thread();} }
 	 */
 
-//	class PassiveInputStream extends MyPipedInputStream {
-//		PipedOutputStream out;
-//
-//		PassiveInputStream(PipedOutputStream out, int size) throws IOException {
-//			super(out, size);
-//			this.out = out;
-//		}
-//
-//		PassiveInputStream(PipedOutputStream out) throws IOException {
-//			super(out);
-//			this.out = out;
-//		}
-//
-//		public void close() throws IOException {
-//			if (out != null) {
-//				this.out.close();
-//			}
-//			out = null;
-//		}
-//	}
+	// class PassiveInputStream extends MyPipedInputStream {
+	// PipedOutputStream out;
+	//
+	// PassiveInputStream(PipedOutputStream out, int size) throws IOException {
+	// super(out, size);
+	// this.out = out;
+	// }
+	//
+	// PassiveInputStream(PipedOutputStream out) throws IOException {
+	// super(out);
+	// this.out = out;
+	// }
+	//
+	// public void close() throws IOException {
+	// if (out != null) {
+	// this.out.close();
+	// }
+	// out = null;
+	// }
+	// }
 
-//	class PassiveOutputStream extends PipedOutputStream {
-//		private MyPipedInputStream _sink = null;
-//
-//		PassiveOutputStream(PipedInputStream in, boolean resizable_buffer) throws IOException {
-//			super(in);
-//			if (resizable_buffer && (in instanceof MyPipedInputStream)) {
-//				this._sink = (MyPipedInputStream) in;
-//			}
-//		}
-//
-//		public void write(int b) throws IOException {
-//			if (_sink != null) {
-//				_sink.checkSpace(1);
-//			}
-//			super.write(b);
-//		}
-//
-//		public void write(byte[] b, int off, int len) throws IOException {
-//			if (_sink != null) {
-//				_sink.checkSpace(len);
-//			}
-//			super.write(b, off, len);
-//		}
-//	}
+	// class PassiveOutputStream extends PipedOutputStream {
+	// private MyPipedInputStream _sink = null;
+	//
+	// PassiveOutputStream(PipedInputStream in, boolean resizable_buffer) throws
+	// IOException {
+	// super(in);
+	// if (resizable_buffer && (in instanceof MyPipedInputStream)) {
+	// this._sink = (MyPipedInputStream) in;
+	// }
+	// }
+	//
+	// public void write(int b) throws IOException {
+	// if (_sink != null) {
+	// _sink.checkSpace(1);
+	// }
+	// super.write(b);
+	// }
+	//
+	// public void write(byte[] b, int off, int len) throws IOException {
+	// if (_sink != null) {
+	// _sink.checkSpace(len);
+	// }
+	// super.write(b, off, len);
+	// }
+	// }
 
 	void setExitStatus(int status) {
 		exitstatus = status;
-	}
-
-	public int getExitStatus() {
-		return exitstatus;
 	}
 
 	void setSession(MockSession session) {
@@ -690,53 +668,20 @@ public abstract class MockChannel {
 		return _session;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	protected void sendOpenConfirmation() throws Exception {
-		Buffer buf = new Buffer(100);
-		MockPacket packet = new MockPacket(buf);
-		packet.reset();
-		buf.putByte((byte) SSH_MSG_CHANNEL_OPEN_CONFIRMATION);
-		buf.putInt(getRecipient());
-		buf.putInt(id);
-		buf.putInt(lwsize);
-		buf.putInt(lmpsize);
-		getSession().write(packet);
-	}
-
-//	protected void sendOpenFailure(int reasoncode) {
-//		try {
-//			Buffer buf = new Buffer(100);
-//			MockPacket packet = new MockPacket(buf);
-//			packet.reset();
-//			buf.putByte((byte) SSH_MSG_CHANNEL_OPEN_FAILURE);
-//			buf.putInt(getRecipient());
-//			buf.putInt(reasoncode);
-//			buf.putString(MockUtil.str2byte("open failed"));
-//			buf.putString(MockUtil.empty);
-//			getSession().write(packet);
-//		} catch (Exception e) {
-//		}
-//	}
-
-	protected MockPacket genChannelOpenPacket() {
-		Buffer buf = new Buffer(100);
-		MockPacket packet = new MockPacket(buf);
-		// byte SSH_MSG_CHANNEL_OPEN(90)
-		// string channel type //
-		// uint32 sender channel // 0
-		// uint32 initial window size // 0x100000(65536)
-		// uint32 maxmum packet size // 0x4000(16384)
-		packet.reset();
-		buf.putByte((byte) 90);
-		buf.putString(this.type);
-		buf.putInt(this.id);
-		buf.putInt(this.lwsize);
-		buf.putInt(this.lmpsize);
-		return packet;
-	}
+	// protected void sendOpenFailure(int reasoncode) {
+	// try {
+	// Buffer buf = new Buffer(100);
+	// MockPacket packet = new MockPacket(buf);
+	// packet.reset();
+	// buf.putByte((byte) SSH_MSG_CHANNEL_OPEN_FAILURE);
+	// buf.putInt(getRecipient());
+	// buf.putInt(reasoncode);
+	// buf.putString(MockUtil.str2byte("open failed"));
+	// buf.putString(MockUtil.empty);
+	// getSession().write(packet);
+	// } catch (Exception e) {
+	// }
+	// }
 
 	protected void sendChannelOpen() throws Exception {
 		MockSession _session = getSession();

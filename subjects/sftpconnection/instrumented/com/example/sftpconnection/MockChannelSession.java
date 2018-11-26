@@ -27,6 +27,7 @@ package com.example.sftpconnection;
 class MockChannelSession extends MockChannel {
 
 	MockChannelSession() {
+		super();
 		io = new MockIO();
 	}
 

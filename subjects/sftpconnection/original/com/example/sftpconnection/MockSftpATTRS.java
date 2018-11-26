@@ -16,11 +16,11 @@ public class MockSftpATTRS {
 		return new MockSftpATTRS();
 	}
 
-//	public void setFLAGS(int i) {
-//	}
-//
-//	public void setUIDGID(String uid2, int gid) {
-//	}
+	// public void setFLAGS(int i) {
+	// }
+	//
+	// public void setUIDGID(String uid2, int gid) {
+	// }
 
 	public int length() {
 		return 0;

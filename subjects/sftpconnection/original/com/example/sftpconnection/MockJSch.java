@@ -36,11 +36,12 @@ public class MockJSch {
 	@SuppressWarnings("rawtypes")
 	private java.util.Vector sessionPool = new java.util.Vector();
 
-//	private IdentityRepository defaultIdentityRepository = new LocalIdentityRepository(this);
-//
-//	private IdentityRepository identityRepository = defaultIdentityRepository;
-//
-//	private ConfigRepository configRepository = null;
+	// private IdentityRepository defaultIdentityRepository = new
+	// LocalIdentityRepository(this);
+	//
+	// private IdentityRepository identityRepository = defaultIdentityRepository;
+	//
+	// private ConfigRepository configRepository = null;
 
 	/**
 	 * Sets the <code>identityRepository</code>, which will be referred in the
@@ -52,27 +53,28 @@ public class MockJSch {
 	 *
 	 * @see #getIdentityRepository()
 	 */
-//	public synchronized void setIdentityRepository(IdentityRepository identityRepository) {
-//		if (identityRepository == null) {
-//			this.identityRepository = defaultIdentityRepository;
-//		} else {
-//			this.identityRepository = identityRepository;
-//		}
-//	}
-//
-//	public synchronized IdentityRepository getIdentityRepository() {
-//		return this.identityRepository;
-//	}
-//
-//	public ConfigRepository getConfigRepository() {
-//		return this.configRepository;
-//	}
-//
-//	public void setConfigRepository(ConfigRepository configRepository) {
-//		this.configRepository = configRepository;
-//	}
-//
-//	private HostKeyRepository known_hosts = null;
+	// public synchronized void setIdentityRepository(IdentityRepository
+	// identityRepository) {
+	// if (identityRepository == null) {
+	// this.identityRepository = defaultIdentityRepository;
+	// } else {
+	// this.identityRepository = identityRepository;
+	// }
+	// }
+	//
+	// public synchronized IdentityRepository getIdentityRepository() {
+	// return this.identityRepository;
+	// }
+	//
+	// public ConfigRepository getConfigRepository() {
+	// return this.configRepository;
+	// }
+	//
+	// public void setConfigRepository(ConfigRepository configRepository) {
+	// this.configRepository = configRepository;
+	// }
+	//
+	// private HostKeyRepository known_hosts = null;
 
 	private static final MockLogger DEVNULL = new MockLogger() {
 		public boolean isEnabled(int level) {
@@ -114,9 +116,9 @@ public class MockJSch {
 	 * @see com.MockSession.jsch.Session
 	 * @see com.jcraft.jsch.ConfigRepository
 	 */
-	public MockSession getSession(String host) throws MockJSchException {
-		return getSession(null, host, 22);
-	}
+//	public MockSession getSession(String host) throws MockJSchException {
+//		return getSession(null, host, 22);
+//	}
 
 	/**
 	 * Instantiates the <code>Session</code> object with <code>username</code> and
@@ -136,9 +138,9 @@ public class MockJSch {
 	 * @see #getSession(String username, String host, int port)
 	 * @see com.MockSession.jsch.Session
 	 */
-	public MockSession getSession(String username, String host) throws MockJSchException {
-		return getSession(username, host, 22);
-	}
+//	public MockSession getSession(String username, String host) throws MockJSchException {
+//		return getSession(username, host, 22);
+//	}
 
 	/**
 	 * Instantiates the <code>Session</code> object with given
@@ -205,37 +207,37 @@ public class MockJSch {
 	 *
 	 * @see com.jcraft.jsch.KnownHosts
 	 */
-//	public void setKnownHosts(String filename) throws MockJSchException {
-//		if (known_hosts == null)
-//			known_hosts = new KnownHosts(this);
-//		if (known_hosts instanceof KnownHosts) {
-//			synchronized (known_hosts) {
-//				((KnownHosts) known_hosts).setKnownHosts(filename);
-//			}
-//		}
-//	}
-//
-//	/**
-//	 * Sets the instance of <code>KnownHosts</code> generated with
-//	 * <code>stream</code>.
-//	 *
-//	 * @param stream
-//	 *            the instance of InputStream from known_hosts file.
-//	 *
-//	 * @throws MockJSchException
-//	 *             if an I/O error occurs.
-//	 *
-//	 * @see com.jcraft.jsch.KnownHosts
-//	 */
-//	public void setKnownHosts(InputStream stream) throws MockJSchException {
-//		if (known_hosts == null)
-//			known_hosts = new KnownHosts(this);
-//		if (known_hosts instanceof KnownHosts) {
-//			synchronized (known_hosts) {
-//				((KnownHosts) known_hosts).setKnownHosts(stream);
-//			}
-//		}
-//	}
+	// public void setKnownHosts(String filename) throws MockJSchException {
+	// if (known_hosts == null)
+	// known_hosts = new KnownHosts(this);
+	// if (known_hosts instanceof KnownHosts) {
+	// synchronized (known_hosts) {
+	// ((KnownHosts) known_hosts).setKnownHosts(filename);
+	// }
+	// }
+	// }
+	//
+	// /**
+	// * Sets the instance of <code>KnownHosts</code> generated with
+	// * <code>stream</code>.
+	// *
+	// * @param stream
+	// * the instance of InputStream from known_hosts file.
+	// *
+	// * @throws MockJSchException
+	// * if an I/O error occurs.
+	// *
+	// * @see com.jcraft.jsch.KnownHosts
+	// */
+	// public void setKnownHosts(InputStream stream) throws MockJSchException {
+	// if (known_hosts == null)
+	// known_hosts = new KnownHosts(this);
+	// if (known_hosts instanceof KnownHosts) {
+	// synchronized (known_hosts) {
+	// ((KnownHosts) known_hosts).setKnownHosts(stream);
+	// }
+	// }
+	// }
 
 	/**
 	 * Returns the current hostkey repository. By the default, this method will the
@@ -246,11 +248,11 @@ public class MockJSch {
 	 * @see com.jcraft.jsch.HostKeyRepository
 	 * @see com.jcraft.jsch.KnownHosts
 	 */
-//	public HostKeyRepository getHostKeyRepository() {
-//		if (known_hosts == null)
-//			known_hosts = new KnownHosts(this);
-//		return known_hosts;
-//	}
+	// public HostKeyRepository getHostKeyRepository() {
+	// if (known_hosts == null)
+	// known_hosts = new KnownHosts(this);
+	// return known_hosts;
+	// }
 
 	/**
 	 * Sets the private key, which will be referred in the public key
@@ -288,7 +290,7 @@ public class MockJSch {
 		if (passphrase != null) {
 			_passphrase = MockUtil.str2byte(passphrase);
 		}
-//		addIdentity(prvkey, _passphrase);
+		// addIdentity(prvkey, _passphrase);
 		if (_passphrase != null)
 			MockUtil.bzero(_passphrase);
 	}
@@ -370,118 +372,119 @@ public class MockJSch {
 	 * @throws MockJSchException
 	 *             if <code>passphrase</code> is not right.
 	 */
-//	public void addIdentity(Identity identity, byte[] passphrase) throws MockJSchException {
-//		if (passphrase != null) {
-//			try {
-//				byte[] goo = new byte[passphrase.length];
-//				System.arraycopy(passphrase, 0, goo, 0, passphrase.length);
-//				passphrase = goo;
-//				identity.setPassphrase(passphrase);
-//			} finally {
-//				Util.bzero(passphrase);
-//			}
-//		}
-//
-//		if (identityRepository instanceof LocalIdentityRepository) {
-//			((LocalIdentityRepository) identityRepository).add(identity);
-//		} else if (identity instanceof IdentityFile && !identity.isEncrypted()) {
-//			identityRepository.add(((IdentityFile) identity).getKeyPair().forSSHAgent());
-//		} else {
-//			synchronized (this) {
-//				if (!(identityRepository instanceof IdentityRepository.Wrapper)) {
-//					setIdentityRepository(new IdentityRepository.Wrapper(identityRepository));
-//				}
-//			}
-//			((IdentityRepository.Wrapper) identityRepository).add(identity);
-//		}
-//	}
-//
+	// public void addIdentity(Identity identity, byte[] passphrase) throws
+	// MockJSchException {
+	// if (passphrase != null) {
+	// try {
+	// byte[] goo = new byte[passphrase.length];
+	// System.arraycopy(passphrase, 0, goo, 0, passphrase.length);
+	// passphrase = goo;
+	// identity.setPassphrase(passphrase);
+	// } finally {
+	// Util.bzero(passphrase);
+	// }
+	// }
+	//
+	// if (identityRepository instanceof LocalIdentityRepository) {
+	// ((LocalIdentityRepository) identityRepository).add(identity);
+	// } else if (identity instanceof IdentityFile && !identity.isEncrypted()) {
+	// identityRepository.add(((IdentityFile) identity).getKeyPair().forSSHAgent());
+	// } else {
+	// synchronized (this) {
+	// if (!(identityRepository instanceof IdentityRepository.Wrapper)) {
+	// setIdentityRepository(new IdentityRepository.Wrapper(identityRepository));
+	// }
+	// }
+	// ((IdentityRepository.Wrapper) identityRepository).add(identity);
+	// }
+	// }
+	//
+	// /**
+	// * @deprecated use #removeIdentity(Identity identity)
+	// */
+	// public void removeIdentity(String name) throws MockJSchException {
+	// Vector identities = identityRepository.getIdentities();
+	// for (int i = 0; i < identities.size(); i++) {
+	// Identity identity = (Identity) (identities.elementAt(i));
+	// if (!identity.getName().equals(name))
+	// continue;
+	// if (identityRepository instanceof LocalIdentityRepository) {
+	// ((LocalIdentityRepository) identityRepository).remove(identity);
+	// } else
+	// identityRepository.remove(identity.getPublicKeyBlob());
+	// }
+	// }
+	//
+	// /**
+	// * Removes the identity from identityRepository.
+	// *
+	// * @param identity
+	// * the indentity to be removed.
+	// *
+	// * @throws MockJSchException
+	// * if <code>identity</code> is invalid.
+	// */
+	// public void removeIdentity(Identity identity) throws MockJSchException {
+	// identityRepository.remove(identity.getPublicKeyBlob());
+	// }
+	//
+	// /**
+	// * Lists names of identities included in the identityRepository.
+	// *
+	// * @return names of identities
+	// *
+	// * @throws MockJSchException
+	// * if identityReposory has problems.
+	// */
+	// public Vector getIdentityNames() throws MockJSchException {
+	// Vector foo = new Vector();
+	// Vector identities = identityRepository.getIdentities();
+	// for (int i = 0; i < identities.size(); i++) {
+	// Identity identity = (Identity) (identities.elementAt(i));
+	// foo.addElement(identity.getName());
+	// }
+	// return foo;
+	// }
+	//
+	// /**
+	// * Removes all identities from identityRepository.
+	// *
+	// * @throws MockJSchException
+	// * if identityReposory has problems.
+	// */
+	// public void removeAllIdentity() throws MockJSchException {
+	// identityRepository.removeAll();
+	// }
+
 //	/**
-//	 * @deprecated use #removeIdentity(Identity identity)
+//	 * Returns the config value for the specified key.
+//	 *
+//	 * @param key
+//	 *            key for the configuration.
+//	 * @return config value
 //	 */
-//	public void removeIdentity(String name) throws MockJSchException {
-//		Vector identities = identityRepository.getIdentities();
-//		for (int i = 0; i < identities.size(); i++) {
-//			Identity identity = (Identity) (identities.elementAt(i));
-//			if (!identity.getName().equals(name))
-//				continue;
-//			if (identityRepository instanceof LocalIdentityRepository) {
-//				((LocalIdentityRepository) identityRepository).remove(identity);
-//			} else
-//				identityRepository.remove(identity.getPublicKeyBlob());
+//	public static String getConfig(String key) {
+//		synchronized (config) {
+//			return (String) (config.get(key));
 //		}
-//	}
-//
-//	/**
-//	 * Removes the identity from identityRepository.
-//	 *
-//	 * @param identity
-//	 *            the indentity to be removed.
-//	 *
-//	 * @throws MockJSchException
-//	 *             if <code>identity</code> is invalid.
-//	 */
-//	public void removeIdentity(Identity identity) throws MockJSchException {
-//		identityRepository.remove(identity.getPublicKeyBlob());
-//	}
-//
-//	/**
-//	 * Lists names of identities included in the identityRepository.
-//	 *
-//	 * @return names of identities
-//	 *
-//	 * @throws MockJSchException
-//	 *             if identityReposory has problems.
-//	 */
-//	public Vector getIdentityNames() throws MockJSchException {
-//		Vector foo = new Vector();
-//		Vector identities = identityRepository.getIdentities();
-//		for (int i = 0; i < identities.size(); i++) {
-//			Identity identity = (Identity) (identities.elementAt(i));
-//			foo.addElement(identity.getName());
-//		}
-//		return foo;
-//	}
-//
-//	/**
-//	 * Removes all identities from identityRepository.
-//	 *
-//	 * @throws MockJSchException
-//	 *             if identityReposory has problems.
-//	 */
-//	public void removeAllIdentity() throws MockJSchException {
-//		identityRepository.removeAll();
 //	}
 
-	/**
-	 * Returns the config value for the specified key.
-	 *
-	 * @param key
-	 *            key for the configuration.
-	 * @return config value
-	 */
-	public static String getConfig(String key) {
-		synchronized (config) {
-			return (String) (config.get(key));
-		}
-	}
-
-	/**
-	 * Sets or Overrides the configuration.
-	 *
-	 * @param newconf
-	 *            configurations
-	 */
-	@SuppressWarnings("unchecked")
-	public static void setConfig(@SuppressWarnings("rawtypes") java.util.Hashtable newconf) {
-		synchronized (config) {
-			for (@SuppressWarnings("rawtypes")
-			java.util.Enumeration e = newconf.keys(); e.hasMoreElements();) {
-				String key = (String) (e.nextElement());
-				config.put(key, (String) (newconf.get(key)));
-			}
-		}
-	}
+//	/**
+//	 * Sets or Overrides the configuration.
+//	 *
+//	 * @param newconf
+//	 *            configurations
+//	 */
+//	@SuppressWarnings("unchecked")
+//	public static void setConfig(@SuppressWarnings("rawtypes") java.util.Hashtable newconf) {
+//		synchronized (config) {
+//			for (@SuppressWarnings("rawtypes")
+//			java.util.Enumeration e = newconf.keys(); e.hasMoreElements();) {
+//				String key = (String) (e.nextElement());
+//				config.put(key, (String) (newconf.get(key)));
+//			}
+//		}
+//	}
 
 	/**
 	 * Sets or Overrides the configuration.
@@ -491,10 +494,10 @@ public class MockJSch {
 	 * @param value
 	 *            value for the configuration
 	 */
-	@SuppressWarnings("unchecked")
-	public static void setConfig(String key, String value) {
-		config.put(key, value);
-	}
+//	@SuppressWarnings("unchecked")
+//	public static void setConfig(String key, String value) {
+//		config.put(key, value);
+//	}
 
 	/**
 	 * Sets the logger
@@ -504,11 +507,11 @@ public class MockJSch {
 	 *
 	 * @see com.MockLogger.jsch.Logger
 	 */
-	public static void setLogger(MockLogger logger) {
-		if (logger == null)
-			logger = DEVNULL;
-		MockJSch.logger = logger;
-	}
+//	public static void setLogger(MockLogger logger) {
+//		if (logger == null)
+//			logger = DEVNULL;
+//		MockJSch.logger = logger;
+//	}
 
 	static MockLogger getLogger() {
 		return logger;

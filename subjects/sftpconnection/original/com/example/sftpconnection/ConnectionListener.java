@@ -15,27 +15,26 @@
  */
 package com.example.sftpconnection;
 
-
 /**
-* Classes that implement this interface are notified about various
-* events that may happen. Make sure to use myftpconnection.addConnectionListener(this) in
-* the class to get it working.
-*/
-public interface ConnectionListener
-{
-    /**
-    * Called if the remote directory has changed by a chdir() or a finished upload for example.
-    */
-    public void updateRemoteDirectory(MockBasicConnection con);
+ * Classes that implement this interface are notified about various events that
+ * may happen. Make sure to use myftpconnection.addConnectionListener(this) in
+ * the class to get it working.
+ */
+public interface ConnectionListener {
+	/**
+	 * Called if the remote directory has changed by a chdir() or a finished upload
+	 * for example.
+	 */
+	public void updateRemoteDirectory(MockBasicConnection con);
 
-    /**
-    * Called every n bytes, where n is defined by Settings
-    */
-    public void updateProgress(String file, String type, long bytes);
+	/**
+	 * Called every n bytes, where n is defined by Settings
+	 */
+	public void updateProgress(String file, String type, long bytes);
 
-    public void connectionInitialized(MockBasicConnection con);
+	public void connectionInitialized(MockBasicConnection con);
 
-    public void connectionFailed(MockBasicConnection con, String why);
+	public void connectionFailed(MockBasicConnection con, String why);
 
-    public void actionFinished(MockBasicConnection con);
+	public void actionFinished(MockBasicConnection con);
 }

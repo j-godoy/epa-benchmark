@@ -15,95 +15,79 @@
  */
 package com.example.sftpconnection;
 
-public class StringUtils
-{
-    /**
-    * Get a filename out of a full path string
-    */
-    public static String getFile(String file)
-    {
-        int x = file.lastIndexOf("/");
+public class StringUtils {
+	/**
+	 * Get a filename out of a full path string
+	 */
+	public static String getFile(String file) {
+		int x = file.lastIndexOf("/");
 
-        // unix
-        if(x >= 0)
-        {
-            file = file.substring(x + 1);
-        }
+		// unix
+		if (x >= 0) {
+			file = file.substring(x + 1);
+		}
 
-        // windows
-        x = file.lastIndexOf("\\");
+		// windows
+		x = file.lastIndexOf("\\");
 
-        if(x >= 0)
-        {
-            file = file.substring(x + 1);
-        }
+		if (x >= 0) {
+			file = file.substring(x + 1);
+		}
 
-        // may work, but can test the other method better
-        //int x  = file.lastIndexOf(File.separatorChar);
-        //if(x >= 0) file = file.substring(x+1);
-        //System.out.println(file);
-        return file;
-    }
+		// may work, but can test the other method better
+		// int x = file.lastIndexOf(File.separatorChar);
+		// if(x >= 0) file = file.substring(x+1);
+		// System.out.println(file);
+		return file;
+	}
 
-    /**
-    * Returns a string representing a relative directory path.
-    * Examples: "/tmp/dir/" -> "dir/" and "/tmp/dir" -> "dir"
-    */
-    public static String getDir(String tmp)
-    {
-        int x;
+	/**
+	 * Returns a string representing a relative directory path. Examples:
+	 * "/tmp/dir/" -> "dir/" and "/tmp/dir" -> "dir"
+	 */
+	public static String getDir(String tmp) {
+		int x;
 
-        while(true)
-        {
-            x = tmp.indexOf("/");
+		while (true) {
+			x = tmp.indexOf("/");
 
-            if((x == (tmp.length() - 1)) || (x < 0))
-            {
-                break;
-            }
-            else
-            {
-                tmp = tmp.substring(x + 1);
-            }
-        }
+			if ((x == (tmp.length() - 1)) || (x < 0)) {
+				break;
+			} else {
+				tmp = tmp.substring(x + 1);
+			}
+		}
 
-        while(true)
-        {
-            x = tmp.indexOf("\\");
+		while (true) {
+			x = tmp.indexOf("\\");
 
-            if((x == (tmp.length() - 1)) || (x < 0))
-            {
-                break;
-            }
-            else
-            {
-                tmp = tmp.substring(x + 1);
-            }
-        }
+			if ((x == (tmp.length() - 1)) || (x < 0)) {
+				break;
+			} else {
+				tmp = tmp.substring(x + 1);
+			}
+		}
 
-        return tmp;
-    }
+		return tmp;
+	}
 
-    /*
-    * Returns true if the string represents a relative filename, false otherwise
-    */
-    public static boolean isRelative(String file)
-    {
-        // unix
-        if(file.startsWith("/"))
-        {
-            return false;
-        }
+	/*
+	 * Returns true if the string represents a relative filename, false otherwise
+	 */
+	public static boolean isRelative(String file) {
+		// unix
+		if (file.startsWith("/")) {
+			return false;
+		}
 
-        // windows
-        if((file.length() > 2) && (file.charAt(1) == ':'))
-        {
-            return false;
-        }
+		// windows
+		if ((file.length() > 2) && (file.charAt(1) == ':')) {
+			return false;
+		}
 
-        //System.out.println("true: " + file);
-        // default
-        return true;
-    }
+		// System.out.println("true: " + file);
+		// default
+		return true;
+	}
 
 }

@@ -15,14 +15,12 @@
  */
 package com.example.sftpconnection;
 
-
-public class MockSettings
-{
+public class MockSettings {
 
 	public static boolean shortProgress = true;
 
 	public static boolean getEnableSftpMultiThreading() {
-		return true;
+		return false;
 	}
 
 }
