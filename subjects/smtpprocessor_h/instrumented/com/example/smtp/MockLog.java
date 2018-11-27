@@ -1,7 +1,5 @@
 package com.example.smtp;
 
-import java.io.IOException;
-
 public class MockLog {
 
 	public boolean isDebugEnabled() {
@@ -10,10 +8,6 @@ public class MockLog {
 
 	public void debug(String string) {
 		// stub
-	}
-
-	public void error(String string, IOException ioe) {
-		// stub		
 	}
 
 	public boolean isInfoEnabled() {

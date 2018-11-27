@@ -25,9 +25,7 @@ package com.example.stringtokenizer;
  * questions.
  */
 
-import java.util.Enumeration;
 import java.util.NoSuchElementException;
-
 import org.evosuite.epa.EpaAction;
 import org.evosuite.epa.EpaState;
 
@@ -392,60 +390,59 @@ public class StringTokenizer implements Enumeration<Object> {
 		return nextToken();
 	}
 
-	/**
-	 * Returns the same value as the <code>hasMoreTokens</code>
-	 * method. It exists so that this class can implement the
-	 * <code>Enumeration</code> interface.
-	 *
-	 * @return  <code>true</code> if there are more tokens;
-	 *          <code>false</code> otherwise.
-	 * @see     java.util.Enumeration
-	 * @see     java.util.StringTokenizer#hasMoreTokens()
-	 */
-	@EpaAction(name = "hasMoreElements()")
-	public boolean hasMoreElements() {
-		return hasMoreTokens();
-	}
+//	/**
+//	 * Returns the same value as the <code>hasMoreTokens</code>
+//	 * method. It exists so that this class can implement the
+//	 * <code>Enumeration</code> interface.
+//	 *
+//	 * @return  <code>true</code> if there are more tokens;
+//	 *          <code>false</code> otherwise.
+//	 * @see     java.util.Enumeration
+//	 * @see     java.util.StringTokenizer#hasMoreTokens()
+//	 */
+//	@EpaAction(name = "hasMoreElements()")
+//	public boolean hasMoreElements() {
+//		return hasMoreTokens();
+//	}
 
-	/**
-	 * Returns the same value as the <code>nextToken</code> method,
-	 * except that its declared return value is <code>Object</code> rather than
-	 * <code>String</code>. It exists so that this class can implement the
-	 * <code>Enumeration</code> interface.
-	 *
-	 * @return     the next token in the string.
-	 * @exception  NoSuchElementException  if there are no more tokens in this
-	 *               tokenizer's string.
-	 * @see        java.util.Enumeration
-	 * @see        java.util.StringTokenizer#nextToken()
-	 */
-	@EpaAction(name = "nextElement()")
-	public Object nextElement() {
-		return nextToken();
-	}
+//	/**
+//	 * Returns the same value as the <code>nextToken</code> method,
+//	 * except that its declared return value is <code>Object</code> rather than
+//	 * <code>String</code>. It exists so that this class can implement the
+//	 * <code>Enumeration</code> interface.
+//	 *
+//	 * @return     the next token in the string.
+//	 * @exception  NoSuchElementException  if there are no more tokens in this
+//	 *               tokenizer's string.
+//	 * @see        java.util.Enumeration
+//	 * @see        java.util.StringTokenizer#nextToken()
+//	 */
+//	@EpaAction(name = "nextElement()")
+//	public Object nextElement() {
+//		return nextToken();
+//	}
 
-	/**
-	 * Calculates the number of times that this tokenizer's
-	 * <code>nextToken</code> method can be called before it generates an
-	 * exception. The current position is not advanced.
-	 *
-	 * @return  the number of tokens remaining in the string using the current
-	 *          delimiter set.
-	 * @see     java.util.StringTokenizer#nextToken()
-	 */
-	@EpaAction(name = "countTokens()")
-	public int countTokens() {
-		int count = 0;
-		int currpos = currentPosition;
-		while (currpos < maxPosition) {
-			currpos = skipDelimiters(currpos);
-			if (currpos >= maxPosition)
-				break;
-			currpos = scanToken(currpos);
-			count++;
-		}
-		return count;
-	}
+//	/**
+//	 * Calculates the number of times that this tokenizer's
+//	 * <code>nextToken</code> method can be called before it generates an
+//	 * exception. The current position is not advanced.
+//	 *
+//	 * @return  the number of tokens remaining in the string using the current
+//	 *          delimiter set.
+//	 * @see     java.util.StringTokenizer#nextToken()
+//	 */
+//	public int countTokens() {
+//		int count = 0;
+//		int currpos = currentPosition;
+//		while (currpos < maxPosition) {
+//			currpos = skipDelimiters(currpos);
+//			if (currpos >= maxPosition)
+//				break;
+//			currpos = scanToken(currpos);
+//			count++;
+//		}
+//		return count;
+//	}
 	
 	/*-------------------------------------------------------
 	 * EPA State Methods

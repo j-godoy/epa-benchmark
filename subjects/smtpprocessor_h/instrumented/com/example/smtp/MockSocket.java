@@ -1,8 +1,5 @@
 package com.example.smtp;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-
 public class MockSocket {
 
 	private boolean isClosed = false;
@@ -11,12 +8,12 @@ public class MockSocket {
 		// Do nothing
 	}
 
-	public OutputStream getOutputStream() {
+	public MockOutputStream getOutputStream() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public InputStream getInputStream() {
+	public MockInputStream getInputStream() {
 		// TODO Auto-generated method stub
 		return null;
 	}

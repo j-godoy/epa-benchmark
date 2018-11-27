@@ -46,11 +46,7 @@
 
 package com.example.smtp;
 
-import java.io.IOException;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
-
 import org.evosuite.epa.EpaAction;
 import org.evosuite.epa.EpaState;
 
@@ -219,9 +215,6 @@ public class SMTPProcessor_h {
         } catch (MockIOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (MockTooManyErrorsException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -263,7 +256,7 @@ public class SMTPProcessor_h {
               forcedexit = true;
            }
         }
-        catch ( IOException e ) {
+        catch ( MockIOException e ) {
 //               if (running) {
 //               }
            if (socket!=null) {
@@ -328,16 +321,16 @@ public class SMTPProcessor_h {
      * Notifies this thread to stop processing and exit.
      * @throws MockIOException 
      */
-    private void shutdown() throws MockIOException {
-//        running = false;
-        if (!isFinishedData) {
-           if (socket!=null) {
-              try {
-                 socket.close();
-              } catch (MockIOException ex) {}
-           }
-        }
-    }
+//    private void shutdown() throws MockIOException {
+////        running = false;
+//        if (!isFinishedData) {
+//           if (socket!=null) {
+//              try {
+//                 socket.close();
+//              } catch (MockIOException ex) {}
+//           }
+//        }
+//    }
 
    /** Message specific variables */
    private MockSMTPMessage message;
