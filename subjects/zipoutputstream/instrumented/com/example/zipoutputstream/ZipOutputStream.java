@@ -94,7 +94,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	 * @param out
 	 *            the actual output stream
 	 */
-	@EpaAction(name = "ZipOutputStream(OutputStream)")
+	@EpaAction(name = "ZipOutputStream")
 	public ZipOutputStream() {
 		super(new MockByteArrayOutputStream(), new MockDeflater(MockDeflater.DEFAULT_COMPRESSION, true));
 		usesDefaultDeflater = true;
@@ -164,7 +164,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	 * @exception IOException
 	 *                if an I/O error has occurred
 	 */
-	@EpaAction(name = "putNextEntry(ZipEntry)")
+	@EpaAction(name = "putNextEntry")
 	public void putNextEntry(MockZipEntry e) throws IOException {
 		ensureOpen();
 		if (current != null) {
@@ -204,7 +204,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 		writeLOC(current);
 	}
 
-	@EpaAction(name = "closeEntry()")
+	@EpaAction(name = "closeEntry")
 	public void closeEntry() throws IOException {
 		closeEntry0();
 	}
@@ -285,7 +285,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	 * @exception IOException
 	 *                if an I/O error has occurred
 	 */
-	@EpaAction(name = "write(byte[],int,int)")
+	@EpaAction(name = "write")
 	public synchronized void write(byte[] b, int off, int len) throws IOException {
 		ensureOpen();
 		if (off < 0 || len < 0 || off > b.length - len) {
@@ -353,7 +353,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	 * @exception IOException
 	 *                if an I/O error has occurred
 	 */
-	@EpaAction(name = "close()")
+	@EpaAction(name = "close")
 	public void close() throws IOException {
 		if (!closed) {
 			super.close();

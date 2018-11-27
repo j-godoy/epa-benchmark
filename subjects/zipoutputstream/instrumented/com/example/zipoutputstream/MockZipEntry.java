@@ -198,31 +198,31 @@ public class MockZipEntry implements MockZipConstants, Cloneable {
 		return crc;
 	}
 
-	/**
-	 * Sets the compression method for the entry.
-	 * 
-	 * @param method
-	 *            the compression method, either STORED or DEFLATED
-	 * @exception IllegalArgumentException
-	 *                if the specified compression method is invalid
-	 * @see #getMethod()
-	 */
-	public void setMethod(int method) {
-		if (method != STORED && method != DEFLATED) {
-			throw new IllegalArgumentException("invalid compression method");
-		}
-		this.method = method;
-	}
-
-	/**
-	 * Returns the compression method of the entry, or -1 if not specified.
-	 * 
-	 * @return the compression method of the entry, or -1 if not specified
-	 * @see #setMethod(int)
-	 */
-	public int getMethod() {
-		return method;
-	}
+//	/**
+//	 * Sets the compression method for the entry.
+//	 * 
+//	 * @param method
+//	 *            the compression method, either STORED or DEFLATED
+//	 * @exception IllegalArgumentException
+//	 *                if the specified compression method is invalid
+//	 * @see #getMethod()
+//	 */
+//	public void setMethod(int method) {
+//		if (method != STORED && method != DEFLATED) {
+//			throw new IllegalArgumentException("invalid compression method");
+//		}
+//		this.method = method;
+//	}
+//
+//	/**
+//	 * Returns the compression method of the entry, or -1 if not specified.
+//	 * 
+//	 * @return the compression method of the entry, or -1 if not specified
+//	 * @see #setMethod(int)
+//	 */
+//	public int getMethod() {
+//		return method;
+//	}
 
 	/**
 	 * Sets the optional extra field data for the entry.

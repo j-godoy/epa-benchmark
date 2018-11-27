@@ -14,8 +14,7 @@ public class MockDeflater {
 	}
 
 	public boolean finished() {
-		// TODO Auto-generated method stub
-		return false;
+		return finish;
 	}
 
 	public void setInput(byte[] b, int off, int len) {
