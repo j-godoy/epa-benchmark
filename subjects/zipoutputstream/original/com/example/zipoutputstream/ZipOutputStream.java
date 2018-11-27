@@ -8,10 +8,11 @@
 package com.example.zipoutputstream;
 
 import java.io.IOException;
-//import java.util.Vector;
-//import java.util.HashSet;
+import java.util.Vector;
+import java.util.HashSet;
 import java.util.zip.ZipException;
-//import java.util.zip.CRC32;
+import java.util.zip.CRC32;
+//import java.util.zip.Deflater;
 
 /**
  * This class implements an output stream filter for writing files in the ZIP
@@ -22,7 +23,7 @@ import java.util.zip.ZipException;
  */
 public class ZipOutputStream extends MockDeflaterOutputStream implements MockZipConstants {
 
-	private class XEntry {
+	private static class XEntry {
 		public final MockZipEntry entry;
 		public final long offset;
 		public final int flag;
@@ -41,9 +42,9 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	}
 
 	private XEntry current;
-//	private Vector<XEntry> xentries = new Vector<XEntry>();
-//	private HashSet<String> names = new HashSet<String>();
-//	private CRC32 crc = new CRC32();
+	private Vector<XEntry> xentries = new Vector<XEntry>();
+	private HashSet<String> names = new HashSet<String>();
+	private CRC32 crc = new CRC32();
 	private long written = 0;
 	private long locoff = 0;
 //	private String comment;
@@ -53,7 +54,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	private boolean closed = false;
 	private MockByteArrayOutputStream byteArrayOutputStream;
 
-	private int version(MockZipEntry e) throws ZipException {
+	private static int version(MockZipEntry e) throws ZipException {
 		switch (e.method) {
 		case DEFLATED:
 			return 20;
@@ -186,11 +187,11 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 		default:
 			throw new ZipException("unsupported compression method");
 		}
-//		if (!names.add(e.name)) {
-//			throw new ZipException("duplicate entry: " + e.name);
-//		}
+		if (!names.add(e.name)) {
+			throw new ZipException("duplicate entry: " + e.name);
+		}
 		current = new XEntry(e, written);
-//		xentries.add(current);
+		xentries.add(current);
 		writeLOC(current);
 	}
 
@@ -227,14 +228,14 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 						throw new ZipException("invalid entry compressed size (expected " + e.csize + " but got "
 								+ deflater_getBytesWritten() + " bytes)");
 					}
-//					if (e.crc != crc.getValue()) {
-//						throw new ZipException("invalid entry CRC-32 (expected 0x" + Long.toHexString(e.crc)
-//								+ " but got 0x" + Long.toHexString(crc.getValue()) + ")");
-//					}
+					if (e.crc != crc.getValue()) {
+						throw new ZipException("invalid entry CRC-32 (expected 0x" + Long.toHexString(e.crc)
+								+ " but got 0x" + Long.toHexString(crc.getValue()) + ")");
+					}
 				} else {
 					e.size = deflater_getBytesRead();
 					e.csize = deflater_getBytesWritten();
-//					e.crc = crc.getValue();
+					e.crc = crc.getValue();
 					writeEXT(e);
 				}
 				deflater_reset();
@@ -246,15 +247,15 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 					throw new ZipException(
 							"invalid entry size (expected " + e.size + " but got " + (written - locoff) + " bytes)");
 				}
-//				if (e.crc != crc.getValue()) {
-//					throw new ZipException("invalid entry crc-32 (expected 0x" + Long.toHexString(e.crc) + " but got 0x"
-//							+ Long.toHexString(crc.getValue()) + ")");
-//				}
+				if (e.crc != crc.getValue()) {
+					throw new ZipException("invalid entry crc-32 (expected 0x" + Long.toHexString(e.crc) + " but got 0x"
+							+ Long.toHexString(crc.getValue()) + ")");
+				}
 				break;
 			default:
 				throw new ZipException("invalid compression method");
 			}
-//			crc.reset();
+			crc.reset();
 			current = null;
 		}
 	}
@@ -300,7 +301,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 		default:
 			throw new ZipException("invalid compression method");
 		}
-//		crc.update(b, off, len);
+		crc.update(b, off, len);
 	}
 
 	/**
@@ -369,13 +370,13 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 			writeInt(e.csize); // compressed size
 			writeInt(e.size); // uncompressed size
 		}
-		byte[] nameBytes = e.name.getBytes();
+		byte[] nameBytes = getUTF8Bytes(e.name);
 		writeShort(nameBytes.length);
-//		writeShort(e.extra != null ? e.extra.length : 0);
-//		writeBytes(nameBytes, 0, nameBytes.length);
-//		if (e.extra != null) {
-//			writeBytes(e.extra, 0, e.extra.length);
-//		}
+		writeShort(e.extra != null ? e.extra.length : 0);
+		writeBytes(nameBytes, 0, nameBytes.length);
+		if (e.extra != null) {
+			writeBytes(e.extra, 0, e.extra.length);
+		}
 		locoff = written;
 	}
 
@@ -503,43 +504,74 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	 * Returns an array of bytes representing the UTF8 encoding of the specified
 	 * String.
 	 */
-//	private static byte[] getUTF8Bytes(String s) {
-//		return s.getBytes();
-//		char[] c = s.toCharArray();
-//		int len = c.length;
-//		// Count the number of encoded bytes...
-//		int count = 0;
-//		for (int i = 0; i < len; i++) {
-//			int ch = c[i];
-//			if (ch <= 0x7f) {
-//				count++;
-//			} else if (ch <= 0x7ff) {
-//				count += 2;
-//			} else {
-//				count += 3;
-//			}
-//		}
-//		// Now return the encoded bytes...
-//		byte[] b = new byte[count];
-//		int off = 0;
-//		for (int i = 0; i < len; i++) {
-//			int ch = c[i];
-//			if (ch <= 0x7f) {
-//				b[off++] = (byte) ch;
-//			} else if (ch <= 0x7ff) {
-//				b[off++] = (byte) ((ch >> 6) | 0xc0);
-//				b[off++] = (byte) ((ch & 0x3f) | 0x80);
-//			} else {
-//				b[off++] = (byte) ((ch >> 12) | 0xe0);
-//				b[off++] = (byte) (((ch >> 6) & 0x3f) | 0x80);
-//				b[off++] = (byte) ((ch & 0x3f) | 0x80);
-//			}
-//		}
-//		return b;
-//	}
+	private static byte[] getUTF8Bytes(String s) {
+		char[] c = s.toCharArray();
+		int len = c.length;
+		// Count the number of encoded bytes...
+		int count = 0;
+		for (int i = 0; i < len; i++) {
+			int ch = c[i];
+			if (ch <= 0x7f) {
+				count++;
+			} else if (ch <= 0x7ff) {
+				count += 2;
+			} else {
+				count += 3;
+			}
+		}
+		// Now return the encoded bytes...
+		byte[] b = new byte[count];
+		int off = 0;
+		for (int i = 0; i < len; i++) {
+			int ch = c[i];
+			if (ch <= 0x7f) {
+				b[off++] = (byte) ch;
+			} else if (ch <= 0x7ff) {
+				b[off++] = (byte) ((ch >> 6) | 0xc0);
+				b[off++] = (byte) ((ch & 0x3f) | 0x80);
+			} else {
+				b[off++] = (byte) ((ch >> 12) | 0xe0);
+				b[off++] = (byte) (((ch >> 6) & 0x3f) | 0x80);
+				b[off++] = (byte) ((ch & 0x3f) | 0x80);
+			}
+		}
+		return b;
+	}
 
 //	public byte[] toByteArray() {
 //		return this.byteArrayOutputStream.toByteArray();
+//	}
+
+	private boolean isPutNextEntryEnabled() {
+		return closed == false;
+	}
+
+	private boolean isCloseEntryEnabled() {
+		return closed == false;
+	}
+	
+//	private boolean isFinishEnabled() {
+//		return closed == false && current != null;
+//	}
+
+	private boolean isCloseEnabled() {
+		return true;
+	}
+
+	private boolean isWriteEnabled() {
+		return closed == false && current != null;
+	}
+	
+//	private boolean isSetCommentEnabled() {
+//		return true;
+//	}
+//
+//	private boolean isSetLevelEnabled() {
+//		return true;
+//	}
+//
+//	private boolean isSetMethodEnabled() {
+//		return true;
 //	}
 
 }
