@@ -119,14 +119,8 @@ public class MockFilterOutputStream extends MockOutputStream {
 	 * @see java.io.FilterOutputStream#flush()
 	 * @see java.io.FilterOutputStream#out
 	 */
-	@SuppressWarnings("try")
 	public void close() throws IOException {
-		MockOutputStream ostream = out;
-		try {
-			flush();
-		} catch (Exception e) {
-		} finally {
-			ostream.close();
-		}
+		flush();
+		out.close();
 	}
 }

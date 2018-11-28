@@ -10,8 +10,6 @@ package com.example.zipoutputstream;
 import java.io.IOException;
 import java.util.Vector;
 import java.util.HashSet;
-import java.util.zip.ZipException;
-
 import org.evosuite.epa.EpaAction;
 import org.evosuite.epa.EpaState;
 
@@ -58,14 +56,14 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	private boolean closed = false;
 	private MockByteArrayOutputStream byteArrayOutputStream;
 
-	private static int version(MockZipEntry e) throws ZipException {
+	private static int version(MockZipEntry e) throws MockZipException {
 		switch (e.method) {
 		case DEFLATED:
 			return 20;
 		case STORED:
 			return 10;
 		default:
-			throw new ZipException("unsupported compression method");
+			throw new MockZipException("unsupported compression method");
 		}
 	}
 
@@ -159,7 +157,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	 * 
 	 * @param e
 	 *            the ZIP entry to be written
-	 * @exception ZipException
+	 * @exception MockZipException
 	 *                if a ZIP format error has occurred
 	 * @exception IOException
 	 *                if an I/O error has occurred
@@ -187,17 +185,17 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 			} else if (e.csize == -1) {
 				e.csize = e.size;
 			} else if (e.size != e.csize) {
-				throw new ZipException("STORED entry where compressed != uncompressed size");
+				throw new MockZipException("STORED entry where compressed != uncompressed size");
 			}
 			if (e.size == -1 || e.crc == -1) {
-				throw new ZipException("STORED entry missing size, compressed size, or crc-32");
+				throw new MockZipException("STORED entry missing size, compressed size, or crc-32");
 			}
 			break;
 		default:
-			throw new ZipException("unsupported compression method");
+			throw new MockZipException("unsupported compression method");
 		}
 		if (!names.add(e.name)) {
-			throw new ZipException("duplicate entry: " + e.name);
+			throw new MockZipException("duplicate entry: " + e.name);
 		}
 		current = new XEntry(e, written);
 		xentries.add(current);
@@ -213,7 +211,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	 * Closes the current ZIP entry and positions the stream for writing the
 	 * next entry.
 	 * 
-	 * @exception ZipException
+	 * @exception MockZipException
 	 *                if a ZIP format error has occurred
 	 * @exception IOException
 	 *                if an I/O error has occurred
@@ -231,15 +229,15 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 				if ((current.flag & 8) == 0) {
 					// verify size, compressed size, and crc-32 settings
 					if (e.size != deflater_getBytesRead()) {
-						throw new ZipException("invalid entry size (expected " + e.size + " but got "
+						throw new MockZipException("invalid entry size (expected " + e.size + " but got "
 								+ deflater_getBytesRead() + " bytes)");
 					}
 					if (e.csize != deflater_getBytesWritten()) {
-						throw new ZipException("invalid entry compressed size (expected " + e.csize + " but got "
+						throw new MockZipException("invalid entry compressed size (expected " + e.csize + " but got "
 								+ deflater_getBytesWritten() + " bytes)");
 					}
 					if (e.crc != crc.getValue()) {
-						throw new ZipException("invalid entry CRC-32 (expected 0x" + Long.toHexString(e.crc)
+						throw new MockZipException("invalid entry CRC-32 (expected 0x" + Long.toHexString(e.crc)
 								+ " but got 0x" + Long.toHexString(crc.getValue()) + ")");
 					}
 				} else {
@@ -254,16 +252,16 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 			case STORED:
 				// we already know that both e.size and e.csize are the same
 				if (e.size != written - locoff) {
-					throw new ZipException(
+					throw new MockZipException(
 							"invalid entry size (expected " + e.size + " but got " + (written - locoff) + " bytes)");
 				}
 				if (e.crc != crc.getValue()) {
-					throw new ZipException("invalid entry crc-32 (expected 0x" + Long.toHexString(e.crc) + " but got 0x"
+					throw new MockZipException("invalid entry crc-32 (expected 0x" + Long.toHexString(e.crc) + " but got 0x"
 							+ Long.toHexString(crc.getValue()) + ")");
 				}
 				break;
 			default:
-				throw new ZipException("invalid compression method");
+				throw new MockZipException("invalid compression method");
 			}
 			crc.reset();
 			current = null;
@@ -280,7 +278,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	 *            the start offset in the data
 	 * @param len
 	 *            the number of bytes that are written
-	 * @exception ZipException
+	 * @exception MockZipException
 	 *                if a ZIP file error has occurred
 	 * @exception IOException
 	 *                if an I/O error has occurred
@@ -295,7 +293,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 		}
 
 		if (current == null) {
-			throw new ZipException("no current ZIP entry");
+			throw new MockZipException("no current ZIP entry");
 		}
 		MockZipEntry entry = current.entry;
 		switch (entry.method) {
@@ -305,12 +303,12 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 		case STORED:
 			written += len;
 			if (written - locoff > entry.size) {
-				throw new ZipException("attempt to write past end of STORED entry");
+				throw new MockZipException("attempt to write past end of STORED entry");
 			}
 			out.write(b, off, len);
 			break;
 		default:
-			throw new ZipException("invalid compression method");
+			throw new MockZipException("invalid compression method");
 		}
 		crc.update(b, off, len);
 	}
@@ -348,7 +346,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	/**
 	 * Closes the ZIP output stream as well as the stream being filtered.
 	 * 
-	 * @exception ZipException
+	 * @exception MockZipException
 	 *                if a ZIP file error has occurred
 	 * @exception IOException
 	 *                if an I/O error has occurred

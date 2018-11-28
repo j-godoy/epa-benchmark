@@ -164,7 +164,8 @@ public class MockDeflaterOutputStream extends MockFilterOutputStream {
 			finish();
 			if (usesDefaultDeflater)
 				def.end();
-			out.close();
+			if(!(out instanceof ZipOutputStream))
+				out.close();
 			closed = true;
 		}
 	}

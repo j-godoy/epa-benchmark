@@ -5,6 +5,10 @@
 
 package com.example.zipoutputstream;
 
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+
 import org.junit.Test;
 import com.example.zipoutputstream.MockZipEntry;
 import com.example.zipoutputstream.ZipOutputStream;
