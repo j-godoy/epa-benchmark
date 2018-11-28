@@ -8,6 +8,7 @@ import os
 import time
 import utils
 import pit_mutants_histogram
+import multiprocessing
 
 class Subject:
 
@@ -52,7 +53,12 @@ class EPAConfig:
         self.evosuite_jar_path = setupdir(config['DEFAULT']['EvoSuiteJARPath'])
         self.evosuite_runtime_jar_path = setupdir(config['DEFAULT']['EvoSuiteRuntimeJARPath'])
         self.results_dir_name = setupdir(config['DEFAULT']['ResultsDirName'])
-        self.workers = int(config['DEFAULT']['Workers'])
+        workers = config['DEFAULT']['Workers']
+        if workers == "ALL":
+            self.workers = multiprocessing.cpu_count()
+        else:
+            self.workers = int(workers)
+
         self.hamcrest_jar_path = setupdir(config['DEFAULT']['HamcrestJarPath'])
         
 
