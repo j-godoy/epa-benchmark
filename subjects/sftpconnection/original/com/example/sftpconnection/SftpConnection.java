@@ -68,7 +68,7 @@ public class SftpConnection implements MockBasicConnection {
 			connected = true;
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+//			ex.printStackTrace();
 			// Log.debug("Error: " + ex);
 			return false;
 		}
@@ -88,9 +88,9 @@ public class SftpConnection implements MockBasicConnection {
 				channel.rmdir(file);
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
+//			ex.printStackTrace();
 			// Log.debug("Removal failed (" + ex + ").");
-			ex.printStackTrace();
+//			ex.printStackTrace();
 
 			return -1;
 		}
@@ -152,7 +152,7 @@ public class SftpConnection implements MockBasicConnection {
 			channel.disconnect();
 			session.disconnect();
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			// Log.debug("Sftp2Connection.disconnect()" + e);
 		}
 
@@ -214,7 +214,7 @@ public class SftpConnection implements MockBasicConnection {
 			// Log.debug("Changed path to: " + tmp);
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+//			ex.printStackTrace();
 
 			// System.out.println(tmp);
 			// Log.debug("Could not change directory (" + ex + ").");
@@ -316,7 +316,7 @@ public class SftpConnection implements MockBasicConnection {
 
 			// return files;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+//			ex.printStackTrace();
 			// Log.debug(" Error while listing directory: " + ex);
 			return new String[0];
 		}
@@ -444,8 +444,8 @@ public class SftpConnection implements MockBasicConnection {
 
 			fireProgressUpdate(baseFile, MockDataConnection.DFINISHED + ":" + fileCount, -1);
 		} catch (Exception ex) {
-			ex.printStackTrace();
-			System.out.println(dir + ", " + out);
+//			ex.printStackTrace();
+//			System.out.println(dir + ", " + out);
 			// Log.debug("Transfer error: " + ex);
 			fireProgressUpdate(baseFile, MockDataConnection.FAILED + ":" + fileCount, -1);
 		}
@@ -496,8 +496,8 @@ public class SftpConnection implements MockBasicConnection {
 
 			fireProgressUpdate(baseFile, MockDataConnection.DFINISHED + ":" + fileCount, -1);
 		} catch (Exception ex) {
-			ex.printStackTrace();
-			System.out.println(dir + ", " + out);
+//			ex.printStackTrace();
+//			System.out.println(dir + ", " + out);
 			// Log.debug("Transfer error: " + ex);
 			fireProgressUpdate(baseFile, MockDataConnection.FAILED + ":" + fileCount, -1);
 		}
@@ -606,7 +606,7 @@ public class SftpConnection implements MockBasicConnection {
 		// fireProgressUpdate(file, DataConnection.FAILED, -1);
 		// }
 		catch (MockSftpException ex) {
-			ex.printStackTrace();
+//			ex.printStackTrace();
 			// Log.debug("Error with SFTP IO (" + ex + ")!");
 			fireProgressUpdate(file, MockDataConnection.FAILED, -1);
 		} finally {
@@ -615,7 +615,7 @@ public class SftpConnection implements MockBasicConnection {
 				out.close();
 				in.close();
 			} catch (Exception ex) {
-				ex.printStackTrace();
+//				ex.printStackTrace();
 			}
 		}
 	}
@@ -629,7 +629,7 @@ public class SftpConnection implements MockBasicConnection {
 
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+//			ex.printStackTrace();
 
 			// Log.debug("Could rename file (" + ex + ").");
 
@@ -803,21 +803,6 @@ public class SftpConnection implements MockBasicConnection {
 	 * EPA States
 	 */
 
-	private boolean stateS1() {
-		return !this.connected && this.listeners.isEmpty();
-	}
-
-	private boolean stateS2() {
-		return !this.connected && !this.listeners.isEmpty();
-	}
-
-	private boolean stateS3() {
-		return this.connected && this.listeners.isEmpty();
-	}
-
-	private boolean stateS4() {
-		return this.connected && !this.listeners.isEmpty();
-	}
 }
 
 class MyUserInfo {
