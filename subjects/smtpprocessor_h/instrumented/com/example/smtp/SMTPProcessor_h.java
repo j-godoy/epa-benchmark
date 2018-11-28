@@ -214,10 +214,10 @@ public class SMTPProcessor_h {
 
         } catch (MockIOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		} catch (MockTooManyErrorsException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
     }
 
@@ -270,7 +270,7 @@ public class SMTPProcessor_h {
         }
         //If any exception gets to here uncaught, it means we should just disconnect.
         catch( Throwable e ) {
-           e.printStackTrace();
+//           e.printStackTrace();
            isconnected = false;
         }
 //        finally {
@@ -1032,7 +1032,7 @@ public class SMTPProcessor_h {
             }
         }
         catch ( Exception e ) {
-           e.printStackTrace();
+//           e.printStackTrace();
             write( MESSAGE_SAVE_MESSAGE_ERROR, 0 );
         }
     }

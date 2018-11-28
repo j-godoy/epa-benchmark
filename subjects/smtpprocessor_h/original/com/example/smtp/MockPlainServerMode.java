@@ -104,7 +104,7 @@ public class MockPlainServerMode {
 				return "Authentication Successful".getBytes("US-ASCII");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 			return null;
 		}
