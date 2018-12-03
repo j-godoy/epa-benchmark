@@ -1,0 +1,11 @@
+digraph finite_state_machine {
+	rankdir=LR;
+	size="8,5"
+	node [shape = doublecircle]; S0;
+	node [shape = circle];
+	S0 -> S1 [ label = "NumberFormatStringTokenizer(String)" ];
+	S0 -> S2 [ label = "NumberFormatStringTokenizer(String)" ];
+        S1 -> S1 [label = "hasMoreTokens\nnextToken\nisLetterOrDigitAhead\nnextIsSep" ];
+        S1 -> S2 [label = "nextToken" ];
+        S2 -> S2 [label = "hasMoreTokens\nisLetterOrDigitAhead" ];
+}
