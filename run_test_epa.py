@@ -31,8 +31,7 @@ class AssertType(Enum):
 def run_evosuite(evosuite_jar_path, projectCP, class_name, criterion, epa_path, stopping_condition, search_budget, test_dir='test', report_dir='report'):
     #is_JDBCResultSet = "JDBCResultSet" in class_name
     #extra_parameters = "-Dassertions=\"false\" -Dminimize=\"false\"" if is_JDBCResultSet else ""
-    is_SMTP_h = "SMTPProcessor_h" in class_name
-    extra_parameters = "-Dminimize=\"false\"" if is_SMTP_h else "-Dminimize=\"true\""
+    extra_parameters = "-Dminimize=\"true\""
     command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"2048\" -Dstopping_condition={} -Dsearch_budget={} -Djunit_allow_restricted_libraries=true -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dprint_missed_goals=\"true\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dtimeout="4000" -Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\" -Dassertions=\"true\" -Dcoverage=\"true\" -Djunit_check_timeout="600" -Dassertion_timeout="600" {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, test_dir, report_dir, epa_path, extra_parameters, test_dir, test_dir)
     utils.print_command(command)
     subprocess.check_output(command, shell=True)
