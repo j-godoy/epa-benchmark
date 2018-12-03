@@ -31,7 +31,7 @@ public class MockJSch {
 	public static final String VERSION = "0.1.54";
 
 	@SuppressWarnings("rawtypes")
-	static java.util.Hashtable config = new java.util.Hashtable();
+	java.util.Hashtable config = new java.util.Hashtable();
 
 	@SuppressWarnings("rawtypes")
 	private java.util.Vector sessionPool = new java.util.Vector();

@@ -40,7 +40,7 @@ public abstract class MockChannel {
 	static int index = 0;
 
 	@SuppressWarnings("rawtypes")
-	private static java.util.Vector pool = new java.util.Vector();
+	private java.util.Vector pool = new java.util.Vector();
 
 	static MockChannel getChannel(String type) {
 		if (type.equals("session")) {
@@ -73,7 +73,7 @@ public abstract class MockChannel {
 		return null;
 	}
 
-	static MockChannel getChannel(int id, MockSession session) {
+	MockChannel getChannel(int id, MockSession session) {
 		synchronized (pool) {
 			for (int i = 0; i < pool.size(); i++) {
 				MockChannel c = (MockChannel) (pool.elementAt(i));
@@ -84,7 +84,7 @@ public abstract class MockChannel {
 		return null;
 	}
 
-	static void del(MockChannel c) {
+	void del(MockChannel c) {
 		synchronized (pool) {
 			pool.removeElement(c);
 		}
@@ -537,7 +537,7 @@ public abstract class MockChannel {
 		return close;
 	}
 
-	static void disconnect(MockSession session) {
+	void disconnect(MockSession session) {
 		MockChannel[] channels = null;
 		int count = 0;
 		synchronized (pool) {
@@ -577,7 +577,7 @@ public abstract class MockChannel {
 			}
 			// io=null;
 		} finally {
-			MockChannel.del(this);
+			del(this);
 		}
 	}
 

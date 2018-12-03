@@ -798,11 +798,6 @@ public class SftpConnection implements MockBasicConnection {
 	// {
 	// return null;
 	// }
-
-	/*
-	 * EPA States
-	 */
-
 }
 
 class MyUserInfo {

@@ -75,7 +75,7 @@ public class MockSession {
 	MockInputStream in = null;
 	MockOutputStream out = null;
 
-	static MockRandom random;
+	MockRandom random;
 
 	Buffer buf;
 	MockPacket packet;
