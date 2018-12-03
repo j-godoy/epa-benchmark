@@ -9,7 +9,7 @@
   <state name="S0">
     <enabled_label name="NumberFormatStringTokenizer(String)" />
     <transition destination="S1" label="NumberFormatStringTokenizer(String)" uncertain="false" violates_invariant="false" />
-    <transition destination="S3" label="NumberFormatStringTokenizer(String)" uncertain="false" violates_invariant="false" />
+    <transition destination="S2" label="NumberFormatStringTokenizer(String)" uncertain="false" violates_invariant="false" />
   </state>
 
   <state name="S1">
