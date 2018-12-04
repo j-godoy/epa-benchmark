@@ -30,7 +30,7 @@ public class Buffer {
 	int s;
 
 	public Buffer(int size) {
-		buffer = new byte[size];
+		buffer = new byte[1];
 		index = 0;
 		s = 0;
 	}
@@ -46,16 +46,16 @@ public class Buffer {
 	}
 
 	public void putByte(byte foo) {
-		buffer[index++] = foo;
+//		buffer[index++] = foo;
 	}
 
 	public void putByte(byte[] foo) {
-		putByte(foo, 0, foo.length);
+//		putByte(foo, 0, foo.length);
 	}
 
 	public void putByte(byte[] foo, int begin, int length) {
-		System.arraycopy(foo, begin, buffer, index, length);
-		index += length;
+//		System.arraycopy(foo, begin, buffer, index, length);
+//		index += length;
 	}
 
 	public void putString(byte[] foo) {
@@ -72,7 +72,7 @@ public class Buffer {
 		tmp[1] = (byte) (val >>> 16);
 		tmp[2] = (byte) (val >>> 8);
 		tmp[3] = (byte) (val);
-		System.arraycopy(tmp, 0, buffer, index, 4);
+//		System.arraycopy(tmp, 0, buffer, index, 4);
 		index += 4;
 	}
 
@@ -85,34 +85,38 @@ public class Buffer {
 	}
 
 	public int getInt() {
-		int foo = getShort();
-		foo = ((foo << 16) & 0xffff0000) | (getShort() & 0xffff);
-		return foo;
+//		int foo = getShort();
+//		foo = ((foo << 16) & 0xffff0000) | (getShort() & 0xffff);
+//		return foo;
+		return 0;
 	}
 
 	public long getUInt() {
-		long foo = 0L;
-		long bar = 0L;
-		foo = getByte();
-		foo = ((foo << 8) & 0xff00) | (getByte() & 0xff);
-		bar = getByte();
-		bar = ((bar << 8) & 0xff00) | (getByte() & 0xff);
-		foo = ((foo << 16) & 0xffff0000) | (bar & 0xffff);
-		return foo;
+//		long foo = 0L;
+//		long bar = 0L;
+//		foo = getByte();
+//		foo = ((foo << 8) & 0xff00) | (getByte() & 0xff);
+//		bar = getByte();
+//		bar = ((bar << 8) & 0xff00) | (getByte() & 0xff);
+//		foo = ((foo << 16) & 0xffff0000) | (bar & 0xffff);
+//		return foo;
+		return 0;
 	}
 
 	int getShort() {
-		int foo = getByte();
-		foo = ((foo << 8) & 0xff00) | (getByte() & 0xff);
-		return foo;
+//		int foo = getByte();
+//		foo = ((foo << 8) & 0xff00) | (getByte() & 0xff);
+//		return foo;
+		return 0;
 	}
 
 	public int getByte() {
-		return (buffer[s++] & 0xff);
+//		return (buffer[s++] & 0xff);
+		return 0;
 	}
 
 	void getByte(byte[] foo, int start, int len) {
-		System.arraycopy(buffer, s, foo, start, len);
+//		System.arraycopy(buffer, s, foo, start, len);
 		s += len;
 	}
 

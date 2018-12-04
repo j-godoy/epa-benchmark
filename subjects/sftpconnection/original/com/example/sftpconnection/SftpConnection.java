@@ -798,6 +798,7 @@ public class SftpConnection implements MockBasicConnection {
 	// {
 	// return null;
 	// }
+
 }
 
 class MyUserInfo {

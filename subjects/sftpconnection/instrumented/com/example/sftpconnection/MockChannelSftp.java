@@ -1925,7 +1925,8 @@ public class MockChannelSftp extends MockChannelSession {
 
 			// for (int j = 0; j < vsize; j++) {
 			// path = (String) (v.elementAt(j));
-			sendREMOVE(MockUtil.str2byte(path, fEncoding));
+			byte[] pathb = MockUtil.str2byte(path, fEncoding);
+			sendREMOVE(pathb);
 
 			// header = header(buf, header);
 			// int length = header.length;
