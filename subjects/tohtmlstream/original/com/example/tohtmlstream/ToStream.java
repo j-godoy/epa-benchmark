@@ -29,7 +29,6 @@ import javax.xml.transform.ErrorListener;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import org.xml.sax.ContentHandler;
 
 /**
  * This abstract class is a base class for other stream 
@@ -2972,12 +2971,12 @@ abstract public class ToStream extends SerializerBase implements SerializerConst
             }
     }
 
-    public void setContentHandler(ContentHandler ch)
-    {
-        // this method is really only useful in the ToSAXHandler classes but it is
-        // in the interface.  If the method defined here is ever called
-        // we are probably in trouble.
-    }
+//    public void setContentHandler(ContentHandler ch)
+//    {
+//        // this method is really only useful in the ToSAXHandler classes but it is
+//        // in the interface.  If the method defined here is ever called
+//        // we are probably in trouble.
+//    }
 
     /**
      * Adds the given attribute to the set of attributes, even if there is
