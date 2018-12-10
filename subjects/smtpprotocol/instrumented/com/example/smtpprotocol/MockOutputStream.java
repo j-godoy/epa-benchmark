@@ -26,4 +26,7 @@ public class MockOutputStream {
 	public void write(byte[] stopword) {
 	}
 
+	public void write(char c) {
+	}
+
 }

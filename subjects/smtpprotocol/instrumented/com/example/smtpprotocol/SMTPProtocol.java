@@ -220,8 +220,8 @@ public class SMTPProtocol implements MockAuthenticationServer {
 			}
 
 			// write CRLF
-//			out.write('\r');
-//			out.write('\n');
+			out.write('\r');
+			out.write('\n');
 
 			// flush the stream
 			out.flush();
