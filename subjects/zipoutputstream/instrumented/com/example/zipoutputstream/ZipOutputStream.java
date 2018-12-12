@@ -12,7 +12,6 @@ import java.util.Vector;
 import java.util.HashSet;
 import org.evosuite.epa.EpaAction;
 import org.evosuite.epa.EpaState;
-
 import java.util.zip.CRC32;
 //import java.util.zip.Deflater;
 

@@ -68,16 +68,16 @@ public class MockZipEntry implements MockZipConstants, Cloneable {
 	 * @param e
 	 *            a zip Entry object
 	 */
-	public MockZipEntry(MockZipEntry e) {
-		name = e.name;
-		time = e.time;
-		crc = e.crc;
-		size = e.size;
-		csize = e.csize;
-		method = e.method;
-		extra = e.extra;
-		comment = e.comment;
-	}
+//	public MockZipEntry(MockZipEntry e) {
+//		name = e.name;
+//		time = e.time;
+//		crc = e.crc;
+//		size = e.size;
+//		csize = e.csize;
+//		method = e.method;
+//		extra = e.extra;
+//		comment = e.comment;
+//	}
 
 	/**
 	 * Returns the name of the entry.

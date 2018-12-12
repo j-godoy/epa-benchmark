@@ -36,7 +36,8 @@ public class MockFilterOutputStream extends MockOutputStream {
 	 *                if an I/O error occurs.
 	 */
 	public void write(int b) throws IOException {
-		out.write(b);
+		if(!(out instanceof ZipOutputStream))
+			out.write(b);
 	}
 
 	/**
