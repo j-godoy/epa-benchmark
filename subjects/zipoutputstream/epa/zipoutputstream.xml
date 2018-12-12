@@ -14,6 +14,7 @@
   <state name="S1">
     <enabled_label name="putNextEntry" />
     <enabled_label name="closeEntry" />
+	<enabled_label name="close" />
     <transition destination="S3" label="putNextEntry" uncertain="false" violates_invariant="false" />
     <transition destination="S1" label="closeEntry" uncertain="false" violates_invariant="false" />
 	<transition destination="S2" label="close" uncertain="false" violates_invariant="false" />
