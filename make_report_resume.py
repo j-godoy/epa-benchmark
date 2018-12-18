@@ -61,12 +61,15 @@ def read_evosuite_csv(file_path):
 def read_generations_csv(file_path):
     generations = 'N/A'
     total_time = 'N/A'
-    with open(file_path, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            generations = row['Generations']
-            total_time = int(row['Total_Time'])/1000
-
+    try:
+        with open(file_path, newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                generations = row['Generations']
+                total_time = int(row['Total_Time'])/1000
+    except:
+        print("Error in \"read_generations_csv\": File {} doesn't exists. Randoop doesnt generate that file".format(file_path))
+        
     return generations, total_time
 
 

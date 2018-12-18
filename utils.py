@@ -13,6 +13,13 @@ def get_package_dir(package_array):
         packages_dir += os.path.sep
     return packages_dir
 
+def get_package_name_from_qualifiedname(class_name):
+    package_name = ""
+    for f in class_name.split(".")[:-1]:
+        package_name += f
+        package_name += "."
+    return package_name[:-1]
+
 def remove_and_make_dirs(path):
     if os.path.exists(path):
         shutil.rmtree(path)
@@ -45,6 +52,18 @@ def add_fails_in_test(java_file):
 
     shutil.move(java_file, java_file+".original.withoutfails")
     save_file(java_file, new_file)
+    
+"""def rename_class(java_file, old_class_name, new_class_name):
+    new_file_content = ""
+    with open(java_file) as file:
+        for line in file:
+            line = re.sub("class " + old_class_name, "class " + new_class_name, line.rstrip())
+            #line = re.sub("@Suite.SuiteClasses", "//@Suite.SuiteClasses", line.rstrip())
+            #line = re.sub("@RunWith", "//@RunWith", line.rstrip())
+            new_file_content += line + "\n"
+
+    save_file(java_file, new_file_content)
+    shutil.move(java_file, java_file.replace(old_class_name, new_class_name))"""
             
 def save_file(path, content):
     file = open(path,"w")
