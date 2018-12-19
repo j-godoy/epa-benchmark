@@ -35,8 +35,10 @@ def replace_assert_catch_in_test(java_file, assert_type):
         for line in file:
             if assert_type.upper() in [run_test_epa.AssertType.NO_ASSERT.name, run_test_epa.AssertType.NO_ASSERT_EXCEPTION.name]:
                 line = re.sub('\sassert','//assert', line.rstrip())
+                line = re.sub('\sorg.junit.Assert.assert','//org.junit.Assert.assert', line.rstrip())
             if assert_type.upper() == run_test_epa.AssertType.NO_ASSERT_EXCEPTION.name:
                 line = re.sub('catch\\(\w*','catch(Exception', line.rstrip())
+                line = re.sub('catch \\((\w.+\w)* ','catch (Exception ', line.rstrip())
             new_file += line+"\n"
 
     shutil.move(java_file, java_file+".original")
