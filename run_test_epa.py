@@ -55,7 +55,7 @@ def run_randoop(projectCP, class_name, randoop_jar_path, testdir, search_budget)
     out_file = os.path.join(testdir, "out.txt")
     package = class_name.split(".")[0:-1]
     packages_dir = utils.get_package_dir(package)
-    command = 'java -classpath {}{}{} randoop.main.Main gentests --testclass={} --time-limit={} --junit-package-name={} --junit-output-dir={} > {} 2> {}'.format(projectCP, sep, randoop_jar_path, class_name, search_budget, packages_dir.replace(os.path.sep, ".")[:-1], testdir, out_file, err_file)
+    command = 'java -classpath {}{}{} randoop.main.Main gentests --testclass={} --time-limit={} --junit-package-name={} --npe-on-non-null-input=expected --junit-output-dir={} > {} 2> {}'.format(projectCP, sep, randoop_jar_path, class_name, search_budget, packages_dir.replace(os.path.sep, ".")[:-1], testdir, out_file, err_file)
     utils.print_command(command)
     subprocess.check_output(command, shell=True)
     testdir_full = os.path.join(testdir, packages_dir)
