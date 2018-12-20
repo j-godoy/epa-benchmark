@@ -246,29 +246,45 @@ def copy_pitest_csv(name, workdir, all_report_dir):
             elif 'jacoco' in line:
                 copy_csv(file_path, '{}_jacoco'.format(name), all_report_dir)
 
-def cp_testsuite_if_exists_in_other_results(curr_bug_type, subdir_testgen, generated_test_report_evosuite_dir, class_name, name):
+def cp_testsuite_if_exists_in_other_results(curr_bug_type, subdir_testgen, generated_test_report_evosuite_dir, class_name, criterion):
     other_bug_type = BugType.ALL.name.lower() if(curr_bug_type.upper() == BugType.ERRPROT.name) else BugType.ERRPROT.name.lower()
     other_generated_test_dir = subdir_testgen.replace(curr_bug_type, other_bug_type)
     other_generated_test_report_evosuite_dir = generated_test_report_evosuite_dir.replace(curr_bug_type, other_bug_type)
-    test_file_path = os.path.join(other_generated_test_dir, "test", utils.get_package_dir(class_name.split(".")[0:-1]), name + "_ESTest.java")
-    testsuite_exists = check_if_exists_testgendir_in_other_bug_type(other_generated_test_report_evosuite_dir, class_name, test_file_path)
+    other_full_test_dir = os.path.join(other_generated_test_dir, "test", utils.get_package_dir(class_name.split(".")[0:-1]))
+    testsuite_exists = check_if_exists_testgendir_in_other_bug_type(other_generated_test_report_evosuite_dir, other_full_test_dir, criterion)
     if(testsuite_exists):
         if os.path.exists(subdir_testgen):
             shutil.rmtree(subdir_testgen)
         shutil.copytree(other_generated_test_dir, subdir_testgen)
-        print("copy {}".format(test_file_path))
+        print("TEST ALREADY GENERATED! coping from {}".format(other_generated_test_dir))
         #if other_bug_type == ERRPROT, then i need to move original test file (with asserts)
         if(other_bug_type.upper() == BugType.ERRPROT.name):
-            test_file_path = test_file_path.replace(other_bug_type, curr_bug_type)
-            os.unlink(test_file_path)
-            shutil.move(test_file_path+".original", test_file_path)
+            curr_full_test_dir = other_full_test_dir.replace(other_bug_type, curr_bug_type)
+            for test_file_name in os.listdir(curr_full_test_dir):
+                if not test_file_name.endswith(".original"):
+                    test_file_path = os.path.join(curr_full_test_dir, test_file_name)
+                    os.unlink(test_file_path)
+            for test_file_name in os.listdir(curr_full_test_dir):
+                if test_file_name.endswith(".original"):
+                    #test_file_path = test_file_path.replace(other_bug_type, curr_bug_type)
+                    #os.unlink(test_file_path)
+                    test_file_path = os.path.join(curr_full_test_dir, test_file_name)
+                    shutil.move(test_file_path, test_file_path.replace(".original",""))
     return testsuite_exists
 
     
-def check_if_exists_testgendir_in_other_bug_type(generated_test_report_evosuite_dir, class_name, test_file_path):
-    exists = True
-    exists = exists and os.path.exists(os.path.join(generated_test_report_evosuite_dir, "statistics.csv"))
-    exists = exists and os.path.exists(test_file_path)
+def check_if_exists_testgendir_in_other_bug_type(generated_test_report_evosuite_dir, test_dir, criterion):
+    exists = os.path.exists(test_dir)
+    if not exists:
+        return False
+    if not "randoop" in criterion:
+        exists = exists and os.path.exists(os.path.join(generated_test_report_evosuite_dir, "statistics.csv"))
+    exists_java_file = False
+    for test_file_name in os.listdir(test_dir):
+        if "test" in test_file_name.lower() and test_file_name.endswith(".java"):
+            exists_java_file = True
+            break
+    exists = exists and exists_java_file
     return exists
 
 lock = threading.Lock()
@@ -325,7 +341,7 @@ class RunTestEPA(threading.Thread):
             curr_bug_type = self.bug_type
             try:
                 lock.acquire()
-                testsuite_exists = cp_testsuite_if_exists_in_other_results(curr_bug_type, self.subdir_testgen, self.generated_test_report_evosuite_dir, self.class_name, self.class_name.split(".")[-1])
+                testsuite_exists = cp_testsuite_if_exists_in_other_results(curr_bug_type, self.subdir_testgen, self.generated_test_report_evosuite_dir, self.class_name, self.criterion)
             except:
                 testsuite_exists = False
                 print("error copying from other bug_type folder to {}".format(self.subdir_testgen))
