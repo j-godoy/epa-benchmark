@@ -53,18 +53,12 @@ def read_evosuite_csv(file_path):
                 epaadjacentedges_covered = row['Covered_Goals']
                 epaadjacentedges_tot = row['Total_Goals']
     
-    try:
-        epaexcepval_covered = int(epatransition_covered)+int(epaexception_covered)
-    except:
-        epaexcepval_covered = 'N/A'
+    epaexcepval_covered = int(epatransition_covered)+int(epaexception_covered)
     try:
         epaexcepval_tot = int(epatransition_tot)+int(epaexception_tot)
     except:
         epaexcepval_tot = 'N/A'
-    try:
-        epaexcepval_coverage = int(epaexcepval_covered)/int(epaexcepval_tot)
-    except:
-        epaexcepval_coverage = 'N/A'
+    epaexcepval_coverage = int(epaexcepval_covered)/int(epaexcepval_tot)
 
     return epatransition_coverage, epatransition_covered, epatransition_tot, epaexception_coverage, epaexception_covered, epaexception_tot, epaexcepval_coverage, epaexcepval_covered, epaexcepval_tot, epaadjacentedges_coverage, epaadjacentedges_covered, epaadjacentedges_tot
 
