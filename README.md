@@ -2,7 +2,10 @@
 
 # Prerequisites
 - [Maven](https://maven.apache.org/download.cgi)
+	- sudo apt install maven
 - [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+	- sudo add-apt-repository ppa:webupd8team/java
+	- sudo apt update; sudo apt install oracle-java8-installer
 - [python3.6](https://www.python.org/downloads/release/python-360/)
 - [R](https://www.r-project.org/)
 - [Epa-evosuite](https://github.com/j-godoy/epa-evosuite)
