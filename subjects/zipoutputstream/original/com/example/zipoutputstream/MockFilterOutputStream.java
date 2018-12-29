@@ -123,6 +123,7 @@ public class MockFilterOutputStream extends MockOutputStream {
 	 */
 	public void close() throws IOException {
 		flush();
-		out.close();
+		if(!(out instanceof ZipOutputStream))
+			out.close();
 	}
 }
