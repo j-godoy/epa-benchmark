@@ -295,7 +295,8 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 			if (written - locoff > entry.size) {
 				throw new MockZipException("attempt to write past end of STORED entry");
 			}
-			out.write(b, off, len);
+			if(!(out instanceof ZipOutputStream))
+				out.write(b, off, len);
 			break;
 		default:
 			throw new MockZipException("invalid compression method");
