@@ -104,7 +104,8 @@ public class MockFilterOutputStream extends MockOutputStream {
 	 * @see java.io.FilterOutputStream#out
 	 */
 	public void flush() throws IOException {
-		out.flush();
+		if(!(out instanceof ZipOutputStream))
+			out.flush();
 	}
 
 	/**
