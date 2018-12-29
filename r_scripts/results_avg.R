@@ -20,7 +20,7 @@ budgets = unique(stats$BUD)
 printHeader <- function()
 {
 																															
-	cat("SUBJECT", "BUDGET", "BUG_TYPE", "CRITERION", "REP", "LINE", "BRNCH", "EPA%", "EXCEP%", "ADJAC%", "PIMUT", sep=", ")
+	cat("SUBJECT", "BUDGET", "BUG_TYPE", "CRITERION", "REP", "LINE", "BRNCH", "EPA%", "EXCEP%", "ADJAC%", "PIMUT", "GENS", sep=", ")
 	cat("\n")
 }
 
@@ -43,10 +43,10 @@ printPitMutationScoreMedian <- function() {
 					adjaccov_avg = paste(round(mean(default_rows$ADJACCOV), digits=3)*100, "%", sep="")
 					adjac = paste("(", round(mean(default_rows$ADJAC), digits=2), "/", mean(default_rows$ADJACTOT), ")", sep="")
 					pit_avg = paste(round(mean(default_rows$PIMUT), digits=3)*100, "%", sep="")
-			
+					gens_avg = round(mean(default_rows$GENS), digits=3)
 					repeticiones = length(default_rows$LINE)
 
-					cat(name_subj, budget, error_type, criterion, repeticiones, line_avg, brnch_avg, paste(epacov_avg, epa, sep=""), paste(excepcov_avg, excep, sep=""), paste(adjaccov_avg, adjac, sep=""), pit_avg, sep=", ")
+					cat(name_subj, budget, error_type, criterion, repeticiones, line_avg, brnch_avg, paste(epacov_avg, epa, sep=""), paste(excepcov_avg, excep, sep=""), paste(adjaccov_avg, adjac, sep=""), pit_avg, gens_avg, sep=", ")
 					cat("\n")
 				}
 			}
