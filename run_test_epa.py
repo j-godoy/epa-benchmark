@@ -416,9 +416,11 @@ class RunTestEPA(threading.Thread):
             
             statistics_testgen_csv = ""
             if not self.criterion == "randoop":
-                statistics_testgen_csv = os.path.join(self.generated_test_report_evosuite_dir, "statistics.csv")
-                copy_csv(statistics_testgen_csv, 'statistics_testgen_{}'.format(self.name), all_report_dir)
-            
+                try:
+                    statistics_testgen_csv = os.path.join(self.generated_test_report_evosuite_dir, "statistics.csv")
+                    copy_csv(statistics_testgen_csv, 'statistics_testgen_{}'.format(self.name), all_report_dir)
+                except:
+                    None
             mujava_csv = os.path.join(self.generated_report_mujava, "mujava_report.csv")
             if os.path.exists(mujava_csv):
                 copy_csv(mujava_csv, 'mujava_{}'.format(self.name), all_report_dir)
