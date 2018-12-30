@@ -230,7 +230,7 @@ public class SftpConnection implements MockBasicConnection {
 			tmp = pwd.substring(0, pwd.lastIndexOf("/"));
 		}
 
-		return tmp.substring(0, tmp.lastIndexOf("/") + 1);
+		return true;
 	}
 
 	private String getLocalPath() {
