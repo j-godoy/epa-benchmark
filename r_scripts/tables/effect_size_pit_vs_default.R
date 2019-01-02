@@ -18,6 +18,9 @@ decimals_size_pvalue = 2
 decimals_size_a12 = 2
 digits_size_to_percentage = 1
 
+
+criterion_versus = "line_branch_exception"
+
 criterios <- list()
 i = 2
 while( i <= length(args))
@@ -64,7 +67,7 @@ printHeader <- function()
 	{
 		curr_criterio = criterios[[i]]		
 		i = i + 1
-		if (curr_criterio == "line_branch_exception")
+		if (curr_criterio == criterion_versus)
 		{
 			next
 		}
@@ -107,6 +110,7 @@ roundDecimals <- function(value)
 
 calculateEffectSize <- function()
 {
+
 	for(subj in subjects)
 	{
 		name_subj = strsplit(subj, "[.]")[[1]]
@@ -115,7 +119,7 @@ calculateEffectSize <- function()
 		for (budget in budgets)
 		{
 			# LINE:BRANCH:EXCEPTION
-			default_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception' & BUD==budget)
+			default_rows  = subset(stats,SUBJ==subj & TOOL==criterion_versus & BUD==budget)
 			default_errors = default_rows$PIMUT
 			default_mean_pit = round(mean(default_errors)*100, digits=digits_size_to_percentage)
 			default_mean_pit = roundDecimals(default_mean_pit)
@@ -126,7 +130,7 @@ calculateEffectSize <- function()
 			{
 				criterio = criterios[[i]]
 				i = i + 1
-				if (criterio == "line_branch_exception")
+				if (criterio == criterion_versus)
 				{
 					next
 				}
@@ -140,7 +144,7 @@ calculateEffectSize <- function()
 				cat(", ", round(my_measureA, digits=decimals_size_a12))
 				if (length(default_errors)==0)
 				{
-					stop("ERROR!! Does not exists criterion line_branch_exception in file", csv_filename, call.=FALSE)
+					stop("ERROR!! Does not exists criterion 'versus' in file", csv_filename, call.=FALSE)
 					return
 				} else
 				{
