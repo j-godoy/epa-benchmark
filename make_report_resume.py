@@ -1,4 +1,5 @@
 import csv
+from tkinter.tix import COLUMN
 
 header_names = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ',
                 'TOOL', 'LINE', 'BRNCH', 'EPACOV', 'EPA',
@@ -6,7 +7,7 @@ header_names = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ',
                 'EXCEPVAL', 'EXCEPVALTOT', 'ADJACCOV', 'ADJAC', 'ADJACTOT',
                 'ERR', 'NERR', 'TERR', 'MUT', 'TIME',
                 'LOC', 'PIMUT', 'ERRF', 'MJMUT', 'MUT_KILLED',
-                'ERRPROT_KILLED', 'GENS', 'TOT_TIME']
+                'ERRPROT_KILLED', 'GENS', 'TOT_TIME', 'TS_LOC']
 
 def write_row(writer, row):
     writer.writerow({'ID': row[0], 'BUG_TYPE': row[1], 'STOP_COND': row[2], 'BUD': row[3], 'SUBJ': row[4],
@@ -16,6 +17,11 @@ def write_row(writer, row):
                      'ERR': row[20], 'NERR': row[21], 'TERR': row[22], 'MUT': row[23], 'TIME': row[24],
                      'LOC': row[25], 'PIMUT': row[26], 'ERRF': row[27], 'MJMUT': row[28], 'MUT_KILLED': row[29],
                      'ERRPROT_KILLED': row[30], 'GENS': row[31], 'TOT_TIME': row[32]});
+                     
+header_names_test_suite_loc = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ', 'TOOL', 'TS_LOC']
+
+def write_row_test_suite_loc(writer, row):
+    writer.writerow({'ID': row[0], 'BUG_TYPE': row[1], 'STOP_COND': row[2], 'BUD': row[3], 'SUBJ': row[4], 'TOOL': row[5], 'TS_LOC': row[6]});
 
 def get_complete_row(row):
     return [row[0], row[1], row[2], row[3], row[4],
@@ -148,11 +154,27 @@ def make_report_resume(target_class, evosuite, statistics_testgen, jacoco, pit, 
         row = report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, runid, bug_type, stopping_condition, search_budget, criterion, mujava_csv)
         row = get_complete_row(row)
         write_row(writer, row)
+        
+def make_report_resume_test_suite_loc(target_class, output_file, runid, stopping_condition, search_budget, criterion, bug_type, javancss_file):
+    file = open(javancss_file, "r")
+    init_loc_index = 11 
+    ts_loc = int(file.read()[init_loc_index:])
+    row = [runid, bug_type, stopping_condition, search_budget, target_class, criterion, ts_loc]
+        
+    with open(output_file, 'w', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=header_names_test_suite_loc)
+        writer.writeheader()
+        write_row_test_suite_loc(writer, row)
 
 
 def merge_final_results(final_results, output_file):
+    # hack
+    # Sólo si tiene 7 columnas, entonces uso el header para TS_LOC
+    column_size = len(open(final_results[0], "r").readline().split(","))
+    header = header_names if column_size != 7 else header_names_test_suite_loc
+    output_file = output_file if column_size != 7 else output_file.replace(".csv","_TS_LOC.csv")
     with open(output_file, 'w', newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=header_names)
+        writer = csv.DictWriter(csvfile, fieldnames=header)
         writer.writeheader()
 
         for resume in final_results:
@@ -161,6 +183,9 @@ def merge_final_results(final_results, output_file):
                     reader = csv.reader(csvfile)
                     next(reader) # Evito el header
                     for row in reader:
-                        write_row(writer, row)
+                        if len(row) != 7:
+                            write_row(writer, row)
+                        else:
+                            write_row_test_suite_loc(writer, row)
             except FileNotFoundError:
                 print("{} doesn't exists".format(resume))
