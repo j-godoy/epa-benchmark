@@ -6,6 +6,7 @@ import shutil
 from enum import Enum
 
 from make_report_resume import make_report_resume
+from make_report_resume import make_report_resume_test_suite_loc
 import mujava_coverage
 import utils
 from pit_mutants_histogram import pit_mutants_histogram
@@ -17,6 +18,7 @@ class EpatestingMethod(Enum):
     BOTH_WITHOUT_MUJAVA = 4
     ONLY_METRICS_WITHOUT_MUJAVA = 5
     ONLY_PIT_MUTANTS_HISTOGRAM = 6
+    ONLY_TEST_SUITE_LOC = 7
     
 class BugType(Enum):
     ALL = 1
@@ -290,7 +292,7 @@ def check_if_exists_testgendir_in_other_bug_type(generated_test_report_evosuite_
 lock = threading.Lock()
 class RunTestEPA(threading.Thread):
 
-    def __init__(self, name, junit_jar, instrumented_code_dir, original_code_dir, evosuite_classes, evosuite_jar_path, evosuite_runtime_jar_path, class_name, epa_path, criterion, bug_type, stopping_condition, search_budget, runid, method, results_dir_name, subdir_mutants, error_prot_list, ignore_mutants_list, hamcrest_jar_path, randoop_jar_path):
+    def __init__(self, name, junit_jar, instrumented_code_dir, original_code_dir, evosuite_classes, evosuite_jar_path, evosuite_runtime_jar_path, class_name, epa_path, criterion, bug_type, stopping_condition, search_budget, runid, method, results_dir_name, subdir_mutants, error_prot_list, ignore_mutants_list, hamcrest_jar_path, randoop_jar_path, javancss_jar_path):
         threading.Thread.__init__(self)
 
         self.subdir_testgen = os.path.join(results_dir_name, "testgen", name, bug_type, stopping_condition, search_budget, criterion.replace(':', '_').lower(), "{}".format(runid))
@@ -322,6 +324,7 @@ class RunTestEPA(threading.Thread):
         self.home_dir = os.path.dirname(os.path.abspath(__file__))
         self.bin_original_code_dir = get_subject_original_bin_dir(results_dir_name, name)
         self.bin_instrumented_code_dir = get_subject_instrumented_bin_dir(results_dir_name, name)
+        self.results_dir_name = results_dir_name
         self.method = method
         self.assert_type = AssertType.ASSERT.name # default
         
@@ -329,6 +332,7 @@ class RunTestEPA(threading.Thread):
         self.ignore_mutants_list = ignore_mutants_list
         self.hamcrest_jar_path = hamcrest_jar_path
         self.randoop_jar_path = randoop_jar_path
+        self.javancss_jar_path = javancss_jar_path
 
     def run(self):
         if self.method in [EpatestingMethod.ONLY_TESTGEN.value, EpatestingMethod.BOTH.value, EpatestingMethod.BOTH_WITHOUT_MUJAVA.value]:
@@ -443,6 +447,25 @@ class RunTestEPA(threading.Thread):
         if self.method in [EpatestingMethod.ONLY_PIT_MUTANTS_HISTOGRAM.value]:
             mutations_csv = get_mutation_csv_pit(self.generated_report_pitest_dir)
             pit_mutants_histogram(self.criterion, self.search_budget, self.stopping_condition, mutations_csv, self.generated_test_dir, self.generated_pitest_killer_test, self.runid)
+        
+        if self.method in [EpatestingMethod.ONLY_TEST_SUITE_LOC.value]:
+            package = self.class_name.split(".")[0:-1]
+            package_dir = utils.get_package_dir(package)
+            only_class_name = self.class_name.split(".")[-1]
+            criterion = get_alternative_criterion_names(self.criterion)
+            test_suite_file_path = os.path.join(self.generated_test_dir, package_dir, only_class_name +"_ESTest.java")
+            
+            result_jncss_temp = os.path.join(self.results_dir_name, "javancss_temp", "{}_{}_{}_{}_{}".format(self.bug_type, self.stopping_condition, self.search_budget, self.class_name, criterion))
+            utils.make_dirs_if_not_exist(result_jncss_temp)
+            
+            result_jncss_temp = os.path.join(result_jncss_temp, "{}.txt".format(self.runid))
+            command = "java -jar {} {} > {}".format(self.javancss_jar_path, test_suite_file_path, result_jncss_temp)
+            utils.print_command(command)
+            subprocess.check_output(command, shell=True)
+            
+            resume_csv = os.path.join(self.subdir_metrics, 'resume.csv')
+            utils.make_dirs_if_not_exist(self.subdir_metrics)
+            make_report_resume_test_suite_loc(self.class_name, resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, result_jncss_temp)
             
 def get_alternative_criterion_names(criterion):
     if (criterion == "line:branch"):
