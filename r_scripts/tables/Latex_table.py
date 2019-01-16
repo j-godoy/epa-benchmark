@@ -17,17 +17,25 @@ def generate_latex_table(r_results_file, output):
     def clean_and_get_matrix(results):
         table_matrix = []
         for line in results:
+            line = line.replace("Evosuite+SMC", "\\EVOSUITESMC")
+            line = line.replace("EvosuiteMOSA", "\\EVOSUITEMOSA")
+            line = line.replace("RANDOOP", "\\RANDOOP")
+            line = line.replace("Evosuite+EPAXP", "\\EVOSUITEPAXP")
+            line = line.replace("Evosuite+EPA", "\\EVOSUITEPA")
+            line = line.replace("Evosuite", "\\EVOSUITE")
             line = line.replace("A12", "$\\vargha$")
             line = line.replace("TxExcep EPAX", "$|\delta^E|$")
             line = line.replace("TxPairs EPAXP", "$|all_txs_pairs|$")
             line = line.replace("TxExcep", "$|\delta^E|$")
             line = line.replace("TxPairs", "$|all_txs_pairs|$")
             line = line.replace("Tx", "$|\delta|$")
+			
+            line = line.replace("NumberFormatStringTokenizer", "NFST")
             
-            line = line.replace("DEF", "$\\base$")
-            line = line.replace("EPAXP", "$\epaxp$")
-            line = line.replace("EPAX", "$\epax$")
-            line = line.replace("EPA", "$\epa$")
+            #line = line.replace("DEF", "$\\base$")
+            #line = line.replace("EPAXP", "$\epaxp$")
+            #line = line.replace("EPAX", "$\epax$")
+            #line = line.replace("EPA", "$\epa$")
             
             line = line.replace("line_branch_exception_epaadjacentedges", "$\\base$ + $\epaxp$")
             line = line.replace("line_branch_exception_epatransition_epaexception", "$\\base$ + $\epax$")
@@ -217,7 +225,15 @@ def generate_latex_table(r_results_file, output):
             is_content = is_content or row[0] == EOH
         
         return content
-            
+    
+    def order_content(content):
+        content_list = content.split("\n")
+        content_list = sorted(content_list, key=lambda L: (L.lower(), L))
+        content = ""
+        for line in content_list:
+            content += line + "\n"
+        return content
+
 
     if not os.path.exists(r_results_file):
         print("generate_latex_table: Does not exits file (r_results_file): {}".format(r_results_file))
@@ -234,6 +250,7 @@ def generate_latex_table(r_results_file, output):
     header = get_latex_header(table_matrix)
     p_values_signif(table_matrix, p_values_index)
     content = get_content(table_matrix)
+    content = order_content(content)
     declaration_end = "{}\n{}\n".format("\end{tabular}", "\end{table*}")
                 
     table = declaration_init
