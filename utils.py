@@ -26,8 +26,10 @@ def remove_and_make_dirs(path):
     os.makedirs(path)
 
 def make_dirs_if_not_exist(path):
+    lock.acquire()
     if not os.path.exists(path):
         os.makedirs(path)
+    lock.release()
     
 def replace_assert_catch_in_test(java_file, assert_type):
     new_file = ""

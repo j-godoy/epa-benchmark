@@ -1,5 +1,4 @@
 import csv
-from tkinter.tix import COLUMN
 
 header_names = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ',
                 'TOOL', 'LINE', 'BRNCH', 'EPACOV', 'EPA',
@@ -18,10 +17,10 @@ def write_row(writer, row):
                      'LOC': row[25], 'PIMUT': row[26], 'ERRF': row[27], 'MJMUT': row[28], 'MUT_KILLED': row[29],
                      'ERRPROT_KILLED': row[30], 'GENS': row[31], 'TOT_TIME': row[32]});
                      
-header_names_test_suite_loc = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ', 'TOOL', 'TS_LOC']
+header_names_ts_loc_exceptions = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ', 'TOOL', 'TS_LOC', 'EXCEPTIONS']
 
-def write_row_test_suite_loc(writer, row):
-    writer.writerow({'ID': row[0], 'BUG_TYPE': row[1], 'STOP_COND': row[2], 'BUD': row[3], 'SUBJ': row[4], 'TOOL': row[5], 'TS_LOC': row[6]});
+def write_row_test_suite_loc_and_exceptions(writer, row):
+    writer.writerow({'ID': row[0], 'BUG_TYPE': row[1], 'STOP_COND': row[2], 'BUD': row[3], 'SUBJ': row[4], 'TOOL': row[5], 'TS_LOC': row[6], 'EXCEPTIONS': row[7]});
 
 def get_complete_row(row):
     return [row[0], row[1], row[2], row[3], row[4],
@@ -155,24 +154,64 @@ def make_report_resume(target_class, evosuite, statistics_testgen, jacoco, pit, 
         row = get_complete_row(row)
         write_row(writer, row)
         
-def make_report_resume_test_suite_loc(target_class, output_file, runid, stopping_condition, search_budget, criterion, bug_type, javancss_file):
+def make_report_resume_test_suite_loc_and_exceptions(target_class, output_file, runid, stopping_condition, search_budget, criterion, bug_type, javancss_file, testgen_log_file, epacoverage_csv, statistics_testgen_csv):
+    def get_exceptions(target_class, output_file, runid, stopping_condition, search_budget, criterion, bug_type, testgen_log_file, epacoverage_csv, statistics_testgen_csv):
+        def get_exceptions_in_testgenlog(testgen_log_file):
+            file = open(testgen_log_file, "r")
+            file_txt = file.read().split("\n")
+            exceptions = 'N/A'
+            line_index = 1
+            for line in file_txt:
+                if "Coverage of criterion EXCEPTION" in line:
+                    #line with exceptions info in two line below
+                    line_index += 2
+                    break
+                line_index += 1
+            if line_index != 0:
+                exceptions = file_txt[line_index-1][27:]
+            return exceptions
+        
+        def read_criterion_covered_goals(file_path, criterion_to_search):
+            criterion_covered_goals = 'N/A'
+            
+            with open(file_path, newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    if criterion_to_search == row['criterion']:
+                        criterion_covered_goals = row['Covered_Goals']
+            
+            return criterion_covered_goals
+            
+        if ("line_branch_exception_epaadjacentedges" in criterion or "line_branch_exception_epatransition" in criterion) and ("Socket" in target_class or "ListItr" in target_class):
+            total_criterion_covered_goals = read_criterion_covered_goals(statistics_testgen_csv, criterion.upper().replace("_",";"))
+            criterion_covered_goals_without_exceptions = read_criterion_covered_goals(epacoverage_csv, criterion.upper().replace("_",";"))
+            exceptions = int(total_criterion_covered_goals) - int(criterion_covered_goals_without_exceptions)
+        else:
+            # si el testgenlog incluye "Coverage of criterion EXCEPTION", con la linea siguiente alcanza
+            exceptions = get_exceptions_in_testgenlog(testgen_log_file)
+    
+        return exceptions
+    
+    
     file = open(javancss_file, "r")
     init_loc_index = 11 
     ts_loc = int(file.read()[init_loc_index:])
-    row = [runid, bug_type, stopping_condition, search_budget, target_class, criterion, ts_loc]
+    exceptions = get_exceptions(target_class, output_file, runid, stopping_condition, search_budget, criterion, bug_type, testgen_log_file, epacoverage_csv, statistics_testgen_csv)
+    row = [runid, bug_type, stopping_condition, search_budget, target_class, criterion, ts_loc, exceptions]
         
     with open(output_file, 'w', newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=header_names_test_suite_loc)
+        writer = csv.DictWriter(csvfile, fieldnames=header_names_ts_loc_exceptions)
         writer.writeheader()
-        write_row_test_suite_loc(writer, row)
+        write_row_test_suite_loc_and_exceptions(writer, row)
 
 
 def merge_final_results(final_results, output_file):
     # hack
-    # Sólo si tiene 7 columnas, entonces uso el header para TS_LOC
+    # Solo si tiene 8 columnas, entonces uso el header para TS_LOC/Exceptions
+    hack_columns = 8
     column_size = len(open(final_results[0], "r").readline().split(","))
-    header = header_names if column_size != 7 else header_names_test_suite_loc
-    output_file = output_file if column_size != 7 else output_file.replace(".csv","_TS_LOC.csv")
+    header = header_names if column_size != hack_columns else header_names_ts_loc_exceptions
+    output_file = output_file if column_size != hack_columns else output_file.replace(".csv","_TS_LOC_EXCEPTIONS.csv")
     with open(output_file, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=header)
         writer.writeheader()
@@ -183,9 +222,9 @@ def merge_final_results(final_results, output_file):
                     reader = csv.reader(csvfile)
                     next(reader) # Evito el header
                     for row in reader:
-                        if len(row) != 7:
+                        if len(row) != hack_columns:
                             write_row(writer, row)
                         else:
-                            write_row_test_suite_loc(writer, row)
+                            write_row_test_suite_loc_and_exceptions(writer, row)
             except FileNotFoundError:
                 print("{} doesn't exists".format(resume))

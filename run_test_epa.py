@@ -6,7 +6,7 @@ import shutil
 from enum import Enum
 
 from make_report_resume import make_report_resume
-from make_report_resume import make_report_resume_test_suite_loc
+from make_report_resume import make_report_resume_test_suite_loc_and_exceptions
 import mujava_coverage
 import utils
 from pit_mutants_histogram import pit_mutants_histogram
@@ -18,7 +18,7 @@ class EpatestingMethod(Enum):
     BOTH_WITHOUT_MUJAVA = 4
     ONLY_METRICS_WITHOUT_MUJAVA = 5
     ONLY_PIT_MUTANTS_HISTOGRAM = 6
-    ONLY_TEST_SUITE_LOC = 7
+    ONLY_TEST_SUITE_LOC_AND_EXCEPTION = 7
     
 class BugType(Enum):
     ALL = 1
@@ -300,6 +300,7 @@ class RunTestEPA(threading.Thread):
         self.subdir_metrics = os.path.join(results_dir_name, "metrics", name, bug_type, stopping_condition, search_budget, criterion.replace(':', '_').lower(), "{}".format(runid))
         self.generated_test_report_evosuite_dir = os.path.join(self.subdir_testgen, 'report_evosuite_generated_test')
         self.subdir_mutants = subdir_mutants
+        self.resume_csv = os.path.join(self.subdir_metrics, 'resume.csv')
 
         self.name = name
         self.junit_jar = junit_jar
@@ -383,6 +384,8 @@ class RunTestEPA(threading.Thread):
 
             utils.compile_test_workdir(self.generated_test_dir, code_dir, self.junit_jar, self.evosuite_classes, self.evosuite_runtime_jar_path)
 
+        criterion = get_alternative_criterion_names(self.criterion)
+        
         if self.method in [EpatestingMethod.ONLY_METRICS.value, EpatestingMethod.BOTH.value, EpatestingMethod.BOTH_WITHOUT_MUJAVA.value, EpatestingMethod.ONLY_METRICS_WITHOUT_MUJAVA.value]:
             print('GENERATING METRICS')
             if not os.path.exists(self.subdir_testgen):
@@ -392,6 +395,8 @@ class RunTestEPA(threading.Thread):
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransition")
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexception")
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedges")
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epatransition")
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epaadjacentedges")
 
             # Run Pitest to measure
             
@@ -436,23 +441,22 @@ class RunTestEPA(threading.Thread):
                 statistics_testgen_csv = os.path.join(all_report_dir, "statistics_testgen_{}.csv".format(self.name))
             jacoco_csv = os.path.join(all_report_dir, "{}_jacoco.csv".format(self.name))
             mutations_csv = os.path.join(all_report_dir, "{}_mutations.csv".format(self.name))
-            resume_csv = os.path.join(self.subdir_metrics, 'resume.csv')
-            criterion = get_alternative_criterion_names(self.criterion)
             
             #if self.bug_type.upper() == BugType.ALL.name:
-            pit_mutants_histogram(self.criterion, self.search_budget, self.stopping_condition, mutations_csv, self.generated_test_dir, self.generated_pitest_killer_test, self.runid)
+            #pit_mutants_histogram(self.criterion, self.search_budget, self.stopping_condition, mutations_csv, self.generated_test_dir, self.generated_pitest_killer_test, self.runid)
             
-            make_report_resume(self.class_name, epacoverage_csv, statistics_testgen_csv, jacoco_csv, mutations_csv, resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, mujava_csv)
+            make_report_resume(self.class_name, epacoverage_csv, statistics_testgen_csv, jacoco_csv, mutations_csv, self.resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, mujava_csv)
         
         if self.method in [EpatestingMethod.ONLY_PIT_MUTANTS_HISTOGRAM.value]:
             mutations_csv = get_mutation_csv_pit(self.generated_report_pitest_dir)
             pit_mutants_histogram(self.criterion, self.search_budget, self.stopping_condition, mutations_csv, self.generated_test_dir, self.generated_pitest_killer_test, self.runid)
         
-        if self.method in [EpatestingMethod.ONLY_TEST_SUITE_LOC.value]:
+        if self.method in [EpatestingMethod.ONLY_TEST_SUITE_LOC_AND_EXCEPTION.value]:
+            # Para obtener TS LOC
+            ####################
             package = self.class_name.split(".")[0:-1]
             package_dir = utils.get_package_dir(package)
             only_class_name = self.class_name.split(".")[-1]
-            criterion = get_alternative_criterion_names(self.criterion)
             test_suite_file_path = os.path.join(self.generated_test_dir, package_dir, only_class_name +"_ESTest.java")
             
             result_jncss_temp = os.path.join(self.results_dir_name, "javancss_temp", "{}_{}_{}_{}_{}".format(self.bug_type, self.stopping_condition, self.search_budget, self.class_name, criterion))
@@ -463,10 +467,21 @@ class RunTestEPA(threading.Thread):
             utils.print_command(command)
             subprocess.check_output(command, shell=True)
             
-            resume_csv = os.path.join(self.subdir_metrics, 'resume.csv')
-            utils.make_dirs_if_not_exist(self.subdir_metrics)
-            make_report_resume_test_suite_loc(self.class_name, resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, result_jncss_temp)
             
+            # Para obtener exceptions
+            ####################
+            testgen_log_file_path = os.path.join(self.subdir_testgen, "testgen_out.txt")
+            # Este archivo tiene la cantidad de goals cubiertos para cada criterio (-measureCoverage)
+            all_report_dir = os.path.join(self.subdir_metrics, 'all_reports')
+            epacoverage_csv = os.path.join(all_report_dir, "epacoverage_{}.csv".format(self.name))
+            # Este archivo tiene la suma de goals cubiertos (incluyendo criterio exception)
+            statistics_testgen_csv = os.path.join(all_report_dir, "statistics_testgen_{}.csv".format(self.name))
+            
+            
+            utils.make_dirs_if_not_exist(self.subdir_metrics)
+            make_report_resume_test_suite_loc_and_exceptions(self.class_name, self.resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, result_jncss_temp, testgen_log_file_path, epacoverage_csv, statistics_testgen_csv)
+        
+
 def get_alternative_criterion_names(criterion):
     if (criterion == "line:branch"):
         criterion = "evosuite_default"
