@@ -26,7 +26,7 @@ digits_size_to_percentage = 1
 
 printHeader <- function()
 {
-	cat("Subject","Evosuite","Evosuite","Evosuite","Evosuite","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP",sep=", ")
+	cat("Subject","Evosuite","Evosuite","Evosuite","Evosuite","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP",sep=", ")
 	cat("\n")
 	cat("Subject","stmt","branch","excep","TS LOC","stmt","A12","p-value","branch","A12","p-value","excep","A12","p-value","TS LOC","stmt","A12","p-value","branch","A12","p-value","excep","A12","p-value","TS LOC",sep=", ")
 	cat("\n")
@@ -159,8 +159,10 @@ RQ1_2 <- function()
 			edges_p_value_excep = pValueRefactor(wilcox.test(default_excep, edges_excep)$p.value)
 			
 			cat(", ", default_st, "%, ", default_br, "%, ", default_excep_mean, ", ", default_test, ", ",
-			epatransition_st, "%, ", epatransition_a12_st, ", ", epatransition_p_value_st, ", ", epatransition_br, "%, ", epatransition_a12_br, ", ", epatransition_p_value_br, ", ", epatransition_excep_mean, ", ", epatransition_test, ", ",
-			edges_st, "%, ", edges_a12_st, ", ", edges_p_value_st, ", ", edges_br, "%, ", edges_a12_br, ", ", edges_p_value_br, ", ", edges_excep_mean, ", ", edges_test,sep="")
+			epatransition_st, "%, ", epatransition_a12_st, ", ", epatransition_p_value_st, ", ", epatransition_br, "%, ", epatransition_a12_br, ", ", epatransition_p_value_br, ", ",
+			epatransition_excep_mean, ", ",epatransition_a12_excep, ", ", epatransition_p_value_excep, ", ", epatransition_test, ", ",
+			edges_st, "%, ", edges_a12_st, ", ", edges_p_value_st, ", ", edges_br, "%, ", edges_a12_br, ", ", edges_p_value_br, ", ",
+			edges_excep_mean, ", ", edges_a12_excep, ", ", edges_p_value_excep, ", ", edges_test,sep="")
 			cat("\n")
 		}
 	}
