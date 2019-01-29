@@ -97,6 +97,10 @@ class EPAConfig:
 
         tests_to_run = []
         for line in lines:
+            # line comment
+            if line.startswith("#"):
+                continue
+            
             terms = line.split('*')
             subject_name = terms[0][1:-1]
             bug_type = terms[1][1:-1]
