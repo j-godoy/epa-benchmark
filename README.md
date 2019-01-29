@@ -7,22 +7,36 @@
 	- sudo add-apt-repository ppa:webupd8team/java
 	- sudo apt update; sudo apt install oracle-java8-installer
 - [python3.6](https://www.python.org/downloads/release/python-360/)
-- [R](https://www.r-project.org/)
+- [R](https://www.r-project.org/) (optional)
 - [Epa-evosuite](https://github.com/j-godoy/epa-evosuite)
 - Junit and Hamcrest jar
 - SeptUp classpath:
 	- Add maven/bin folder to classpath
-	- Create JAVA_HOME environment var pointing to jdk folder
+	- Create JAVA_HOME environment variable pointing to jdk folder
 	- Add jdk/bin folder to classpath
 
 # Instructions
-Quick run: download release icst2019 (Replication-Package.zip) OR
 
-0) [optional-recommended] Create "Replication-Package" folder in home user dir and follow the next steps
+0) [optional-recommended] Create "Replication-Package" folder in home user dir and follow the next steps in this folder.
 1) Clone epa-evosuite repository: git clone https://github.com/j-godoy/epa-evosuite.git
 2) In epa-evosuite folder, run "mvn clean install -DskipTests=true"
 3) Clone this repository: git clone https://github.com/j-godoy/epa-benchmark.git
-4) Check config_example.ini for correct folders.
+4) Check config_example.ini for correct folders. The possible paramenters are: 
+	[A]*[B]*[C]*[D]*[E]*F*G
+	- A: Subject Name. This name must be in the configuration file "runs_example.ini"
+	- B: Type error: Could be "errprot" for looking for 'protocol failures' or "all" for general faults.
+	- C: Stopping condition for Evosuite. Example: "maxtime".
+	- D: budget. This parameter is related with the above parameter. For "maxtime" in C, this parameter is the time budget for stopping condition.
+	- E: Criterion. This can be any accepted criteria for Evosuite; Or "randoop" for random test suite generation.
+	- F: run mode. It could be:
+		"1" :
+		"2" : 
+		"3" : 
+		"4" : 
+		"5" : 
+		"6" : 
+		"7" : 
+	- G: repetitions. Number of repetition to run the experiments. Example: "30". 
 5) Run "python script.py config_example.ini runs_example.ini"
 
 # Results
