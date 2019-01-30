@@ -1,21 +1,21 @@
 import csv
 
 header_names = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ',
-                'TOOL', 'LINE', 'BRNCH', 'EPACOV', 'EPA',
-                'EPATOT', 'EXCEPCOV', 'EXCEP', 'EXCEPTOT', 'EXCEPVALCOV',
-                'EXCEPVAL', 'EXCEPVALTOT', 'ADJACCOV', 'ADJAC', 'ADJACTOT',
-                'ERR', 'NERR', 'TERR', 'MUT', 'TIME',
-                'LOC', 'PIMUT', 'ERRF', 'MJMUT', 'MUT_KILLED',
-                'ERRPROT_KILLED', 'GENS', 'TOT_TIME', 'TS_LOC']
+                'TOOL', 'LINE', 'BRNCH', 'EXCEPTION', 'EPACOV',
+                'EPA', 'EPATOT', 'EPAEXCEPCOV', 'EPAEXCEP', 'EPAEXCEPTOT',
+                'EPAEXCEPVALCOV', 'EPAEXCEPVAL', 'EPAEXCEPVALTOT', 'ADJACCOV', 'ADJAC',
+                'ADJACTOT', 'ERR', 'NERR', 'TERR', 'MUT',
+                'TIME', 'TS_LOC', 'PIMUT', 'ERRF', 'MJMUT',
+                'MUT_KILLED', 'ERRPROT_KILLED', 'GENS', 'TOT_TIME']
 
 def write_row(writer, row):
     writer.writerow({'ID': row[0], 'BUG_TYPE': row[1], 'STOP_COND': row[2], 'BUD': row[3], 'SUBJ': row[4],
-                     'TOOL': row[5], 'LINE': row[6], 'BRNCH': row[7], 'EPACOV': row[8], 'EPA': row[9],
-                     'EPATOT': row[10], 'EXCEPCOV': row[11], 'EXCEP': row[12], 'EXCEPTOT': row[13], 'EXCEPVALCOV': row[14],
-                     'EXCEPVAL': row[15], 'EXCEPVALTOT': row[16], 'ADJACCOV': row[17], 'ADJAC': row[18], 'ADJACTOT': row[19],
-                     'ERR': row[20], 'NERR': row[21], 'TERR': row[22], 'MUT': row[23], 'TIME': row[24],
-                     'LOC': row[25], 'PIMUT': row[26], 'ERRF': row[27], 'MJMUT': row[28], 'MUT_KILLED': row[29],
-                     'ERRPROT_KILLED': row[30], 'GENS': row[31], 'TOT_TIME': row[32]});
+                     'TOOL': row[5], 'LINE': row[6], 'BRNCH': row[7], 'EXCEPTION': row[8], 'EPACOV': row[9],
+                     'EPA': row[10], 'EPATOT': row[11], 'EPAEXCEPCOV': row[12], 'EPAEXCEP': row[13], 'EPAEXCEPTOT': row[14],
+                     'EPAEXCEPVALCOV': row[15], 'EPAEXCEPVAL': row[16], 'EPAEXCEPVALTOT': row[17], 'ADJACCOV': row[18], 'ADJAC': row[19],
+                     'ADJACTOT': row[20], 'ERR': row[21], 'NERR': row[22], 'TERR': row[23], 'MUT': row[24],
+                     'TIME': row[25], 'TS_LOC': row[26], 'PIMUT': row[27], 'ERRF': row[28], 'MJMUT': row[29],
+                     'MUT_KILLED': row[30], 'ERRPROT_KILLED': row[31], 'GENS': row[32], 'TOT_TIME': row[33]});
                      
 header_names_ts_loc_exceptions = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ', 'TOOL', 'TS_LOC', 'EXCEPTIONS']
 
@@ -27,9 +27,9 @@ def get_complete_row(row):
             row[5], row[6], row[7], row[8], row[9],
             row[10], row[11], row[12], row[13], row[14],
             row[15], row[16], row[17], row[18], row[19],
-            'N/A', 'N/A', 'N/A', 'N/A', 'N/A',
-            'N/A', row[20], 'N/A', row[21], row[22],
-            row[23], row[24], row[25]]
+            row[20], 'N/A', 'N/A', 'N/A', 'N/A',
+            'N/A', row[21], row[22], 'N/A', row[23],
+            row[24], row[25], row[26], row[27]]
 
 def read_evosuite_csv(file_path):
     epatransition_coverage = 'N/A'
@@ -130,27 +130,52 @@ def read_mujava_coverage_csv(mujava_csv):
     return mujava_coverage, mutants_killed, err_prot_killed
 
 
-def report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, runid, bug_type, stopping_condition, search_budget, criterion, mujava_csv):
+def get_test_suite_loc(path_file):
+    file = open(path_file, "r")
+    init_loc_index = 11 
+    ts_loc = int(file.read()[init_loc_index:])
+    return ts_loc
+
+def get_exceptions_in_testgenlog(testgen_log_file):
+    file = open(testgen_log_file, "r")
+    file_txt = file.read().split("\n")
+    exceptions = 'N/A'
+    init_exception_goals_covered_index = 27
+    line_index = 1
+    for line in file_txt:
+        if "Coverage of criterion EXCEPTION" in line:
+            #line with exceptions info in two line below
+            line_index += 2
+            break
+        line_index += 1
+    if line_index != 0:
+        exceptions = file_txt[line_index-1][init_exception_goals_covered_index:]
+    return exceptions
+
+def report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, runid, bug_type, stopping_condition, search_budget, criterion, mujava_csv, path_file_jncss, testgen_log_file_path):
     epa_coverage, epa_covered, epa_tot, epaex_coverage, epaex_covered, epaex_tot, epaexval_coverage, epaexval_covered, epaexval_tot, edges_coverage, edges_covered, edges_tot = read_evosuite_csv(evosuite)
     generations_test, total_time_test = read_generations_csv(statistics_testgen)
     branch_coverage, line_coverage = read_jacoco_csv(target_class, jacoco)
     mutation_coverage = read_pit_csv(pit)
     mujava_coverage, mutants_killed, err_prot_killed = read_mujava_coverage_csv(mujava_csv)
+    ts_loc = get_test_suite_loc(path_file_jncss)
+    # si el testgenlog incluye "Coverage of criterion EXCEPTION", con la linea siguiente alcanza
+    exceptions = get_exceptions_in_testgenlog(testgen_log_file_path)
     row = [runid, bug_type, stopping_condition, search_budget, target_class,
-           criterion, line_coverage, branch_coverage, epa_coverage, epa_covered,
-           epa_tot, epaex_coverage, epaex_covered, epaex_tot, epaexval_coverage,
-           epaexval_covered, epaexval_tot, edges_coverage, edges_covered, edges_tot,
-           mutation_coverage, mujava_coverage, mutants_killed, err_prot_killed, generations_test,
-           total_time_test]
+           criterion, line_coverage, branch_coverage, exceptions, epa_coverage,
+           epa_covered, epa_tot, epaex_coverage, epaex_covered, epaex_tot,
+           epaexval_coverage, epaexval_covered, epaexval_tot, edges_coverage, edges_covered,
+           edges_tot, ts_loc, mutation_coverage, mujava_coverage, mutants_killed,
+           err_prot_killed, generations_test, total_time_test]
     return row
 
 
-def make_report_resume(target_class, evosuite, statistics_testgen, jacoco, pit, output_file, runid, stopping_condition, search_budget, criterion, bug_type, mujava_csv):
+def make_report_resume(target_class, evosuite, statistics_testgen, jacoco, pit, output_file, runid, stopping_condition, search_budget, criterion, bug_type, mujava_csv, path_file_jncss, testgen_log_file_path):
     with open(output_file, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=header_names)
 
         writer.writeheader()
-        row = report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, runid, bug_type, stopping_condition, search_budget, criterion, mujava_csv)
+        row = report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, runid, bug_type, stopping_condition, search_budget, criterion, mujava_csv, path_file_jncss, testgen_log_file_path)
         row = get_complete_row(row)
         write_row(writer, row)
         
