@@ -30,11 +30,11 @@ class AssertType(Enum):
     NO_ASSERT_EXCEPTION = 3
 
 
-def run_evosuite(evosuite_jar_path, projectCP, class_name, criterion, epa_path, stopping_condition, search_budget, test_dir='test', report_dir='report'):
+def run_evosuite(evosuite_jar_path, projectCP, class_name, criterion, epa_path, inferred_epa_xml_path, stopping_condition, search_budget, test_dir='test', report_dir='report'):
     #is_JDBCResultSet = "JDBCResultSet" in class_name
     #extra_parameters = "-Dassertions=\"false\" -Dminimize=\"false\"" if is_JDBCResultSet else ""
     extra_parameters = "-Dminimize=\"true\""
-    command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"2048\" -Dstopping_condition={} -Dsearch_budget={} -Djunit_allow_restricted_libraries=true -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dprint_missed_goals=\"true\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dtimeout="4000" -Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\" -Dassertions=\"true\" -Dcoverage=\"true\" -Djunit_check_timeout="600" -Dassertion_timeout="600" {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, test_dir, report_dir, epa_path, extra_parameters, test_dir, test_dir)
+    command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1048\" -Dstopping_condition={} -Dsearch_budget={} -Djunit_allow_restricted_libraries=true -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dtest_archive=\"true\" -Dprint_missed_goals=\"true\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dtimeout="4000" -Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\" -Dassertions=\"true\" -Dcoverage=\"true\" -Djunit_check_timeout="600" -Dassertion_timeout="600" -Dinferred_epa_xml_path={} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, test_dir, test_dir)
     utils.print_command(command)
     subprocess.check_output(command, shell=True)
     
@@ -81,13 +81,17 @@ def measure_evosuite(evosuite_jar_path, projectCP, testCP, class_name, epa_path,
     utils.print_command(command)
     subprocess.check_output(command, shell=True)
 
-def setup_subjects(results_dir_name, original_code_dir, instrumented_code_dir, name, evosuite_classes, class_name):
+def setup_subjects(results_dir_name, original_code_dir, instrumented_code_dir, mining_code_dir, name, evosuite_classes, class_name):
     bin_original_code_dir = get_subject_original_bin_dir(results_dir_name, name)
     bin_instrumented_code_dir = get_subject_instrumented_bin_dir(results_dir_name, name)
-    if exist_subject(bin_original_code_dir, bin_instrumented_code_dir, class_name):
-        return
-    utils.compile_workdir(original_code_dir, bin_original_code_dir, evosuite_classes)
-    utils.compile_workdir(instrumented_code_dir, bin_instrumented_code_dir, evosuite_classes)
+    bin_mining_code_dir = get_subject_mining_bin_dir(results_dir_name, name)
+    
+    if not exist_subject(bin_original_code_dir, class_name):
+        utils.compile_workdir(original_code_dir, bin_original_code_dir, evosuite_classes)
+    if not exist_subject(bin_instrumented_code_dir, class_name):
+        utils.compile_workdir(instrumented_code_dir, bin_instrumented_code_dir, evosuite_classes)
+    if not exist_subject(bin_mining_code_dir, class_name):
+        utils.compile_workdir(mining_code_dir, bin_mining_code_dir, evosuite_classes)
     
 def get_subject_original_bin_dir(results_dir_name, subject):
     return os.path.join(get_subject_dir(results_dir_name, subject), "bin", "original")
@@ -95,12 +99,15 @@ def get_subject_original_bin_dir(results_dir_name, subject):
 def get_subject_instrumented_bin_dir(results_dir_name, subject):
     return os.path.join(get_subject_dir(results_dir_name, subject), "bin", "instrumented")
 
+def get_subject_mining_bin_dir(results_dir_name, subject):
+    return os.path.join(get_subject_dir(results_dir_name, subject), "bin", "mining")
+
 def get_subject_dir(results_dir_name, subject):
     return os.path.join(results_dir_name, "subjects", subject)
 
-def exist_subject(bin_original_code_dir, bin_instrumented_code_dir, class_name):
+def exist_subject(bin_code_dir, class_name):
     package_dir = utils.get_package_dir(class_name.split(".")[0:-1])
-    if os.path.exists(os.path.join(bin_original_code_dir, package_dir)) and os.path.exists(os.path.join(bin_instrumented_code_dir, package_dir)):
+    if os.path.exists(os.path.join(bin_code_dir, package_dir)):
         return True
     return False
 
@@ -309,7 +316,7 @@ def get_file_path_jncss(class_name, test_dir, results_dir_name, bug_type, stoppi
 lock = threading.Lock()
 class RunTestEPA(threading.Thread):
 
-    def __init__(self, name, junit_jar, instrumented_code_dir, original_code_dir, evosuite_classes, evosuite_jar_path, evosuite_runtime_jar_path, class_name, epa_path, criterion, bug_type, stopping_condition, search_budget, runid, method, results_dir_name, subdir_mutants, error_prot_list, ignore_mutants_list, hamcrest_jar_path, randoop_jar_path, javancss_jar_path):
+    def __init__(self, name, junit_jar, instrumented_code_dir, mining_code_dir, original_code_dir, evosuite_classes, evosuite_jar_path, evosuite_runtime_jar_path, class_name, epa_path, criterion, bug_type, stopping_condition, search_budget, runid, method, results_dir_name, subdir_mutants, error_prot_list, ignore_mutants_list, hamcrest_jar_path, randoop_jar_path, javancss_jar_path):
         threading.Thread.__init__(self)
 
         self.subdir_testgen = os.path.join(results_dir_name, "testgen", name, bug_type, stopping_condition, search_budget, criterion.replace(':', '_').lower(), "{}".format(runid))
@@ -318,10 +325,12 @@ class RunTestEPA(threading.Thread):
         self.generated_test_report_evosuite_dir = os.path.join(self.subdir_testgen, 'report_evosuite_generated_test')
         self.subdir_mutants = subdir_mutants
         self.resume_csv = os.path.join(self.subdir_metrics, 'resume.csv')
+        self.inferred_epa_xml = os.path.join(self.subdir_metrics, 'inferred_epa.xml')
 
         self.name = name
         self.junit_jar = junit_jar
         self.instrumented_code_dir = instrumented_code_dir
+        self.mining_code_dir = mining_code_dir
         self.original_code_dir = original_code_dir
         self.evosuite_classes = evosuite_classes
         self.evosuite_jar_path = evosuite_jar_path
@@ -342,6 +351,7 @@ class RunTestEPA(threading.Thread):
         self.home_dir = os.path.dirname(os.path.abspath(__file__))
         self.bin_original_code_dir = get_subject_original_bin_dir(results_dir_name, name)
         self.bin_instrumented_code_dir = get_subject_instrumented_bin_dir(results_dir_name, name)
+        self.bin_mining_code_dir = get_subject_mining_bin_dir(results_dir_name, name)
         self.results_dir_name = results_dir_name
         self.method = method
         self.assert_type = AssertType.ASSERT.name # default
@@ -356,7 +366,12 @@ class RunTestEPA(threading.Thread):
         if self.method in [EpatestingMethod.ONLY_TESTGEN.value, EpatestingMethod.BOTH.value, EpatestingMethod.BOTH_WITHOUT_MUJAVA.value]:
             print('GENERATING TESTS')
             code_dir = self.instrumented_code_dir if "epa" in self.criterion else self.original_code_dir
+            if "epamining".upper() == self.criterion.upper():
+                code_dir = self.mining_code_dir
+            
             bin_code_dir = self.bin_instrumented_code_dir if "epa" in self.criterion else self.bin_original_code_dir
+            if "epamining".upper() == self.criterion.upper():
+                bin_code_dir = self.bin_mining_code_dir
             
             # if exists testsuite in other bug_type, copy it!
             testsuite_exists = False
@@ -374,7 +389,7 @@ class RunTestEPA(threading.Thread):
                 if self.criterion == "randoop":
                     run_randoop(projectCP=bin_code_dir, class_name=self.class_name, randoop_jar_path=self.randoop_jar_path, testdir=self.generated_test_dir, search_budget=self.search_budget)
                 else:
-                    run_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=bin_code_dir, class_name=self.class_name, criterion=self.criterion, epa_path=self.epa_path, test_dir=self.generated_test_dir, stopping_condition=self.stopping_condition, search_budget=self.search_budget, report_dir=self.generated_test_report_evosuite_dir)
+                    run_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=bin_code_dir, class_name=self.class_name, criterion=self.criterion, epa_path=self.epa_path, inferred_epa_xml_path=self.inferred_epa_xml, test_dir=self.generated_test_dir, stopping_condition=self.stopping_condition, search_budget=self.search_budget, report_dir=self.generated_test_report_evosuite_dir)
 
             add_fails= False
             if(self.bug_type.upper() == BugType.ERRPROT.name):
@@ -408,11 +423,12 @@ class RunTestEPA(threading.Thread):
             if not os.path.exists(self.subdir_testgen):
                 print("not found testgen folder ! '{}'".format(self.subdir_testgen))
                 exit(1)
-                
+            
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransition")
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexception")
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedges")
             #ONLY to get exception goals in metrics folder
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epatransition:epaexception")
             #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epatransition")
             #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epaadjacentedges")
 
@@ -421,7 +437,7 @@ class RunTestEPA(threading.Thread):
             targetTests = "{}_ESTest".format(self.class_name)
             if "randoop" in self.criterion:
                 targetTests = "{}.RegressionTest".format(utils.get_package_name_from_qualifiedname(self.class_name))
-            pitest_measure(self.generated_report_pitest_dir, self.class_name, targetTests, self.original_code_dir, self.generated_test_dir)
+            pitest_measure(self.generated_report_pitest_dir, self.class_name, targetTests, self.original_code_dir.replace("mining","original"), self.generated_test_dir)
             #pitest_measure(self.generated_report_pitest_dir, self.class_name, self.original_code_dir, self.generated_test_dir, utils.get_package_dir(self.class_name.split(".")[0:-1]))
             
             if self.method in [EpatestingMethod.ONLY_METRICS.value, EpatestingMethod.BOTH.value]:
@@ -491,8 +507,8 @@ class RunTestEPA(threading.Thread):
         
 
 def get_alternative_criterion_names(criterion):
-    if (criterion == "line:branch"):
-        criterion = "evosuite_default"
+    #if (criterion == "line:branch"):
+    #   criterion = "evosuite_default"
     #if (criterion == "epatransition"):
     #    criterion = "evosuite_epaalone"
     #if (criterion == "line:branch:epatransition"):
