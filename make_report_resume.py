@@ -142,13 +142,15 @@ def get_exceptions_in_testgenlog(testgen_log_file):
     exceptions = 'N/A'
     init_exception_goals_covered_index = 27
     line_index = 1
+    found = False
     for line in file_txt:
         if "Coverage of criterion EXCEPTION" in line:
             #line with exceptions info in two line below
             line_index += 2
+            found = True
             break
         line_index += 1
-    if line_index != 0:
+    if found:
         exceptions = file_txt[line_index-1][init_exception_goals_covered_index:]
     return exceptions
 
