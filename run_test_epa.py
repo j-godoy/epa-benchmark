@@ -366,11 +366,11 @@ class RunTestEPA(threading.Thread):
         if self.method in [EpatestingMethod.ONLY_TESTGEN.value, EpatestingMethod.BOTH.value, EpatestingMethod.BOTH_WITHOUT_MUJAVA.value]:
             print('GENERATING TESTS')
             code_dir = self.instrumented_code_dir if "epa" in self.criterion else self.original_code_dir
-            if "epamining".upper() == self.criterion.upper():
+            if "mining".upper() in self.criterion.upper():
                 code_dir = self.mining_code_dir
             
             bin_code_dir = self.bin_instrumented_code_dir if "epa" in self.criterion else self.bin_original_code_dir
-            if "epamining".upper() == self.criterion.upper():
+            if "mining".upper() in self.criterion.upper():
                 bin_code_dir = self.bin_mining_code_dir
             
             # if exists testsuite in other bug_type, copy it!
@@ -428,7 +428,7 @@ class RunTestEPA(threading.Thread):
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexception")
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedges")
             #ONLY to get exception goals in metrics folder
-            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epatransition:epaexception")
+            #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epatransition:epaexception")
             #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epatransition")
             #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epaadjacentedges")
 
@@ -441,7 +441,7 @@ class RunTestEPA(threading.Thread):
             #pitest_measure(self.generated_report_pitest_dir, self.class_name, self.original_code_dir, self.generated_test_dir, utils.get_package_dir(self.class_name.split(".")[0:-1]))
             
             if self.method in [EpatestingMethod.ONLY_METRICS.value, EpatestingMethod.BOTH.value]:
-                mujava_measure(self.bug_type, self.name, self.criterion, self.subdir_mutants, self.error_prot_list, self.ignore_mutants_list, self.bin_original_code_dir, self.generated_test_dir, self.class_name, self.junit_jar, self.hamcrest_jar_path, self.generated_report_mujava)
+                mujava_measure(self.bug_type, self.name, self.criterion, self.subdir_mutants, self.error_prot_list, self.ignore_mutants_list, self.bin_original_code_dir.replace("mining","original"), self.generated_test_dir, self.class_name, self.junit_jar, self.hamcrest_jar_path, self.generated_report_mujava)
 
             # Resume the reports generated
             all_report_dir = os.path.join(self.subdir_metrics, 'all_reports')
