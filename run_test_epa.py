@@ -286,7 +286,7 @@ def check_if_exists_testgendir_in_other_bug_type(generated_test_report_evosuite_
     exists = os.path.exists(test_dir)
     if not exists:
         return False
-    if not "randoop" in criterion:
+    if not "randoop".upper() in criterion.upper():
         exists = exists and os.path.exists(os.path.join(generated_test_report_evosuite_dir, "statistics.csv"))
     exists_java_file = False
     for test_file_name in os.listdir(test_dir):
@@ -365,11 +365,11 @@ class RunTestEPA(threading.Thread):
     def run(self):
         if self.method in [EpatestingMethod.ONLY_TESTGEN.value, EpatestingMethod.BOTH.value, EpatestingMethod.BOTH_WITHOUT_MUJAVA.value]:
             print('GENERATING TESTS')
-            code_dir = self.instrumented_code_dir if "epa" in self.criterion else self.original_code_dir
+            code_dir = self.instrumented_code_dir if "epa".upper() in self.criterion.upper() else self.original_code_dir
             if "mining".upper() in self.criterion.upper():
                 code_dir = self.mining_code_dir
             
-            bin_code_dir = self.bin_instrumented_code_dir if "epa" in self.criterion else self.bin_original_code_dir
+            bin_code_dir = self.bin_instrumented_code_dir if "epa".upper() in self.criterion.upper() else self.bin_original_code_dir
             if "mining".upper() in self.criterion.upper():
                 bin_code_dir = self.bin_mining_code_dir
             
@@ -398,7 +398,7 @@ class RunTestEPA(threading.Thread):
                 #if("JDBCResultSet" in self.name):
                     #add_fails= True;
             if self.assert_type.upper() in [AssertType.NO_ASSERT.name, AssertType.NO_ASSERT_EXCEPTION.name]:
-                if "randoop" in self.criterion:
+                if "randoop".upper() in self.criterion.upper():
                     test_dir = self.generated_test_dir
                     packages_dir = utils.get_package_dir(self.class_name.split(".")[:-1])
                     test_dir_sub = os.path.join(test_dir, packages_dir)
@@ -435,7 +435,7 @@ class RunTestEPA(threading.Thread):
             # Run Pitest to measure
             
             targetTests = "{}_ESTest".format(self.class_name)
-            if "randoop" in self.criterion:
+            if "randoop".upper() in self.criterion.upper():
                 targetTests = "{}.RegressionTest".format(utils.get_package_name_from_qualifiedname(self.class_name))
             pitest_measure(self.generated_report_pitest_dir, self.class_name, targetTests, self.original_code_dir.replace("mining","original"), self.generated_test_dir)
             #pitest_measure(self.generated_report_pitest_dir, self.class_name, self.original_code_dir, self.generated_test_dir, utils.get_package_dir(self.class_name.split(".")[0:-1]))
