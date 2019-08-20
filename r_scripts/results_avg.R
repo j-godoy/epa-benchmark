@@ -20,7 +20,7 @@ budgets = unique(stats$BUD)
 printHeader <- function()
 {
 																															
-	cat("SUBJECT", "BUDGET", "BUG_TYPE", "CRITERION", "REP", "LINE", "BRNCH", "EPA%", "EXCEP%", "ADJAC%", "PIMUT", "GENS", sep=", ")
+	cat("SUBJECT", "BUDGET", "BUG_TYPE", "CRITERION", "REP", "LINE", "BRNCH", "EPA%", "EPAEXCEP%", "ADJAC%", "PIMUT", "GENS", sep=", ")
 	cat("\n")
 }
 
@@ -38,8 +38,8 @@ printPitMutationScoreMedian <- function() {
 					brnch_avg = paste(round(mean(default_rows$BRNCH), digits=3)*100, "%", sep="")
 					epacov_avg = paste(round(mean(default_rows$EPACOV), digits=3)*100, "%", sep="")
 					epa = paste("(", round(mean(default_rows$EPA), digits=2), "/", mean(default_rows$EPATOT), ")", sep="")
-					excepcov_avg = paste(round(mean(default_rows$EXCEPCOV), digits=3)*100, "%", sep="")
-					excep = paste("(", round(mean(default_rows$EXCEP), digits=2), "/", mean(default_rows$EXCEPTOT), ")", sep="")
+					excepcov_avg = paste(round(mean(default_rows$EPAEXCEPCOV), digits=3)*100, "%", sep="")
+					excep = paste("(", round(mean(default_rows$EPAEXCEP), digits=2), "/", mean(default_rows$EPAEXCEPTOT), ")", sep="")
 					adjaccov_avg = paste(round(mean(default_rows$ADJACCOV), digits=3)*100, "%", sep="")
 					adjac = paste("(", round(mean(default_rows$ADJAC), digits=2), "/", mean(default_rows$ADJACTOT), ")", sep="")
 					pit_avg = paste(round(mean(default_rows$PIMUT), digits=3)*100, "%", sep="")
