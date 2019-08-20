@@ -222,11 +222,7 @@ def merge_final_results(final_results, output_file):
     # hack
     # Solo si tiene 8 columnas, entonces uso el header para TS_LOC/Exceptions
     hack_columns = 8
-    # Fix if (open(file[i]) exists) then ... else open(file[i+1] )
-    try:
-        column_size = len(open(final_results[0], "r").readline().split(","))
-    except: # hack por si falla final_results[0]
-        column_size = len(open(final_results[1], "r").readline().split(","))
+    column_size = len(open(final_results[0], "r").readline().split(","))
     header = header_names if column_size != hack_columns else header_names_ts_loc_exceptions
     output_file = output_file if column_size != hack_columns else output_file.replace(".csv","_TS_LOC_EXCEPTIONS.csv")
     with open(output_file, 'w', newline='') as csvfile:
