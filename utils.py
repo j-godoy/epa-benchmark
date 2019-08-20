@@ -98,8 +98,12 @@ def compile_workdir(workdir, output_directory, *classpath):
     command_compile = "javac -classpath {} {} @sources.txt".format(all_classpath, output_dir)
     print_command(command_compile, workdir)
     lock_if_windows()
-    subprocess.check_output(command_compile, cwd=workdir, shell=True)
-    release_if_windows()
+    try:
+        subprocess.check_output(command_compile, cwd=workdir, shell=True)
+    except:
+        print("Error al compilar con el comando '{}'".format(command_compile))
+    finally:
+        release_if_windows()
     
 def find_and_save_command(toFind, saveIn):
     command_win = "FORFILES /S /M {} /C \"CMD /C echo|set /p=@relpath & echo:\" > {}".format(toFind, saveIn)
