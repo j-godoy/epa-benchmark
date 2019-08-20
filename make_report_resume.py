@@ -158,7 +158,7 @@ def report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, r
     return row
 
 
-def make_report_resume(target_class, evosuite, statistics_testgen, jacoco, pit, output_file, runid, stopping_condition, search_budget, criterion, bug_type, mujava_csv, path_file_jncss, testgen_log_file_path):
+def resume(target_class, evosuite, statistics_testgen, jacoco, pit, output_file, runid, stopping_condition, search_budget, criterion, bug_type, mujava_csv, path_file_jncss, testgen_log_file_path):
     with open(output_file, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=header_names)
 
@@ -167,7 +167,7 @@ def make_report_resume(target_class, evosuite, statistics_testgen, jacoco, pit, 
         row = get_complete_row(row)
         write_row(writer, row)
         
-def make_report_resume_test_suite_loc_and_exceptions(target_class, output_file, runid, stopping_condition, search_budget, criterion, bug_type, javancss_file, testgen_log_file, epacoverage_csv, statistics_testgen_csv):
+def resume_test_suite_loc_and_exceptions(target_class, output_file, runid, stopping_condition, search_budget, criterion, bug_type, javancss_file, testgen_log_file, epacoverage_csv, statistics_testgen_csv):
     def get_exceptions(target_class, output_file, runid, stopping_condition, search_budget, criterion, bug_type, testgen_log_file, epacoverage_csv, statistics_testgen_csv):
         def get_exceptions_in_testgenlog(testgen_log_file):
             file = open(testgen_log_file, "r")
@@ -222,7 +222,11 @@ def merge_final_results(final_results, output_file):
     # hack
     # Solo si tiene 8 columnas, entonces uso el header para TS_LOC/Exceptions
     hack_columns = 8
-    column_size = len(open(final_results[0], "r").readline().split(","))
+    # Fix if (open(file[i]) exists) then ... else open(file[i+1] )
+    try:
+        column_size = len(open(final_results[0], "r").readline().split(","))
+    except: # hack por si falla final_results[0]
+        column_size = len(open(final_results[1], "r").readline().split(","))
     header = header_names if column_size != hack_columns else header_names_ts_loc_exceptions
     output_file = output_file if column_size != hack_columns else output_file.replace(".csv","_TS_LOC_EXCEPTIONS.csv")
     with open(output_file, 'w', newline='') as csvfile:

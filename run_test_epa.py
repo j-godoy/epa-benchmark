@@ -3,13 +3,13 @@ import xml.etree.ElementTree as ET
 import threading
 import os
 import shutil
-from enum import Enum
-
-from make_report_resume import make_report_resume
-from make_report_resume import make_report_resume_test_suite_loc_and_exceptions
+import make_report_resume
 import mujava_coverage
 import utils
 from pit_mutants_histogram import pit_mutants_histogram
+
+from enum import Enum
+
 
 class EpatestingMethod(Enum):
     ONLY_TESTGEN = 1
@@ -36,7 +36,10 @@ def run_evosuite(evosuite_jar_path, projectCP, class_name, criterion, epa_path, 
     extra_parameters = "-Dminimize=\"true\""
     command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1048\" -Dstopping_condition={} -Dsearch_budget={} -Djunit_allow_restricted_libraries=true -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dtest_archive=\"true\" -Dprint_missed_goals=\"true\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dtimeout="4000" -Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\" -Dassertions=\"true\" -Dcoverage=\"true\" -Djunit_check_timeout="600" -Dassertion_timeout="600" -Dinferred_epa_xml_path={} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, test_dir, test_dir)
     utils.print_command(command)
-    subprocess.check_output(command, shell=True)
+    try:
+        subprocess.check_output(command, shell=True)
+    except:
+        print("Error al correr evosuite en la generacion de test con el comando '{}'".format(command))
     
 def run_randoop(projectCP, class_name, randoop_jar_path, testdir, search_budget):
     def remove_randoop_error_test(testdir):
@@ -79,7 +82,10 @@ def measure_evosuite(evosuite_jar_path, projectCP, testCP, class_name, epa_path,
     sep = os.path.pathsep
     command = 'java -jar {} -projectCP {}{}{} -class {} -Depa_xml_path={} -criterion {} -Dwrite_covered_goals_file=\"true\" -Dwrite_all_goals_file=\"true\" -Dreport_dir={} -measureCoverage > {} 2> {}'.format(evosuite_jar_path, projectCP, sep, testCP, class_name, epa_path, criterion, report_dir, out_file, err_file)
     utils.print_command(command)
-    subprocess.check_output(command, shell=True)
+    try:
+        subprocess.check_output(command, shell=True)
+    except:
+        print("Error al correr evosuite en la medicion de cobertura con el comando '{}'".format(command))
 
 def setup_subjects(results_dir_name, original_code_dir, instrumented_code_dir, mining_code_dir, name, evosuite_classes, class_name):
     bin_original_code_dir = get_subject_original_bin_dir(results_dir_name, name)
@@ -156,7 +162,10 @@ def edit_pit_pom(file_path, targetClasses, targetTests, output_file):
 def run_pitest(workdir):
     command = "mvn clean install org.pitest:pitest-maven:mutationCoverage > {}out.txt 2> {}err.txt".format(workdir, workdir)
     utils.print_command(command, workdir)
-    subprocess.check_output(command, cwd=workdir, shell=True)
+    try:
+        subprocess.check_output(command, cwd=workdir, shell=True)
+    except:
+        print("Error al correr pitest con el comando '{}'".format(command))
 
 
 def generate_pitest_workdir(pitest_dir):
@@ -483,7 +492,7 @@ class RunTestEPA(threading.Thread):
             # For covered exceptions goals
             testgen_log_file_path = os.path.join(self.subdir_testgen, "testgen_out.txt")
             
-            make_report_resume(self.class_name, epacoverage_csv, statistics_testgen_csv, jacoco_csv, mutations_csv, self.resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, mujava_csv, result_jncss_temp, testgen_log_file_path)
+            make_report_resume.resume(self.class_name, epacoverage_csv, statistics_testgen_csv, jacoco_csv, mutations_csv, self.resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, mujava_csv, result_jncss_temp, testgen_log_file_path)
         
         if self.method in [EpatestingMethod.ONLY_PIT_MUTANTS_HISTOGRAM.value]:
             mutations_csv = get_mutation_csv_pit(self.generated_report_pitest_dir)
@@ -503,7 +512,7 @@ class RunTestEPA(threading.Thread):
             statistics_testgen_csv = os.path.join(all_report_dir, "statistics_testgen_{}.csv".format(self.name))
             
             utils.make_dirs_if_not_exist(self.subdir_metrics)
-            make_report_resume_test_suite_loc_and_exceptions(self.class_name, self.resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, result_jncss_temp, testgen_log_file_path, epacoverage_csv, statistics_testgen_csv)
+            make_report_resume.resume_test_suite_loc_and_exceptions(self.class_name, self.resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, result_jncss_temp, testgen_log_file_path, epacoverage_csv, statistics_testgen_csv)
         
 
 def get_alternative_criterion_names(criterion):
