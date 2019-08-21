@@ -223,7 +223,7 @@ public class ListItr implements ListIterator<Object> {
 	}
 
 	/*-------------------------------------------------------
-	 * EPA State Methods
+	 * EPA Precondition Methods
 	 */
 
 	@EpaActionPrecondition(name = "hasPrevious")
