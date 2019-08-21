@@ -24,7 +24,7 @@ public class NumberFormatStringTokenizer {
 	 * @param str
 	 *            Format string to be tokenized
 	 */
-	@EpaAction(name = "NumberFormatStringTokenizer(String)")
+	@EpaAction(name = "NumberFormatStringTokenizer")
 	public NumberFormatStringTokenizer(String str) {
 		this.str = str;
 		maxPosition = str.length();
@@ -45,7 +45,7 @@ public class NumberFormatStringTokenizer {
 	 * @throws NoSuchElementException
 	 *             if there are no more tokens in this tokenizer's string.
 	 */
-	@EpaAction(name = "nextToken()")
+	@EpaAction(name = "nextToken")
 	public String nextToken() {
 
 		if (currentPosition >= maxPosition) {
@@ -70,7 +70,7 @@ public class NumberFormatStringTokenizer {
 	 *
 	 * @return true if there is a number or character ahead.
 	 */
-	@EpaAction(name = "isLetterOrDigitAhead()")
+	@EpaAction(name = "isLetterOrDigitAhead")
 	public boolean isLetterOrDigitAhead() {
 
 		int pos = currentPosition;
@@ -90,7 +90,7 @@ public class NumberFormatStringTokenizer {
 	 *
 	 * @return true if there is not a number or character ahead.
 	 */
-	@EpaAction(name = "nextIsSep()")
+	@EpaAction(name = "nextIsSep")
 	public boolean nextIsSep() {
 
 		if (Character.isLetterOrDigit(str.charAt(currentPosition)))
@@ -105,7 +105,7 @@ public class NumberFormatStringTokenizer {
 	 * @return true if <code>nextToken</code> can be called without throwing an
 	 *         exception.
 	 */
-	@EpaAction(name = "hasMoreTokens()")
+	@EpaAction(name = "hasMoreTokens")
 	public boolean hasMoreTokens() {
 		return (currentPosition >= maxPosition) ? false : true;
 	}
