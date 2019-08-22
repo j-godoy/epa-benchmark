@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <abstraction initial_state="S0" input_format="code-with-pre" name="com.example.stackar.StackAr">
-    <label name="StackAr(int)" />
-    <label name="isEmpty()" />
-    <label name="isFull()" />
-    <label name="makeEmpty()" />
-    <label name="top()" />
-    <label name="push(Object)" />
-	<label name="topAndPop()" />
+    <label name="StackAr" />
+    <label name="isEmpty" />
+    <label name="isFull" />
+    <label name="makeEmpty" />
+    <label name="top" />
+    <label name="push" />
+	<label name="topAndPop" />
   
   <state name="S0">
-    <enabled_label name="StackAr(int)" />
-    <transition destination="S1" label="StackAr(int)" uncertain="false" violates_invariant="false" />
-	<transition destination="S4" label="StackAr(int)" uncertain="false" violates_invariant="false" />
+    <enabled_label name="StackAr" />
+    <transition destination="S1" label="StackAr" uncertain="false" violates_invariant="false" />
+	<transition destination="S4" label="StackAr" uncertain="false" violates_invariant="false" />
   </state>
   
   <state name="S1">
-    <enabled_label name="topAndPop()" />
-	<enabled_label name="isFull()" />
-	<enabled_label name="top()" />
-	<enabled_label name="push(Object)" />
-	<enabled_label name="makeEmpty()" />
-	<enabled_label name="isEmpty()" />
-    <transition destination="S1" label="topAndPop()" uncertain="false" violates_invariant="false" />
-    <transition destination="S1" label="isFull()" uncertain="false" violates_invariant="false" />
-	<transition destination="S1" label="top()" uncertain="false" violates_invariant="false" />
-	<transition destination="S2" label="push(Object)" uncertain="false" violates_invariant="false" />
-	<transition destination="S1" label="makeEmpty()" uncertain="false" violates_invariant="false" />
-	<transition destination="S1" label="isEmpty()" uncertain="false" violates_invariant="false" />
+    <enabled_label name="topAndPop" />
+	<enabled_label name="isFull" />
+	<enabled_label name="top" />
+	<enabled_label name="push" />
+	<enabled_label name="makeEmpty" />
+	<enabled_label name="isEmpty" />
+    <transition destination="S1" label="topAndPop" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="isFull" uncertain="false" violates_invariant="false" />
+	<transition destination="S1" label="top" uncertain="false" violates_invariant="false" />
+	<transition destination="S2" label="push" uncertain="false" violates_invariant="false" />
+	<transition destination="S1" label="makeEmpty" uncertain="false" violates_invariant="false" />
+	<transition destination="S1" label="isEmpty" uncertain="false" violates_invariant="false" />
   </state>
   
   <state name="S2">
-    <enabled_label name="topAndPop()" />
-	<enabled_label name="isFull()" />
-	<enabled_label name="top()" />
-	<enabled_label name="push(Object)" />
-	<enabled_label name="makeEmpty()" />
-	<enabled_label name="isEmpty()" />
-    <transition destination="S2" label="topAndPop()" uncertain="false" violates_invariant="false" />
-	<transition destination="S1" label="topAndPop()" uncertain="false" violates_invariant="false" />
-    <transition destination="S2" label="isFull()" uncertain="false" violates_invariant="false" />
-	<transition destination="S2" label="top()" uncertain="false" violates_invariant="false" />
-	<transition destination="S2" label="push(Object)" uncertain="false" violates_invariant="false" />
-	<transition destination="S3" label="push(Object)" uncertain="false" violates_invariant="false" />
-	<transition destination="S1" label="makeEmpty()" uncertain="false" violates_invariant="false" />
-	<transition destination="S2" label="isEmpty()" uncertain="false" violates_invariant="false" />
+    <enabled_label name="topAndPop" />
+	<enabled_label name="isFull" />
+	<enabled_label name="top" />
+	<enabled_label name="push" />
+	<enabled_label name="makeEmpty" />
+	<enabled_label name="isEmpty" />
+    <transition destination="S2" label="topAndPop" uncertain="false" violates_invariant="false" />
+	<transition destination="S1" label="topAndPop" uncertain="false" violates_invariant="false" />
+    <transition destination="S2" label="isFull" uncertain="false" violates_invariant="false" />
+	<transition destination="S2" label="top" uncertain="false" violates_invariant="false" />
+	<transition destination="S2" label="push" uncertain="false" violates_invariant="false" />
+	<transition destination="S3" label="push" uncertain="false" violates_invariant="false" />
+	<transition destination="S1" label="makeEmpty" uncertain="false" violates_invariant="false" />
+	<transition destination="S2" label="isEmpty" uncertain="false" violates_invariant="false" />
   </state>
 
   <state name="S3">
-    <enabled_label name="topAndPop()" />
-	<enabled_label name="top()" />
-	<enabled_label name="isFull()" />
-	<enabled_label name="makeEmpty()" />
-	<enabled_label name="isEmpty()" />
-    <transition destination="S2" label="topAndPop()" uncertain="false" violates_invariant="false" />
-	<transition destination="S3" label="top()" uncertain="false" violates_invariant="false" />
-    <transition destination="S3" label="isFull()" uncertain="false" violates_invariant="false" />
-	<transition destination="S1" label="makeEmpty()" uncertain="false" violates_invariant="false" />
-	<transition destination="S3" label="isEmpty()" uncertain="false" violates_invariant="false" />
+    <enabled_label name="topAndPop" />
+	<enabled_label name="top" />
+	<enabled_label name="isFull" />
+	<enabled_label name="makeEmpty" />
+	<enabled_label name="isEmpty" />
+    <transition destination="S2" label="topAndPop" uncertain="false" violates_invariant="false" />
+	<transition destination="S3" label="top" uncertain="false" violates_invariant="false" />
+    <transition destination="S3" label="isFull" uncertain="false" violates_invariant="false" />
+	<transition destination="S1" label="makeEmpty" uncertain="false" violates_invariant="false" />
+	<transition destination="S3" label="isEmpty" uncertain="false" violates_invariant="false" />
   </state>
   
   <state name="S4">
-    <enabled_label name="topAndPop()" />
-	<enabled_label name="isFull()" />
-	<enabled_label name="top()" />
-	<enabled_label name="makeEmpty()" />
-	<enabled_label name="isEmpty()" />
-    <transition destination="S4" label="topAndPop()" uncertain="false" violates_invariant="false" />
-    <transition destination="S4" label="isFull()" uncertain="false" violates_invariant="false" />
-	<transition destination="S4" label="top()" uncertain="false" violates_invariant="false" />
-	<transition destination="S4" label="makeEmpty()" uncertain="false" violates_invariant="false" />
-	<transition destination="S4" label="isEmpty()" uncertain="false" violates_invariant="false" />
+    <enabled_label name="topAndPop" />
+	<enabled_label name="isFull" />
+	<enabled_label name="top" />
+	<enabled_label name="makeEmpty" />
+	<enabled_label name="isEmpty" />
+    <transition destination="S4" label="topAndPop" uncertain="false" violates_invariant="false" />
+    <transition destination="S4" label="isFull" uncertain="false" violates_invariant="false" />
+	<transition destination="S4" label="top" uncertain="false" violates_invariant="false" />
+	<transition destination="S4" label="makeEmpty" uncertain="false" violates_invariant="false" />
+	<transition destination="S4" label="isEmpty" uncertain="false" violates_invariant="false" />
   </state>
   
 </abstraction>

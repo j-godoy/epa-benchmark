@@ -29,7 +29,7 @@ public class StackAr
      * Construct the stack.
      * @param capacity the capacity.
      */
-	@EpaAction(name="StackAr(int)")
+	@EpaAction(name="StackAr")
     public StackAr( int capacity )
     {
         theArray = new Object[ capacity ];
@@ -41,7 +41,7 @@ public class StackAr
      * @return true if empty, false otherwise.
      * @observer // annotation added by Jeremy
      */
-	@EpaAction(name="isEmpty()")
+	@EpaAction(name="isEmpty")
     public boolean isEmpty( )
     {
         return topOfStack == -1;
@@ -52,7 +52,7 @@ public class StackAr
      * @return true if full, false otherwise.
      * @observer // annotation added by Jeremy
      */
-	@EpaAction(name="isFull()")
+	@EpaAction(name="isFull")
     public boolean isFull( )
     {
         return topOfStack == theArray.length - 1;
@@ -62,7 +62,7 @@ public class StackAr
     /**
      * Make the stack logically empty.
      */
-	@EpaAction(name="makeEmpty()")
+	@EpaAction(name="makeEmpty")
     public void makeEmpty( )
     {
 //        java.util.Arrays.fill(theArray, 0, topOfStack + 1, null);
@@ -75,7 +75,7 @@ public class StackAr
      * @return the most recently inserted item in the stack, or null, if empty.
      * @observer // annotation added by Jeremy
      */
-    @EpaAction(name="top()")
+    @EpaAction(name="top")
     public Object top( )
     {
         if( isEmpty( ) )
@@ -100,7 +100,7 @@ public class StackAr
      * @param x the item to insert.
      * @exception Overflow if stack is already full.
      */
-    @EpaAction(name="push(Object)")
+    @EpaAction(name="push")
     public void push( Object x ) throws Overflow
     {
         if( isFull( ) )
@@ -112,7 +112,7 @@ public class StackAr
      * Return and remove most recently inserted item from the stack.
      * @return most recently inserted item, or null, if stack is empty.
      */
-    @EpaAction(name="topAndPop()")
+    @EpaAction(name="topAndPop")
     public Object topAndPop( )
     {
         if( isEmpty( ) )
@@ -130,54 +130,34 @@ public class StackAr
 	 * EPA Precondition Methods
 	 */
 
-	@EpaActionPrecondition(name = "isEmpty()")
+	@EpaActionPrecondition(name = "isEmpty")
 	private boolean isEmptyEnabled() {
 		return true;
     }
     
-    @EpaActionPrecondition(name = "isFull()")
+    @EpaActionPrecondition(name = "isFull")
 	private boolean isFullEnabled() {
 		return true;
     }
 
-    @EpaActionPrecondition(name = "makeEmpty()")
+    @EpaActionPrecondition(name = "makeEmpty")
 	private boolean isMakeEmptyEnabled() {
 		return true;
     }
 
-    @EpaActionPrecondition(name = "top()")
+    @EpaActionPrecondition(name = "top")
 	private boolean isTopEnabled() {
-		return topOfStack < theArray.length;
+		return !isEmpty();
     }
 
-    @EpaActionPrecondition(name = "push(Object)")
+    @EpaActionPrecondition(name = "push")
 	private boolean isPushEnabled() {
 		return !isFull();
     }
 
-    @EpaActionPrecondition(name = "topAndPop()")
+    @EpaActionPrecondition(name = "topAndPop")
 	private boolean isTopAndPopEnabled() {
-		return topOfStack < theArray.length;
+		return !isEmpty();
     }
     
-	@EpaState(name="S1")
-	private boolean stateS1() {
-		return !isFull() && isEmpty();
-	}
-	
-	@EpaState(name="S2")
-	private boolean stateS2() {
-		return !isFull() && !isEmpty();
-	}
-	
-	@EpaState(name="S3")
-	private boolean stateS3() {
-		return isFull() && !isEmpty();
-	}
-	
-	@EpaState(name="S4")
-	private boolean stateS4() {
-		return isFull() && isEmpty();
-	}
-
 }
