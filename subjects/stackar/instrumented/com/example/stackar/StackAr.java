@@ -132,22 +132,12 @@ public class StackAr
     
 	@EpaState(name="S1")
 	private boolean stateS1() {
-		return !isFull() && isEmpty();
+		return !isFull();
 	}
 	
 	@EpaState(name="S2")
 	private boolean stateS2() {
-		return !isFull() && !isEmpty();
-	}
-	
-	@EpaState(name="S3")
-	private boolean stateS3() {
-		return isFull() && !isEmpty();
-	}
-	
-	@EpaState(name="S4")
-	private boolean stateS4() {
-		return isFull() && isEmpty();
+		return isFull();
 	}
 
 }

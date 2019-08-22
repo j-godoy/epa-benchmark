@@ -147,7 +147,7 @@ public class StackAr
 
     @EpaActionPrecondition(name = "top")
 	private boolean isTopEnabled() {
-		return !isEmpty();
+		return true;
     }
 
     @EpaActionPrecondition(name = "push")
@@ -157,7 +157,7 @@ public class StackAr
 
     @EpaActionPrecondition(name = "topAndPop")
 	private boolean isTopAndPopEnabled() {
-		return !isEmpty();
+		return true;
     }
-    
+
 }
