@@ -256,9 +256,12 @@ def copy_pitest_csv(name, workdir, all_report_dir):
     utils.print_command(command, workdir)
     
     utils.lock_if_windows()
-    subprocess.check_output(command, cwd=workdir, shell=True)
-    utils.release_if_windows()
-
+    try:
+        subprocess.check_output(command, cwd=workdir, shell=True)
+    except:
+        print("Error al ejecutar el comando '{}'".format(command))
+    finally:
+        utils.release_if_windows()
     with open(os.path.join(workdir, "sources.txt")) as file:
         for line in file:
             file_path = os.path.join(workdir, line[2:-1])

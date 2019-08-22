@@ -82,8 +82,12 @@ def compile_workdir(workdir, output_directory, *classpath):
     print_command(command_find, workdir)
     
     lock_if_windows()
-    subprocess.check_output(command_find, cwd=workdir, shell=True)
-    release_if_windows()
+    try:
+        subprocess.check_output(command_find, cwd=workdir, shell=True)
+    except:
+        print("Error al ejecutar el comando '{}'".format(command_find))
+    finally:
+        release_if_windows()
 
     print_command("mkdir {}".format(output_directory))
     if (output_directory != None and not os.path.exists(output_directory)):
