@@ -88,7 +88,12 @@ public class Socket {
 	}
 
 	public Socket() throws Exception {
-		this(new MockEnvironment());
+		try {
+			this.env = new MockEnvironment();
+			setImpl();
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	/**
