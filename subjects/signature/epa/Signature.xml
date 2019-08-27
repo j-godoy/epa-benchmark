@@ -45,7 +45,8 @@
   <state name="S8179">
     <enabled_label name="initSign(PrivateKey)"/>
     <enabled_label name="initVerify(PublicKey)"/>
-    <enabled_label name="verify(byte[],int,int)"/>
+	<enabled_label name="verify(byte[])"/>
+	<enabled_label name="verify(byte[],int,int)"/>
     <enabled_label name="update(byte)"/>
     <enabled_label name="update(byte[])"/>
     <enabled_label name="update(byte[],int,int)"/>
