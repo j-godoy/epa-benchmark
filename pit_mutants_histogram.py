@@ -85,24 +85,27 @@ def count_mutant(subject, criterion, budget, stopping_condition, mutant_name, re
 
 def pit_mutants_histogram(criterion, budget, stopping_condition, mutations_csv_path, test_dir, pitest_dir, runid):
     #file = csv.DictReader(open(mutations_csv_path), newline='', )
-    with open(mutations_csv_path, newline='') as csvfile:
-        reader = csv.DictReader(csvfile, fieldnames=['NAME','SUBJECT','MUTANT_NAME','METHOD','LINE','RESULT','TEST'])
-        keys_by_file = set()
-        for row in reader:
-            subject = row["SUBJECT"]
-            mutant_key = row["MUTANT_NAME"]+"_"+row["METHOD"]+"_"+row["LINE"]
-            result = row["RESULT"]
-            test_name = row["TEST"]
-            test_name = test_name[0:test_name.find("(")]
-            new_key = mutant_key
-            i = 2
-            while new_key in keys_by_file:
-                new_key = mutant_key + "_{}".format(i)
-                i += 1
-            mutant_key = new_key
-            
-            count_mutant(subject, criterion, budget, stopping_condition, mutant_key, result, test_name, test_dir, pitest_dir, runid)
-            keys_by_file.add(mutant_key)
+    try:
+        with open(mutations_csv_path, newline='') as csvfile:
+            reader = csv.DictReader(csvfile, fieldnames=['NAME','SUBJECT','MUTANT_NAME','METHOD','LINE','RESULT','TEST'])
+            keys_by_file = set()
+            for row in reader:
+                subject = row["SUBJECT"]
+                mutant_key = row["MUTANT_NAME"]+"_"+row["METHOD"]+"_"+row["LINE"]
+                result = row["RESULT"]
+                test_name = row["TEST"]
+                test_name = test_name[0:test_name.find("(")]
+                new_key = mutant_key
+                i = 2
+                while new_key in keys_by_file:
+                    new_key = mutant_key + "_{}".format(i)
+                    i += 1
+                mutant_key = new_key
+                
+                count_mutant(subject, criterion, budget, stopping_condition, mutant_key, result, test_name, test_dir, pitest_dir, runid)
+                keys_by_file.add(mutant_key)
+    except:
+        print("Error al leer archivo '{}' ".format(mutations_csv_path))
 
 lock = threading.Lock()
 headers_list = ["SUBJECT","BUDGET","STOP_COND","MUTANT_METHOD_LINE"]
