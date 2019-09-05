@@ -224,7 +224,14 @@ public class StringTokenizer implements Enumeration<Object> {
 	 * @exception NullPointerException if str is <CODE>null</CODE>
 	 */
 	public StringTokenizer(String str, String delim) {
-		this(str, delim, false, null);
+		currentPosition = 0;
+		newPosition = -1;
+		delimsChanged = false;
+		this.str = str;
+		maxPosition = str.length();
+		delimiters = delim;
+		retDelims = false;
+		setMaxDelimCodePoint();
 	}
 
 	/**
