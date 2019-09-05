@@ -27,9 +27,13 @@ def remove_and_make_dirs(path):
 
 def make_dirs_if_not_exist(path):
     lock.acquire()
-    if not os.path.exists(path):
-        os.makedirs(path)
-    lock.release()
+    try:
+        if not os.path.exists(path):
+            os.makedirs(path)
+    except:
+        print ("Error al ejecutar os.makedirs({})".format(path))
+    finally:
+        lock.release()
     
 def replace_assert_catch_in_test(java_file, assert_type):
     new_file = ""
