@@ -120,11 +120,18 @@ def read_mujava_coverage_csv(mujava_csv):
 def get_test_suite_loc(path_file):
     file = open(path_file, "r")
     init_loc_index = 11 
-    ts_loc = int(file.read()[init_loc_index:])
+    ts_loc = "N/A"
+    try:
+        ts_loc = int(file.read()[init_loc_index:])
+    except:
+        print("ERROR al obtener numero de lineas del test suite '{}'".format(path_file))
     return ts_loc
 
 def get_exceptions_in_testgenlog(testgen_log_file):
-    file = open(testgen_log_file, "r")
+    try:
+        file = open(testgen_log_file, "r")
+    except:
+        return "N/A"
     file_txt = file.read().split("\n")
     exceptions = 'N/A'
     init_exception_goals_covered_index = 27
