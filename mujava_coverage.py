@@ -58,7 +58,8 @@ class MuJava:
             try:
                 subprocess.check_output(command_junit, shell=True)
             except:
-                None
+                print("Error al ejecutar el comando '{}'".format(command_junit))
+
             ret = read_results("{}{}{}".format(output_dir, os.path.sep, junit_log_name))
             self.running_cmd += "\n\tResults: {}{} , Total: {} - Failure: {}\n".format(output_dir, junit_log_name, ret[0], ret[1])
             return ret
