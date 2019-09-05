@@ -34,7 +34,7 @@ def run_evosuite(evosuite_jar_path, projectCP, class_name, criterion, epa_path, 
     #is_JDBCResultSet = "JDBCResultSet" in class_name
     #extra_parameters = "-Dassertions=\"false\" -Dminimize=\"false\"" if is_JDBCResultSet else ""
     extra_parameters = "-Dminimize=\"true\""
-    command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1048\" -Dstopping_condition={} -Dsearch_budget={} -Djunit_allow_restricted_libraries=true -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dtest_archive=\"true\" -Dprint_missed_goals=\"true\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dtimeout="4000" -Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\" -Dassertions=\"true\" -Dcoverage=\"true\" -Djunit_check_timeout="600" -Dassertion_timeout="600" -Dinferred_epa_xml_path={} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, test_dir, test_dir)
+    command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1048\" -Dstop_zero=\"false\" -Dstopping_condition={} -Dsearch_budget={} -Djunit_allow_restricted_libraries=true -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dtest_archive=\"true\" -Dprint_missed_goals=\"true\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dtimeout="4000" -Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\" -Dassertions=\"true\" -Dcoverage=\"true\" -Djunit_check_timeout="600" -Dassertion_timeout="600" -Dinferred_epa_xml_path={} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, test_dir, test_dir)
     utils.print_command(command)
     try:
         subprocess.check_output(command, shell=True)
@@ -48,11 +48,13 @@ def run_randoop(projectCP, class_name, randoop_jar_path, testdir, search_budget)
                 test_file = os.path.join(testdir, test)
                 os.unlink(test_file)
             
-            """if not test_file.endswith(".java"):
-                continue
-            if not test[-1:].isdigit(): # Randoop generates a test file without tests.
-                continue
-            utils.rename_class(test_file, "RegressionTest", new_class_name)"""
+            #if not test_file.endswith(".java"):
+            #    continue
+            #if not test[-1:].isdigit(): # Randoop generates a test file without tests.
+            #    continue
+    
+    """def change_class_name(test_dir, new_classname):
+        utils.rename_class(test_dir, "RegressionTest", new_classname)"""
         
     utils.make_dirs_if_not_exist(testdir)   
     sep = os.path.pathsep
@@ -316,8 +318,12 @@ def check_if_exists_testgendir_in_other_bug_type(generated_test_report_evosuite_
 def get_file_path_jncss(class_name, test_dir, results_dir_name, bug_type, stopping_condition, search_budget, criterion, runid, javancss_jar_path):
     package = class_name.split(".")[0:-1]
     package_dir = utils.get_package_dir(package)
-    only_class_name = class_name.split(".")[-1]
-    test_suite_file_path = os.path.join(test_dir, package_dir, only_class_name +"_ESTest.java")
+    
+    if "randoop".upper() in criterion.upper():
+        only_class_name = "RegressionTest?.java" #Randoop genera varios .java, c/u con 500 tests
+    else:
+        only_class_name = class_name.split(".")[-1] + "_ESTest.java"
+    test_suite_file_path = os.path.join(test_dir, package_dir, only_class_name)
     
     result_jncss_temp = os.path.join(results_dir_name, "javancss_temp", "{}_{}_{}_{}_{}".format(bug_type, stopping_condition, search_budget, class_name, criterion))
     utils.make_dirs_if_not_exist(result_jncss_temp)
@@ -325,8 +331,14 @@ def get_file_path_jncss(class_name, test_dir, results_dir_name, bug_type, stoppi
     result_jncss_temp = os.path.join(result_jncss_temp, "{}.txt".format(runid))
     command = "java -jar {} {} > {}".format(javancss_jar_path, test_suite_file_path, result_jncss_temp)
     utils.print_command(command)
-    subprocess.check_output(command, shell=True)
-    return result_jncss_temp
+    utils.lock_if_windows()
+    try:
+        subprocess.check_output(command, shell=True)
+    except:
+        print("Error al ejecutar el comando '{}'".format(command))
+    finally:
+        utils.release_if_windows()
+    return result_jncss_temp;
 
 lock = threading.Lock()
 class RunTestEPA(threading.Thread):
