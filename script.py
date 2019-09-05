@@ -100,7 +100,7 @@ class EPAConfig:
         tests_to_run = []
         for line in lines:
             # line comment
-            if line.strip().startswith("#"):
+            if line.strip().startswith("#") or len(line.strip()) == 0:
                 continue
             
             terms = line.split('*')
