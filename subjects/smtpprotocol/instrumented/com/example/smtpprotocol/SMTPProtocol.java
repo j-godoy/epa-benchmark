@@ -121,12 +121,18 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	 */
 	@EpaAction(name = "SMTPProtocol(String)")
 	public SMTPProtocol(String host) {
-		this(host, DEFAULTPORT, new MockSMTPResponse());
+		this.host = host;
+		this.port = DEFAULTPORT;
+		this.smtpResponse = new MockSMTPResponse();
+		out = new MockOutputStream();
 	}
 	
 	@EpaAction(name = "SMTPProtocol(String,MockSMTPResponse)")
 	public SMTPProtocol(String host, MockSMTPResponse serverResponse) {
-		this(host, DEFAULTPORT, serverResponse);
+		this.host = host;
+		this.port = DEFAULTPORT;
+		this.smtpResponse = serverResponse;
+		out = new MockOutputStream();
 	}
 
 	/**
