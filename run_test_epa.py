@@ -447,8 +447,10 @@ class RunTestEPA(threading.Thread):
         
         if self.method in [EpatestingMethod.ONLY_METRICS.value, EpatestingMethod.BOTH.value, EpatestingMethod.BOTH_WITHOUT_MUJAVA.value, EpatestingMethod.ONLY_METRICS_WITHOUT_MUJAVA.value]:
             print('GENERATING METRICS')
-            if not os.path.exists(self.subdir_testgen):
-                print("not found testgen folder ! '{}'".format(self.subdir_testgen))
+            packages_dir = utils.get_package_dir(self.class_name.split(".")[:-1])
+            test_dir_sub = os.path.join(self.generated_test_dir, packages_dir)
+            if not os.path.exists(test_dir_sub):
+                print("not found test folder ! '{}'".format(test_dir_sub))
                 exit(1)
             
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransition")
