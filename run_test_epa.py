@@ -80,12 +80,12 @@ def workaround_test(test_dir, class_name, file_name, add_fails, assert_type):
     if(add_fails):
         utils.add_fails_in_test(java_file)
 
-def measure_evosuite(evosuite_jar_path, projectCP, testCP, class_name, epa_path, report_dir, criterion):
+def measure_evosuite(evosuite_jar_path, projectCP, testCP, class_name, epa_path, report_dir, criterion, inferred_epa_xml_path, force_inferred_epa):
     utils.make_dirs_if_not_exist(report_dir)
     err_file = os.path.join(report_dir, criterion.replace(":","_") + "_err.txt")
     out_file = os.path.join(report_dir, criterion.replace(":","_") + "_out.txt")
     sep = os.path.pathsep
-    command = 'java -jar {} -projectCP {}{}{} -class {} -Depa_xml_path={} -criterion {} -Dwrite_covered_goals_file=\"true\" -Dwrite_all_goals_file=\"true\" -Dreport_dir={} -measureCoverage > {} 2> {}'.format(evosuite_jar_path, projectCP, sep, testCP, class_name, epa_path, criterion, report_dir, out_file, err_file)
+    command = 'java -jar {} -projectCP {}{}{} -class {} -Depa_xml_path={} -criterion {} -Dwrite_covered_goals_file=\"true\" -Dwrite_all_goals_file=\"true\" -Dreport_dir={} -Dforce_inferred_epa={} -Dinferred_epa_xml_path={} -measureCoverage > {} 2> {}'.format(evosuite_jar_path, projectCP, sep, testCP, class_name, epa_path, criterion, report_dir, force_inferred_epa, inferred_epa_xml_path, out_file, err_file)
     utils.print_command(command)
     try:
         subprocess.check_output(command, shell=True)
@@ -247,11 +247,16 @@ def mujava_measure(bug_type, name, criterion, subdir_mutants, error_prot_list, i
 
 
 def copy_csv(file_path, file_name, all_report_dir):
-    dest = os.path.join(all_report_dir, "{}.csv".format(file_name))
-    command = 'cp {} {}'.format(file_path, dest)
-    utils.print_command(command)
-    shutil.copyfile(file_path, dest)
-
+    utils.lock_if_windows()
+    try:
+        dest = os.path.join(all_report_dir, "{}.csv".format(file_name))
+        command = 'cp {} {}'.format(file_path, dest)
+        utils.print_command(command)
+        shutil.copyfile(file_path, dest)
+    except:
+        print ("ERROR al copiar csv con el comando '{}'".format(command))
+    finally:
+        utils.release_if_windows()
 
 def copy_pitest_csv(name, workdir, all_report_dir):
     command = utils.find_and_save_command("*.csv", "sources.txt")
@@ -282,7 +287,7 @@ def cp_testsuite_if_exists_in_other_results(curr_bug_type, subdir_testgen, gener
         if os.path.exists(subdir_testgen):
             shutil.rmtree(subdir_testgen)
         shutil.copytree(other_generated_test_dir, subdir_testgen)
-        print("TEST ALREADY GENERATED! coping from {}".format(other_generated_test_dir))
+        print("TEST ALREADY GENERATED! copying from {}".format(other_generated_test_dir))
         #if other_bug_type == ERRPROT, then i need to move original test file (with asserts)
         if(other_bug_type.upper() == BugType.ERRPROT.name):
             curr_full_test_dir = other_full_test_dir.replace(other_bug_type, curr_bug_type)
@@ -453,9 +458,11 @@ class RunTestEPA(threading.Thread):
                 print("not found test folder ! '{}'".format(test_dir_sub))
                 exit(1)
             
-            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransition")
-            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexception")
-            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedges")
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransition", inferred_epa_xml_path="", force_inferred_epa=False)
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexception", inferred_epa_xml_path="", force_inferred_epa=False)
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedges", inferred_epa_xml_path="", force_inferred_epa=False)
+            # Hack to generate inferred epa
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransitionmining", inferred_epa_xml_path=self.inferred_epa_xml, force_inferred_epa=True)
             #ONLY to get exception goals in metrics folder
             #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epatransition:epaexception")
             #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epatransition")
