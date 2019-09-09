@@ -182,7 +182,10 @@ if __name__ == '__main__':
             test.start()
         for test in chunk:
             test.join()
-            final_results.append(os.path.join(test.subdir_metrics,'resume.csv'))
+            resume_file = os.path.join(test.subdir_metrics,'resume.csv')
+            if(os.path.exists(resume_file)):
+                if(len(open(resume_file, 'r').readlines()) > 1): # Debe tener al menos una linea
+                    final_results.append(resume_file)
             finished_subjects = finished_subjects + 1
             percent_finished = finished_subjects*100/total_subjects
             total_time = elapsed_time()
