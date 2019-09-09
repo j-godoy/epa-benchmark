@@ -159,7 +159,7 @@ global finished_subjects
 global total_subjects
 if __name__ == '__main__':
     init()
-    print("Starting at time {} ...\n".format(time.strftime("%H:%M:%S")))
+    print("Starting at time {} ...\n".format(time.strftime("%Y-%m-%d   %H:%M:%S")))
     config = EPAConfig()
     parser = argparse.ArgumentParser()
     parser.add_argument("config_file", help="The config file needed to run epatesting. See config_example.ini for an example.")
@@ -194,5 +194,5 @@ if __name__ == '__main__':
     merge_final_results(final_results, os.path.join(config.results_dir_name, 'results.csv'))
     utils.save_file(os.path.join(config.results_dir_name, "mujava_histogram.csv"), utils.get_mutant_histogram())
     utils.save_file(os.path.join(config.results_dir_name, "pit_histogram.csv"), pit_mutants_histogram.get_histogram())
-    print("Done! {}".format(time.strftime("%H:%M:%S")))
+    print("Done! at time {} ...\n".format(time.strftime("%Y-%m-%d   %H:%M:%S")))
     print_elapsed_time()
