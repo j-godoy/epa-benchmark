@@ -153,7 +153,7 @@ public class NumberFormatStringTokenizer {
 
 	@EpaActionPrecondition(name = "isLetterOrDigitAhead")
 	private boolean isLetterOrDigitAheadEnabled() {
-		return currentPosition >= 0 && currentPosition < str.length();
+		return true;
 	}
 
 	@EpaActionPrecondition(name = "nextIsSep")
