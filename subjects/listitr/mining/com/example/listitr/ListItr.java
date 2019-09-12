@@ -233,12 +233,12 @@ public class ListItr implements ListIterator<Object> {
 
 	@EpaActionPrecondition(name = "nextIndex")
 	private boolean isNextIndexEnabled() {
-		return cursor < this.arrayList.size();
+		return true;
 	}
 
 	@EpaActionPrecondition(name = "previousIndex")
 	private boolean isPreviousIndexEnabled() {
-		return cursor - 1 >= 0;
+		return true;
 	}
 
 	@EpaActionPrecondition(name = "hasNext")
