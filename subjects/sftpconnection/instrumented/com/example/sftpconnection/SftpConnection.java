@@ -195,12 +195,12 @@ public class SftpConnection implements MockBasicConnection {
 	public void list() throws MockIOException {
 	}
 
-	@EpaAction(name = "chdir")
+	@EpaAction(name = "chdir(String)")
 	public boolean chdir(String p) {
 		return chdir(p, true);
 	}
 
-	@EpaAction(name = "chdir")
+	@EpaAction(name = "chdir(String,boolean)")
 	public boolean chdir(String p, boolean refresh) {
 		String tmp = toSFTP(p);
 
