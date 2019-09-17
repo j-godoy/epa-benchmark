@@ -63,8 +63,8 @@ def read_generations_csv(file_path):
             for row in reader:
                 generations = row['Generations']
                 total_time = int(row['Total_Time'])/1000
-    except:
-        print("Error in \"read_generations_csv\": File {} doesn't exists. Randoop doesnt generate that file".format(file_path))
+    except Exception as e:
+        print("Error in \"read_generations_csv\": File {} doesn't exists. Randoop doesnt generate that file. Error {}".format(file_path, e))
         
     return generations, total_time
 
@@ -112,8 +112,8 @@ def read_mujava_coverage_csv(mujava_csv):
                 mutants_killed = row[1]
                 mujava_coverage = row[2]
                 err_prot_killed = row[4]
-    except:
-        print("File {} doesn't exists".format(mujava_csv))
+    except Exception as e:
+        print("File {} doesn't exists".format(mujava_csv, e))
     return mujava_coverage, mutants_killed, err_prot_killed
 
 
@@ -123,8 +123,8 @@ def get_test_suite_loc(path_file):
     ts_loc = "N/A"
     try:
         ts_loc = int(file.read()[init_loc_index:])
-    except:
-        print("ERROR al obtener numero de lineas del test suite '{}'".format(path_file))
+    except Exception as e:
+        print("ERROR al obtener numero de lineas del test suite '{}'".format(path_file, e))
     return ts_loc
 
 def get_exceptions_in_testgenlog(testgen_log_file):

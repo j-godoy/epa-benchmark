@@ -30,8 +30,8 @@ def make_dirs_if_not_exist(path):
     try:
         if not os.path.exists(path):
             os.makedirs(path)
-    except:
-        print ("Error al ejecutar os.makedirs({})".format(path))
+    except Exception as e:
+        print ("Error al ejecutar os.makedirs({}). Error {}".format(path, e))
     finally:
         lock.release()
     
@@ -88,12 +88,12 @@ def compile_workdir(workdir, output_directory, *classpath):
     lock_if_windows()
     try:
         subprocess.check_output(command_find, cwd=workdir, shell=True)
-    except:
-        print("Error al ejecutar el comando '{}'".format(command_find))
+    except Exception as e:
+        print("Error al ejecutar el comando '{}'. Error {}".format(command_find, e))
     finally:
         release_if_windows()
 
-    print_command("mkdir {}".format(output_directory))
+    #print_command("mkdir {}".format(output_directory))
     if (output_directory != None and not os.path.exists(output_directory)):
         os.makedirs(output_directory)
         
@@ -108,8 +108,8 @@ def compile_workdir(workdir, output_directory, *classpath):
     lock_if_windows()
     try:
         subprocess.check_output(command_compile, cwd=workdir, shell=True)
-    except:
-        print("Error al compilar con el comando '{}'".format(command_compile))
+    except Exception as e:
+        print("Error al compilar con el comando '{}'. Error {}".format(command_compile, e))
     finally:
         release_if_windows()
     
