@@ -766,46 +766,58 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	
 	@EpaActionPrecondition(name = "openPort()")
 	private boolean isOpenPortEnabled() {
-		return true;
+		return isS1() || isS2();
 	}
 	
 	@EpaActionPrecondition(name = "rcpt(int,String)")
 	private boolean isRcptintstringEnabled() {
-		return socket != null && !socket.isClosed() && state != NOT_CONNECTED;
+		return isS1() || isS2();
 	}
 	
 	@EpaActionPrecondition(name = "rcpt(String)")
 	private boolean isRcptstringEnabled() {
-		return socket != null && !socket.isClosed() && state != NOT_CONNECTED;
+		return isS1() || isS2();
 	}
 	
 	@EpaActionPrecondition(name = "quit()")
 	private boolean isQuitEnabled() {
-		return socket != null;
+		return isS1() || isS2();
 	}
 	
 	@EpaActionPrecondition(name = "getState()")
 	private boolean isGetStateEnabled() {
-		return true;
+		return isS1() || isS2();
 	}
 	
 	@EpaActionPrecondition(name = "ehlo(string)")
 	private boolean isEhlostringEnabled() {
-		return socket != null && !socket.isClosed() && state >= PLAIN;
+		return isS2();
 	}
 	
 	@EpaActionPrecondition(name = "mail(String)")
 	private boolean isMailstringEnabled() {
-		return socket != null && !socket.isClosed() && state >= PLAIN;
+		return isS2();
 	}
 	
 	@EpaActionPrecondition(name = "data(string)")
 	private boolean isDatastringEnabled() {
-		return socket != null && !socket.isClosed() && state >= PLAIN;
+		return isS2();
 	}
 	
 	@EpaActionPrecondition(name = "startTLS()")
 	private boolean isStartTLSEnabled() {
+		return isS2();
+	}
+	
+	/*-------------------------------------------------------
+	 * EPA State Methods
+	 */
+	 
+    private boolean isS1() {
+		return socket == null || socket.isClosed() || state == NOT_CONNECTED;
+	}
+    
+    private boolean isS2() {
 		return socket != null && !socket.isClosed() && state != NOT_CONNECTED;
 	}
 }
