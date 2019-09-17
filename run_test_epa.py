@@ -33,13 +33,16 @@ class AssertType(Enum):
 def run_evosuite(evosuite_jar_path, projectCP, class_name, criterion, epa_path, inferred_epa_xml_path, stopping_condition, search_budget, test_dir='test', report_dir='report'):
     #is_JDBCResultSet = "JDBCResultSet" in class_name
     #extra_parameters = "-Dassertions=\"false\" -Dminimize=\"false\"" if is_JDBCResultSet else ""
-    extra_parameters = "-Dminimize=\"true\""
-    command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1048\" -Dstop_zero=\"false\" -Dstopping_condition={} -Dsearch_budget={} -Djunit_allow_restricted_libraries=true -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dtest_archive=\"true\" -Dprint_missed_goals=\"true\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dtimeout="4000" -Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\" -Dassertions=\"true\" -Dcoverage=\"true\" -Djunit_check_timeout="600" -Dassertion_timeout="600" -Dinferred_epa_xml_path={} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, test_dir, test_dir)
+    #extra_parameters = "-Dminimize=\"false\""
+    extra_parameters = "-Dminimize=\"true\" -Dstop_zero=\"false\" -Djunit_allow_restricted_libraries=true -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dtest_archive=\"true\" -Dprint_missed_goals=\"true\" -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dassertions=\"true\" -Dcoverage=\"true\" -Dallows_actions_violates_precondition=\"false\""
+    output_parameters = "-Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\""
+    timeout_parameters = "-Dtimeout=\"4000\" -Djunit_check_timeout=\"600\" -Dassertion_timeout=\"600\" -Dminimization_timeout=\"600\""
+    command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1048\" -Dstopping_condition={} -Dsearch_budget={} -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dinferred_epa_xml_path={} {} {} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, output_parameters, timeout_parameters, test_dir, test_dir)
     utils.print_command(command)
     try:
         subprocess.check_output(command, shell=True)
-    except:
-        print("Error al correr evosuite en la generacion de test con el comando '{}'".format(command))
+    except Exception as e:
+        print("Error al correr evosuite en la generacion de test con el comando '{}'. Error {}".format(command, e))
     
 def run_randoop(projectCP, class_name, randoop_jar_path, testdir, search_budget):
     def remove_randoop_error_test(testdir):
@@ -66,8 +69,8 @@ def run_randoop(projectCP, class_name, randoop_jar_path, testdir, search_budget)
     utils.print_command(command)
     try:
         subprocess.check_output(command, shell=True)
-    except:
-        print("Error al correr randoop con el comando '{}'".format(command))
+    except Exception as e:
+        print("Error al correr randoop con el comando '{}'".format(command, e))
     testdir_full = os.path.join(testdir, packages_dir)
     remove_randoop_error_test(testdir_full)
     #change_class_name(testdir_full, class_name.split(".")[-1]+"_ESTest")
@@ -89,8 +92,8 @@ def measure_evosuite(evosuite_jar_path, projectCP, testCP, class_name, epa_path,
     utils.print_command(command)
     try:
         subprocess.check_output(command, shell=True)
-    except:
-        print("Error al correr evosuite en la medicion de cobertura con el comando '{}'".format(command))
+    except Exception as e:
+        print("Error al correr evosuite en la medicion de cobertura con el comando '{}'".format(command, e))
 
 def setup_subjects(results_dir_name, original_code_dir, instrumented_code_dir, mining_code_dir, name, evosuite_classes, class_name):
     bin_original_code_dir = get_subject_original_bin_dir(results_dir_name, name)
@@ -169,8 +172,8 @@ def run_pitest(workdir):
     utils.print_command(command, workdir)
     try:
         subprocess.check_output(command, cwd=workdir, shell=True)
-    except:
-        print("Error al correr pitest con el comando '{}'".format(command))
+    except Exception as e:
+        print("Error al correr pitest con el comando '{}'. Error {}".format(command, e))
 
 
 def generate_pitest_workdir(pitest_dir):
@@ -178,39 +181,46 @@ def generate_pitest_workdir(pitest_dir):
     # pom.xml
     # src/main/java/ < source code we want to test
     # src/test/java/ < testsuite
-    command_mkdir_home = "mkdir {}".format(pitest_dir)
-    utils.print_command(command_mkdir_home)
-    if not os.path.exists(pitest_dir):
-        os.makedirs(pitest_dir)
+    print("Generating pitest workdir...")
+    #command_mkdir_home = "mkdir {}".format(pitest_dir)
+    #utils.print_command(command_mkdir_home)
+    utils.make_dirs_if_not_exist(pitest_dir)
+    #if not os.path.exists(pitest_dir):
+    #    os.makedirs(pitest_dir)
     pitest_dir_src = os.path.join(pitest_dir, "src");
-    command_mkdir_src = "mkdir {}".format(pitest_dir_src)
-    utils.print_command(command_mkdir_src)
-    if not os.path.exists(pitest_dir_src):
-        os.makedirs(pitest_dir_src)
+    utils.make_dirs_if_not_exist(pitest_dir_src)
+    #command_mkdir_src = "mkdir {}".format(pitest_dir_src)
+    #utils.print_command(command_mkdir_src)
+    #if not os.path.exists(pitest_dir_src):
+    #    os.makedirs(pitest_dir_src)
 
     pitest_dir_src_main = os.path.join(pitest_dir, "src", "main");
-    command_mkdir_src_main = "mkdir {}".format(pitest_dir_src_main)
-    utils.print_command(command_mkdir_src_main)
-    if not os.path.exists(pitest_dir_src_main):
-        os.makedirs(pitest_dir_src_main)
+    #command_mkdir_src_main = "mkdir {}".format(pitest_dir_src_main)
+    #utils.print_command(command_mkdir_src_main)
+    utils.make_dirs_if_not_exist(pitest_dir_src_main)
+    #if not os.path.exists(pitest_dir_src_main):
+    #   os.makedirs(pitest_dir_src_main)
 
     pitest_dir_src_main_java = os.path.join(pitest_dir, "src", "main", "java")
-    command_mkdir_src_main_java = "mkdir {}".format(pitest_dir_src_main_java)
-    utils.print_command(command_mkdir_src_main_java)
-    if not os.path.exists(pitest_dir_src_main_java):
-        os.makedirs(pitest_dir_src_main_java)
+    #command_mkdir_src_main_java = "mkdir {}".format(pitest_dir_src_main_java)
+    #utils.print_command(command_mkdir_src_main_java)
+    utils.make_dirs_if_not_exist(pitest_dir_src_main_java)
+    #if not os.path.exists(pitest_dir_src_main_java):
+    #    os.makedirs(pitest_dir_src_main_java)
     
     pitest_dir_src_test = os.path.join(pitest_dir, "src", "test")
-    command_mkdir_src_test = "mkdir {}".format(pitest_dir_src_test)
-    utils.print_command(command_mkdir_src_test)
-    if not os.path.exists(pitest_dir_src_test):
-        os.makedirs(pitest_dir_src_test)
+    #command_mkdir_src_test = "mkdir {}".format(pitest_dir_src_test)
+    #utils.print_command(command_mkdir_src_test)
+    utils.make_dirs_if_not_exist(pitest_dir_src_test)
+    #if not os.path.exists(pitest_dir_src_test):
+    #    os.makedirs(pitest_dir_src_test)
         
     pitest_dir_src_test_java = os.path.join(pitest_dir, "src", "test", "java")        
-    command_mkdir_src_test_java = "mkdir {}".format(pitest_dir_src_test_java)
-    utils.print_command(command_mkdir_src_test_java)
-    if not os.path.exists(pitest_dir_src_test_java):
-        os.makedirs(pitest_dir_src_test_java)
+    #command_mkdir_src_test_java = "mkdir {}".format(pitest_dir_src_test_java)
+    #utils.print_command(command_mkdir_src_test_java)
+    utils.make_dirs_if_not_exist(pitest_dir_src_test_java)
+    #if not os.path.exists(pitest_dir_src_test_java):
+    #    os.makedirs(pitest_dir_src_test_java)
 
 
 def pitest_measure(pitest_dir, targetClasses, targetTests, class_dir, test_dir):
@@ -218,16 +228,16 @@ def pitest_measure(pitest_dir, targetClasses, targetTests, class_dir, test_dir):
     edit_pit_pom('pit_pom.xml', targetClasses, targetTests, os.path.join(pitest_dir, "pom.xml"))
 
     pitest_dir_src_main_java = os.path.join(pitest_dir, "src", "main", "java")
-    command_copy_source = 'cp -r {}/* {}'.format(class_dir, pitest_dir_src_main_java)
-    utils.print_command(command_copy_source)
+    #command_copy_source = 'cp -r {}/* {}'.format(class_dir, pitest_dir_src_main_java)
+    #utils.print_command(command_copy_source)
     # Si existe el directorio lo elimino (sino tira error shutil.copytree)
     if os.path.exists(pitest_dir_src_main_java):
         shutil.rmtree(pitest_dir_src_main_java)
     shutil.copytree(class_dir, pitest_dir_src_main_java)
     
     pitest_dir_src_test_java = os.path.join(pitest_dir, "src", "test", "java")
-    command_copy_test = 'cp -r {}/* {}'.format(test_dir, pitest_dir_src_test_java)
-    utils.print_command(command_copy_test)
+    #command_copy_test = 'cp -r {}/* {}'.format(test_dir, pitest_dir_src_test_java)
+    #utils.print_command(command_copy_test)
     if os.path.exists(pitest_dir_src_test_java):
         shutil.rmtree(pitest_dir_src_test_java)
     shutil.copytree(test_dir, pitest_dir_src_test_java)
@@ -251,22 +261,22 @@ def copy_csv(file_path, file_name, all_report_dir):
     try:
         dest = os.path.join(all_report_dir, "{}.csv".format(file_name))
         command = 'cp {} {}'.format(file_path, dest)
-        utils.print_command(command)
+        #utils.print_command(command)
         shutil.copyfile(file_path, dest)
-    except:
-        print ("ERROR al copiar csv con el comando '{}'".format(command))
+    except Exception as e:
+        print ("ERROR al copiar csv con el comando '{}'. Error {}".format(command, e))
     finally:
         utils.release_if_windows()
 
 def copy_pitest_csv(name, workdir, all_report_dir):
     command = utils.find_and_save_command("*.csv", "sources.txt")
-    utils.print_command(command, workdir)
+    #utils.print_command(command, workdir)
     
     utils.lock_if_windows()
     try:
         subprocess.check_output(command, cwd=workdir, shell=True)
-    except:
-        print("Error al ejecutar el comando '{}'".format(command))
+    except Exception as e:
+        print("Error al ejecutar el comando '{}'".format(command, e))
     finally:
         utils.release_if_windows()
     with open(os.path.join(workdir, "sources.txt")) as file:
@@ -339,8 +349,8 @@ def get_file_path_jncss(class_name, test_dir, results_dir_name, bug_type, stoppi
     utils.lock_if_windows()
     try:
         subprocess.check_output(command, shell=True)
-    except:
-        print("Error al ejecutar el comando '{}'".format(command))
+    except Exception as e:
+        print("Error al ejecutar el comando '{}'. Error {}".format(command, e))
     finally:
         utils.release_if_windows()
     return result_jncss_temp;
@@ -411,9 +421,9 @@ class RunTestEPA(threading.Thread):
             try:
                 lock.acquire()
                 testsuite_exists = cp_testsuite_if_exists_in_other_results(curr_bug_type, self.subdir_testgen, self.generated_test_report_evosuite_dir, self.class_name, self.criterion)
-            except:
+            except Exception as e:
                 testsuite_exists = False
-                print("error copying from other bug_type folder to {}".format(self.subdir_testgen))
+                print("error copying from other bug_type folder to {}. Error {}".format(self.subdir_testgen, e))
             finally:
                 lock.release()
 
@@ -482,7 +492,7 @@ class RunTestEPA(threading.Thread):
             # Resume the reports generated
             all_report_dir = os.path.join(self.subdir_metrics, 'all_reports')
             command_mkdir_report = 'mkdir {}'.format(all_report_dir)
-            utils.print_command(command_mkdir_report)
+            #utils.print_command(command_mkdir_report)
             if not os.path.exists(all_report_dir):
                 os.makedirs(all_report_dir)
 
