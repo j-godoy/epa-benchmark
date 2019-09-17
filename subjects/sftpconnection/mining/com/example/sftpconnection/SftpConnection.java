@@ -195,12 +195,12 @@ public class SftpConnection implements MockBasicConnection {
 	public void list() throws MockIOException {
 	}
 
-	@EpaAction(name = "chdir")
+	@EpaAction(name = "chdir(String)")
 	public boolean chdir(String p) {
 		return chdir(p, true);
 	}
 
-	@EpaAction(name = "chdir")
+	@EpaAction(name = "chdir(String,boolean)")
 	public boolean chdir(String p, boolean refresh) {
 		String tmp = toSFTP(p);
 
@@ -831,97 +831,121 @@ public class SftpConnection implements MockBasicConnection {
 
 	@EpaActionPrecondition(name = "removeFileOrDir")
 	private boolean isRemoveFileOrDirEnabled() {
-		return this.connected;
+		return stateS4();
 	}
 	
 	@EpaActionPrecondition(name = "disconnect")
 	private boolean isDisconnectEnabled() {
-		return this.channel != null && this.session != null;
+		return stateS3() || stateS4();
 	}
 
 	@EpaActionPrecondition(name = "isConnected")
 	private boolean isIsConnectedEnabled() {
-		return true;
+		return stateS3();
 	}
 
 	@EpaActionPrecondition(name = "getPWD")
 	private boolean isGetPWDEnabled() {
-		return true;
+		return stateS2() || stateS3() || stateS4();
 	}
 
 	@EpaActionPrecondition(name = "mkdir")
 	private boolean isMkdirEnabled() {
-		return this.connected;
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "list")
 	private boolean isListEnabled() {
-		return true;
+		return stateS4();
 	}
 
-	@EpaActionPrecondition(name = "chdir")
-	private boolean ischdirEnabled() {
-		return this.connected;
+	@EpaActionPrecondition(name = "chdir(String)")
+	private boolean ischdirstringEnabled() {
+		return stateS4();
+	}
+
+	@EpaActionPrecondition(name = "chdir(String,boolean)")
+	private boolean ischdirstringbooleanEnabled() {
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "setLocalPath")
 	private boolean isSetLocalPathEnabled() {
-		return this.connected;
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "sortLs")
 	private boolean isSortLsEnabled() {
-		return this.connected;
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "sortSize")
 	private boolean isSortSizeEnabled() {
-		return true;
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "getPermissions")
 	private boolean isGetPermissionsEnabled() {
-		return true;
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "handleUpload")
 	private boolean isHandleUploadEnabled() {
-		return this.connected;
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "handleDownload")
 	private boolean isHandleDownloadEnabled() {
-		return this.connected;
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "upload")
 	private boolean isUploadEnabled() {
-		return this.connected;
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "download")
 	private boolean isDownloadEnabled() {
-		return this.connected;
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "rename")
 	private boolean isRenameEnabled() {
-		return this.connected;
+		return stateS4();
 	}
 
 	@EpaActionPrecondition(name = "addConnectionListener")
 	private boolean isAddConnectionListenerEnabled() {
-		return true;
+		return stateS2() || stateS3();
 	}
 
 	@EpaActionPrecondition(name = "setConnectionListeners")
 	private boolean isSetConnectionListenersEnabled() {
-		return true;
+		return stateS1() || stateS3();
 	}
 	
 	@EpaActionPrecondition(name = "login")
 	private boolean isLoginEnabled() {
-		return !this.connected;
+		return stateS1() || stateS2();
+	}
+
+	
+	// EPA states
+	
+	private boolean stateS1() {
+		return !this.connected && this.listeners.isEmpty();
+	}
+
+	private boolean stateS2() {
+		return !this.connected && !this.listeners.isEmpty();
+	}
+
+	private boolean stateS3() {
+		return this.connected && this.listeners.isEmpty();
+	}
+
+	private boolean stateS4() {
+		return this.connected && !this.listeners.isEmpty();
 	}
 
 }
