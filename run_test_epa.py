@@ -36,7 +36,7 @@ def run_evosuite(evosuite_jar_path, projectCP, class_name, criterion, epa_path, 
     #extra_parameters = "-Dminimize=\"false\""
     extra_parameters = "-Dminimize=\"true\" -Dstop_zero=\"false\" -Djunit_allow_restricted_libraries=true -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dtest_archive=\"true\" -Dprint_missed_goals=\"true\" -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dassertions=\"true\" -Dcoverage=\"true\" -Dallows_actions_violates_precondition=\"false\""
     output_parameters = "-Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\""
-    timeout_parameters = "-Dtimeout=\"4000\" -Djunit_check_timeout=\"600\" -Dassertion_timeout=\"600\" -Dminimization_timeout=\"600\""
+    timeout_parameters = "-Dtimeout=\"4000\" -Djunit_check_timeout=\"600\" -Dassertion_timeout=\"600\" -Dminimization_timeout=\"300\""
     command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1048\" -Dstopping_condition={} -Dsearch_budget={} -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dinferred_epa_xml_path={} {} {} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, output_parameters, timeout_parameters, test_dir, test_dir)
     utils.print_command(command)
     try:
@@ -471,12 +471,10 @@ class RunTestEPA(threading.Thread):
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransition", inferred_epa_xml_path="", force_inferred_epa=False)
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexception", inferred_epa_xml_path="", force_inferred_epa=False)
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedges", inferred_epa_xml_path="", force_inferred_epa=False)
-            # Hack to generate inferred epa
+            # Hack to generate inferred epa - only needed one true in force_inferred_epa
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransitionmining", inferred_epa_xml_path=self.inferred_epa_xml, force_inferred_epa=True)
-            #ONLY to get exception goals in metrics folder
-            #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epatransition:epaexception")
-            #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epatransition")
-            #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="line:branch:exception:epaadjacentedges")
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexceptionmining", inferred_epa_xml_path="", force_inferred_epa=False)
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedgesmining", inferred_epa_xml_path="", force_inferred_epa=False)
 
             # Run Pitest to measure
             
