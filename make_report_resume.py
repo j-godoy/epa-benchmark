@@ -3,15 +3,17 @@ import csv
 header_names = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ',
                 'TOOL', 'LINE', 'BRNCH', 'EXCEPTION', 'EPACOV',
                 'EPA', 'EPATOT', 'EPAEXCEPCOV', 'EPAEXCEP', 'EPAEXCEPTOT',
-                'ADJACCOV', 'ADJAC', 'ADJACTOT', 'TS_LOC', 'PIMUT',
-                'MJMUT', 'MUT_KILLED', 'ERRPROT_KILLED', 'GENS', 'TOT_TIME']
+                'ADJACCOV', 'ADJAC', 'ADJACTOT', 'EPAMINING', 'EPAEXCEPMINING',
+                'EDGESMINING', 'TS_LOC', 'PIMUT', 'MJMUT', 'MUT_KILLED',
+                'ERRPROT_KILLED', 'GENS', 'TOT_TIME']
 
 def write_row(writer, row):
     writer.writerow({'ID': row[0], 'BUG_TYPE': row[1], 'STOP_COND': row[2], 'BUD': row[3], 'SUBJ': row[4],
                      'TOOL': row[5], 'LINE': row[6], 'BRNCH': row[7], 'EXCEPTION': row[8], 'EPACOV': row[9],
                      'EPA': row[10], 'EPATOT': row[11], 'EPAEXCEPCOV': row[12], 'EPAEXCEP': row[13], 'EPAEXCEPTOT': row[14],
-                     'ADJACCOV': row[15], 'ADJAC': row[16], 'ADJACTOT': row[17], 'TS_LOC': row[18], 'PIMUT': row[19],
-                     'MJMUT': row[20], 'MUT_KILLED': row[21], 'ERRPROT_KILLED': row[22], 'GENS': row[23], 'TOT_TIME': row[24]});
+                     'ADJACCOV': row[15], 'ADJAC': row[16], 'ADJACTOT': row[17], 'EPAMINING': row[18], 'EPAEXCEPMINING': row[19],
+                     'EDGESMINING': row[20], 'TS_LOC': row[21], 'PIMUT': row[22], 'MJMUT': row[23], 'MUT_KILLED': row[24],
+                     'ERRPROT_KILLED': row[25], 'GENS': row[26], 'TOT_TIME': row[27]});
                      
 header_names_ts_loc_exceptions = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ', 'TOOL', 'TS_LOC', 'EXCEPTIONS']
 
@@ -23,7 +25,8 @@ def get_complete_row(row):
             row[5], row[6], row[7], row[8], row[9],
             row[10], row[11], row[12], row[13], row[14],
             row[15], row[16], row[17], row[18], row[19],
-            row[20], row[21], row[22], row[23], row[24]]
+            row[20], row[21], row[22], row[23], row[24],
+            row[25], row[26], row[27]]
 
 def read_evosuite_csv(file_path):
     epatransition_coverage = 'N/A'
@@ -35,7 +38,11 @@ def read_evosuite_csv(file_path):
     epaadjacentedges_coverage = 'N/A'
     epaadjacentedges_covered = 'N/A'
     epaadjacentedges_tot = 'N/A'
-    
+
+    epatransitionmining_covered = 'N/A'
+    epaexceptionmining_covered = 'N/A'
+    epaadjacentedgesmining_covered = 'N/A'
+
     with open(file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
@@ -51,8 +58,15 @@ def read_evosuite_csv(file_path):
                 epaadjacentedges_coverage = row['Coverage']
                 epaadjacentedges_covered = row['Covered_Goals']
                 epaadjacentedges_tot = row['Total_Goals']
+            if 'EPATRANSITIONMINING' == row['criterion']:
+                epatransitionmining_covered = row['Covered_Goals']
+            if 'EPAEXCEPTIONMINING' == row['criterion']:
+                epaexceptionmining_covered = row['Covered_Goals']
+            if 'EPAADJACENTEDGESMINING' == row['criterion']:
+                epaadjacentedgesmining_covered = row['Covered_Goals']
     
-    return epatransition_coverage, epatransition_covered, epatransition_tot, epaexception_coverage, epaexception_covered, epaexception_tot, epaadjacentedges_coverage, epaadjacentedges_covered, epaadjacentedges_tot
+    return epatransition_coverage, epatransition_covered, epatransition_tot, epaexception_coverage, epaexception_covered, epaexception_tot,\
+           epaadjacentedges_coverage, epaadjacentedges_covered, epaadjacentedges_tot, epatransitionmining_covered, epaexceptionmining_covered, epaadjacentedgesmining_covered
 
 def read_generations_csv(file_path):
     generations = 'N/A'
@@ -149,7 +163,7 @@ def get_exceptions_in_testgenlog(testgen_log_file):
     return exceptions
 
 def report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, runid, bug_type, stopping_condition, search_budget, criterion, mujava_csv, path_file_jncss, testgen_log_file_path):
-    epa_coverage, epa_covered, epa_tot, epaex_coverage, epaex_covered, epaex_tot, edges_coverage, edges_covered, edges_tot = read_evosuite_csv(evosuite)
+    epa_coverage, epa_covered, epa_tot, epaex_coverage, epaex_covered, epaex_tot, edges_coverage, edges_covered, edges_tot, epamining_covered, epaexcepmining_covered, edgesmining_covered = read_evosuite_csv(evosuite)
     generations_test, total_time_test = read_generations_csv(statistics_testgen)
     branch_coverage, line_coverage = read_jacoco_csv(target_class, jacoco)
     mutation_coverage = read_pit_csv(pit)
@@ -160,8 +174,9 @@ def report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, r
     row = [runid, bug_type, stopping_condition, search_budget, target_class,
            criterion, line_coverage, branch_coverage, exceptions, epa_coverage,
            epa_covered, epa_tot, epaex_coverage, epaex_covered, epaex_tot,
-           edges_coverage, edges_covered, edges_tot, ts_loc, mutation_coverage,
-           mujava_coverage, mutants_killed, err_prot_killed, generations_test, total_time_test]
+           edges_coverage, edges_covered, edges_tot, epamining_covered, epaexcepmining_covered,
+           edgesmining_covered, ts_loc, mutation_coverage, mujava_coverage, mutants_killed,
+           err_prot_killed, generations_test, total_time_test]
     return row
 
 
