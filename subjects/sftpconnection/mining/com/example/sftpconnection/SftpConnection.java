@@ -841,7 +841,7 @@ public class SftpConnection implements MockBasicConnection {
 
 	@EpaActionPrecondition(name = "isConnected")
 	private boolean isIsConnectedEnabled() {
-		return stateS3();
+		return stateS3() || stateS4();
 	}
 
 	@EpaActionPrecondition(name = "getPWD")
