@@ -21,7 +21,7 @@
     <enabled_label name="startElement(String,String,String,MockAttributes)" />
     <enabled_label name="endElement(String)" />
 	<enabled_label name="endElement(String,String,String)" />
-	<enabled_label name="characters(char[], int, int)" />
+	<enabled_label name="characters(char[],int,int)" />
     <transition destination="S1" label="setOutputFormat(Properties)" uncertain="false" violates_invariant="false" />
     <transition destination="S1" label="startDocumentInternal()" uncertain="false" violates_invariant="false" />
     <transition destination="S1" label="endDocument()" uncertain="false" violates_invariant="false" />
