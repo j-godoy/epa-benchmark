@@ -376,6 +376,7 @@ public class SMTPProcessor_h {
      */
     private boolean checkQuit( String command ) {
         if( command.equals( COMMAND_QUIT ) ) {
+			socket = null;
             return true;
         }
         return false;
@@ -415,22 +416,22 @@ public class SMTPProcessor_h {
 		run();
 	}
 	
-	@EpaAction(name = "helo")
-    public void helo(String argument) throws MockSocketException, Exception {
-		try {
-			helo0(argument);
-		} catch (Exception ex) {
-			throw ex;
-		}
-	}
+//	@EpaAction(name = "helo")
+//    public void helo(String argument) throws MockSocketException, Exception {
+//		try {
+//			helo0(argument);
+//		} catch (Exception ex) {
+//			throw ex;
+//		}
+//	}
 
-	private void helo0(String argument) throws MockSocketException, Exception {
-		if (!helo_pre()) {
-			throw new IllegalStateException();
-		}
-		enqueueLineToInputStream(COMMAND_HELO + " " + argument);
-		run();
-	}
+//	private void helo0(String argument) throws MockSocketException, Exception {
+//		if (!helo_pre()) {
+//			throw new IllegalStateException();
+//		}
+//		enqueueLineToInputStream(COMMAND_HELO + " " + argument);
+//		run();
+//	}
 	
 	@EpaAction(name = "ehlo")
 	public void ehlo(String argument) throws MockSocketException, Exception {
@@ -577,9 +578,9 @@ public class SMTPProcessor_h {
 		return socket != null && !socket.isClosed();
 	}
 	
-	private boolean helo_pre() {
-		return socket != null && !socket.isClosed() && isHELOEnabled;
-	}
+//	private boolean helo_pre() {
+//		return socket != null && !socket.isClosed() && isHELOEnabled;
+//	}
 	
 	private boolean noop_pre() {
 		return socket != null && !socket.isClosed();
@@ -1333,10 +1334,10 @@ public class SMTPProcessor_h {
 		return auth_pre();
 	}
 	
-	@EpaActionPrecondition(name = "helo")
-	private boolean isHeloEnabled() {
-		return helo_pre();
-	}
+//	@EpaActionPrecondition(name = "helo")
+//	private boolean isHeloEnabled() {
+//		return helo_pre();
+//	}
 	
 	@EpaActionPrecondition(name = "ehlo")
 	private boolean isEhloEnabled() {
