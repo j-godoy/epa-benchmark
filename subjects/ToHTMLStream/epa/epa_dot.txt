@@ -3,6 +3,6 @@ digraph finite_state_machine {
 	size="8,5"
 	node [shape = doublecircle]; S0;
 	node [shape = circle];
-        S0 -> S1 [ label = "toHTMLStream" ];
-        S1 -> S1 [ label = "setOutputFormat\nstartDocumentInternal\nendDocument\nstartElement\nendElement\ncharacters\ncloseStartTag" ];
+        S0 -> S1 [ label = "ToHTMLStream()" ];
+        S1 -> S1 [ label = "setOutputFormat(Properties)\nstartDocumentInternal()\nendDocument()\nstartElement(String,String,String,MockAttributes)\nendElement(String)\nendElement(String,String,String)\ncharacters(char[],int,int)" ];
 }
