@@ -12,6 +12,7 @@ stats = read.csv(csv_filename, header=TRUE, sep=",")
 
 subjects = unique(stats$SUBJ)
 tools = unique(stats$TOOL)
+bug_type = unique(stats$BUG_TYPE)
 budgets = unique(stats$BUD)
 
 decimals_size_pvalue = 2
@@ -60,7 +61,7 @@ measureA <- function(a,b){
 
 printHeader <- function()
 {
-	cat("Subject, AVG DEF")
+	cat("Subject, BUD, BUG_TYPE, AVG DEF")
 	i = 1
 	second_line = ""
 	while(i <= length(criterios))
@@ -78,8 +79,7 @@ printHeader <- function()
 		second_line = c(second_line, ", AVG, A12, p-value")
 	}
 	cat("\n")
-	cat("Subject")
-	cat(", AVG DEF")
+	cat("Subject, BUD, BUG_TYPE, AVG DEF")
 	cat(second_line)
 	cat("\n")
 	cat("EOH\n")
@@ -110,49 +110,51 @@ roundDecimals <- function(value)
 
 calculateEffectSize <- function()
 {
-
-	for(subj in subjects)
-	{
-		name_subj = strsplit(subj, "[.]")[[1]]
-		name_subj = tail(name_subj, n=1)
-		cat(name_subj)
-		for (budget in budgets)
-		{
-			# LINE:BRANCH:EXCEPTION
-			default_rows  = subset(stats,SUBJ==subj & TOOL==criterion_versus & BUD==budget)
-			default_errors = default_rows$PIMUT
-			default_mean_pit = round(mean(default_errors)*100, digits=digits_size_to_percentage)
-			default_mean_pit = roundDecimals(default_mean_pit)
-			cat(", ", default_mean_pit,"%", sep="")
-			
-			i = 1
-			while(i <= length(criterios))
-			{
-				criterio = criterios[[i]]
-				i = i + 1
-				if (criterio == criterion_versus)
-				{
-					next
-				}
-				rows  = subset(stats,SUBJ==subj & TOOL==criterio & BUD==budget)
-				errors = rows$PIMUT
-				errors_mean_pit = round(mean(errors)*100, digits=digits_size_to_percentage)
-				errors_mean_pit = roundDecimals(errors_mean_pit)
-				cat(", ", errors_mean_pit, "%", sep="")
+	for (b_type in bug_type) {
+		for (budget in budgets) {
+			for(subj in subjects) {
+				name_subj = strsplit(subj, "[.]")[[1]]
+				name_subj = tail(name_subj, n=1)
+				cat(name_subj)
+				cat(", ", budget)
+				cat(", ", b_type)
 				
-				my_measureA = measureA(default_errors, errors)
-				cat(", ", round(my_measureA, digits=decimals_size_a12))
-				if (length(default_errors)==0)
+				# LINE:BRANCH:EXCEPTION
+				default_rows  = subset(stats,SUBJ==subj & TOOL==criterion_versus & BUD==budget & BUG_TYPE==b_type)
+				default_errors = default_rows$PIMUT
+				default_mean_pit = round(mean(default_errors)*100, digits=digits_size_to_percentage)
+				default_mean_pit = roundDecimals(default_mean_pit)
+				cat(", ", default_mean_pit,"%", sep="")
+				
+				i = 1
+				while(i <= length(criterios))
 				{
-					stop("ERROR!! Does not exists criterion 'versus' in file", csv_filename, call.=FALSE)
-					return
-				} else
-				{
-					my_p_value = pValueRefactor(wilcox.test(default_errors, errors)$p.value)
-					cat(", ", my_p_value)
+					criterio = criterios[[i]]
+					i = i + 1
+					if (criterio == criterion_versus)
+					{
+						next
+					}
+					rows  = subset(stats,SUBJ==subj & TOOL==criterio & BUD==budget & BUG_TYPE==b_type)
+					errors = rows$PIMUT
+					errors_mean_pit = round(mean(errors)*100, digits=digits_size_to_percentage)
+					errors_mean_pit = roundDecimals(errors_mean_pit)
+					cat(", ", errors_mean_pit, "%", sep="")
+					
+					my_measureA = measureA(default_errors, errors)
+					cat(", ", round(my_measureA, digits=decimals_size_a12))
+					if (length(default_errors)==0)
+					{
+						stop("ERROR!! Does not exists criterion 'versus' in file", csv_filename, call.=FALSE)
+						return
+					} else
+					{
+						my_p_value = pValueRefactor(wilcox.test(default_errors, errors)$p.value)
+						cat(", ", my_p_value)
+					}
 				}
+				cat("\n")
 			}
-			cat("\n")
 		}
 	}
 }
