@@ -211,7 +211,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	}
 
-	protected void sendCommand(String command, String[] parameters)
+	private void sendCommand(String command, String[] parameters)
 			throws MockIOException {
 		try {
 			// write the command
@@ -751,7 +751,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 			throw new SMTPException("Wrong state!");
 	}
 	
-	protected MockSMTPResponse readSingleLineResponse() throws MockIOException, SMTPException{
+	private MockSMTPResponse readSingleLineResponse() throws MockIOException, SMTPException{
 		if (this.smtpResponse == null)
 			return new MockSMTPResponse();
 		return this.smtpResponse;
