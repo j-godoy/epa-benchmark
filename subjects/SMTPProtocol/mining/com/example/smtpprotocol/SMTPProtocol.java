@@ -751,7 +751,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 			throw new SMTPException("Wrong state!");
 	}
 	
-	private MockSMTPResponse readSingleLineResponse() throws MockIOException, SMTPException{
+	private MockSMTPResponse readSingleLineResponse() throws MockIOException, SMTPException {
 		if (this.smtpResponse == null)
 			return new MockSMTPResponse();
 		return this.smtpResponse;
