@@ -33,9 +33,10 @@ def generate_latex_table(r_results_file, output):
             line = line.replace("NumberFormatStringTokenizer", "NFST")
             
             #line = line.replace("DEF", "$\\base$")
-            #line = line.replace("EPAXP", "$\epaxp$")
-            #line = line.replace("EPAX", "$\epax$")
-            #line = line.replace("EPA", "$\epa$")
+            line = line.replace("EPAXP", "\\TESTGENEPAXP")
+            line = line.replace(" EPAEX", " \\TESTGENEPAX")
+            line = line.replace(" EPAX", " \\TESTGENEPAX")
+            line = line.replace(" EPA", " \\TESTGENEPA")
             
             line = line.replace("line_branch_exception_epaadjacentedges", "$\\base$ + $\epaxp$")
             line = line.replace("line_branch_exception_epatransition_epaexception", "$\\base$ + $\epax$")
@@ -81,10 +82,11 @@ def generate_latex_table(r_results_file, output):
             for column in row:
                 if column_index in p_values_index:
                     p_value = column
-                    if "< 0.05" in p_value or "< 0.005" in p_value:
+                    if "< 0.05" in p_value or "< 0.005" in p_value or (p_value.isdigit() and int(p_value) < 0.05):
                         a12 = row[column_index-1].strip()
                         row[column_index-1] = "\\textbf{" + a12 + "}"
-                        row[column_index] = p_value.replace("< ", "\\textless{") + "}"
+                        if not p_value.isdigit(): # Entonces el p_value es del tipo "< 0.05"
+                            row[column_index] = p_value.replace("< ", "\\textless{") + "}"
                 column_index += 1
     
     def get_latex_header(table_matrix):
