@@ -337,7 +337,7 @@ def check_if_exists_testgendir_in_other_bug_type(generated_test_report_evosuite_
 
 
 # Para obtener TS LOC
-def get_file_path_jncss(class_name, test_dir, results_dir_name, bug_type, stopping_condition, search_budget, criterion, runid, javancss_jar_path):
+def get_file_path_jncss(strategy, class_name, test_dir, results_dir_name, bug_type, stopping_condition, search_budget, criterion, runid, javancss_jar_path):
     package = class_name.split(".")[0:-1]
     package_dir = utils.get_package_dir(package)
     
@@ -347,7 +347,7 @@ def get_file_path_jncss(class_name, test_dir, results_dir_name, bug_type, stoppi
         only_class_name = class_name.split(".")[-1] + "_ESTest.java"
     test_suite_file_path = os.path.join(test_dir, package_dir, only_class_name)
     
-    result_jncss_temp = os.path.join(results_dir_name, "javancss_temp", "{}_{}_{}_{}_{}".format(bug_type, stopping_condition, search_budget, class_name, criterion))
+    result_jncss_temp = os.path.join(results_dir_name, "javancss_temp", "{}_{}_{}_{}_{}_{}".format(strategy, bug_type, stopping_condition, search_budget, class_name, criterion))
     utils.make_dirs_if_not_exist(result_jncss_temp)
     
     result_jncss_temp = os.path.join(result_jncss_temp, "{}.txt".format(runid))
@@ -368,16 +368,18 @@ class RunTestEPA(threading.Thread):
     def __init__(self, name, strategy, junit_jar, instrumented_code_dir, mining_code_dir, original_code_dir, evosuite_classes, evosuite_jar_path, evosuite_runtime_jar_path, class_name, epa_path, criterion, bug_type, stopping_condition, search_budget, runid, method, results_dir_name, subdir_mutants, error_prot_list, ignore_mutants_list, hamcrest_jar_path, randoop_jar_path, javancss_jar_path):
         threading.Thread.__init__(self)
 
-        self.subdir_testgen = os.path.join(results_dir_name, "testgen", name, bug_type, stopping_condition, search_budget, strategy.name.lower(), criterion.replace(':', '_').lower(), "{}".format(runid))
+        self.strategy_value = strategy.value
+        self.strategy_name = strategy.name.lower()
+
+        self.subdir_testgen = os.path.join(results_dir_name, "testgen", name, bug_type, stopping_condition, search_budget, self.strategy_name, criterion.replace(':', '_').lower(), "{}".format(runid))
         utils.make_dirs_if_not_exist(self.subdir_testgen)
-        self.subdir_metrics = os.path.join(results_dir_name, "metrics", name, bug_type, stopping_condition, search_budget, strategy.name.lower(), criterion.replace(':', '_').lower(), "{}".format(runid))
+        self.subdir_metrics = os.path.join(results_dir_name, "metrics", name, bug_type, stopping_condition, search_budget, self.strategy_name, criterion.replace(':', '_').lower(), "{}".format(runid))
         self.generated_test_report_evosuite_dir = os.path.join(self.subdir_testgen, 'report_evosuite_generated_test')
         self.subdir_mutants = subdir_mutants
         self.resume_csv = os.path.join(self.subdir_metrics, 'resume.csv')
         self.inferred_epa_xml = os.path.join(self.subdir_metrics, 'inferred_epa.xml')
 
         self.name = name
-        self.strategy = strategy.value
         self.junit_jar = junit_jar
         self.instrumented_code_dir = instrumented_code_dir
         self.mining_code_dir = mining_code_dir
@@ -439,7 +441,7 @@ class RunTestEPA(threading.Thread):
                 if self.criterion == "randoop":
                     run_randoop(projectCP=bin_code_dir, class_name=self.class_name, randoop_jar_path=self.randoop_jar_path, testdir=self.generated_test_dir, search_budget=self.search_budget)
                 else:
-                    run_evosuite(evosuite_jar_path=self.evosuite_jar_path, strategy=self.strategy, projectCP=bin_code_dir, class_name=self.class_name, criterion=self.criterion, epa_path=self.epa_path, inferred_epa_xml_path=self.inferred_epa_xml, test_dir=self.generated_test_dir, stopping_condition=self.stopping_condition, search_budget=self.search_budget, report_dir=self.generated_test_report_evosuite_dir)
+                    run_evosuite(evosuite_jar_path=self.evosuite_jar_path, strategy=self.strategy_value, projectCP=bin_code_dir, class_name=self.class_name, criterion=self.criterion, epa_path=self.epa_path, inferred_epa_xml_path=self.inferred_epa_xml, test_dir=self.generated_test_dir, stopping_condition=self.stopping_condition, search_budget=self.search_budget, report_dir=self.generated_test_report_evosuite_dir)
 
             add_fails= False
             if(self.bug_type.upper() == BugType.ERRPROT.name):
@@ -492,9 +494,10 @@ class RunTestEPA(threading.Thread):
                 targetTests = "{}.RegressionTest".format(utils.get_package_name_from_qualifiedname(self.class_name))
             pitest_measure(self.generated_report_pitest_dir, self.class_name, targetTests, self.original_code_dir.replace("mining","original"), self.generated_test_dir)
             #pitest_measure(self.generated_report_pitest_dir, self.class_name, self.original_code_dir, self.generated_test_dir, utils.get_package_dir(self.class_name.split(".")[0:-1]))
-            
+
+            #TODO: add strategy
             if self.method in [EpatestingMethod.ONLY_METRICS.value, EpatestingMethod.BOTH.value]:
-                mujava_measure(self.bug_type, self.name, self.criterion, self.subdir_mutants, self.error_prot_list, self.ignore_mutants_list, self.bin_original_code_dir.replace("mining","original"), self.generated_test_dir, self.class_name, self.junit_jar, self.hamcrest_jar_path, self.generated_report_mujava)
+                mujava_measure(self.bug_type, self.name, criterion, self.subdir_mutants, self.error_prot_list, self.ignore_mutants_list, self.bin_original_code_dir.replace("mining","original"), self.generated_test_dir, self.class_name, self.junit_jar, self.hamcrest_jar_path, self.generated_report_mujava)
 
             # Resume the reports generated
             all_report_dir = os.path.join(self.subdir_metrics, 'all_reports')
@@ -529,18 +532,17 @@ class RunTestEPA(threading.Thread):
             jacoco_csv = os.path.join(all_report_dir, "{}_jacoco.csv".format(self.name))
             mutations_csv = os.path.join(all_report_dir, "{}_mutations.csv".format(self.name))
             
-            #if self.bug_type.upper() == BugType.ALL.name:
-            pit_mutants_histogram(self.criterion, self.search_budget, self.stopping_condition, mutations_csv, self.generated_test_dir, self.generated_pitest_killer_test, self.runid)
+            pit_mutants_histogram(self.strategy_name, self.bug_type, criterion, self.search_budget, self.stopping_condition, mutations_csv, self.generated_test_dir, self.generated_pitest_killer_test, self.runid)
             # For test suite LOC
-            result_jncss_temp = get_file_path_jncss(self.class_name, self.generated_test_dir, self.results_dir_name, self.bug_type, self.stopping_condition, self.search_budget, criterion, self.runid, self.javancss_jar_path)
+            result_jncss_temp = get_file_path_jncss(self.strategy_name, self.class_name, self.generated_test_dir, self.results_dir_name, self.bug_type, self.stopping_condition, self.search_budget, criterion, self.runid, self.javancss_jar_path)
             # For covered exceptions goals
             testgen_log_file_path = os.path.join(self.subdir_testgen, "testgen_out.txt")
             
-            make_report_resume.resume(self.class_name, epacoverage_csv, statistics_testgen_csv, jacoco_csv, mutations_csv, self.resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, mujava_csv, result_jncss_temp, testgen_log_file_path)
+            make_report_resume.resume(self.class_name, epacoverage_csv, statistics_testgen_csv, jacoco_csv, mutations_csv, self.resume_csv, self.runid, self.stopping_condition, self.search_budget, criterion, self.bug_type, self.strategy_name, mujava_csv, result_jncss_temp, testgen_log_file_path)
         
         if self.method in [EpatestingMethod.ONLY_PIT_MUTANTS_HISTOGRAM.value]:
             mutations_csv = get_mutation_csv_pit(self.generated_report_pitest_dir)
-            pit_mutants_histogram(self.criterion, self.search_budget, self.stopping_condition, mutations_csv, self.generated_test_dir, self.generated_pitest_killer_test, self.runid)
+            pit_mutants_histogram(criterion, self.search_budget, self.stopping_condition, mutations_csv, self.generated_test_dir, self.generated_pitest_killer_test, self.runid)
         
         # Hack (for old executions)
         if self.method in [EpatestingMethod.ONLY_TEST_SUITE_LOC_AND_EXCEPTION.value]:

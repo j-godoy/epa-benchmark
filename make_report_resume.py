@@ -1,19 +1,19 @@
 import csv
 
-header_names = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ',
-                'TOOL', 'LINE', 'BRNCH', 'EXCEPTION', 'EPACOV',
-                'EPA', 'EPATOT', 'EPAEXCEPCOV', 'EPAEXCEP', 'EPAEXCEPTOT',
-                'ADJACCOV', 'ADJAC', 'ADJACTOT', 'EPAMINING', 'EPAEXCEPMINING',
-                'EDGESMINING', 'TS_LOC', 'PIMUT', 'MJMUT', 'MUT_KILLED',
-                'ERRPROT_KILLED', 'GENS', 'TOT_TIME']
+header_names = ['ID', 'STRATEGY', 'BUG_TYPE', 'STOP_COND', 'BUD',
+                'SUBJ', 'TOOL', 'LINE', 'BRNCH', 'EXCEPTION',
+                'EPACOV', 'EPA', 'EPATOT', 'EPAEXCEPCOV', 'EPAEXCEP',
+                'EPAEXCEPTOT', 'ADJACCOV', 'ADJAC', 'ADJACTOT', 'EPAMINING',
+                'EPAEXCEPMINING', 'EDGESMINING', 'TS_LOC', 'PIMUT', 'MJMUT',
+                'MUT_KILLED', 'ERRPROT_KILLED', 'GENS', 'TOT_TIME']
 
 def write_row(writer, row):
-    writer.writerow({'ID': row[0], 'BUG_TYPE': row[1], 'STOP_COND': row[2], 'BUD': row[3], 'SUBJ': row[4],
-                     'TOOL': row[5], 'LINE': row[6], 'BRNCH': row[7], 'EXCEPTION': row[8], 'EPACOV': row[9],
-                     'EPA': row[10], 'EPATOT': row[11], 'EPAEXCEPCOV': row[12], 'EPAEXCEP': row[13], 'EPAEXCEPTOT': row[14],
-                     'ADJACCOV': row[15], 'ADJAC': row[16], 'ADJACTOT': row[17], 'EPAMINING': row[18], 'EPAEXCEPMINING': row[19],
-                     'EDGESMINING': row[20], 'TS_LOC': row[21], 'PIMUT': row[22], 'MJMUT': row[23], 'MUT_KILLED': row[24],
-                     'ERRPROT_KILLED': row[25], 'GENS': row[26], 'TOT_TIME': row[27]});
+    writer.writerow({'ID': row[0], 'STRATEGY': row[1], 'BUG_TYPE': row[2], 'STOP_COND': row[3], 'BUD': row[4],
+                     'SUBJ': row[5], 'TOOL': row[6], 'LINE': row[7], 'BRNCH': row[8], 'EXCEPTION': row[9],
+                     'EPACOV': row[10], 'EPA': row[11], 'EPATOT': row[12], 'EPAEXCEPCOV': row[13], 'EPAEXCEP': row[14],
+                     'EPAEXCEPTOT': row[15], 'ADJACCOV': row[16], 'ADJAC': row[17], 'ADJACTOT': row[18], 'EPAMINING': row[19],
+                     'EPAEXCEPMINING': row[20], 'EDGESMINING': row[21], 'TS_LOC': row[22], 'PIMUT': row[23], 'MJMUT': row[24],
+                     'MUT_KILLED': row[25], 'ERRPROT_KILLED': row[26], 'GENS': row[27], 'TOT_TIME': row[28]});
                      
 header_names_ts_loc_exceptions = ['ID', 'BUG_TYPE', 'STOP_COND', 'BUD', 'SUBJ', 'TOOL', 'TS_LOC', 'EXCEPTIONS']
 
@@ -26,7 +26,7 @@ def get_complete_row(row):
             row[10], row[11], row[12], row[13], row[14],
             row[15], row[16], row[17], row[18], row[19],
             row[20], row[21], row[22], row[23], row[24],
-            row[25], row[26], row[27]]
+            row[25], row[26], row[27], row[28]]
 
 def read_evosuite_csv(file_path):
     epatransition_coverage = 'N/A'
@@ -162,7 +162,7 @@ def get_exceptions_in_testgenlog(testgen_log_file):
         exceptions = file_txt[line_index-1][init_exception_goals_covered_index:]
     return exceptions
 
-def report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, runid, bug_type, stopping_condition, search_budget, criterion, mujava_csv, path_file_jncss, testgen_log_file_path):
+def report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, runid, bug_type, strategy, stopping_condition, search_budget, criterion, mujava_csv, path_file_jncss, testgen_log_file_path):
     epa_coverage, epa_covered, epa_tot, epaex_coverage, epaex_covered, epaex_tot, edges_coverage, edges_covered, edges_tot, epamining_covered, epaexcepmining_covered, edgesmining_covered = read_evosuite_csv(evosuite)
     generations_test, total_time_test = read_generations_csv(statistics_testgen)
     branch_coverage, line_coverage = read_jacoco_csv(target_class, jacoco)
@@ -171,21 +171,21 @@ def report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, r
     ts_loc = get_test_suite_loc(path_file_jncss)
     # si el testgenlog incluye "Coverage of criterion EXCEPTION", con la linea siguiente alcanza
     exceptions = get_exceptions_in_testgenlog(testgen_log_file_path)
-    row = [runid, bug_type, stopping_condition, search_budget, target_class,
-           criterion, line_coverage, branch_coverage, exceptions, epa_coverage,
-           epa_covered, epa_tot, epaex_coverage, epaex_covered, epaex_tot,
-           edges_coverage, edges_covered, edges_tot, epamining_covered, epaexcepmining_covered,
-           edgesmining_covered, ts_loc, mutation_coverage, mujava_coverage, mutants_killed,
-           err_prot_killed, generations_test, total_time_test]
+    row = [runid, strategy, bug_type, stopping_condition, search_budget,
+           target_class, criterion, line_coverage, branch_coverage, exceptions,
+           epa_coverage, epa_covered, epa_tot, epaex_coverage, epaex_covered,
+           epaex_tot, edges_coverage, edges_covered, edges_tot, epamining_covered,
+           epaexcepmining_covered, edgesmining_covered, ts_loc, mutation_coverage, mujava_coverage,
+           mutants_killed, err_prot_killed, generations_test, total_time_test]
     return row
 
 
-def resume(target_class, evosuite, statistics_testgen, jacoco, pit, output_file, runid, stopping_condition, search_budget, criterion, bug_type, mujava_csv, path_file_jncss, testgen_log_file_path):
+def resume(target_class, evosuite, statistics_testgen, jacoco, pit, output_file, runid, stopping_condition, search_budget, criterion, bug_type, strategy, mujava_csv, path_file_jncss, testgen_log_file_path):
     with open(output_file, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=header_names)
 
         writer.writeheader()
-        row = report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, runid, bug_type, stopping_condition, search_budget, criterion, mujava_csv, path_file_jncss, testgen_log_file_path)
+        row = report_resume_row(target_class, evosuite, statistics_testgen, jacoco, pit, runid, bug_type, strategy, stopping_condition, search_budget, criterion, mujava_csv, path_file_jncss, testgen_log_file_path)
         row = get_complete_row(row)
         write_row(writer, row)
         
