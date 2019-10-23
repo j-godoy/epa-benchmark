@@ -376,7 +376,6 @@ public class SMTPProcessor_h {
      */
     private boolean checkQuit( String command ) {
         if( command.equals( COMMAND_QUIT ) ) {
-			socket = null;
             return true;
         }
         return false;
@@ -633,6 +632,12 @@ public class SMTPProcessor_h {
            write ( MESSAGE_INVALID_COMMAND, 1 );
         }
         else if (checkQuit(command)) {
+			try {
+                socket.close();
+				socket = null;
+            } catch (MockIOException e) {
+                e.printStackTrace();
+            }
            return false;
         }
         else if (isRejected) {
