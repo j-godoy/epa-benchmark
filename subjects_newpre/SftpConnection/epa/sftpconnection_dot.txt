@@ -1,0 +1,16 @@
+digraph finite_state_machine {
+	rankdir=LR;
+	size="8,5"
+	node [shape = doublecircle]; S0;
+	node [shape = circle];
+	S0 -> S1 [ label = "SftpConnection" ];
+	S1 -> S2 [ label = "setConnectionListeners" ];
+        S1 -> S3 [ label = "login" ];
+        S2 -> S2 [ label = "addConnectionListener\ngetPWD" ];
+        S2 -> S4 [ label = "login" ];
+        S3 -> S1 [ label = "disconnect" ];
+        S3 -> S3 [ label = "addConnectionListener\nisConnected\ngetPWD" ];
+        S3 -> S4 [ label = "setConnectionListeners\naddConnectionListener" ];
+        S4 -> S2 [ label = "disconnect" ];
+        S4 -> S4 [ label = "list\ngetPWD\ndownload\nremoveFileOrDir\nupload\nsetLocalPath\nsortLs\nchdir\nsortSize\nmkdir\nisConnected\ngetPermissions\nrename\nhandleDownload\nhandleUpload" ];
+}

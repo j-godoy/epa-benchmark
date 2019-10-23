@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<abstraction initial_state="S0" input_format="contract"
+	name="com.example.smtpprotocol">
+	<label name="SMTPProtocol(String)" />
+	<label name="SMTPProtocol(String,int)" />
+	<label name="SMTPProtocol(String,MockSMTPResponse)" />
+	<label name="openPort()" />
+	<label name="rcpt(int,String)" />
+	<label name="rcpt(String)" />
+	<label name="quit()" />
+	<label name="getState()" />
+	<label name="ehlo(string)" />
+	<label name="mail(String)" />
+	<label name="data(string)" />
+	<label name="startTLS()" />
+
+	<state name="S0">
+		<enabled_label name="SMTPProtocol(String)" />
+		<enabled_label name="SMTPProtocol(String,int)" />
+		<enabled_label name="SMTPProtocol(String,MockSMTPResponse)" />
+		<transition destination="S1" label="SMTPProtocol(String)" />
+		<transition destination="S1" label="SMTPProtocol(String,int)" />
+		<transition destination="S1" label="SMTPProtocol(String,MockSMTPResponse)" />
+	</state>
+	
+	<state name="S1">
+		<enabled_label name="openPort()" />
+		<enabled_label name="rcpt(int,String)" />
+		<enabled_label name="rcpt(String)" />
+		<enabled_label name="quit()" />
+		<enabled_label name="getState()" />
+
+		<transition destination="S1" label="openPort()" />
+		<transition destination="S1" label="rcpt(int,String)" />
+		<transition destination="S1" label="rcpt(String)" />
+		<transition destination="S1" label="quit()" />
+		<transition destination="S1" label="getState()" />
+		<transition destination="S2" label="openPort()" />
+	</state>
+	
+	<state name="S2">
+		<enabled_label name="openPort()" />
+		<enabled_label name="ehlo(string)" />
+		<enabled_label name="mail(String)" />
+		<enabled_label name="rcpt(int,String)" />
+		<enabled_label name="rcpt(String)" />
+		<enabled_label name="data(string)" />
+		<enabled_label name="startTLS()" />
+		<enabled_label name="quit()" />
+		<enabled_label name="getState()" />
+
+		<transition destination="S1" label="quit()" />
+		<transition destination="S2" label="openPort()" />
+		<transition destination="S2" label="ehlo(string)" />
+		<transition destination="S2" label="mail(String)" />
+		<transition destination="S2" label="rcpt(int,String)" />
+		<transition destination="S2" label="rcpt(String)" />
+		<transition destination="S2" label="data(string)" />
+		<transition destination="S2" label="startTLS()" />
+		<transition destination="S2" label="getState()" />
+	</state>
+
+</abstraction>

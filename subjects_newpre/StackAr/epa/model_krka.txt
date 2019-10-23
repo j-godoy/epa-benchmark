@@ -1,0 +1,47 @@
+Invariant_based = S0,
+
+S0 = (stackAr -> S2
+		| stackAr -> S4
+		| stackAr -> S5),
+
+S2 = (topAndPop -> S2
+		| isFull -> S2
+		| top -> S2
+		| push -> S1
+		| makeEmpty -> S2
+		| isEmpty -> S2),
+
+S4 = (topAndPop -> S4
+		| top -> S4
+		| isFull -> S4
+		| makeEmpty -> S4
+		| isEmpty -> S4),
+
+S1 = (topAndPop -> S1
+		| topAndPop -> S2
+		| isFull -> S1
+		| top -> S1
+		| push -> S1
+		| push -> S3
+		| makeEmpty -> S2
+		| isEmpty -> S1),
+
+S3 = (topAndPop -> S1
+		| top -> S3
+		| isFull -> S3
+		| makeEmpty -> S2
+		| isEmpty -> S3),
+
+S5 = (topAndPop -> S5
+		| isFull -> S5
+		| top -> S5
+		| push -> S6
+		| makeEmpty -> S5
+		| isEmpty -> S5),
+S6 = (topAndPop -> S5
+		| top -> S6
+		| isFull -> S6
+		| makeEmpty -> S5
+		| isEmpty -> S6).
+
+||MTS_Invariant_based = (Invariant_based).

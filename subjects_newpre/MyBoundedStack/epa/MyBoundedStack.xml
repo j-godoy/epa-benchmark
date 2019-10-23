@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abstraction initial_state="S0" input_format="code-with-pre" name="ar.uba.dc.myboundedstack.MyBoundedStack">
+  <label name="MyBoundedStack()" />
+  <label name="push()" />
+  <label name="pop()" />
+  <label name="isEmpty()" />
+  <label name="isFull()" />
+  
+  <state name="S0">
+    <enabled_label name="MyBoundedStack()" />
+    <transition destination="S1" label="MyBoundedStack()" uncertain="false" violates_invariant="false" />
+  </state>
+  
+  <state name="S1">
+    <enabled_label name="push()" />
+	<enabled_label name="isEmpty()" />
+	<enabled_label name="isFull()" />
+    <transition destination="S2" label="push()" uncertain="false" violates_invariant="false" />
+	<transition destination="S1" label="isEmpty()" uncertain="false" violates_invariant="false" />
+	<transition destination="S1" label="isFull()" uncertain="false" violates_invariant="false" />
+  </state>
+  
+  <state name="S2">
+    <enabled_label name="push()" />
+    <enabled_label name="pop()" />
+	<enabled_label name="isEmpty()" />
+	<enabled_label name="isFull()" />
+    <transition destination="S2" label="push()" uncertain="false" violates_invariant="false" />
+    <transition destination="S2" label="pop()" uncertain="false" violates_invariant="false" />
+    <transition destination="S3" label="push()" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="pop()" uncertain="false" violates_invariant="false" />
+	<transition destination="S2" label="isEmpty()" uncertain="false" violates_invariant="false" />
+	<transition destination="S2" label="isFull()" uncertain="false" violates_invariant="false" />
+  </state>
+
+  <state name="S3">
+    <enabled_label name="pop()" />
+	<enabled_label name="isEmpty()" />
+	<enabled_label name="isFull()" />
+    <transition destination="S2" label="pop()" uncertain="false" violates_invariant="false" />
+	<transition destination="S3" label="isEmpty()" uncertain="false" violates_invariant="false" />
+	<transition destination="S3" label="isFull()" uncertain="false" violates_invariant="false" />
+  </state>
+  
+</abstraction>

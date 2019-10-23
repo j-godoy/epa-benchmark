@@ -1,0 +1,12 @@
+digraph finite_state_machine {
+	rankdir=LR;
+	size="8,5"
+	node [shape = doublecircle]; S0;
+	node [shape = circle];
+        S0 -> S1 [ label = "StackAr" ];
+        S0 -> S2 [ label = "StackAr" ];
+	S1 -> S1 [ label = "topAndPop\nisFull\ntop\npush\nmakeEmpty\nisEmpty" ];
+    S1 -> S2 [ label = "push" ];
+	S2 -> S2 [ label = "isFull\ntop\nisEmpty" ];
+	S2 -> S1 [ label = "topAndPop\nmakeEmpty" ];
+}

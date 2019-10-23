@@ -1,0 +1,11 @@
+digraph finite_state_machine {
+	rankdir=LR;
+	size="8,5"
+	node [shape = doublecircle]; S0;
+	node [shape = circle];
+	S0 -> S1 [label = "SMTPProtocol(String)\nSMTPProtocol(String,int)\nSMTPProtocol(String,MockSMTPResponse)" ];
+        S1 -> S1 [label = "openPort()\nrcpt(int,String)\nrcpt(String)\nquit()\ngetState()" ];
+        S1 -> S2 [label = "openPort()" ];
+        S2 -> S1 [label = "quit()" ];
+        S2 -> S2 [label = "openPort()\nehlo(string)\nmail(String)\nrcpt(int,String)\nrcpt(String)\ndata(string)\nstartTLS()\ngetState()" ];
+}

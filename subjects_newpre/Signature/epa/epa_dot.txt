@@ -1,0 +1,14 @@
+digraph finite_state_machine {
+	rankdir=LR;
+	size="8,5"
+	node [shape = doublecircle]; Sinit;
+	node [shape = circle];
+	Sinit -> S6195 [ label = "Signature()" ];
+        S6195 -> S7999 [label = "initSign(PrivateKey)" ];
+        S6195 -> S8179 [label = "initVerify(PublicKey)" ];
+        S6195 -> S6195 [label = "getAlgorithm()" ];
+        S7999 -> S7999 [label = "initSign(PrivateKey)\nsign()\nsign(byte[],int,int)\nupdate(byte)\nupdate(byte[])\nupdate(byte[],int,int)\ngetAlgorithm()" ];
+        S7999 -> S8179 [label = "initVerify(PublicKey)" ];
+        S8179 -> S7999 [label = "initSign(PrivateKey)" ];
+        S8179 -> S8179 [label = "initVerify(PublicKey)\nverify(byte[])\nverify(byte[],int,int)\nupdate(byte)\nupdate(byte[])\nupdate(byte[],int,int)\ngetAlgorithm()" ];
+}

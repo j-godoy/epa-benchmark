@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abstraction initial_state="S0" input_format="code-with-pre" name="com.example.tohtmlstream.ToHTMLStream">
+    <label name="ToHTMLStream()" />
+    <label name="setOutputFormat(Properties)" />
+    <label name="startDocumentInternal()" />
+    <label name="endDocument()" />
+    <label name="startElement(String,String,String,MockAttributes)" />
+    <label name="endElement(String)" />
+	<label name="endElement(String,String,String)" />
+	<label name="characters(char[],int,int)" />
+  
+  <state name="S0">
+    <enabled_label name="ToHTMLStream()" />
+    <transition destination="S1" label="ToHTMLStream()" uncertain="false" violates_invariant="false" />
+  </state>
+  
+  <state name="S1">
+    <enabled_label name="setOutputFormat(Properties)" />
+    <enabled_label name="startDocumentInternal()" />
+    <enabled_label name="endDocument()" />
+    <enabled_label name="startElement(String,String,String,MockAttributes)" />
+    <enabled_label name="endElement(String)" />
+	<enabled_label name="endElement(String,String,String)" />
+	<enabled_label name="characters(char[],int,int)" />
+    <transition destination="S1" label="setOutputFormat(Properties)" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="startDocumentInternal()" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="endDocument()" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="startElement(String,String,String,MockAttributes)" uncertain="false" violates_invariant="false" />
+    <transition destination="S1" label="endElement(String)" uncertain="false" violates_invariant="false" />
+	<transition destination="S1" label="endElement(String,String,String)" uncertain="false" violates_invariant="false" />
+	<transition destination="S1" label="characters(char[],int,int)" uncertain="false" violates_invariant="false" />
+  </state>
+
+</abstraction>

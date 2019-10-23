@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<abstraction initial_state="S0" input_format="code-with-pre" name="Socket">
+  <label name="connect"/>
+  <label name="bind"/>
+  <label name="getInputStream"/>
+  <label name="getOutputStream"/>
+  <label name="close"/>
+  <label name="shutdownInput"/>
+  <label name="shutdownOutput"/>
+  <label name="Socket"/>
+  <state name="S0">
+    <enabled_label name="Socket"/>
+    <transition destination="S1" label="Socket"/>
+  </state>
+  <state name="S3">
+    <enabled_label name="getInputStream"/>
+    <enabled_label name="getOutputStream"/>
+    <enabled_label name="close"/>
+    <enabled_label name="shutdownInput"/>
+    <enabled_label name="shutdownOutput"/>
+    <transition destination="S6" label="close"/>
+    <transition destination="S3" label="getInputStream"/>
+    <transition destination="S3" label="getOutputStream"/>
+    <transition destination="S4" label="shutdownInput"/>
+    <transition destination="S5" label="shutdownOutput"/>
+  </state>
+  <state name="S6">
+    <enabled_label name="close"/>
+    <transition destination="S6" label="close"/>
+  </state>
+  <state name="S2">
+    <enabled_label name="connect"/>
+    <enabled_label name="close"/>
+    <transition destination="S6" label="close"/>
+    <transition destination="S3" label="connect"/>
+    <transition destination="S6" label="connect"/>
+  </state>
+  <state name="S1">
+    <enabled_label name="connect"/>
+    <enabled_label name="bind"/>
+    <enabled_label name="close"/>
+    <transition destination="S2" label="bind"/>
+    <transition destination="S6" label="close"/>
+    <transition destination="S3" label="connect"/>
+    <transition destination="S6" label="connect"/>
+  </state>
+  <state name="S5">
+    <enabled_label name="getInputStream"/>
+    <enabled_label name="close"/>
+    <enabled_label name="shutdownInput"/>
+    <transition destination="S6" label="close"/>
+    <transition destination="S5" label="getInputStream"/>
+    <transition destination="S6" label="shutdownInput"/>
+  </state>
+  <state name="S4">
+    <enabled_label name="getOutputStream"/>
+    <enabled_label name="close"/>
+    <enabled_label name="shutdownOutput"/>
+    <transition destination="S6" label="close"/>
+    <transition destination="S4" label="getOutputStream"/>
+    <transition destination="S6" label="shutdownOutput"/>
+  </state>
+</abstraction>
+

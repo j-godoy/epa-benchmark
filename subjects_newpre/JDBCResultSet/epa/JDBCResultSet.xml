@@ -1,0 +1,551 @@
+<?xml version="1.0" ?>
+<abstraction initial_state="Sinit" name="Result_set" input_format="contract">
+	<information Abstraction_size="9 states, 247 transitions"
+		Author="hernancz @ trantor" Engine_certainty="100.00 %" Generated="2010-07-06 13:23:11"
+		Input_size="42 labels" Input_type="contract" Invariant_violations="0 violations"
+		Name="Result_set (ResultSetScUp.contract)" Run="8 threads for 8.06 seconds" />
+
+  <label name="absolute" />
+  <label name="afterLast" />
+  <label name="beforeFirst" />
+  <label name="cancelRowUpdates" />
+  <!-- <label name="clearWarnings" /> -->
+  <label name="close" />
+  <label name="deleteRow" />
+  <!-- <label name="findColumn" /> -->
+  <label name="first" />
+  <!--  <label name="getConcurrency" />  -->
+  <!--  <label name="getCursorName" />  -->
+  <!--  <label name="getFetchDirection" />  -->
+  <!--  <label name="getFetchSize" />  -->
+  <!--  <label name="getHoldability" />  -->
+  <label name="getInt(int)" />
+  <label name="getInt(String)" />
+  <!--  <label name="getMetaData" />  -->
+  <label name="getRow" />
+  <!--  <label name="getStatement" />  -->
+  <!--  <label name="getType" />  -->
+  <!--  <label name="getWarnings" />  -->
+  <label name="insertRow" />
+  <label name="isAfterLast" />
+  <label name="isBeforeFirst" />
+  <!-- <label name="isClosed" />  -->
+  <label name="isFirst" />
+  <label name="isLast" />
+  <label name="last" />
+  <label name="moveToCurrentRow" />
+  <label name="moveToInsertRow" />
+  <label name="next" />
+  <label name="previous" />
+  <label name="refreshRow" />
+  <label name="relative" />
+  <label name="resultSet" />
+  <!--  <label name="rowDeleted" />  -->
+  <!--  <label name="rowInserted" />  -->
+  <!--  <label name="rowUpdated" />  -->
+  <!--  <label name="setFetchDirection" />  -->
+  <!--  <label name="setFetchSize" />  -->
+  <label name="updateInt" />
+  <label name="updateRow" />
+  <label name="wasNull" />
+  <state name="BEFORE_FIRST_AFTER_LAST_STATE">
+    <enabled_label name="absolute" />
+    <enabled_label name="afterLast" />
+    <enabled_label name="beforeFirst" />
+    <!--<enabled_label name="clearWarnings" /> -->
+    <enabled_label name="close" />
+    <!-- <enabled_label name="findColumn" /> -->
+    <enabled_label name="first" />
+    <!-- <enabled_label name="getConcurrency" /> -->
+    <!-- <enabled_label name="getCursorName" /> -->
+    <!-- <enabled_label name="getFetchDirection" /> -->
+    <!-- <enabled_label name="getFetchSize" /> -->
+    <!-- <enabled_label name="getHoldability" /> -->
+    <!-- <enabled_label name="getMetaData" /> -->
+    <enabled_label name="getRow" />
+    <!-- <enabled_label name="getStatement" /> -->
+    <!-- <enabled_label name="getType" /> -->
+    <!-- <enabled_label name="getWarnings" /> -->
+    <enabled_label name="isAfterLast" />
+    <enabled_label name="isBeforeFirst" />
+    <!-- <enabled_label name="isClosed" /> -->
+    <enabled_label name="isFirst" />
+    <enabled_label name="isLast" />
+    <enabled_label name="last" />
+    <enabled_label name="moveToInsertRow" />
+    <enabled_label name="next" />
+    <enabled_label name="previous" />
+    <enabled_label name="relative" />
+    <!--  <enabled_label name="rowDeleted" />  -->
+    <!-- <enabled_label name="rowInserted" /> -->
+    <!-- <enabled_label name="rowUpdated" /> -->
+    <!-- <enabled_label name="setFetchDirection" /> -->
+    <!-- <enabled_label name="setFetchSize" /> -->
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="absolute" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="afterLast" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="beforeFirst" />
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="clearWarnings" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="findColumn" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="getConcurrency" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="getCursorName" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="getFetchDirection" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="getFetchSize" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="getHoldability" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="getMetaData" /> -->
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="getRow" />
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="getStatement" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="getType" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="getWarnings" /> -->
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="isAfterLast" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="isBeforeFirst" />
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="isClosed" /> -->
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="isFirst" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="isLast" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="next" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="previous" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="relative" />
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="rowDeleted" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="rowInserted" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="rowUpdated" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="setFetchDirection" /> -->
+    <!-- <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="setFetchSize" /> -->
+    <transition destination="CLOSED_STATE" label="close" />
+    <transition destination="ON_INSERT_ROW_STATE" label="moveToInsertRow" />
+    <transition destination="SCROLLING_STATE" label="absolute" />
+    <transition destination="SCROLLING_STATE" label="first" />
+    <transition destination="SCROLLING_STATE" label="last" />
+    <transition destination="SCROLLING_STATE" label="next" />
+    <transition destination="SCROLLING_STATE" label="previous" />
+    <transition destination="SCROLLING_STATE" label="relative" />
+  </state>
+  <state name="CLOSED_STATE">
+    <enabled_label name="close" />
+    <!-- <enabled_label name="isClosed" /> -->
+    <transition destination="CLOSED_STATE" label="close" />
+    <!-- <transition destination="CLOSED_STATE" label="isClosed" /> -->
+  </state>
+  <state name="ERROR_STATE">
+  </state>
+  <state name="ON_INSERT_ROW_STATE">
+    <!-- <enabled_label name="clearWarnings" /> -->
+    <enabled_label name="close" />
+    <!-- <enabled_label name="findColumn" /> -->
+    <!-- <enabled_label name="getConcurrency" /> -->
+    <!-- <enabled_label name="getCursorName" /> -->
+    <!-- <enabled_label name="getFetchDirection" /> -->
+    <!-- <enabled_label name="getFetchSize" /> -->
+    <!-- <enabled_label name="getHoldability" /> -->
+    <!-- <enabled_label name="getMetaData" /> -->
+    <!-- <enabled_label name="getStatement" /> -->
+    <!-- <enabled_label name="getType" /> -->
+    <!-- <enabled_label name="getWarnings" /> -->
+    <enabled_label name="insertRow" />
+    <!-- <enabled_label name="isClosed" /> -->
+    <enabled_label name="moveToCurrentRow" />
+    <!-- <enabled_label name="rowDeleted" /> -->
+    <!-- <enabled_label name="rowInserted" /> -->
+    <!-- <enabled_label name="rowUpdated" /> -->
+    <!-- <enabled_label name="setFetchDirection" /> -->
+    <!-- <enabled_label name="setFetchSize" /> -->
+    <enabled_label name="updateInt" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="moveToCurrentRow" />
+    <transition destination="CLOSED_STATE" label="close" />
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="clearWarnings" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="findColumn" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="getConcurrency" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="getCursorName" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="getFetchDirection" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="getFetchSize" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="getHoldability" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="getMetaData" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="getStatement" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="getType" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="getWarnings" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="isClosed" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="rowDeleted" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="rowInserted" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="rowUpdated" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="setFetchDirection" /> -->
+    <!-- <transition destination="ON_INSERT_ROW_STATE" label="setFetchSize" /> -->
+    <transition destination="ON_INSERT_ROW_STATE" label="updateInt" />
+    <transition destination="ROW_INSERTED_STATE" label="insertRow" />
+    <transition destination="SCROLLING_STATE" label="moveToCurrentRow" />
+  </state>
+  <state name="ROW_INSERTED_STATE">
+    <!-- <enabled_label name="clearWarnings" /> -->
+    <enabled_label name="close" />
+    <!-- <enabled_label name="findColumn" /> -->
+    <!-- <enabled_label name="getConcurrency" /> -->
+    <!-- <enabled_label name="getCursorName" /> -->
+    <!-- <enabled_label name="getFetchDirection" /> -->
+    <!-- <enabled_label name="getFetchSize" /> -->
+    <!-- <enabled_label name="getHoldability" /> -->
+    <!-- <enabled_label name="getMetaData" /> -->
+    <!-- <enabled_label name="getStatement" /> -->
+    <!-- <enabled_label name="getType" /> -->
+    <!-- <enabled_label name="getWarnings" /> -->
+    <!-- <enabled_label name="isClosed" /> -->
+    <enabled_label name="moveToCurrentRow" />
+    <!-- <enabled_label name="rowDeleted" /> -->
+    <!-- <enabled_label name="rowInserted" /> -->
+    <!-- <enabled_label name="rowUpdated" /> -->
+    <!-- <enabled_label name="setFetchDirection" /> -->
+    <!-- <enabled_label name="setFetchSize" /> -->
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="moveToCurrentRow" />
+    <transition destination="CLOSED_STATE" label="close" />
+    <!-- <transition destination="ROW_INSERTED_STATE" label="clearWarnings" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="findColumn" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="getConcurrency" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="getCursorName" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="getFetchDirection" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="getFetchSize" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="getHoldability" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="getMetaData" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="getStatement" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="getType" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="getWarnings" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="isClosed" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="rowDeleted" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="rowInserted" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="rowUpdated" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="setFetchDirection" /> -->
+    <!-- <transition destination="ROW_INSERTED_STATE" label="setFetchSize" /> -->
+    <transition destination="SCROLLING_STATE" label="moveToCurrentRow" />
+</state>
+  <state name="SCROLLING_STATE">
+    <enabled_label name="absolute" />
+    <enabled_label name="afterLast" />
+    <enabled_label name="beforeFirst" />
+    <!-- <enabled_label name="clearWarnings" /> -->
+    <enabled_label name="close" />
+    <enabled_label name="deleteRow" />
+    <!-- <enabled_label name="findColumn" /> -->
+    <enabled_label name="first" />
+    <!-- <enabled_label name="getConcurrency" /> -->
+    <!-- <enabled_label name="getCursorName" /> -->
+    <!-- <enabled_label name="getFetchDirection" /> -->
+    <!-- <enabled_label name="getFetchSize" /> -->
+    <!-- <enabled_label name="getHoldability" /> -->
+    <enabled_label name="getInt(int)" />
+    <enabled_label name="getInt(String)" />
+    <!-- <enabled_label name="getMetaData" /> -->
+    <enabled_label name="getRow" />
+    <!-- <enabled_label name="getStatement" /> -->
+    <!-- <enabled_label name="getType" /> -->
+    <!-- <enabled_label name="getWarnings" /> -->
+    <enabled_label name="isAfterLast" />
+    <enabled_label name="isBeforeFirst" />
+    <!-- <enabled_label name="isClosed" /> -->
+    <enabled_label name="isFirst" />
+    <enabled_label name="isLast" />
+    <enabled_label name="last" />
+    <enabled_label name="moveToInsertRow" />
+    <enabled_label name="next" />
+    <enabled_label name="previous" />
+    <enabled_label name="refreshRow" />
+    <enabled_label name="relative" />
+    <!-- <enabled_label name="rowDeleted" /> -->
+    <!-- <enabled_label name="rowInserted" /> -->
+    <!-- <enabled_label name="rowUpdated" /> -->
+    <!-- <enabled_label name="setFetchDirection" /> -->
+    <!-- <enabled_label name="setFetchSize" /> -->
+    <enabled_label name="updateInt" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="absolute" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="afterLast" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="beforeFirst" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="next" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="previous" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="relative" />
+    <transition destination="CLOSED_STATE" label="close" />
+    <transition destination="ON_INSERT_ROW_STATE" label="moveToInsertRow" />
+    <transition destination="SCROLLING_STATE" label="absolute" />
+    <!-- <transition destination="SCROLLING_STATE" label="clearWarnings" /> -->
+    <transition destination="SCROLLING_STATE" label="deleteRow" />
+    <!-- <transition destination="SCROLLING_STATE" label="findColumn" /> -->
+    <transition destination="SCROLLING_STATE" label="first" />
+    <!-- <transition destination="SCROLLING_STATE" label="getConcurrency" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="getCursorName" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="getFetchDirection" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="getFetchSize" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="getHoldability" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="getMetaData" /> -->
+    <transition destination="SCROLLING_STATE" label="getRow" />
+    <!-- <transition destination="SCROLLING_STATE" label="getStatement" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="getType" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="getWarnings" /> -->
+    <transition destination="SCROLLING_STATE" label="isAfterLast" />
+    <transition destination="SCROLLING_STATE" label="isBeforeFirst" />
+    <!-- <transition destination="SCROLLING_STATE" label="isClosed" /> -->
+    <transition destination="SCROLLING_STATE" label="isFirst" />
+    <transition destination="SCROLLING_STATE" label="isLast" />
+    <transition destination="SCROLLING_STATE" label="last" />
+    <transition destination="SCROLLING_STATE" label="next" />
+    <transition destination="SCROLLING_STATE" label="previous" />
+    <transition destination="SCROLLING_STATE" label="refreshRow" />
+    <transition destination="SCROLLING_STATE" label="relative" />
+    <!-- <transition destination="SCROLLING_STATE" label="rowDeleted" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="rowInserted" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="rowUpdated" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="setFetchDirection" /> -->
+    <!-- <transition destination="SCROLLING_STATE" label="setFetchSize" /> -->
+    <transition destination="UPDATE_ROW_ENABLED_STATE" label="updateInt" />
+    <transition destination="WAS_NULL_ENABLED_STATE" label="getInt(int)" />
+	<transition destination="WAS_NULL_ENABLED_STATE" label="getInt(String)" />
+  </state>
+  <state name="Sinit">
+    <enabled_label name="resultSet" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="resultSet" />
+  </state>
+  <state name="UPDATE_ROW_ENABLED_STATE">
+    <enabled_label name="absolute" />
+    <enabled_label name="afterLast" />
+    <enabled_label name="beforeFirst" />
+    <enabled_label name="cancelRowUpdates" />
+    <!-- <enabled_label name="clearWarnings" /> -->
+    <enabled_label name="close" />
+    <enabled_label name="deleteRow" />
+    <!-- <enabled_label name="findColumn" /> -->
+    <enabled_label name="first" />
+    <!-- <enabled_label name="getConcurrency" /> -->
+    <!-- <enabled_label name="getCursorName" /> -->
+    <!-- <enabled_label name="getFetchDirection" /> -->
+    <!-- <enabled_label name="getFetchSize" /> -->
+    <!-- <enabled_label name="getHoldability" /> -->
+    <enabled_label name="getInt(int)" />
+    <enabled_label name="getInt(String)" />
+    <!-- <enabled_label name="getMetaData" /> -->
+    <enabled_label name="getRow" />
+    <!-- <enabled_label name="getStatement" /> -->
+    <!-- <enabled_label name="getType" /> -->
+    <!-- <enabled_label name="getWarnings" /> -->
+    <enabled_label name="isAfterLast" />
+    <enabled_label name="isBeforeFirst" />
+    <!-- <enabled_label name="isClosed" /> -->
+    <enabled_label name="isFirst" />
+    <enabled_label name="isLast" />
+    <enabled_label name="last" />
+    <enabled_label name="moveToInsertRow" />
+    <enabled_label name="next" />
+    <enabled_label name="previous" />
+    <enabled_label name="refreshRow" />
+    <enabled_label name="relative" />
+    <!-- <enabled_label name="rowDeleted" /> -->
+    <!-- <enabled_label name="rowInserted" /> -->
+    <!-- <enabled_label name="rowUpdated" /> -->
+    <!-- <enabled_label name="setFetchDirection" /> -->
+    <!-- <enabled_label name="setFetchSize" /> -->
+    <enabled_label name="updateInt" />
+    <enabled_label name="updateRow" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="absolute" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="afterLast" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="beforeFirst" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="next" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="previous" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="relative" />
+    <transition destination="CLOSED_STATE" label="close" />
+    <transition destination="ON_INSERT_ROW_STATE" label="moveToInsertRow" />
+    <transition destination="SCROLLING_STATE" label="absolute" />
+    <transition destination="SCROLLING_STATE" label="cancelRowUpdates" />
+    <transition destination="SCROLLING_STATE" label="deleteRow" />
+    <transition destination="SCROLLING_STATE" label="first" />
+    <transition destination="SCROLLING_STATE" label="last" />
+    <transition destination="SCROLLING_STATE" label="next" />
+    <transition destination="SCROLLING_STATE" label="previous" />
+    <transition destination="SCROLLING_STATE" label="refreshRow" />
+    <transition destination="SCROLLING_STATE" label="relative" />
+    <transition destination="SCROLLING_STATE" label="updateRow" />
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="clearWarnings" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="findColumn" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="getConcurrency" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="getCursorName" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="getFetchDirection" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="getFetchSize" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="getHoldability" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="getMetaData" /> -->
+    <transition destination="UPDATE_ROW_ENABLED_STATE" label="getRow" />
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="getStatement" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="getType" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="getWarnings" /> -->
+    <transition destination="UPDATE_ROW_ENABLED_STATE" label="isAfterLast" />
+    <transition destination="UPDATE_ROW_ENABLED_STATE" label="isBeforeFirst" />
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="isClosed" /> -->
+    <transition destination="UPDATE_ROW_ENABLED_STATE" label="isFirst" />
+    <transition destination="UPDATE_ROW_ENABLED_STATE" label="isLast" />
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="rowDeleted" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="rowInserted" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="rowUpdated" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="setFetchDirection" /> -->
+    <!-- <transition destination="UPDATE_ROW_ENABLED_STATE" label="setFetchSize" /> -->
+    <transition destination="UPDATE_ROW_ENABLED_STATE" label="updateInt" />
+    <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getInt(int)" />
+	<transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getInt(String)" />
+  </state>
+  <state name="WAS_NULL_ENABLED_STATE">
+    <enabled_label name="absolute" />
+    <enabled_label name="afterLast" />
+    <enabled_label name="beforeFirst" />
+    <!-- <enabled_label name="clearWarnings" /> -->
+    <enabled_label name="close" />
+    <enabled_label name="deleteRow" />
+    <!-- <enabled_label name="findColumn" /> -->
+    <enabled_label name="first" />
+    <!-- <enabled_label name="getConcurrency" /> -->
+    <!-- <enabled_label name="getCursorName" /> -->
+    <!-- <enabled_label name="getFetchDirection" /> -->
+    <!-- <enabled_label name="getFetchSize" /> -->
+    <!-- <enabled_label name="getHoldability" /> -->
+    <enabled_label name="getInt(int)" />
+    <enabled_label name="getInt(String)" />
+    <!-- <enabled_label name="getMetaData" /> -->
+    <enabled_label name="getRow" />
+    <!-- <enabled_label name="getStatement" /> -->
+    <!-- <enabled_label name="getType" /> -->
+    <!-- <enabled_label name="getWarnings" /> -->
+    <enabled_label name="isAfterLast" />
+    <enabled_label name="isBeforeFirst" />
+    <!-- <enabled_label name="isClosed" /> -->
+    <enabled_label name="isFirst" />
+    <enabled_label name="isLast" />
+    <enabled_label name="last" />
+    <enabled_label name="moveToInsertRow" />
+    <enabled_label name="next" />
+    <enabled_label name="previous" />
+    <enabled_label name="refreshRow" />
+    <enabled_label name="relative" />
+    <!-- <enabled_label name="rowDeleted" /> -->
+    <!-- <enabled_label name="rowInserted" /> -->
+    <!-- <enabled_label name="rowUpdated" /> -->
+    <!-- <enabled_label name="setFetchDirection" /> -->
+    <!-- <enabled_label name="setFetchSize" /> -->
+    <enabled_label name="updateInt" />
+    <enabled_label name="wasNull" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="absolute" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="afterLast" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="beforeFirst" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="next" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="previous" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="relative" />
+    <transition destination="CLOSED_STATE" label="close" />
+    <transition destination="ON_INSERT_ROW_STATE" label="moveToInsertRow" />
+    <transition destination="SCROLLING_STATE" label="absolute" />
+    <transition destination="SCROLLING_STATE" label="deleteRow" />
+    <transition destination="SCROLLING_STATE" label="first" />
+    <transition destination="SCROLLING_STATE" label="last" />
+    <transition destination="SCROLLING_STATE" label="next" />
+    <transition destination="SCROLLING_STATE" label="previous" />
+    <transition destination="SCROLLING_STATE" label="relative" />
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="clearWarnings" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="findColumn" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="getConcurrency" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="getCursorName" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="getFetchDirection" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="getFetchSize" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="getHoldability" /> -->
+    <transition destination="WAS_NULL_ENABLED_STATE" label="getInt(int)" />
+	<transition destination="WAS_NULL_ENABLED_STATE" label="getInt(String)" />
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="getMetaData" /> -->
+    <transition destination="WAS_NULL_ENABLED_STATE" label="getRow" />
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="getStatement" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="getType" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="getWarnings" /> -->
+    <transition destination="WAS_NULL_ENABLED_STATE" label="isAfterLast" />
+    <transition destination="WAS_NULL_ENABLED_STATE" label="isBeforeFirst" />
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="isClosed" /> -->
+    <transition destination="WAS_NULL_ENABLED_STATE" label="isFirst" />
+    <transition destination="WAS_NULL_ENABLED_STATE" label="isLast" />
+    <transition destination="WAS_NULL_ENABLED_STATE" label="refreshRow" />
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="rowDeleted" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="rowInserted" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="rowUpdated" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="setFetchDirection" /> -->
+    <!-- <transition destination="WAS_NULL_ENABLED_STATE" label="setFetchSize" /> -->
+    <transition destination="WAS_NULL_ENABLED_STATE" label="wasNull" />
+    <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="updateInt" />
+  </state>
+  <state name="WAS_NULL_UPDATE_ROW_ENABLED_STATE">
+    <enabled_label name="absolute" />
+    <enabled_label name="afterLast" />
+    <enabled_label name="beforeFirst" />
+    <enabled_label name="cancelRowUpdates" />
+    <!-- <enabled_label name="clearWarnings" /> -->
+    <enabled_label name="close" />
+    <enabled_label name="deleteRow" />
+    <!-- <enabled_label name="findColumn" /> -->
+    <enabled_label name="first" />
+    <!-- <enabled_label name="getConcurrency" /> -->
+    <!-- <enabled_label name="getCursorName" /> -->
+    <!-- <enabled_label name="getFetchDirection" /> -->
+    <!-- <enabled_label name="getFetchSize" /> -->
+    <!-- <enabled_label name="getHoldability" /> -->
+    <enabled_label name="getInt(int)" />
+    <enabled_label name="getInt(String)" />
+    <!-- <enabled_label name="getMetaData" /> -->
+    <enabled_label name="getRow" />
+    <!-- <enabled_label name="getStatement" /> -->
+    <!-- <enabled_label name="getType" /> -->
+    <!-- <enabled_label name="getWarnings" /> -->
+    <enabled_label name="isAfterLast" />
+    <enabled_label name="isBeforeFirst" />
+    <!-- <enabled_label name="isClosed" /> -->
+    <enabled_label name="isFirst" />
+    <enabled_label name="isLast" />
+    <enabled_label name="last" />
+    <enabled_label name="moveToInsertRow" />
+    <enabled_label name="next" />
+    <enabled_label name="previous" />
+    <enabled_label name="refreshRow" />
+    <enabled_label name="relative" />
+    <!-- <enabled_label name="rowDeleted" /> -->
+    <!-- <enabled_label name="rowInserted" /> -->
+    <!-- <enabled_label name="rowUpdated" /> -->
+    <!-- <enabled_label name="setFetchDirection" /> -->
+    <!-- <enabled_label name="setFetchSize" /> -->
+    <enabled_label name="updateInt" />
+    <enabled_label name="updateRow" />
+    <enabled_label name="wasNull" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="absolute" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="afterLast" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="beforeFirst" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="next" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="previous" />
+    <transition destination="BEFORE_FIRST_AFTER_LAST_STATE" label="relative" />
+    <transition destination="CLOSED_STATE" label="close" />
+    <transition destination="ON_INSERT_ROW_STATE" label="moveToInsertRow" />
+    <transition destination="SCROLLING_STATE" label="absolute" />
+    <transition destination="SCROLLING_STATE" label="deleteRow" />
+    <transition destination="SCROLLING_STATE" label="first" />
+    <transition destination="SCROLLING_STATE" label="last" />
+    <transition destination="SCROLLING_STATE" label="next" />
+    <transition destination="SCROLLING_STATE" label="previous" />
+    <transition destination="SCROLLING_STATE" label="relative" />
+    <transition destination="WAS_NULL_ENABLED_STATE" label="cancelRowUpdates" />
+    <transition destination="WAS_NULL_ENABLED_STATE" label="refreshRow" />
+    <transition destination="WAS_NULL_ENABLED_STATE" label="updateRow" />
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="clearWarnings" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="findColumn" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getConcurrency" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getCursorName" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getFetchDirection" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getFetchSize" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getHoldability" /> -->
+    <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getInt(int)" />
+	<transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getInt(String)" />
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getMetaData" /> -->
+    <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getRow" />
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getStatement" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getType" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="getWarnings" /> -->
+    <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="isAfterLast" />
+    <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="isBeforeFirst" />
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="isClosed" /> -->
+    <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="isFirst" />
+    <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="isLast" />
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="rowDeleted" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="rowInserted" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="rowUpdated" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="setFetchDirection" /> -->
+    <!-- <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="setFetchSize" /> -->
+    <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="updateInt" />
+    <transition destination="WAS_NULL_UPDATE_ROW_ENABLED_STATE" label="wasNull" />
+  </state>
+</abstraction>

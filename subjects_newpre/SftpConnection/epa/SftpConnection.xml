@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<abstraction initial_state="S0" input_format="contract" name="com.example.sftpconnection.SftpConnection">
+  <label name="login"/>
+  <label name="sftpConnection"/>
+  <label name="disconnect"/>
+  <label name="setConnectionListeners"/>
+  <label name="addConnectionListener"/>
+  <label name="getPWD"/>
+  <label name="list"/>
+  <label name="download"/>
+  <label name="removeFileOrDir"/>
+  <label name="upload"/>
+  <label name="setLocalPath"/>
+  <label name="sortLs"/>
+  <label name="chdir(String)"/>
+  <label name="chdir(String,boolean)"/>
+  <label name="getPermissions"/>
+  <label name="sortSize"/>
+  <label name="mkdir"/>
+  <label name="isConnected"/>
+  <label name="rename"/>
+  <label name="handleDownload"/>
+  <label name="handleUpload"/>
+  
+  <state name="S0">
+    <enabled_label name="sftpConnection"/>
+    <transition destination="S1" label="sftpConnection"/>
+  </state>
+  
+  <state name="S1">
+    <enabled_label name="setConnectionListeners"/>
+    <enabled_label name="login"/>
+    <transition destination="S2" label="setConnectionListeners"/>
+    <transition destination="S3" label="login"/>
+  </state>
+  
+  <state name="S2">
+    <enabled_label name="addConnectionListener"/>
+    <enabled_label name="getPWD"/>
+	<enabled_label name="login"/>
+    <transition destination="S2" label="addConnectionListener"/>
+    <transition destination="S2" label="getPWD"/>
+    <transition destination="S4" label="login"/>
+  </state>
+  
+  <state name="S3">
+    <enabled_label name="addConnectionListener"/>
+    <enabled_label name="setConnectionListeners"/>
+    <enabled_label name="disconnect"/>
+    <enabled_label name="isConnected"/>
+    <enabled_label name="getPWD"/>
+    <transition destination="S3" label="addConnectionListener"/>
+    <transition destination="S3" label="isConnected"/>
+    <transition destination="S3" label="getPWD"/>
+    <transition destination="S4" label="setConnectionListeners"/>
+	<transition destination="S4" label="addConnectionListener"/>
+	<transition destination="S1" label="disconnect"/>
+  </state>
+  
+  <state name="S4">
+    <enabled_label name="disconnect"/>
+    <enabled_label name="list"/>
+    <enabled_label name="getPWD"/>
+    <enabled_label name="download"/>
+    <enabled_label name="removeFileOrDir"/>
+	<enabled_label name="upload"/>
+	<enabled_label name="setLocalPath"/>
+	<enabled_label name="sortLs"/>
+	<enabled_label name="chdir(String)"/>
+	<enabled_label name="chdir(String,boolean)"/>
+	<enabled_label name="getPermissions"/>
+	<enabled_label name="sortSize"/>
+	<enabled_label name="mkdir"/>
+	<enabled_label name="isConnected"/>
+	<enabled_label name="rename"/>
+	<enabled_label name="handleDownload"/>
+	<enabled_label name="handleUpload"/>
+    <transition destination="S2" label="disconnect"/>
+    <transition destination="S4" label="list"/>
+	<transition destination="S4" label="getPWD"/>
+	<transition destination="S4" label="download"/>
+	<transition destination="S4" label="removeFileOrDir"/>
+	<transition destination="S4" label="upload"/>
+	<transition destination="S4" label="setLocalPath"/>
+	<transition destination="S4" label="sortLs"/>
+	<transition destination="S4" label="chdir(String)"/>
+	<transition destination="S4" label="chdir(String,boolean)"/>
+	<transition destination="S4" label="getPermissions"/>
+	<transition destination="S4" label="sortSize"/>
+	<transition destination="S4" label="mkdir"/>
+	<transition destination="S4" label="isConnected"/>
+	<transition destination="S4" label="rename"/>
+	<transition destination="S4" label="handleDownload"/>
+	<transition destination="S4" label="handleUpload"/>
+  </state>
+</abstraction>

@@ -1,0 +1,14 @@
+digraph finite_state_machine {
+  rankdir=LR;
+  size="8,5"
+  node [shape = doublecircle]; S0;
+  node [shape = circle];
+  S0 -> S1 [ label = "ZipOutputStream" ];
+  S1 -> S1 [ label = "closeEntry" ];
+  S1 -> S2 [ label = "close" ];
+  S1 -> S3 [ label = "putNextEntry" ];
+  S2 -> S2 [ label = "close" ];
+  S3 -> S1 [ label = "closeEntry" ];
+  S3 -> S2 [ label = "close" ];
+  S3 -> S3 [ label = "putNextEntry\nwrite" ];
+}
