@@ -10,7 +10,6 @@ from pit_mutants_histogram import pit_mutants_histogram
 
 from enum import Enum
 
-
 class EpatestingMethod(Enum):
     ONLY_TESTGEN = 1
     ONLY_METRICS = 2
@@ -24,20 +23,28 @@ class BugType(Enum):
     ALL = 1
     ERRPROT = 2
 
+class StrategyEvosuiteGeneration(Enum):
+    EVOSUITE = '-generateSuite'
+    RANDOM = '-generateRandom'
+    RANDOM_FIXED = '-generateNumRandom'
+    REGRESSION = '-regressionSuite'
+    REGRESSIONTESTS = '-regressionTests'
+    MOSUITE = '-generateMOSuite'
+
 class AssertType(Enum):
     ASSERT = 1
     NO_ASSERT = 2
     NO_ASSERT_EXCEPTION = 3
 
 
-def run_evosuite(evosuite_jar_path, projectCP, class_name, criterion, epa_path, inferred_epa_xml_path, stopping_condition, search_budget, test_dir='test', report_dir='report'):
+def run_evosuite(evosuite_jar_path, strategy, projectCP, class_name, criterion, epa_path, inferred_epa_xml_path, stopping_condition, search_budget, test_dir='test', report_dir='report'):
     #is_JDBCResultSet = "JDBCResultSet" in class_name
     #extra_parameters = "-Dassertions=\"false\" -Dminimize=\"false\"" if is_JDBCResultSet else ""
     #extra_parameters = "-Dminimize=\"false\""
     extra_parameters = "-Dminimize=\"true\" -Dstop_zero=\"false\" -Djunit_allow_restricted_libraries=true -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dtest_archive=\"true\" -Dprint_missed_goals=\"true\" -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dassertions=\"true\" -Dcoverage=\"true\" -Dallows_actions_violates_precondition=\"false\""
     output_parameters = "-Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\""
     timeout_parameters = "-Dtimeout=\"4000\" -Djunit_check_timeout=\"600\" -Dassertion_timeout=\"600\" -Dminimization_timeout=\"300\""
-    command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1048\" -Dstopping_condition={} -Dsearch_budget={} -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dinferred_epa_xml_path={} {} {} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, output_parameters, timeout_parameters, test_dir, test_dir)
+    command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1048\" -Dstopping_condition={} -Dsearch_budget={} {} -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dinferred_epa_xml_path={} {} {} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, strategy, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, output_parameters, timeout_parameters, test_dir, test_dir)
     utils.print_command(command)
     try:
         subprocess.check_output(command, shell=True)
@@ -358,18 +365,19 @@ def get_file_path_jncss(class_name, test_dir, results_dir_name, bug_type, stoppi
 lock = threading.Lock()
 class RunTestEPA(threading.Thread):
 
-    def __init__(self, name, junit_jar, instrumented_code_dir, mining_code_dir, original_code_dir, evosuite_classes, evosuite_jar_path, evosuite_runtime_jar_path, class_name, epa_path, criterion, bug_type, stopping_condition, search_budget, runid, method, results_dir_name, subdir_mutants, error_prot_list, ignore_mutants_list, hamcrest_jar_path, randoop_jar_path, javancss_jar_path):
+    def __init__(self, name, strategy, junit_jar, instrumented_code_dir, mining_code_dir, original_code_dir, evosuite_classes, evosuite_jar_path, evosuite_runtime_jar_path, class_name, epa_path, criterion, bug_type, stopping_condition, search_budget, runid, method, results_dir_name, subdir_mutants, error_prot_list, ignore_mutants_list, hamcrest_jar_path, randoop_jar_path, javancss_jar_path):
         threading.Thread.__init__(self)
 
-        self.subdir_testgen = os.path.join(results_dir_name, "testgen", name, bug_type, stopping_condition, search_budget, criterion.replace(':', '_').lower(), "{}".format(runid))
+        self.subdir_testgen = os.path.join(results_dir_name, "testgen", name, bug_type, stopping_condition, search_budget, strategy.name.lower(), criterion.replace(':', '_').lower(), "{}".format(runid))
         utils.make_dirs_if_not_exist(self.subdir_testgen)
-        self.subdir_metrics = os.path.join(results_dir_name, "metrics", name, bug_type, stopping_condition, search_budget, criterion.replace(':', '_').lower(), "{}".format(runid))
+        self.subdir_metrics = os.path.join(results_dir_name, "metrics", name, bug_type, stopping_condition, search_budget, strategy.name.lower(), criterion.replace(':', '_').lower(), "{}".format(runid))
         self.generated_test_report_evosuite_dir = os.path.join(self.subdir_testgen, 'report_evosuite_generated_test')
         self.subdir_mutants = subdir_mutants
         self.resume_csv = os.path.join(self.subdir_metrics, 'resume.csv')
         self.inferred_epa_xml = os.path.join(self.subdir_metrics, 'inferred_epa.xml')
 
         self.name = name
+        self.strategy = strategy.value
         self.junit_jar = junit_jar
         self.instrumented_code_dir = instrumented_code_dir
         self.mining_code_dir = mining_code_dir
@@ -431,7 +439,7 @@ class RunTestEPA(threading.Thread):
                 if self.criterion == "randoop":
                     run_randoop(projectCP=bin_code_dir, class_name=self.class_name, randoop_jar_path=self.randoop_jar_path, testdir=self.generated_test_dir, search_budget=self.search_budget)
                 else:
-                    run_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=bin_code_dir, class_name=self.class_name, criterion=self.criterion, epa_path=self.epa_path, inferred_epa_xml_path=self.inferred_epa_xml, test_dir=self.generated_test_dir, stopping_condition=self.stopping_condition, search_budget=self.search_budget, report_dir=self.generated_test_report_evosuite_dir)
+                    run_evosuite(evosuite_jar_path=self.evosuite_jar_path, strategy=self.strategy, projectCP=bin_code_dir, class_name=self.class_name, criterion=self.criterion, epa_path=self.epa_path, inferred_epa_xml_path=self.inferred_epa_xml, test_dir=self.generated_test_dir, stopping_condition=self.stopping_condition, search_budget=self.search_budget, report_dir=self.generated_test_report_evosuite_dir)
 
             add_fails= False
             if(self.bug_type.upper() == BugType.ERRPROT.name):
@@ -471,8 +479,9 @@ class RunTestEPA(threading.Thread):
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransition", inferred_epa_xml_path="", force_inferred_epa=False)
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexception", inferred_epa_xml_path="", force_inferred_epa=False)
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedges", inferred_epa_xml_path="", force_inferred_epa=False)
-            # Hack to generate inferred epa - only needed one true in force_inferred_epa
-            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransitionmining", inferred_epa_xml_path=self.inferred_epa_xml, force_inferred_epa=True)
+            # Hack to generate inferred epa for randoop. For other criteria it is generated in the generation process - only needed one true in force_inferred_epa
+            force_inferred_epa_value = True if "randoop".upper() in self.criterion.upper() else False
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransitionmining", inferred_epa_xml_path=self.inferred_epa_xml, force_inferred_epa=force_inferred_epa_value)
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexceptionmining", inferred_epa_xml_path="", force_inferred_epa=False)
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedgesmining", inferred_epa_xml_path="", force_inferred_epa=False)
 

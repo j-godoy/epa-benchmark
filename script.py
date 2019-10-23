@@ -111,7 +111,9 @@ class EPAConfig:
             criterion = terms[4][1:-1]
             method = int(terms[5])
             rep = int(terms[6])
-            
+            strategy = terms[7][1:-1]
+
+            strategy = run_test_epa.StrategyEvosuiteGeneration[strategy.upper()]
             subject = self.subjects[subject_name]
             mutant_list = subject.all_mutants_list
             if(bug_type.upper() == run_test_epa.BugType.ERRPROT.name):
@@ -121,7 +123,7 @@ class EPAConfig:
             
             runid = 0
             for __ in range(rep):
-                tests_to_run.append(RunTestEPA(name=subject.name, junit_jar=self.junit_jar, instrumented_code_dir=subject.instrumented_code_dir, mining_code_dir=subject.mining_code_dir, original_code_dir=subject.original_code_dir, evosuite_classes=self.evosuite_classes, evosuite_jar_path=self.evosuite_jar_path, evosuite_runtime_jar_path=self.evosuite_runtime_jar_path, class_name=subject.class_name, epa_path=subject.epa_path, criterion=criterion, bug_type=bug_type, stopping_condition=stopping_condition, search_budget=search_budget, runid=runid, method=method, results_dir_name=self.results_dir_name, subdir_mutants=subject.subdir_mutants, error_prot_list=subject.error_prot_list, ignore_mutants_list=subject.ignore_mutants_list, hamcrest_jar_path=self.hamcrest_jar_path, randoop_jar_path=self.randoop_jar_path, javancss_jar_path=self.javancss_jar_path))
+                tests_to_run.append(RunTestEPA(name=subject.name, strategy=strategy, junit_jar=self.junit_jar, instrumented_code_dir=subject.instrumented_code_dir, mining_code_dir=subject.mining_code_dir, original_code_dir=subject.original_code_dir, evosuite_classes=self.evosuite_classes, evosuite_jar_path=self.evosuite_jar_path, evosuite_runtime_jar_path=self.evosuite_runtime_jar_path, class_name=subject.class_name, epa_path=subject.epa_path, criterion=criterion, bug_type=bug_type, stopping_condition=stopping_condition, search_budget=search_budget, runid=runid, method=method, results_dir_name=self.results_dir_name, subdir_mutants=subject.subdir_mutants, error_prot_list=subject.error_prot_list, ignore_mutants_list=subject.ignore_mutants_list, hamcrest_jar_path=self.hamcrest_jar_path, randoop_jar_path=self.randoop_jar_path, javancss_jar_path=self.javancss_jar_path))
                 runid += 1
 
         return [tests_to_run[x:x + self.workers] for x in range(0, len(tests_to_run), self.workers)]
