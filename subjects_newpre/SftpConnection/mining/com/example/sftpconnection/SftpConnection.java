@@ -916,7 +916,7 @@ public class SftpConnection implements MockBasicConnection {
 
 	@EpaActionPrecondition(name = "addConnectionListener")
 	private boolean isAddConnectionListenerEnabled() {
-		return listeners != null;
+		return true;
 	}
 
 	@EpaActionPrecondition(name = "setConnectionListeners")
