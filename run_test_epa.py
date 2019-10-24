@@ -368,8 +368,12 @@ class RunTestEPA(threading.Thread):
     def __init__(self, name, strategy, junit_jar, instrumented_code_dir, mining_code_dir, original_code_dir, evosuite_classes, evosuite_jar_path, evosuite_runtime_jar_path, class_name, epa_path, criterion, bug_type, stopping_condition, search_budget, runid, method, results_dir_name, subdir_mutants, error_prot_list, ignore_mutants_list, hamcrest_jar_path, randoop_jar_path, javancss_jar_path):
         threading.Thread.__init__(self)
 
-        self.strategy_value = strategy.value
-        self.strategy_name = strategy.name.lower()
+        # Si el criterio es Randoop, entonces no es necesario ingresar una strategy
+        if criterion.upper() in "randoop".upper():
+            self.strategy_value = self.strategy_name = strategy
+        else:
+            self.strategy_value = strategy.value
+            self.strategy_name = strategy.name.lower()
 
         self.subdir_testgen = os.path.join(results_dir_name, "testgen", name, bug_type, stopping_condition, search_budget, self.strategy_name, criterion.replace(':', '_').lower(), "{}".format(runid))
         utils.make_dirs_if_not_exist(self.subdir_testgen)

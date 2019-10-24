@@ -107,7 +107,7 @@ def pit_mutants_histogram(strategy, bug_type, criterion, budget, stopping_condit
         print("Error al leer archivo '{}' ".format(mutations_csv_path))
 
 lock = threading.Lock()
-headers_list = ["SUBJECT","STRATEGY", "BUG_TYPE", "BUDGET","STOP_COND","MUTANT_METHOD_LINE"]
+headers_list = ["STRATEGY", "BUG_TYPE", "SUBJECT", "BUDGET","STOP_COND","MUTANT_METHOD_LINE"]
 def get_histogram():
     def add_header(name):
         global headers_list
@@ -118,14 +118,14 @@ def get_histogram():
     data = ""
     for key in mutants_histogram.keys():
         key_value = key.split(" ")
-        subject = key_value[0]
-        strategy = key_value[1]
-        b_type = key_value[2]
+        strategy = key_value[0]
+        b_type = key_value[1]
+        subject = key_value[2]
         budget = key_value[3]
         stopping_condition = key_value[4]
         mutant = key_value[5]
         killer_test = ""
-        data += "{},{},{},{},{},{}".format(subject, strategy, b_type, budget, stopping_condition, mutant)
+        data += "{},{},{},{},{},{}".format(strategy, b_type, subject, budget, stopping_condition, mutant)
         value = mutants_histogram[key]
         for sec_key in value.keys():
             criterion = sec_key
@@ -142,9 +142,10 @@ def get_histogram():
             add_header("ALIVE_{}".format(criterion))
             data += ",{},{},{},{}".format(survived, no_coverage, killed, alive)
         
-        add_header("KILLER_TEST")
         data += ",{}".format(killer_test)
         data += "\n"
+
+    add_header("KILLER_TEST")
     headers = ""
     add_colon = False
     for header in headers_list:

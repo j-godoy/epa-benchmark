@@ -111,9 +111,14 @@ class EPAConfig:
             criterion = terms[4][1:-1]
             method = int(terms[5])
             rep = int(terms[6])
-            strategy = terms[7][1:-1]
 
-            strategy = run_test_epa.StrategyEvosuiteGeneration[strategy.upper()]
+            # Si el criterio es Randoop, entonces no es necesario ingresar una strategy
+            if criterion.upper() in "randoop".upper():
+                strategy = "randoop"
+            else:
+                strategy = terms[7][1:-1]
+                strategy = run_test_epa.StrategyEvosuiteGeneration[strategy.upper()]
+
             subject = self.subjects[subject_name]
             mutant_list = subject.all_mutants_list
             if(bug_type.upper() == run_test_epa.BugType.ERRPROT.name):
