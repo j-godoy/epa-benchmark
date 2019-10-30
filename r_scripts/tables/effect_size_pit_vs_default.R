@@ -26,10 +26,16 @@ criterios <- list()
 i = 2
 while( i <= length(args))
 {
-	curr_criterio = args[i]
+	#curr_criterio = args[i]
+	curr_criterio_strategy = strsplit(args[i], "[:]")[[1]] #criterion:strategy
+	curr_criterio = curr_criterio_strategy[1] #only criterion
 	if (!(curr_criterio %in% tools))
 	{
 	  stop("\nERROR!! Does not exists criterion '", curr_criterio, "' in '", csv_filename,"'\n", sep="")
+	}
+	if (curr_criterio %in% criterios) #if already exists criterion, then add as criterion his strategy
+	{
+		curr_criterio = args[i]
 	}
     criterios <- c(criterios, curr_criterio)
     i = i + 1
@@ -66,7 +72,7 @@ printHeader <- function()
 	second_line = ""
 	while(i <= length(criterios))
 	{
-		curr_criterio = criterios[[i]]		
+		curr_criterio = criterios[[i]]
 		i = i + 1
 		if (curr_criterio == criterion_versus)
 		{
@@ -130,13 +136,28 @@ calculateEffectSize <- function()
 				while(i <= length(criterios))
 				{
 					criterio = criterios[[i]]
+					strategy = ""
+					if(grepl(':',criterio))
+					{
+						curr_criterio_strategy = strsplit(args[i], "[:]")[[1]] #criterion:strategy
+						criterio = curr_criterio_strategy[1] #only criterion
+						strategy = curr_criterio_strategy[2] #only strategy
+					}
 					i = i + 1
 					if (criterio == criterion_versus)
 					{
 						next
 					}
-					rows  = subset(stats,SUBJ==subj & TOOL==criterio & BUD==budget & BUG_TYPE==b_type)
+					if(strategy == "") {
+						rows  = subset(stats,SUBJ==subj & TOOL==criterio & BUD==budget & BUG_TYPE==b_type)
+					} else {
+						rows  = subset(stats,SUBJ==subj & TOOL==criterio & BUD==budget & BUG_TYPE==b_type & STRATEGY==strategy)
+					}
 					errors = rows$PIMUT
+					#total_rows = dim(rows)[1]
+					#if(total_rows == 0) {
+					#	errors = 0
+					#}
 					errors_mean_pit = round(mean(errors)*100, digits=digits_size_to_percentage)
 					errors_mean_pit = roundDecimals(errors_mean_pit)
 					cat(", ", errors_mean_pit, "%", sep="")

@@ -11,8 +11,8 @@ def generate_r_results(r_executable_path, script_r_path, input_path, criterios_l
         with open(input_path, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                if not row['TOOL'] in criterios:
-                    criterios.append(row['TOOL'])
+                if not row['TOOL']+":"+row['STRATEGY'] in criterios:
+                    criterios.append(row['TOOL']+":"+row['STRATEGY'])
         return criterios
     
     def exists_criterion_in_file(input_path, criterion):
@@ -42,14 +42,15 @@ def generate_r_results(r_executable_path, script_r_path, input_path, criterios_l
         
     i = 0
     while i < len(criterios_list):
-        curr_criterion = criterios_list[i].strip()
+        curr_criterion_plus_strategy = criterios_list[i].strip()
+        curr_criterion = curr_criterion_plus_strategy.split(":")[0]
         if not exists_default_criterion(input_path):
             print("Does not exists criterion 'line_branch_exception' in all_resumes file. You need it for compare results!")
             return
         if not exists_criterion_in_file(input_path, curr_criterion):
             print("Does not exists criterion '{}' in all_resumes file. Check it!".format(curr_criterion))
             return
-        criterios += "\"{}\" ".format(curr_criterion)
+        criterios += "\"{}\" ".format(curr_criterion_plus_strategy)
         i += 1
     command = "\"{}\" \"{}\" \"{}\" {} > {} 2> {}".format(r_executable_path, script_r_path, input_path, criterios, output, output+".err")
     subprocess.check_output(command, shell=True)
