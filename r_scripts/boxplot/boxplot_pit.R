@@ -14,6 +14,7 @@ stats = read.csv(csv_filename, header=TRUE, sep=",")
 subjects_in_file = unique(stats$SUBJ)
 tools = unique(stats$TOOL)
 budgets = unique(stats$BUD)
+bug_type = unique(stats$BUG_TYPE)
 
 subjects <- list()
 if (length(args) == 2)
@@ -41,32 +42,32 @@ if (length(args) == 2)
 
 createBoxPlot <- function()
 {
-	for(subj in subjects)
-	{
-		for (budget in budgets)
-		{
-			if (budget=='600')
-			{
-				default_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception' & BUD==budget)
-				line_branch_exception_epatransition_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epatransition' & BUD==budget)
-				line_branch_exception_edges_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epaadjacentedges' & BUD==budget)
-				line_branch_exception_smc_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_strongmutation' & BUD==budget)
-				line_branch_exception_mosa_rows  = subset(stats,SUBJ==subj & TOOL=='mosa_line_branch_exception_strongmutation' & BUD==budget)
-				randoop_rows  = subset(stats,SUBJ==subj & TOOL=='randoop' & BUD==budget)
+	for (b_type in bug_type) {
+		for (budget in budgets) {
+			for(subj in subjects) {
+				default_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception' & BUD==budget & BUG_TYPE==b_type)
+				
+				#line_branch_exception_epatransition_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epatransitionmining' & BUD==budget)
+				line_branch_exception_edges_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epaadjacentedgesmining' & BUD==budget & BUG_TYPE==b_type)
+				#line_branch_exception_smc_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_strongmutation' & BUD==budget)
+				#line_branch_exception_mosa_rows  = subset(stats,SUBJ==subj & TOOL=='mosa_line_branch_exception_strongmutation' & BUD==budget)
+				#randoop_rows  = subset(stats,SUBJ==subj & TOOL=='randoop' & BUD==budget)
 
 				default_pit = default_rows$PIMUT
-				line_branch_exception_epatransition_pit = line_branch_exception_epatransition_rows$PIMUT
+				#line_branch_exception_epatransition_pit = line_branch_exception_epatransition_rows$PIMUT
 				line_branch_exception_edges_pit = line_branch_exception_edges_rows$PIMUT
-				line_branch_exception_smc_pit = line_branch_exception_smc_rows$PIMUT
-				line_branch_exception_mosa_pit = line_branch_exception_mosa_rows$PIMUT
-				line_branch_exception_randoop_pit = randoop_rows$PIMUT
+				#line_branch_exception_smc_pit = line_branch_exception_smc_rows$PIMUT
+				#line_branch_exception_mosa_pit = line_branch_exception_mosa_rows$PIMUT
+				#line_branch_exception_randoop_pit = randoop_rows$PIMUT
 
 				name_subj = strsplit(subj, "[.]")[[1]]
 				name_subj = tail(name_subj, n=1)
-				outputname = paste("boxplot_combined_",name_subj,".pdf",sep = "")
+				outputname = paste("boxplot_combined_",name_subj,"_",b_type,"_",budget,".pdf",sep = "")
 				pdf(outputname)
 				budget_txt = paste("Budget: ", budget, " segs", sep="")
-				boxplot(default_pit, line_branch_exception_epatransition_pit, line_branch_exception_edges_pit, line_branch_exception_smc_pit, line_branch_exception_mosa_pit, line_branch_exception_randoop_pit, names=c("A","B","C","D","E","F"),main=c(name_subj),ylab="Mutation Score",cex.lab=1.6, cex.axis=1.3, cex.main=2)
+				#boxplot(default_pit, line_branch_exception_epatransition_pit, line_branch_exception_edges_pit, line_branch_exception_smc_pit, line_branch_exception_mosa_pit, line_branch_exception_randoop_pit, names=c("A","B","C","D","E","F"),main=c(name_subj),ylab="Mutation Score",cex.lab=1.6, cex.axis=1.3, cex.main=2)
+				
+				boxplot(default_pit, line_branch_exception_edges_pit, names=c("EVO","EVO+EDGES"),main=c(name_subj),ylab="Mutation Score",cex.lab=1.6, cex.axis=1.3, cex.main=2)
 				
 				#default_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception' & BUD==budget)
 				#epatransition_rows  = subset(stats,SUBJ==subj & TOOL=='epatransition' & BUD==budget)
