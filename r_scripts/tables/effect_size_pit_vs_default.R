@@ -93,17 +93,19 @@ printHeader <- function()
 
 pValueRefactor <- function(p_value)
 {
-	if (p_value < 0.005)
-	{
-		p_value = "< 0.005"
-	} else if (p_value < 0.05)
-	{
-		p_value = "< 0.05"
-	} else
-	{
-		p_value = round(p_value, digits=decimals_size_pvalue)
-	}
+	p_value = round(p_value, digits=decimals_size_pvalue)
 	return (p_value)
+	#if (p_value < 0.005)
+	#{
+	#	p_value = "< 0.005"
+	#} else if (p_value < 0.05)
+	#{
+	#	p_value = "< 0.05"
+	#} else
+	#{
+	#	p_value = round(p_value, digits=decimals_size_pvalue)
+	#}
+	#return (p_value)
 }
 
 roundDecimals <- function(value)
