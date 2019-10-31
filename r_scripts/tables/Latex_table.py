@@ -21,6 +21,7 @@ def generate_latex_table(r_results_file, output):
             line = line.replace("EvosuiteMOSA", "\\EVOSUITEMOSA")
             line = line.replace("RANDOOP", "\\RANDOOP")
             line = line.replace("Evosuite+EPAXP", "\\EVOSUITEPAXP")
+            line = line.replace("Evosuite+EPAX", "\\EVOSUITEPAX")
             line = line.replace("Evosuite+EPA", "\\EVOSUITEPA")
             line = line.replace("Evosuite", "\\EVOSUITE")
             line = line.replace("A12", "$\\vargha$")
@@ -31,12 +32,15 @@ def generate_latex_table(r_results_file, output):
             line = line.replace("Tx", "$|\delta|$")
 			
             line = line.replace("NumberFormatStringTokenizer", "NFST")
+            line = line.replace("SMTPProcessor_h", "SMTPProcessor")
             
             #line = line.replace("DEF", "$\\base$")
-            line = line.replace("EPAXP", "\\TESTGENEPAXP")
-            line = line.replace(" EPAEX", " \\TESTGENEPAX")
-            line = line.replace(" EPAX", " \\TESTGENEPAX")
-            line = line.replace(" EPA", " \\TESTGENEPA")
+            line = line.replace(" EPAXP ", " \\TESTGENEPAXP ")
+            line = line.replace(" EPAX ", " \\TESTGENEPAX ")
+            line = line.replace(" EPA ", " \\TESTGENEPA ")
+            line = line.replace(" EPAXP", " \\TESTGENEPAXP,")
+            line = line.replace(" EPAX,", " \\TESTGENEPAX,")
+            line = line.replace(" EPA,", " \\TESTGENEPA,")
             
             line = line.replace("line_branch_exception_epaadjacentedges", "$\\base$ + $\epaxp$")
             line = line.replace("line_branch_exception_epatransition_epaexception", "$\\base$ + $\epax$")
@@ -47,6 +51,8 @@ def generate_latex_table(r_results_file, output):
             line = line.replace("epatransition", "$\epa$")
             
             line = line.replace("_", "\_")
+            line = line.replace("#", "\#")
+            line = line.replace("mu", "$\mu$")
             line = line.replace("%", "\%")
             line = line.replace("\n", "")
             table_matrix.append(line.split(", "))
@@ -82,7 +88,7 @@ def generate_latex_table(r_results_file, output):
             for column in row:
                 if column_index in p_values_index:
                     p_value = column
-                    if "< 0.05" in p_value or "< 0.005" in p_value or (p_value.isdigit() and int(p_value) < 0.05):
+                    if "< 0.05" in p_value or "< 0.005" in p_value or "< 0.0001" in p_value or (p_value.isdigit() and int(p_value) < 0.05):
                         a12 = row[column_index-1].strip()
                         row[column_index-1] = "\\textbf{" + a12 + "}"
                         if not p_value.isdigit(): # Entonces el p_value es del tipo "< 0.05"
