@@ -4,6 +4,8 @@ import threading
 import shutil
 import os
 import sys
+import run_test_epa
+
 
 class Mutant_result:
     def __init__(self):
@@ -41,8 +43,8 @@ class Mutant_result:
 
 mutants_histogram = {}
 
-def get_first_key(strategy, bug_type, subject, budget, stopping_condition, mutant):
-    return "{} {} {} {} {} {}".format(strategy, bug_type, subject, budget, stopping_condition, mutant)
+def get_first_key(bug_type, subject, budget, stopping_condition, mutant):
+    return "{} {} {} {} {}".format(bug_type, subject, budget, stopping_condition, mutant)
 
 def get_second_key(criterion):
     return "{}".format(criterion)
@@ -62,11 +64,11 @@ def save_killer_test(src, dst, mutant_name, test_name, criterion):
         return False
     return True
 
-def count_mutant(strategy, bug_type, subject, criterion, budget, stopping_condition, mutant_name, result, test_name, test_dir, pitest_dir, runid):
+def count_mutant(bug_type, subject, criterion, budget, stopping_condition, mutant_name, result, test_name, test_dir, pitest_dir, runid):
     lock.acquire()
     try:
         global mutants_histogram
-        first_key = get_first_key(strategy, bug_type, subject, budget, stopping_condition, mutant_name)
+        first_key = get_first_key(bug_type, subject, budget, stopping_condition, mutant_name)
         second_key = get_second_key(criterion)
         value = {} # {criterio:mutant_result}
         mutant_result = Mutant_result()
@@ -84,6 +86,10 @@ def count_mutant(strategy, bug_type, subject, criterion, budget, stopping_condit
         lock.release()
 
 def pit_mutants_histogram(strategy, bug_type, criterion, budget, stopping_condition, mutations_csv_path, test_dir, pitest_dir, runid):
+    # Para diferenciar mismos criterios con diferente STRATEGY
+    if not strategy.lower() == run_test_epa.StrategyEvosuiteGeneration.EVOSUITE.name.lower():
+        criterion = strategy + "_" + criterion
+
     try:
         with open(mutations_csv_path, newline='') as csvfile:
             reader = csv.DictReader(csvfile, fieldnames=['NAME','SUBJECT','MUTANT_NAME','METHOD','LINE','RESULT','TEST'])
@@ -101,13 +107,13 @@ def pit_mutants_histogram(strategy, bug_type, criterion, budget, stopping_condit
                     i += 1
                 mutant_key = new_key
                 
-                count_mutant(strategy, bug_type, subject, criterion, budget, stopping_condition, mutant_key, result, test_name, test_dir, pitest_dir, runid)
+                count_mutant(bug_type, subject, criterion, budget, stopping_condition, mutant_key, result, test_name, test_dir, pitest_dir, runid)
                 keys_by_file.add(mutant_key)
     except:
         print("Error al leer archivo '{}' ".format(mutations_csv_path))
 
 lock = threading.Lock()
-headers_list = ["STRATEGY", "BUG_TYPE", "SUBJECT", "BUDGET","STOP_COND","MUTANT_METHOD_LINE"]
+headers_list = ["BUG_TYPE", "SUBJECT", "BUDGET","STOP_COND","MUTANT_METHOD_LINE"]
 def get_histogram():
     def add_header(name):
         global headers_list
@@ -118,14 +124,13 @@ def get_histogram():
     data = ""
     for key in mutants_histogram.keys():
         key_value = key.split(" ")
-        strategy = key_value[0]
-        b_type = key_value[1]
-        subject = key_value[2]
-        budget = key_value[3]
-        stopping_condition = key_value[4]
-        mutant = key_value[5]
+        b_type = key_value[0]
+        subject = key_value[1]
+        budget = key_value[2]
+        stopping_condition = key_value[3]
+        mutant = key_value[4]
         killer_test = ""
-        data += "{},{},{},{},{},{}".format(strategy, b_type, subject, budget, stopping_condition, mutant)
+        data += "{},{},{},{},{}".format(b_type, subject, budget, stopping_condition, mutant)
         value = mutants_histogram[key]
         for sec_key in value.keys():
             criterion = sec_key

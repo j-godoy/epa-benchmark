@@ -44,7 +44,7 @@ def run_evosuite(evosuite_jar_path, strategy, projectCP, class_name, criterion, 
     extra_parameters = "-Dminimize=\"true\" -Dstop_zero=\"false\" -Djunit_allow_restricted_libraries=true -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dtest_archive=\"true\" -Dprint_missed_goals=\"true\" -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dassertions=\"true\" -Dcoverage=\"true\" -Dallows_actions_violates_precondition=\"false\""
     output_parameters = "-Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\""
     timeout_parameters = "-Dtimeout=\"4000\" -Djunit_check_timeout=\"600\" -Dassertion_timeout=\"600\" -Dminimization_timeout=\"300\""
-    command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1048\" -Dstopping_condition={} -Dsearch_budget={} {} -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dinferred_epa_xml_path={} {} {} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, strategy, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, output_parameters, timeout_parameters, test_dir, test_dir)
+    command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"1024\" -Dstopping_condition={} -Dsearch_budget={} {} -Dp_functional_mocking=\"0.0\" -Dp_reflection_on_private=\"0.0\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dinferred_epa_xml_path={} {} {} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, strategy, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, output_parameters, timeout_parameters, test_dir, test_dir)
     utils.print_command(command)
     try:
         subprocess.check_output(command, shell=True)
@@ -546,7 +546,7 @@ class RunTestEPA(threading.Thread):
         
         if self.method in [EpatestingMethod.ONLY_PIT_MUTANTS_HISTOGRAM.value]:
             mutations_csv = get_mutation_csv_pit(self.generated_report_pitest_dir)
-            pit_mutants_histogram(criterion, self.search_budget, self.stopping_condition, mutations_csv, self.generated_test_dir, self.generated_pitest_killer_test, self.runid)
+            pit_mutants_histogram(self.strategy_name, self.bug_type, criterion, self.search_budget, self.stopping_condition, mutations_csv, self.generated_test_dir, self.generated_pitest_killer_test, self.runid)
         
         # Hack (for old executions)
         if self.method in [EpatestingMethod.ONLY_TEST_SUITE_LOC_AND_EXCEPTION.value]:
