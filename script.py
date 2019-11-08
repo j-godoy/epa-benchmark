@@ -198,7 +198,8 @@ if __name__ == '__main__':
             total_time = elapsed_time()
             print("=====================================>{} PROGRESS {}% ({}/{}) Elapsed time: {}:{}:{}<=====================================".format(time.strftime("%Y-%m-%d   %H:%M:%S"), percent_finished, finished_subjects, total_subjects, total_time[0], total_time[1], total_time[2]))
     
-    merge_final_results(final_results, os.path.join(config.results_dir_name, 'results.csv'))
+    if(len(final_results) > 0):
+        merge_final_results(final_results, os.path.join(config.results_dir_name, 'results.csv'))
     utils.save_file(os.path.join(config.results_dir_name, "mujava_histogram.csv"), utils.get_mutant_histogram())
     utils.save_file(os.path.join(config.results_dir_name, "pit_histogram.csv"), pit_mutants_histogram.get_histogram())
     print("Done! at time {} ...\n".format(time.strftime("%Y-%m-%d   %H:%M:%S")))
