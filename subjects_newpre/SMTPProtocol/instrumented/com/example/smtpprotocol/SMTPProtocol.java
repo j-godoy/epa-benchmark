@@ -36,6 +36,8 @@
 package com.example.smtpprotocol;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
 
 import org.evosuite.epa.EpaAction;
 import org.evosuite.epa.EpaState;
@@ -94,7 +96,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	private int state;
 	
-	private MockSMTPResponse smtpResponse;
+	private Stack<MockSMTPResponse> smtpResponse;
 
 	/**
 	 * Constructs the SMTPProtocol.
@@ -105,7 +107,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	 *            the port to connect to
 	 */
 	@EpaAction(name = "SMTPProtocol(String,int)")
-	public SMTPProtocol(String host, int port, MockSMTPResponse serverResponse) {
+	public SMTPProtocol(String host, int port, Stack<MockSMTPResponse> serverResponse) {
 		this.host = host;
 		this.port = port;
 		this.smtpResponse = serverResponse;
@@ -123,12 +125,12 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	public SMTPProtocol(String host) {
 		this.host = host;
 		this.port = DEFAULTPORT;
-		this.smtpResponse = new MockSMTPResponse();
+		this.smtpResponse = new Stack<MockSMTPResponse>();
 		out = new MockOutputStream();
 	}
 	
 	@EpaAction(name = "SMTPProtocol(String,MockSMTPResponse)")
-	public SMTPProtocol(String host, MockSMTPResponse serverResponse) {
+	public SMTPProtocol(String host, Stack<MockSMTPResponse> serverResponse) {
 		this.host = host;
 		this.port = DEFAULTPORT;
 		this.smtpResponse = serverResponse;
@@ -752,9 +754,9 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	}
 	
 	private MockSMTPResponse readSingleLineResponse() throws MockIOException, SMTPException {
-		if (this.smtpResponse == null)
+		if (this.smtpResponse == null || this.smtpResponse.empty())
 			return new MockSMTPResponse();
-		return this.smtpResponse;
+		return this.smtpResponse.pop();
 	}
 	
 	

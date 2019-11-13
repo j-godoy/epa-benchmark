@@ -36,6 +36,7 @@
 package com.example.smtpprotocol;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
 import org.evosuite.epa.EpaAction;
 import org.evosuite.epa.EpaActionPrecondition;
@@ -58,7 +59,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	 * @deprecated Use NOT_CONNECTED instead
 	 */
 	public static final int NO_CONNECTION = 0;
-	
+
 	/**
 	 * Protocol state.
 	 */
@@ -72,7 +73,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	 */
 	public static final int AUTHORIZED = 2;
 
-	
+
 	/**
 	 * Address type.
 	 */
@@ -93,19 +94,19 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	private MockOutputStream out;
 
 	private int state;
-	
-	private MockSMTPResponse smtpResponse;
+
+	private Stack<MockSMTPResponse> smtpResponse;
 
 	/**
 	 * Constructs the SMTPProtocol.
-	 * 
+	 *
 	 * @param host
 	 *            the sever name to connect to
 	 * @param port
 	 *            the port to connect to
 	 */
 	@EpaAction(name = "SMTPProtocol(String,int)")
-	public SMTPProtocol(String host, int port, MockSMTPResponse serverResponse) {
+	public SMTPProtocol(String host, int port, Stack<MockSMTPResponse> serverResponse) {
 		this.host = host;
 		this.port = port;
 		this.smtpResponse = serverResponse;
@@ -115,7 +116,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	/**
 	 * Constructs the SMTPProtocol. Uses the default port 25 to connect to the
 	 * server.
-	 * 
+	 *
 	 * @param host
 	 *            the sever name to connect to
 	 */
@@ -123,12 +124,12 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	public SMTPProtocol(String host) {
 		this.host = host;
 		this.port = DEFAULTPORT;
-		this.smtpResponse = new MockSMTPResponse();
+		this.smtpResponse = new Stack<MockSMTPResponse>();
 		out = new MockOutputStream();
 	}
-	
+
 	@EpaAction(name = "SMTPProtocol(String,MockSMTPResponse)")
-	public SMTPProtocol(String host, MockSMTPResponse serverResponse) {
+	public SMTPProtocol(String host, Stack<MockSMTPResponse> serverResponse) {
 		this.host = host;
 		this.port = DEFAULTPORT;
 		this.smtpResponse = serverResponse;
@@ -137,7 +138,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	/**
 	 * Opens the connection to the SMTP server.
-	 * 
+	 *
 	 * @return the domain name of the server
 	 * @throws MockIOException
 	 * @throws SMTPException
@@ -149,10 +150,10 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 //			createStreams();
 
-			MockSMTPResponse response = readSingleLineResponse();
-			if (response.isERR())
-				throw new SMTPException(response.getMessage());
-			String domain = response.getDomain();
+		MockSMTPResponse response = readSingleLineResponse();
+		if (response.isERR())
+			throw new SMTPException(response.getMessage());
+		String domain = response.getDomain();
 //
 //			// don't care what the server has to say here.
 //			if (response.isHasSuccessor()) {
@@ -181,7 +182,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	/**
 	 * Switches to a SSL connection using the TLS extension.
-	 * 
+	 *
 	 * @throws MockIOException
 	 * @throws MockSSLException
 	 * @throws SMTPException
@@ -241,9 +242,9 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	 * Sends the EHLO command to the server. This command can be used to fetch
 	 * the capabilities of the server. <br>
 	 * Note: Only ESMTP servers understand this comand.
-	 * 
+	 *
 	 * @see #helo(InetAddress)
-	 * 
+	 *
 	 * @param domain
 	 *            the domain name of the client
 	 * @return the capabilities of the server
@@ -265,7 +266,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 			if (response.isERR()) {
 				throw new SMTPException(response.getMessage());
 			}
-			
+
 			capas.add(response.getMessage());
 //			if (response.isHasSuccessor()) {
 //				response = readSingleLineResponse();
@@ -294,9 +295,9 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	/**
 	 * Sends the HELO command to the SMTP server. Needed only for non ESMTP
 	 * servers. Use #ehlo(InetAddress) instead.
-	 * 
+	 *
 	 * @see #ehlo(InetAddress)
-	 * 
+	 *
 	 * @param domain
 	 * @throws MockIOException
 	 * @throws SMTPException
@@ -323,8 +324,8 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	/**
 	 * Authenticates a user. This is done with the Authentication mechanisms
 	 * provided by the
-	 * @param algorithm 
-	 * 
+	 * @param algorithm
+	 *
 	 * @link{org.columba.ristretto.auth.AuthenticationFactory}. @param
 	 *                                                          algorithm the
 	 *                                                          algorithm used
@@ -371,10 +372,10 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	/**
 	 * Sends a MAIL command which specifies the sender's email address and
 	 * starts a new mail.
-	 * 
+	 *
 	 * @see #rcpt(Address)
 	 * @see #data(InputStream)
-	 * 
+	 *
 	 * @param from
 	 *            the email address of the sender
 	 * @throws MockIOException
@@ -402,10 +403,10 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	 * Sends a RCPT TO: command which specifies a recipient of the mail started
 	 * by the MAIL command. This command can be called repeatedly to add more
 	 * recipients.
-	 * 
+	 *
 	 * @see #mail(Address)
 	 * @see #data(InputStream)
-	 * 
+	 *
 	 * @param address
 	 *            the email address of a recipient.
 	 * @throws MockIOException
@@ -432,13 +433,13 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	 * the MAIL command. This command can be called repeatedly to add more
 	 * recipients. You can pass the type parameter to either send a RCPT TO or
 	 * CC.
-	 * @param type 
-	 * 
+	 * @param type
+	 *
 	 * @see #mail(Address)
 	 * @see #data(InputStream)
 	 * @see #TO
 	 * @see #CC
-	 * 
+	 *
 	 * @param address
 	 *            the email address of a recipient.
 	 * @throws MockIOException
@@ -448,12 +449,12 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	public void rcpt(int type, String address) throws MockIOException, SMTPException {
 		try {
 			switch (type) {
-			case TO:
+				case TO:
 				{
 					sendCommand("RCPT", new String[] { "TO:" + address});
 					break;
 				}
-			case CC:
+				case CC:
 				{
 					sendCommand("RCPT", new String[] { "CC:" + address});
 					break;
@@ -473,10 +474,10 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	/**
 	 * Sends a DATA command which sends the mail to the recipients specified by
 	 * the RCPT command. Can be cancelled with #dropConnection().
-	 * 
+	 *
 	 * @see #mail(Address)
 	 * @see #rcpt(Address)
-	 * 
+	 *
 	 * @param data
 	 *            the mail
 	 * @throws MockIOException
@@ -516,7 +517,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	/**
 	 * Sends the QUIT command and closes the socket.
-	 * 
+	 *
 	 * @throws MockIOException
 	 * @throws SMTPException
 	 */
@@ -541,7 +542,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	/**
 	 * Sends a RSET command which resets the current session.
-	 * 
+	 *
 	 * @throws MockIOException
 	 * @throws SMTPException
 	 */
@@ -563,7 +564,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	/**
 	 * Sends a VRFY command which verifies the given email address.
-	 * 
+	 *
 	 * @param address
 	 *            email address to verify
 	 * @throws MockIOException
@@ -587,7 +588,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	/**
 	 * Expands a given mailinglist address to all members of that list.
-	 * 
+	 *
 	 * @param mailinglist
 	 *            the mailinglist address
 	 * @return the members of the mailinglist
@@ -642,7 +643,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	/**
 	 * Sends a NOOP command to the server.
-	 * 
+	 *
 	 * @throws MockIOException
 	 * @throws SMTPException
 	 */
@@ -731,9 +732,9 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	/**
 	 * Drops the connection.
-	 * 
+	 *
 	 * @throws MockIOException
-	 *  
+	 *
 	 */
 //	public void dropConnection() throws MockIOException {
 //		if (state != NOT_CONNECTED) {
@@ -750,11 +751,11 @@ public class SMTPProtocol implements MockAuthenticationServer {
 		if (state < s)
 			throw new SMTPException("Wrong state!");
 	}
-	
+
 	private MockSMTPResponse readSingleLineResponse() throws MockIOException, SMTPException {
-		if (this.smtpResponse == null)
+		if (this.smtpResponse == null || this.smtpResponse.empty())
 			return new MockSMTPResponse();
-		return this.smtpResponse;
+		return this.smtpResponse.pop();
 	}
 	
 	
@@ -766,17 +767,17 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	
 	@EpaActionPrecondition(name = "openPort()")
 	private boolean isOpenPortEnabled() {
-		return !smtpResponse.isERR();
+		return true;
 	}
 	
 	@EpaActionPrecondition(name = "rcpt(int,String)")
 	private boolean isRcptintstringEnabled() {
-		return !smtpResponse.isERR();
+		return true;
 	}
 	
 	@EpaActionPrecondition(name = "rcpt(String)")
 	private boolean isRcptstringEnabled() {
-		return !smtpResponse.isERR() && out != null;
+		return out != null;
 	}
 	
 	@EpaActionPrecondition(name = "quit()")
@@ -791,22 +792,22 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	
 	@EpaActionPrecondition(name = "ehlo(string)")
 	private boolean isEhlostringEnabled() {
-		return state >= PLAIN && out != null && !smtpResponse.isERR();
+		return state >= PLAIN && out != null;
 	}
 	
 	@EpaActionPrecondition(name = "mail(String)")
 	private boolean isMailstringEnabled() {
-		return state >= PLAIN && out != null && !smtpResponse.isERR();
+		return state >= PLAIN && out != null;
 	}
 
 	@EpaActionPrecondition(name = "data(string)")
 	private boolean isDatastringEnabled() {
-		return state >= PLAIN && out != null && !smtpResponse.isERR() && smtpResponse.getCode() == 354;
+		return state >= PLAIN && out != null;
 	}
 	
 	@EpaActionPrecondition(name = "startTLS()")
 	private boolean isStartTLSEnabled() {
-		return out != null && !smtpResponse.isERR();
+		return out != null;
 	}
 	
 	/*-------------------------------------------------------

@@ -36,6 +36,7 @@
 package com.example.smtpprotocol;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * Implementation of the client side SMTP protocol.
@@ -92,7 +93,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 
 	private int state;
 	
-	private MockSMTPResponse smtpResponse;
+	private Stack<MockSMTPResponse> smtpResponse;
 
 	/**
 	 * Constructs the SMTPProtocol.
@@ -102,7 +103,7 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	 * @param port
 	 *            the port to connect to
 	 */
-	public SMTPProtocol(String host, int port, MockSMTPResponse serverResponse) {
+	public SMTPProtocol(String host, int port, Stack<MockSMTPResponse> serverResponse) {
 		this.host = host;
 		this.port = port;
 		this.smtpResponse = serverResponse;
@@ -119,11 +120,11 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	public SMTPProtocol(String host) {
 		this.host = host;
 		this.port = DEFAULTPORT;
-		this.smtpResponse = new MockSMTPResponse();
+		this.smtpResponse = new Stack<MockSMTPResponse>();
 		out = new MockOutputStream();
 	}
 	
-	public SMTPProtocol(String host, MockSMTPResponse serverResponse) {
+	public SMTPProtocol(String host, Stack<MockSMTPResponse> serverResponse) {
 		this.host = host;
 		this.port = DEFAULTPORT;
 		this.smtpResponse = serverResponse;
@@ -219,8 +220,8 @@ public class SMTPProtocol implements MockAuthenticationServer {
 			}
 
 			// write CRLF
-//			out.write('\r');
-//			out.write('\n');
+			out.write('\r');
+			out.write('\n');
 
 			// flush the stream
 			out.flush();
@@ -738,9 +739,9 @@ public class SMTPProtocol implements MockAuthenticationServer {
 	}
 	
 	private MockSMTPResponse readSingleLineResponse() throws MockIOException, SMTPException {
-		if (this.smtpResponse == null)
+		if (this.smtpResponse == null || this.smtpResponse.empty())
 			return new MockSMTPResponse();
-		return this.smtpResponse;
+		return this.smtpResponse.pop();
 	}
 		
 }
