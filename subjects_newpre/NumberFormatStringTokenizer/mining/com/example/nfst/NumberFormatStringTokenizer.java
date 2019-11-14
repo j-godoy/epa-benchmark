@@ -158,7 +158,7 @@ public class NumberFormatStringTokenizer {
 
 	@EpaActionPrecondition(name = "nextIsSep")
 	private boolean isNextIsSepEnabled() {
-		return true;
+		return currentPosition < maxPosition;
 	}
 
 	@EpaActionPrecondition(name = "hasMoreTokens")
