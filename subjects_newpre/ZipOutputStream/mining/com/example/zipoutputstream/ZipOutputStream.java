@@ -572,7 +572,7 @@ public class ZipOutputStream extends MockDeflaterOutputStream implements MockZip
 	
 	@EpaActionPrecondition(name = "write")
 	private boolean isWriteEnabled() {
-		return true;
+		return !closed;
 	}
 
 }
