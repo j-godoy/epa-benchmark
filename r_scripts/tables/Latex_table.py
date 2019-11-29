@@ -83,18 +83,25 @@ def generate_latex_table(r_results_file, output):
         return p_values_index
     
     def p_values_signif(table_matrix, p_values_index):
+        def is_valid_pvalue(n):
+            try:
+                float(n)
+                return True
+            except:
+                return False
+
         for row in table_matrix:
             column_index = 0
             for column in row:
                 if column_index in p_values_index:
                     p_value = column
-                    if "< 0.05" in p_value or "< 0.005" in p_value or "< 0.0001" in p_value or (p_value.isdigit() and int(p_value) < 0.05):
+                    if "<" in p_value or (is_valid_pvalue(p_value) and float(p_value) < 0.05):
                         a12 = row[column_index-1].strip()
                         row[column_index-1] = "\\textbf{" + a12 + "}"
-                        if not p_value.isdigit(): # Entonces el p_value es del tipo "< 0.05"
+                        if not is_valid_pvalue(p_value): # Entonces el p_value es del tipo "< 0.05"
                             row[column_index] = p_value.replace("< ", "\\textless{") + "}"
                 column_index += 1
-    
+
     def get_latex_header(table_matrix):
         def header_add_multirow(table_matrix):
             eoh_index = -1

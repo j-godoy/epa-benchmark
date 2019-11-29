@@ -14,7 +14,7 @@ subjects = unique(stats$SUBJ)
 tools = unique(stats$TOOL)
 budgets = unique(stats$BUD)
 
-decimals_size_pvalue = 2
+decimals_size_pvalue = 3
 decimals_size_a12 = 2
 digits_size_to_percentage = 1
 
