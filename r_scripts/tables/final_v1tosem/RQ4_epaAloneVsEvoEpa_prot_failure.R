@@ -15,7 +15,7 @@ subjects = unique(stats$SUBJ)
 tools = unique(stats$TOOL)
 budgets = unique(stats$BUD)
 
-decimals_size_pvalue = 2
+decimals_size_pvalue = 3
 decimals_size_a12 = 2
 digits_size_to_percentage = 1
 
@@ -57,15 +57,16 @@ pValueRefactor <- function(p_value)
 	{
 	    return ("1")
 	}
-	if (p_value < 0.0001)
+	if (p_value < 0.001)
 	{
-		p_value = "< 0.0001"
+		p_value = "< 0.001"
 	} else
 	{
 		p_value = round(p_value, digits=decimals_size_pvalue)
 	}
 	return (p_value)
 }
+
 
 roundDecimals <- function(value)
 {

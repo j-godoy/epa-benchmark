@@ -21,9 +21,9 @@ digits_size_to_percentage = 1
 
 printHeader <- function()
 {
-	cat("Subject","#pf Evosuite","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP", sep=", ")
+	cat("Subject","#pf Evosuite","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP", sep=", ")
 	cat("\n")
-	cat("Subject","#pf Evosuite","#pf","A12","p-value",sep=", ")
+	cat("Subject","#pf Evosuite","#pf","A12","p-value","#pf Diff",sep=", ")
 	cat("\n")
 	cat("EOH\n")
 }
@@ -86,16 +86,19 @@ RQ2_1 <- function()
 			# LINE:BRANCH:EXCEPTION
 			default_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception' & BUD==budget & BUG_TYPE==bug_type_errprot)
 			default_protocol = default_rows$KILLED_PIMUT
-			default_protocolmean = roundDecimals(round(mean(default_protocol), digits=digits_size_to_percentage))
+			default_protocolmean = round(mean(default_protocol), digits=digits_size_to_percentage)
 					
 			# LINE:BRANCH:EXCEPTION:EPAADJACENTEDGES
 			edges_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epaadjacentedgesmining' & BUD==budget & BUG_TYPE==bug_type_errprot)
 			edges_protocol = edges_rows$KILLED_PIMUT
-			edges_protocolmean = roundDecimals(round(mean(edges_protocol), digits=digits_size_to_percentage))
+			edges_protocolmean = round(mean(edges_protocol), digits=digits_size_to_percentage)
 			edges_a12 = round(measureA(default_protocol, edges_protocol),digits=decimals_size_a12)
 			edges_p_value = pValueRefactor(wilcox.test(default_protocol, edges_protocol)$p.value)
+			pfdiff =  round((edges_protocolmean / default_protocolmean - 1) * 100 , digits=decimals_size_pvalue)
+			if(pfdiff > 0)
+				pfdiff = paste("+",pfdiff,sep="")
 			
-			cat(", ", default_protocolmean, ", ", edges_protocolmean, ", ", edges_a12, ", ", edges_p_value, sep="")
+			cat(", ", roundDecimals(default_protocolmean), ", ", roundDecimals(edges_protocolmean), ", ", edges_a12, ", ", edges_p_value, ", ", pfdiff, "%", sep="")
 			cat("\n")
 		}
 	}

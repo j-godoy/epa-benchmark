@@ -14,17 +14,17 @@ subjects = unique(stats$SUBJ)
 tools = unique(stats$TOOL)
 budgets = unique(stats$BUD)
 
-decimals_size_pvalue = 4
+decimals_size_pvalue = 3
 decimals_size_a12 = 2
 digits_size_to_percentage = 1
 
 printHeader <- function()
 {
-	cat("Subject","Evosuite vs. Evosuite+EPA","Evosuite vs. Evosuite+EPA","Evosuite vs. Evosuite+EPA","Evosuite vs. Evosuite+EPA","Evosuite vs. Evosuite+EPAEX","Evosuite vs. Evosuite+EPAEX","Evosuite vs. Evosuite+EPAEX","Evosuite vs. Evosuite+EPAEX","Evosuite vs. Evosuite+EPAXP","Evosuite vs. Evosuite+EPAXP","Evosuite vs. Evosuite+EPAXP","Evosuite vs. Evosuite+EPAXP",sep=", ")
+	cat("Subject","Evosuite vs. Evosuite+EPA","Evosuite vs. Evosuite+EPA","Evosuite vs. Evosuite+EPA","Evosuite vs. Evosuite+EPA","Evosuite vs. Evosuite+EPAX","Evosuite vs. Evosuite+EPAX","Evosuite vs. Evosuite+EPAX","Evosuite vs. Evosuite+EPAX","Evosuite vs. Evosuite+EPAXP","Evosuite vs. Evosuite+EPAXP","Evosuite vs. Evosuite+EPAXP","Evosuite vs. Evosuite+EPAXP",sep=", ")
 	cat("\n")
 	cat("Subject","AVG Tx","AVG Tx","A12", "p-value","AVG EXTx","AVG EXTx","A12", "p-value","AVG TxPairs","AVG TxPairs","A12", "p-value",sep=", ")
 	cat("\n")
-	cat("Subject","Evosuite","Evosuite+EPA","A12", "p-value","Evosuite","Evosuite+EPAEX","A12", "p-value","Evosuite","Evosuite+EPAXP","A12", "p-value",sep=", ")
+	cat("Subject","Evosuite","Evosuite+EPA","A12", "p-value","Evosuite","Evosuite+EPAX","A12", "p-value","Evosuite","Evosuite+EPAXP","A12", "p-value",sep=", ")
 	cat("\n")
 	cat("EOH\n")
 }
@@ -58,9 +58,9 @@ pValueRefactor <- function(p_value)
 	{
 	    return ("1")
 	}
-	if (p_value < 0.0001)
+	if (p_value < 0.001)
 	{
-		p_value = "< 0.0001"
+		p_value = "< 0.001"
 	} else
 	{
 		p_value = round(p_value, digits=decimals_size_pvalue)

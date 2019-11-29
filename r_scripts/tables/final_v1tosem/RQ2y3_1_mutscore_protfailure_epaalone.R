@@ -15,13 +15,13 @@ subjects = unique(stats$SUBJ)
 tools = unique(stats$TOOL)
 budgets = unique(stats$BUD)
 
-decimals_size_pvalue = 2
+decimals_size_pvalue = 3
 decimals_size_a12 = 2
 digits_size_to_percentage = 1
 
 printHeader <- function()
 {
-	cat("Subject","Evosuite","Evosuite","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPA","Evosuite+EPAX","Evosuite+EPAX","Evosuite+EPAX","Evosuite+EPAX","Evosuite+EPAX","Evosuite+EPAX","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP", sep=", ")
+	cat("Subject","Evosuite","Evosuite","EPA","EPA","EPA","EPA","EPA","EPA","EPAX","EPAX","EPAX","EPAX","EPAX","EPAX","EPAXP","EPAXP","EPAXP","EPAXP","EPAXP","EPAXP", sep=", ")
 	cat("\n")
 	cat("Subject","mu","#pf","mu","A12","p-value","#pf","A12","p-value","mu","A12","p-value","#pf","A12","p-value","mu","A12","p-value","#pf","A12","p-value",sep=", ")
 	cat("\n")
@@ -57,15 +57,16 @@ pValueRefactor <- function(p_value)
 	{
 	    return ("1")
 	}
-	if (p_value < 0.0001)
+	if (p_value < 0.001)
 	{
-		p_value = "< 0.0001"
+		p_value = "< 0.001"
 	} else
 	{
 		p_value = round(p_value, digits=decimals_size_pvalue)
 	}
 	return (p_value)
 }
+
 
 roundDecimals <- function(value)
 {
@@ -85,7 +86,7 @@ RQ2_1 <- function()
 			name_subj = tail(name_subj, n=1)
 			cat(name_subj)
 			# LINE:BRANCH:EXCEPTION
-			default_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception' & BUD==budget & BUG_TYPE==bug_type_all & STRATEGY=="evosuite")
+			default_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception' & BUD==budget & BUG_TYPE==bug_type_all)
 			default_pit = default_rows$PIMUT
 			default_pitmean = roundDecimals(round(mean(default_pit)*100, digits=digits_size_to_percentage))
 			
@@ -93,40 +94,40 @@ RQ2_1 <- function()
 			default_pf = default_rows_protocol$KILLED_PIMUT
 			default_pf_mean = roundDecimals(round(mean(default_pf), digits=digits_size_to_percentage))
 						
-			# LINE:BRANCH:EXCEPTION:EPATRANSITION
-			epatransition_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epatransitionmining' & BUD==budget & BUG_TYPE==bug_type_all)
+			# EPATRANSITION
+			epatransition_rows  = subset(stats,SUBJ==subj & TOOL=='epatransitionmining' & BUD==budget & BUG_TYPE==bug_type_all)
 			epatransition_pit = epatransition_rows$PIMUT
 			epatransition_pitmean = roundDecimals(round(mean(epatransition_pit)*100, digits=digits_size_to_percentage))
 			epatransition_a12 = round(measureA(default_pit, epatransition_pit),digits=decimals_size_a12)
 			epatransition_p_value = pValueRefactor(wilcox.test(default_pit, epatransition_pit)$p.value)
 			
-			epatransition_rows_protocol  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epatransitionmining' & BUD==budget & BUG_TYPE==bug_type_errprot)
+			epatransition_rows_protocol  = subset(stats,SUBJ==subj & TOOL=='epatransitionmining' & BUD==budget & BUG_TYPE==bug_type_errprot)
 			epatransition_pf = epatransition_rows_protocol$KILLED_PIMUT
 			epatransition_pf_mean = roundDecimals(round(mean(epatransition_pf), digits=digits_size_to_percentage))
 			epatransition_a12_pf = round(measureA(default_pf, epatransition_pf),digits=decimals_size_a12)
 			epatransition_pf_p_value = pValueRefactor(wilcox.test(default_pf, epatransition_pf)$p.value)
 			
-			# LINE:BRANCH:EXCEPTION:EPAEXCEPTION
-			epaex_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epaexceptionmining' & BUD==budget & BUG_TYPE==bug_type_all)
+			# EPAEXCEPTION
+			epaex_rows  = subset(stats,SUBJ==subj & TOOL=='epaexceptionmining' & BUD==budget & BUG_TYPE==bug_type_all)
 			epaex_pit = epaex_rows$PIMUT
 			epaex_pitmean = roundDecimals(round(mean(epaex_pit)*100, digits=digits_size_to_percentage))
 			epaex_a12 = round(measureA(default_pit, epaex_pit),digits=decimals_size_a12)
 			epaex_p_value = pValueRefactor(wilcox.test(default_pit, epaex_pit)$p.value)
 			
-			epaex_rows_protocol  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epaexceptionmining' & BUD==budget & BUG_TYPE==bug_type_errprot)
+			epaex_rows_protocol  = subset(stats,SUBJ==subj & TOOL=='epaexceptionmining' & BUD==budget & BUG_TYPE==bug_type_errprot)
 			epaex_pf = epaex_rows_protocol$KILLED_PIMUT
 			epaex_pf_mean = roundDecimals(round(mean(epaex_pf), digits=digits_size_to_percentage))
 			epaex_a12_pf = round(measureA(default_pf, epaex_pf),digits=decimals_size_a12)
 			epaex_pf_p_value = pValueRefactor(wilcox.test(default_pf, epaex_pf)$p.value)
 			
-			# LINE:BRANCH:EXCEPTION:EPAADJACENTEDGES
-			edges_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epaadjacentedgesmining' & BUD==budget & BUG_TYPE==bug_type_all)
+			# EPAADJACENTEDGES
+			edges_rows  = subset(stats,SUBJ==subj & TOOL=='epaadjacentedgesmining' & BUD==budget & BUG_TYPE==bug_type_all)
 			edges_pit = edges_rows$PIMUT
 			edges_pitmean = roundDecimals(round(mean(edges_pit)*100, digits=digits_size_to_percentage))
 			edges_a12 = round(measureA(default_pit, edges_pit),digits=decimals_size_a12)
 			edges_p_value = pValueRefactor(wilcox.test(default_pit, edges_pit)$p.value)
 			
-			edges_rows_protocol  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epaadjacentedgesmining' & BUD==budget & BUG_TYPE==bug_type_errprot)
+			edges_rows_protocol  = subset(stats,SUBJ==subj & TOOL=='epaadjacentedgesmining' & BUD==budget & BUG_TYPE==bug_type_errprot)
 			edges_pf = edges_rows_protocol$KILLED_PIMUT
 			edges_pf_mean = roundDecimals(round(mean(edges_pf), digits=digits_size_to_percentage))
 			edges_a12_pf = round(measureA(default_pf, edges_pf),digits=decimals_size_a12)

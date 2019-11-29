@@ -20,9 +20,9 @@ digits_size_to_percentage = 1
 
 printHeader <- function()
 {
-	cat("Subject","Evosuite+EPAXP","Evosuite+SMC","Evosuite+SMC","Evosuite+SMC","EvosuiteMOSA","EvosuiteMOSA","EvosuiteMOSA",sep=", ")
+	cat("Subject","Evosuite+EPAXP (3)","Evosuite+SMC (1)","Evosuite+SMC (1)","Evosuite+SMC (1)","Evosuite+SMC (1)","EvosuiteMOSA (2)","EvosuiteMOSA (2)","EvosuiteMOSA (2)","EvosuiteMOSA (2)",sep=", ")
 	cat("\n")
-	cat("Subject","Evosuite+EPAXP","mu","A12","p-value","mu","A12","p-value",sep=", ")
+	cat("Subject","Evosuite+EPAXP (3)","mu","A12","p-value","mu Diff","mu","A12","p-value","mu Diff",sep=", ")
 	cat("\n")
 	cat("EOH\n")
 }
@@ -88,24 +88,29 @@ RQ3_2 <- function()
 			#------------------------------------------
 			evoepaxp_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epaadjacentedgesmining' & BUD==budget & BUG_TYPE==bug_type_all)
 			evoepaxp_pit = evoepaxp_rows$PIMUT
-			evoepaxp_pitmean = roundDecimals(round(mean(evoepaxp_pit)*100, digits=digits_size_to_percentage))
+			evoepaxp_pitmean = round(mean(evoepaxp_pit)*100, digits=digits_size_to_percentage)
 			
 			# LINE:BRANCH:EXCEPTION:STRONGMUTATION
 			strongmut_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_strongmutation' & BUD==budget & STRATEGY=="evosuite" & BUG_TYPE==bug_type_all)
 			strongmut_pit = strongmut_rows$PIMUT
-			strongmut_pitmean = roundDecimals(round(mean(strongmut_pit)*100, digits=digits_size_to_percentage))
+			strongmut_pitmean = round(mean(strongmut_pit)*100, digits=digits_size_to_percentage)
 			strongmut_a12_vsevoepaxp = round(measureA(strongmut_pit, evoepaxp_pit),digits=decimals_size_a12)
 			strongmut_p_value_vsevoepaxp = pValueRefactor(wilcox.test(strongmut_pit, evoepaxp_pit)$p.value)
+			mudiff_strongmut =  round(evoepaxp_pitmean - strongmut_pitmean, digits=digits_size_to_percentage)
+			if(mudiff_strongmut > 0)
+				mudiff_strongmut = paste("+",mudiff_strongmut,sep="")
 			
 			# MOSA LINE:BRANCH:EXCEPTION:STRONGMUTATION
 			mosa_strongmut_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_strongmutation' & BUD==budget & STRATEGY=="mosuite" & BUG_TYPE==bug_type_all)
 			mosa_strongmut_pit = mosa_strongmut_rows$PIMUT
-			mosa_strongmut_pitmean = roundDecimals(round(mean(mosa_strongmut_pit)*100, digits=digits_size_to_percentage))
+			mosa_strongmut_pitmean = round(mean(mosa_strongmut_pit)*100, digits=digits_size_to_percentage)
 			mosa_strongmut_a12_vsevoepaxp = round(measureA(mosa_strongmut_pit, evoepaxp_pit),digits=decimals_size_a12)
 			mosa_strongmut_p_value_vsevoepaxp = pValueRefactor(wilcox.test(mosa_strongmut_pit, evoepaxp_pit)$p.value)
+			mudiff_mosa =  round(evoepaxp_pitmean - mosa_strongmut_pitmean, digits=digits_size_to_percentage)
+			if(mudiff_mosa > 0)
+				mudiff_mosa = paste("+",mudiff_mosa,sep="")
 			
-			
-			cat(", ",evoepaxp_pitmean, "%, ", strongmut_pitmean, "%, ", strongmut_a12_vsevoepaxp,", ",strongmut_p_value_vsevoepaxp,", ", mosa_strongmut_pitmean, "%, ", mosa_strongmut_a12_vsevoepaxp,", ",mosa_strongmut_p_value_vsevoepaxp,sep="")
+			cat(", ",roundDecimals(evoepaxp_pitmean), "%, ", roundDecimals(strongmut_pitmean), "%, ", strongmut_a12_vsevoepaxp,", ",strongmut_p_value_vsevoepaxp,", ", mudiff_strongmut, "%, ", roundDecimals(mosa_strongmut_pitmean), "%, ", mosa_strongmut_a12_vsevoepaxp,", ",mosa_strongmut_p_value_vsevoepaxp, ", ", mudiff_mosa, "% ", sep="")
 			cat("\n")
 		}
 	}

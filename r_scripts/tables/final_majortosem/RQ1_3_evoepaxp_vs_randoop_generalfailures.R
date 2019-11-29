@@ -3,7 +3,7 @@ args = commandArgs(trailingOnly=TRUE)
 
 # test if there is at least one argument: if not, return an error
 if (length(args)!= 1) {
-  stop("Input csv file argument must be supplied (report.csv with general bugs and protocol failures -needs columns added in excel-)", call.=FALSE)
+  stop("Input csv file argument must be supplied (report.csv )", call.=FALSE)
 }
 
 csv_filename_general_bug = args[1]
@@ -20,9 +20,9 @@ digits_size_to_percentage = 1
 
 printHeader <- function()
 {
-	cat("Subject","Evosuite+EPAXP","Randoop","Randoop","Randoop",sep=", ")
+	cat("Subject","Randoop", "Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP",sep=", ")
 	cat("\n")
-	cat("Subject","Evosuite+EPAXP","#pf","A12","p-value",sep=", ")
+	cat("Subject","Randoop", "mu","A12","p-value","mu Diff",sep=", ")
 	cat("\n")
 	cat("EOH\n")
 }
@@ -51,25 +51,19 @@ measureA <- function(a,b){
 }
 
 pValueRefactor <- function(p_value)
-{
-	if (p_value == "NaN")
+{	
+	if (p_value == "NaN") 
 	{
-	    return ("0.5")
+	    return ("1")
 	}
-	p_value = round(p_value, digits=decimals_size_pvalue)
+	if (p_value < 0.0001)
+	{
+		p_value = "< 0.0001"
+	} else
+	{
+		p_value = round(p_value, digits=decimals_size_pvalue)
+	}
 	return (p_value)
-	
-	#if (p_value < 0.005)
-	#{
-	#	p_value = "< 0.005"
-	#} else if (p_value < 0.05)
-	#{
-	#	p_value = "< 0.05"
-	#} else
-	#{
-	#	p_value = round(p_value, digits=decimals_size_pvalue)
-	#}
-	#return (p_value)
 }
 
 roundDecimals <- function(value)
@@ -82,7 +76,7 @@ roundDecimals <- function(value)
 
 RQ3_2 <- function()
 {
-	bug_type_errprot  = "errprot"
+	bug_type_all  = "all"
 	for(subj in subjects)
 	{
 		name_subj = strsplit(subj, "[.]")[[1]]
@@ -92,19 +86,22 @@ RQ3_2 <- function()
 		{
 			# VS LINE:BRANCH:EXCEPTION:EPATRANSITION:EPAADJACENTEDGESMINING
 			#------------------------------------------
-			evoepaxp_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epaadjacentedgesmining' & BUD==budget & BUG_TYPE==bug_type_errprot)
-			evoepaxp_protocol = evoepaxp_rows$KILLED_PIMUT
-			evoepaxp_protocolmean = roundDecimals(round(mean(evoepaxp_protocol), digits=digits_size_to_percentage))
+			evoepaxp_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_epaadjacentedgesmining' & BUD==budget & BUG_TYPE==bug_type_all)
+			evoepaxp_pit = evoepaxp_rows$PIMUT
+			evoepaxp_pitmean = round(mean(evoepaxp_pit)*100, digits=digits_size_to_percentage)
 			
 			# RANDOOP
-			randoop_rows  = subset(stats,SUBJ==subj & TOOL=='line_branch_exception_strongmutation' & BUD==budget & BUG_TYPE==bug_type_errprot)
-			randoop_protocol = randoop_rows$KILLED_PIMUT
-			randoop_protocolmean = roundDecimals(round(mean(randoop_protocol), digits=digits_size_to_percentage))
-			randoop_a12_vsevoepaxp = round(measureA(randoop_protocol, evoepaxp_protocol),digits=decimals_size_a12)
-			randoop_p_value_vsevoepaxp = pValueRefactor(wilcox.test(randoop_protocol, evoepaxp_protocol)$p.value)
+			randoop_rows  = subset(stats,SUBJ==subj & TOOL=='randoop' & BUD==budget & BUG_TYPE==bug_type_all)
+			randoop_pit = randoop_rows$PIMUT
+			randoop_pitmean = round(mean(randoop_pit)*100, digits=digits_size_to_percentage)
+			randoop_a12_vsevoepaxp = round(measureA(randoop_pit, evoepaxp_pit),digits=decimals_size_a12)
+			randoop_p_value_vsevoepaxp = pValueRefactor(wilcox.test(randoop_pit, evoepaxp_pit)$p.value)
+			mudiff =  round(evoepaxp_pitmean - randoop_pitmean, digits=digits_size_to_percentage)
+			if(mudiff > 0)
+				mudiff = paste("+",mudiff,sep="")
 			
 			
-			cat(", ",evoepaxp_protocolmean, ", ", randoop_protocolmean, ", ", randoop_a12_vsevoepaxp,", ",randoop_p_value_vsevoepaxp, sep="")
+			cat(", ", roundDecimals(randoop_pitmean), "%, ", roundDecimals(evoepaxp_pitmean), "%, ", randoop_a12_vsevoepaxp,", ",randoop_p_value_vsevoepaxp, ", ", mudiff, "%", sep="")
 			cat("\n")
 		}
 	}
