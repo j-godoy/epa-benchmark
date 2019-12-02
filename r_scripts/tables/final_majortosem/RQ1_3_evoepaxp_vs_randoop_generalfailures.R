@@ -22,7 +22,7 @@ printHeader <- function()
 {
 	cat("Subject","Randoop", "Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP",sep=", ")
 	cat("\n")
-	cat("Subject","Randoop", "mu","A12","p-value","mu Diff",sep=", ")
+	cat("Subject","Randoop", "mu","A12","p-value","Improvement",sep=", ")
 	cat("\n")
 	cat("EOH\n")
 }
@@ -96,7 +96,7 @@ RQ3_2 <- function()
 			randoop_pitmean = round(mean(randoop_pit)*100, digits=digits_size_to_percentage)
 			randoop_a12_vsevoepaxp = round(measureA(randoop_pit, evoepaxp_pit),digits=decimals_size_a12)
 			randoop_p_value_vsevoepaxp = pValueRefactor(wilcox.test(randoop_pit, evoepaxp_pit)$p.value)
-			mudiff =  round(evoepaxp_pitmean - randoop_pitmean, digits=digits_size_to_percentage)
+			mudiff =  round(((evoepaxp_pitmean / randoop_pitmean)-1)*100, digits=digits_size_to_percentage)
 			if(mudiff > 0)
 				mudiff = paste("+",mudiff,sep="")
 			

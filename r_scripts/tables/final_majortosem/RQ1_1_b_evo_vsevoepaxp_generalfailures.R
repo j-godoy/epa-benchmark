@@ -23,7 +23,7 @@ printHeader <- function()
 {
 	cat("Subject"," mu Evosuite","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP","Evosuite+EPAXP", sep=", ")
 	cat("\n")
-	cat("Subject","mu Evosuite","mu","A12","p-value","mu Diff",sep=", ")
+	cat("Subject","mu Evosuite","mu","A12","p-value","Improvement",sep=", ")
 	cat("\n")
 	cat("EOH\n")
 }
@@ -94,7 +94,7 @@ RQ2_1 <- function()
 			edges_pitmean = round(mean(edges_pit)*100, digits=digits_size_to_percentage)
 			edges_a12 = round(measureA(default_pit, edges_pit),digits=decimals_size_a12)
 			edges_p_value = pValueRefactor(wilcox.test(default_pit, edges_pit)$p.value)
-			mudiff = round(edges_pitmean - default_pitmean, digits=digits_size_to_percentage)
+			mudiff = round(((edges_pitmean / default_pitmean)-1)*100, digits=digits_size_to_percentage)
 			if(mudiff > 0)
 				mudiff = paste("+",mudiff,sep="")
 
