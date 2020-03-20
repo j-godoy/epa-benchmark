@@ -78,8 +78,8 @@ def save_file(path, content):
     file.write(content)
     file.close()
 
-def compile_test_workdir(workdir, *classpath):
-    compile_workdir(workdir, None, *classpath)
+#def compile_test_workdir(workdir, *classpath):
+ #   compile_workdir(workdir, None, *classpath)
 
 def compile_workdir(workdir, output_directory, *classpath):
     command_find = find_and_save_command("*.java", "sources.txt")

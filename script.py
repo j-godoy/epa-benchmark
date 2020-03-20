@@ -12,7 +12,7 @@ import multiprocessing
 
 class Subject:
 
-    def __init__(self, name, instrumented_code_dir, mining_code_dir, original_code_dir, class_name, epa_path, mutants_dir, subdir_mutants, error_prot_list, all_mutants_list, ignore_mutants_list):
+    def __init__(self, name, instrumented_code_dir, mining_code_dir, original_code_dir, class_name, epa_path, mutants_dir, subdir_mutants, error_prot_list, all_mutants_list, ignore_mutants_list, extra_classpath):
         self.name = name
         self.instrumented_code_dir = instrumented_code_dir
         self.mining_code_dir = mining_code_dir
@@ -24,17 +24,27 @@ class Subject:
         self.error_prot_list = error_prot_list
         self.all_mutants_list = all_mutants_list
         self.ignore_mutants_list = ignore_mutants_list
+        self.extra_classpath = extra_classpath
 
 
 class EPAConfig:
 
     def read_config_file(self, config_file):
-        
+        def replace_path_and_classpath(path):
+            return replace_paths_separator(replace_classpath_separator(path))
+
+        def replace_classpath_separator(classpath):
+            all_classpath = classpath.split(",")
+            classpath = ""
+            for path in all_classpath:
+                classpath += path + os.path.pathsep
+            return classpath
+
+        def replace_paths_separator(path):
+            path = path.replace("\\", os.path.sep)
+            return path.replace("/", os.path.sep)
+
         def setupdir(path):
-            def replace_paths_separator(path):
-                path = path.replace("\\", os.path.sep)
-                return path.replace("/", os.path.sep)
-        
             path = replace_paths_separator(path)
             user_home_dir = os.path.expanduser('~')
             curr_dir = os.path.join(user_home_dir, path)
@@ -56,14 +66,13 @@ class EPAConfig:
         self.results_dir_name = setupdir(config['DEFAULT']['ResultsDirName'])
         self.randoop_jar_path = setupdir(config['DEFAULT']['RandoopJARPath'])
         self.javancss_jar_path = setupdir(config['DEFAULT']['JavaNCSSJARPath'])
+        self.hamcrest_jar_path = setupdir(config['DEFAULT']['HamcrestJarPath'])
         workers = config['DEFAULT']['Workers']
         if workers == "ALL":
             self.workers = multiprocessing.cpu_count()
         else:
             self.workers = int(workers)
 
-        self.hamcrest_jar_path = setupdir(config['DEFAULT']['HamcrestJarPath'])
-        
 
         # Reads each section witch defines a run
         # tests_to_run = []
@@ -84,11 +93,16 @@ class EPAConfig:
                 ignore_mutants_list = setupdir(config[section]['IgnoreMutantsList'])
             except:
                 ignore_mutants_list = ""
+            try: # Que sea opcional tener el classpath extra
+                extra_classpath = config[section]['ExtraClasspath']
+            except:
+                extra_classpath = ""
+            extra_classpath = replace_classpath_separator(extra_classpath)
             subdir_mutants = os.path.join(self.results_dir_name, "mutants")
             error_prot_list = utils.load_list_from_file(error_prot_list) if error_prot_list != "" else [] 
             all_mutants_list = utils.load_list_from_file(all_mutants_list) if all_mutants_list != "" else []
             ignore_mutants_list = utils.load_list_from_file(ignore_mutants_list) if ignore_mutants_list != "" else []
-            self.subjects[section] = Subject(name, instrumented_code_dir, mining_code_dir, original_code_dir, class_name, epa_path, mutants_dir, subdir_mutants, error_prot_list, all_mutants_list, ignore_mutants_list)
+            self.subjects[section] = Subject(name, instrumented_code_dir, mining_code_dir, original_code_dir, class_name, epa_path, mutants_dir, subdir_mutants, error_prot_list, all_mutants_list, ignore_mutants_list, extra_classpath)
             
     
     def read_runs_file(self, runs_file):
@@ -128,7 +142,7 @@ class EPAConfig:
             
             runid = 0
             for __ in range(rep):
-                tests_to_run.append(RunTestEPA(name=subject.name, strategy=strategy, junit_jar=self.junit_jar, instrumented_code_dir=subject.instrumented_code_dir, mining_code_dir=subject.mining_code_dir, original_code_dir=subject.original_code_dir, evosuite_classes=self.evosuite_classes, evosuite_jar_path=self.evosuite_jar_path, evosuite_runtime_jar_path=self.evosuite_runtime_jar_path, class_name=subject.class_name, epa_path=subject.epa_path, criterion=criterion, bug_type=bug_type, stopping_condition=stopping_condition, search_budget=search_budget, runid=runid, method=method, results_dir_name=self.results_dir_name, subdir_mutants=subject.subdir_mutants, error_prot_list=subject.error_prot_list, ignore_mutants_list=subject.ignore_mutants_list, hamcrest_jar_path=self.hamcrest_jar_path, randoop_jar_path=self.randoop_jar_path, javancss_jar_path=self.javancss_jar_path))
+                tests_to_run.append(RunTestEPA(name=subject.name, strategy=strategy, junit_jar=self.junit_jar, instrumented_code_dir=subject.instrumented_code_dir, mining_code_dir=subject.mining_code_dir, original_code_dir=subject.original_code_dir, evosuite_classes=self.evosuite_classes, evosuite_jar_path=self.evosuite_jar_path, evosuite_runtime_jar_path=self.evosuite_runtime_jar_path, class_name=subject.class_name, epa_path=subject.epa_path, criterion=criterion, bug_type=bug_type, stopping_condition=stopping_condition, search_budget=search_budget, runid=runid, method=method, results_dir_name=self.results_dir_name, subdir_mutants=subject.subdir_mutants, error_prot_list=subject.error_prot_list, ignore_mutants_list=subject.ignore_mutants_list, hamcrest_jar_path=self.hamcrest_jar_path, randoop_jar_path=self.randoop_jar_path, javancss_jar_path=self.javancss_jar_path, extra_classpath=subject.extra_classpath))
                 runid += 1
 
         return [tests_to_run[x:x + self.workers] for x in range(0, len(tests_to_run), self.workers)]
@@ -139,7 +153,7 @@ class EPAConfig:
             for test in chunk:
                 if test.name in self.subjects:
                     subject = self.subjects[test.name]
-                    run_test_epa.setup_subjects(self.results_dir_name, subject.original_code_dir, subject.instrumented_code_dir, subject.mining_code_dir, subject.name, self.evosuite_classes, subject.class_name)
+                    run_test_epa.setup_subjects(self.results_dir_name, subject.original_code_dir, subject.instrumented_code_dir, subject.mining_code_dir, subject.name, self.evosuite_classes, subject.class_name, subject.extra_classpath)
                     if test.method == 3:
                         subjects.add(subject)
         
