@@ -26,11 +26,11 @@ public class MyBoundedStack {
 
 		return ret_val;
 	}
-	
+
 	public boolean isFull() {
 		return index == elements.length - 1;
 	}
-	
+
 	public boolean isEmpty() {
 		return index == -1;
 	}

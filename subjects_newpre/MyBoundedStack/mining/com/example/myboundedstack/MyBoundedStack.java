@@ -50,6 +50,7 @@ public class MyBoundedStack {
 	// ======================================================
 	// Boolean Queries
 	// ======================================================
+
 	@EpaActionPrecondition(name = "push()")
 	private boolean isPushEnabled() {
 		return !isFull();
