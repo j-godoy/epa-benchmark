@@ -45,7 +45,7 @@ class EPAConfig:
             return path.replace("/", os.path.sep)
 
         def setupdir(path):
-            path = replace_paths_separator(path)
+            path = replace_paths_separator(path.strip())
             user_home_dir = os.path.expanduser('~')
             curr_dir = os.path.join(user_home_dir, path)
             if os.path.exists(curr_dir):
