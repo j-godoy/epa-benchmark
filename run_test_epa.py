@@ -421,11 +421,11 @@ class RunTestEPA(threading.Thread):
         if self.method in [EpatestingMethod.ONLY_TESTGEN.value, EpatestingMethod.BOTH.value, EpatestingMethod.BOTH_WITHOUT_MUJAVA.value]:
             print('GENERATING TESTS')
             code_dir = self.instrumented_code_dir if "epa".upper() in self.criterion.upper() else self.original_code_dir
-            if "mining".upper() in self.criterion.upper():
+            if "mining".upper() in self.criterion.upper() or "Compiler_" in self.name:#hack for Compiler
                 code_dir = self.mining_code_dir
             
             bin_code_dir = self.bin_instrumented_code_dir if "epa".upper() in self.criterion.upper() else self.bin_original_code_dir
-            if "mining".upper() in self.criterion.upper():
+            if "mining".upper() in self.criterion.upper() or "Compiler_" in self.name:#hack for Compiler
                 bin_code_dir = self.bin_mining_code_dir
             if len(self.extra_classpath) != 0:
                 bin_code_dir += os.path.pathsep + self.extra_classpath
