@@ -37,7 +37,7 @@ class EPAConfig:
             all_classpath = classpath.split(",")
             classpath = ""
             for path in all_classpath:
-                classpath += path + os.path.pathsep
+                classpath += setupdir(path) + os.path.pathsep
             return classpath
 
         def replace_paths_separator(path):
