@@ -34,6 +34,8 @@ class EPAConfig:
             return replace_paths_separator(replace_classpath_separator(path))
 
         def replace_classpath_separator(classpath):
+            if len(classpath) == 0:
+                return classpath
             all_classpath = classpath.split(",")
             classpath = ""
             for path in all_classpath:
