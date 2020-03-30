@@ -20,13 +20,11 @@ package com.example.filterlistiteration;
 //https://archive.apache.org/dist/commons/collections/source/
 //https://issues.apache.org/jira/browse/COLLECTIONS-360
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-
 import org.evosuite.epa.EpaAction;
 import org.evosuite.epa.EpaActionPrecondition;
+
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 
 /** 
@@ -385,7 +383,7 @@ public class FilterListIterator implements ListIterator {
 
     @EpaActionPrecondition(name = "next")
     private boolean isnextEnabled() {
-        return nextObjectSet || setNextObject();
+        return nextObjectSet || iterator != null;
     }
 
     @EpaActionPrecondition(name = "nextIndex")
@@ -395,7 +393,7 @@ public class FilterListIterator implements ListIterator {
 
     @EpaActionPrecondition(name = "previous")
     private boolean ispreviousEnabled() {
-        return previousObjectSet || setPreviousObject();
+        return previousObjectSet || iterator != null;
     }
 
     @EpaActionPrecondition(name = "previousIndex")
@@ -434,7 +432,7 @@ public class FilterListIterator implements ListIterator {
     }
 
     /*public static void main(String[] args) {
-        java.lang.Integer var6 = new java.lang.Integer(0);
+        Integer var6 = new Integer(0);
         List<String> var7 = new ArrayList<>();
         Predicate var9 = PredicateUtils.anyPredicate((java.util.Collection)var7);
         FilterListIterator var13 = new FilterListIterator(var9);
