@@ -10,6 +10,8 @@
 
 package com.example.stringtokenizer.spacedelimiter;
 
+//https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4135670
+
 import org.evosuite.epa.EpaAction;
 import org.evosuite.epa.EpaActionPrecondition;
 
@@ -153,7 +155,8 @@ class StringTokenizer implements Enumeration {
      */
     @EpaAction(name = "StringTokenizer(String)")
     public StringTokenizer(String str) {
-        this(str, " \t\n\r\f", false);
+        this(str, " \t\n\r\f", false); //FIX
+        //this(str, "\t\n\r\f", false); //BUGGY
     }
 
     /**
@@ -279,7 +282,7 @@ class StringTokenizer implements Enumeration {
      * @see java.util.Enumeration
      * @see java.util.StringTokenizer#hasMoreTokens()
      */
-    @EpaAction(name = "hasMoreTokens()")
+    @EpaAction(name = "hasMoreElements()")
     public boolean hasMoreElements() {
         return hasMoreTokens();
     }
@@ -331,18 +334,23 @@ class StringTokenizer implements Enumeration {
      */
 
     @EpaActionPrecondition(name = "hasMoreTokens()")
-    private boolean isHasMoreElementsEnabled() {
+    private boolean ishasMoreTokensEnabled() {
         return delimiters != null;
+    }
+
+    @EpaActionPrecondition(name = "hasMoreElements()")
+    private boolean isHasMoreElementsEnabled() {
+        return ishasMoreTokensEnabled();
     }
 
     @EpaActionPrecondition(name = "nextToken()")
     private boolean isNextTokenEnabled() {
-        return delimiters != null && currentPosition < maxPosition && newPosition < maxPosition && maxPosition >= 1;
+        return delimiters != null && currentPosition < maxPosition && currentPosition >= 0;
     }
 
     @EpaActionPrecondition(name = "nextToken(String)")
     private boolean isNextTokenstringEnabled() {
-        return delimiters != null && currentPosition < maxPosition && newPosition < maxPosition && maxPosition >= 1;
+        return isNextTokenEnabled();
     }
 
     @EpaActionPrecondition(name = "nextElement()")
