@@ -10,8 +10,8 @@
 
 package com.example.stringtokenizer.hasmoretokens;
 
-import org.evosuite.epa.EpaAction;
-import org.evosuite.epa.EpaActionPrecondition;
+        import org.evosuite.epa.EpaAction;
+        import org.evosuite.epa.EpaActionPrecondition;
 
 /**
  * The string tokenizer class allows an application to break a
@@ -211,7 +211,8 @@ class StringTokenizer implements Enumeration {
          * nextToken() method only if the delimiters have'nt been changed in
          * that nextToken() invocation.
          */
-        newPosition = skipDelimiters(currentPosition);
+        //currentPosition = newPosition = skipDelimiters(currentPosition); //Buggy
+        newPosition = skipDelimiters(currentPosition); //FIX
         return (newPosition < maxPosition);
     }
 
@@ -279,7 +280,7 @@ class StringTokenizer implements Enumeration {
      * @see java.util.Enumeration
      * @see java.util.StringTokenizer#hasMoreTokens()
      */
-    @EpaAction(name = "hasMoreTokens()")
+    @EpaAction(name = "hasMoreElements()")
     public boolean hasMoreElements() {
         return hasMoreTokens();
     }
@@ -331,18 +332,23 @@ class StringTokenizer implements Enumeration {
      */
 
     @EpaActionPrecondition(name = "hasMoreTokens()")
-    private boolean isHasMoreElementsEnabled() {
+    private boolean ishasMoreTokensEnabled() {
         return delimiters != null;
+    }
+
+    @EpaActionPrecondition(name = "hasMoreElements()")
+    private boolean isHasMoreElementsEnabled() {
+        return ishasMoreTokensEnabled();
     }
 
     @EpaActionPrecondition(name = "nextToken()")
     private boolean isNextTokenEnabled() {
-        return delimiters != null && currentPosition < maxPosition && newPosition < maxPosition && maxPosition >= 1;
+        return delimiters != null && currentPosition < maxPosition && currentPosition >= 0;
     }
 
     @EpaActionPrecondition(name = "nextToken(String)")
     private boolean isNextTokenstringEnabled() {
-        return delimiters != null && currentPosition < maxPosition && newPosition < maxPosition && maxPosition >= 1;
+        return isNextTokenEnabled();
     }
 
     @EpaActionPrecondition(name = "nextElement()")
