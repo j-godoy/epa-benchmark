@@ -181,7 +181,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @since 1.0.13
      */
-    @EpaAction(name="(Comparable name, String domain, String range)")
+    @EpaAction(name="(Comparable,String,String)")
     public TimeSeries(Comparable name, String domain, String range) {
         super(name);
         this.domain = domain;
