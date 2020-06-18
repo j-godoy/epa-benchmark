@@ -42,7 +42,8 @@ def run_evosuite(evosuite_jar_path, strategy, projectCP, class_name, criterion, 
     #extra_parameters = "-Dminimize=\"false\""
     extra_parameters = "-Dminimize=\"true\" -Dstop_zero=\"false\" -Djunit_allow_restricted_libraries=true -Duse_separate_classloader=\"false\" -Dwrite_covered_goals_file=\"false\" -Dwrite_all_goals_file=\"false\" -Dtest_archive=\"true\" -Dprint_missed_goals=\"true\" -Dno_runtime_dependency=\"true\" -Dshow_progress=\"false\" -Dassertions=\"true\" -Dcoverage=\"true\" -Dallows_actions_violates_precondition=\"false\""
     output_parameters = "-Doutput_variables=\"TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals,Generations,Total_Time\""
-    timeout_parameters = "-Dtimeout=\"4000\" -Djunit_check_timeout=\"600\" -Dassertion_timeout=\"600\" -Dminimization_timeout=\"600\" "
+    #-Dextra_timeout=\"600\" for subjects as strbuilder
+    timeout_parameters = "-Dtimeout=\"4000\" -Djunit_check_timeout=\"600\" -Dassertion_timeout=\"600\" -Dminimization_timeout=\"600\" -Dextra_timeout=\"600\""
     command = 'java -jar {} -projectCP {} -class {} -criterion {} -mem=\"4096\" -Dstopping_condition={} -Dsearch_budget={} {} -Dp_functional_mocking=\"0.0\" -Dfunctional_mocking_percent=\"0.0\" -Dvirtual_fs=\"false\" -Dp_reflection_on_private=\"0.0\" -Dtest_dir={} -Dreport_dir={} -Depa_xml_path={} -Dinferred_epa_xml_path={} {} {} {} > {}gen_out.txt 2> {}gen_err.txt'.format(evosuite_jar_path, projectCP, class_name, criterion, stopping_condition, search_budget, strategy, test_dir, report_dir, epa_path, inferred_epa_xml_path, extra_parameters, output_parameters, timeout_parameters, test_dir, test_dir)
     utils.print_command(command)
     try:
@@ -93,8 +94,8 @@ def measure_evosuite(evosuite_jar_path, projectCP, testCP, class_name, epa_path,
     utils.make_dirs_if_not_exist(report_dir)
     err_file = os.path.join(report_dir, criterion.replace(":","_") + "_err.txt")
     out_file = os.path.join(report_dir, criterion.replace(":","_") + "_out.txt")
-    sep = os.path.pathsep
-    command = 'java -jar {} -projectCP {}{}{} -class {} -Depa_xml_path={} -criterion {} -Dwrite_covered_goals_file=\"true\" -Dwrite_all_goals_file=\"true\" -Dreport_dir={} -Dforce_inferred_epa={} -Dinferred_epa_xml_path={} -measureCoverage > {} 2> {}'.format(evosuite_jar_path, projectCP, sep, testCP, class_name, epa_path, criterion, report_dir, force_inferred_epa, inferred_epa_xml_path, out_file, err_file)
+    sep = "" if projectCP[-1] == os.path.pathsep else os.path.pathsep
+    command = 'java -jar {} -projectCP {}{}{} -class {} -Depa_xml_path={} -criterion {} -Dwrite_covered_goals_file=\"true\" -Dwrite_all_goals_file=\"true\" -Dreport_dir={} -Dforce_inferred_epa={} -Dinferred_epa_xml_path={} -Dallows_actions_violates_precondition=\"false\" -measureCoverage > {} 2> {}'.format(evosuite_jar_path, projectCP, sep, testCP, class_name, epa_path, criterion, report_dir, force_inferred_epa, inferred_epa_xml_path, out_file, err_file)
     utils.print_command(command)
     try:
         subprocess.check_output(command, shell=True)
@@ -174,6 +175,8 @@ def edit_pit_pom(file_path, targetClasses, targetTests, output_file):
 
 def run_pitest(workdir):
     command = "mvn clean install org.pitest:pitest-maven:mutationCoverage > {}out.txt 2> {}err.txt".format(workdir, workdir)
+    #Si quiero evitar limpiar lo generado (util para dejar algunas classya generados y usar eso para correr PIT
+    #command = "mvn install org.pitest:pitest-maven:mutationCoverage > {}out.txt 2> {}err.txt".format(workdir, workdir)
     utils.print_command(command, workdir)
     try:
         subprocess.check_output(command, cwd=workdir, shell=True)
@@ -482,15 +485,26 @@ class RunTestEPA(threading.Thread):
             if not os.path.exists(test_dir_sub):
                 print("not found test folder ! '{}'".format(test_dir_sub))
                 exit(1)
-            
+
+            bin_code_dir = self.bin_instrumented_code_dir if "epa".upper() in self.criterion.upper() else self.bin_original_code_dir
+            if "mining".upper() in self.criterion.upper() or "Compiler_" in self.name:#hack for Compiler
+                bin_code_dir = self.bin_mining_code_dir
+            if len(self.extra_classpath) != 0:
+                bin_code_dir += os.path.pathsep + self.extra_classpath
+
+            ###to compile test suite
+            #utils.compile_workdir(self.generated_test_dir, self.generated_test_dir, bin_code_dir, self.junit_jar, self.evosuite_classes, self.evosuite_runtime_jar_path, self.extra_classpath)
+
             #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransition", inferred_epa_xml_path="", force_inferred_epa=False)
             #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexception", inferred_epa_xml_path="", force_inferred_epa=False)
             #measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_instrumented_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedges", inferred_epa_xml_path="", force_inferred_epa=False)
             # Hack to generate inferred epa for randoop. For other criteria it is generated in the generation process - only needed one true in force_inferred_epa
-            force_inferred_epa_value = True# if "randoop".upper() in self.criterion.upper() else False
-            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransitionmining", inferred_epa_xml_path=self.inferred_epa_xml, force_inferred_epa=force_inferred_epa_value)
+            force_inferred_epa_value = True if "randoop".upper() in self.criterion.upper() else False
+            measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=bin_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epatransitionmining", inferred_epa_xml_path=self.inferred_epa_xml, force_inferred_epa=force_inferred_epa_value)
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaexceptionmining", inferred_epa_xml_path="", force_inferred_epa=False)
             measure_evosuite(evosuite_jar_path=self.evosuite_jar_path, projectCP=self.bin_mining_code_dir, testCP=self.generated_test_dir, class_name=self.class_name, epa_path=self.epa_path, report_dir=self.generated_report_evosuite_dir, criterion="epaadjacentedgesmining", inferred_epa_xml_path="", force_inferred_epa=False)
+            #if force_inferred_epa_value:
+             #   return
 
             # Run Pitest to measure
             
