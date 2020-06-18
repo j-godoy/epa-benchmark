@@ -1880,7 +1880,8 @@ import org.evosuite.epa.EpaActionPrecondition;
             return -1;
         }
         char[] thisBuf = buffer;
-        int len = size - strLen + 1;
+        //int len = thisBuf.length - strLen; // BUGGY
+        int len = size - strLen + 1; // FIX
         outer:
         for (int i = startIndex; i < len; i++) {
             for (int j = 0; j < strLen; j++) {

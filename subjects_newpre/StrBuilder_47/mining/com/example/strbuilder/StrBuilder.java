@@ -1268,6 +1268,7 @@ import org.evosuite.epa.EpaActionPrecondition;
         if (width > 0) {
             ensureCapacity(size + width);
             String str = (obj == null ? getNullText() : obj.toString());
+            //FIX (Add str == null)
             if (str == null) {
                 str = "";
             }
@@ -1317,9 +1318,10 @@ import org.evosuite.epa.EpaActionPrecondition;
         if (width > 0) {
             ensureCapacity(size + width);
             String str = (obj == null ? getNullText() : obj.toString());
-            if (str == null) {
+            //FIX (Add str == null)
+            /*if (str == null) {
                 str = "";
-            }
+            }*/
             int strLen = str.length();
             if (strLen >= width) {
                 str.getChars(0, width, buffer, size);

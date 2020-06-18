@@ -1771,7 +1771,8 @@ import org.evosuite.epa.EpaActionPrecondition;
     @EpaAction(name="contains(char)")
     public boolean contains(char ch) {
         char[] thisBuf = buffer;
-        for (int i = 0; i < this.size; i++) {
+        //for (int i = 0; i < thisBuf.length; i++) { // BUGGY
+        for (int i = 0; i < this.size; i++) { // FIX
             if (thisBuf[i] == ch) {
                 return true;
             }
@@ -1832,7 +1833,8 @@ import org.evosuite.epa.EpaActionPrecondition;
             return -1;
         }
         char[] thisBuf = buffer;
-        for (int i = startIndex; i < size; i++) {
+        //for (int i = startIndex; i < thisBuf.length; i++) { // BUGGY
+        for (int i = startIndex; i < size; i++) { // FIX
             if (thisBuf[i] == ch) {
                 return i;
             }
